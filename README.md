@@ -9,3 +9,6 @@
 * [pg](https://github.com/brianc/node-postgres)
 * [pg-hstore](https://github.com/scarney81/pg-hstore)
 * [sequelize](http://docs.sequelizejs.com/)
+* [chai](http://www.chaijs.com/)
+* [chai-http](https://github.com/chaijs/chai-http)
+* [mocha](https://mochajs.org/)
