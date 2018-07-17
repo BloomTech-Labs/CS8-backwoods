@@ -23,11 +23,11 @@ const user = (sequelize, DataTypes) => {
       },
       createdAt: {
         type: DataTypes.DATE,
-        defaultValue: sequelize.literaL('NOW()')
+        defaultValue: sequelize.literal('NOW()')
       },
       updatedAt: {
         type: DataTypes.DATE,
-        defaultValue: sequelize.literaL('NOW()')
+        defaultValue: sequelize.literal('NOW()')
       }
     },
     {
