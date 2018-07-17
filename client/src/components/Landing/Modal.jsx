@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
+import Tabs from './Tabs.jsx';
 
 function getModalStyle() {
   const top = 50;
@@ -44,12 +45,10 @@ class SimpleModal extends React.Component {
 
     return (
       <div>
-        <Button onClick={this.handleOpen}>Sign In / Sign Up</Button>
+        <Button onClick={this.handleOpen}>Sign Up / Sign In</Button>
         <Modal open={this.state.open} onClose={this.handleClose}>
           <div style={getModalStyle()} className={classes.paper}>
-            <Typography variant="title" id="modal-title">
-              Text in a modal
-            </Typography>
+            <Tabs />
           </div>
         </Modal>
       </div>
