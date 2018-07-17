@@ -31,17 +31,21 @@ const user = (sequelize, DataTypes) => {
       }
     },
     {
-      timestamps: true,
-      instanceMethods: {
-        generateHash(password) {
-          return bcrypt.hash(password, bcrypt.genSalt(8));
-        },
-        validPassword(password) {
-          return bcrypt.compare(password, this.password);
-        }
-      }
+      timestamps: true
     }
   );
+
+  User.beforeCreate((user, options) => {
+    return bcrypt
+      .hash(user.password, 10)
+      .then(hash => {
+        user.password = hash;
+      })
+      .catch(err => {
+        throw new Error();
+      });
+  });
+
   return User;
 };
 
