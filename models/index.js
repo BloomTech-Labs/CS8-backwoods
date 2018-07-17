@@ -1,4 +1,4 @@
-import Sequelize from 'sequelize';
+const Sequelize = require('sequelize');
 
 const sequelize = new Sequelize('user', 'postgres', 'dbsuperuser', {
   dialect: 'postgres'
@@ -16,4 +16,4 @@ Object.keys(models).forEach(key => {
 
 models.sequelize = sequelize;
 
-export default models;
+module.exports = models;

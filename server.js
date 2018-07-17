@@ -5,7 +5,7 @@ const cors = require('cors');
 app.use(cors());
 app.use(bodyParser.json());
 
-import models from './models';
+const models = require('./models');
 
 // Test GET request
 app.get('/', (req, res) => {
