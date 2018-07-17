@@ -3,6 +3,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 
 import BuyNow from './components/Landing/BuyNow.jsx';
 import Modal from './components/Landing/Modal.jsx';
+import PageContent from './components/Landing/PageContent.jsx';
 
 // CssBaseline is the Material UI built in CSS reset
 class App extends Component {
@@ -24,7 +25,7 @@ class App extends Component {
         <React.Fragment>
           <CssBaseline>
             <Modal />
-            <h1>Back Woods App</h1>
+            <PageContent />
             <BuyNow />
           </CssBaseline>
         </React.Fragment>
