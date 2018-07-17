@@ -8,6 +8,10 @@ body {
   margin-left: 50%;
   margin-top: 1%;
 }
+.submitButton {
+  margin-left: 30%;
+  margin-top: 5%;
+}
 p {
   margin-left: 10%;
   margin-right: 10%;
