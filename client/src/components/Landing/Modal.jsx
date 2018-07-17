@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import Tabs from './Tabs.jsx';
@@ -44,7 +43,7 @@ class SimpleModal extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div>
+      <div className="signUpController">
         <Button onClick={this.handleOpen}>Sign Up / Sign In</Button>
         <Modal open={this.state.open} onClose={this.handleClose}>
           <div style={getModalStyle()} className={classes.paper}>
