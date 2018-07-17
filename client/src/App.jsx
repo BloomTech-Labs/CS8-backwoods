@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import CssBaseline from '@material-ui/core/CssBaseline';
 
 import BuyNow from './components/Landing/BuyNow.jsx';
+import Modal from './components/Landing/Modal.jsx';
 
 // CssBaseline is the Material UI built in CSS reset
 class App extends Component {
@@ -29,6 +30,7 @@ class App extends Component {
             {/* DEBUG */}
             <h3> Logged In: {this.state.isLoggedIn.toString()}</h3>
             <BuyNow />
+            <Modal />
           </CssBaseline>
         </React.Fragment>
       </div>
