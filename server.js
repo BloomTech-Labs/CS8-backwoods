@@ -12,7 +12,7 @@ app.get('/', (req, res) => {
   res.send('GET request');
 });
 
-models.sequelize.sync().then(() => {
+models.sequelize.sync({ force: true }).then(() => {
   app.listen('8000', () => console.log('Server listening on port 8000'));
 });
 

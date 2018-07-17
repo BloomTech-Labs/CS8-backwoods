@@ -23,14 +23,15 @@ const user = (sequelize, DataTypes) => {
       },
       createdAt: {
         type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW
+        defaultValue: sequelize.literaL('NOW()')
       },
       updatedAt: {
         type: DataTypes.DATE,
-        defaultValue: DataTypes.NOW
+        defaultValue: sequelize.literaL('NOW()')
       }
     },
     {
+      timestamps: true,
       instanceMethods: {
         generateHash(password) {
           return bcrypt.hash(password, bcrypt.genSalt(8));
