@@ -1,6 +1,7 @@
 # CS8-backwoods
-
-## Lambda Labs Project
+This Lambda Labs Project is a location based trip planner to keep your family and friends informed of your adventures.
+## Tech Stack
+React, Express, Node, Postgres
 
 ## To run project locally 
 _______________________________
