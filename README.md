@@ -8,7 +8,7 @@ _______________________________
 1. Clone repo.
 2. In `/CS8-Backwoods` type `yarn` or `npm i` to install back-end dependencies.
 3. Make sure you have a Postgres DB running on your local machine. [Instructions here](https://devcenter.heroku.com/articles/heroku-postgresql#local-setup)
-4. The `node server.js` command will start back-end server [listening on port 8000](http://localhost:8000/).
+4. The `yarn start` or `npm start` command will start back-end server [listening on port 8000](http://localhost:8000/).
 5. Open a new terminal window.
 6. `cd client` type `yarn` or `npm i` to install front-end dependencies.
 7. The `yarn start` or `npm start` command visit site at [localhost:3000](http://localhost:3000/)
