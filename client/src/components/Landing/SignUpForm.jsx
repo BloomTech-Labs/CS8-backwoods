@@ -22,7 +22,9 @@ const styles = theme => ({
 class TextFields extends React.Component {
   state = {
     firstName: '',
-    lastName: ''
+    lastName: '',
+    email: '',
+    password: '',
   };
 
   handleChange = name => event => {
@@ -35,7 +37,7 @@ class TextFields extends React.Component {
     const { classes } = this.props;
 
     return (
-      <form className={classes.container} noValidate autoComplete="off">
+      <form className={classes.container} noValidate autoComplete="off" onSubmit="this.handleSubmit">
         <TextField
           required
           id="firstName"
@@ -80,7 +82,7 @@ class TextFields extends React.Component {
           margin="normal"
         />
         <div className="submitButton">
-          <Button variant="contained" className={classes.button}>
+          <Button variant="contained" className={classes.button} type="submit">
             Submit
             <Icon className={classes.rightIcon}>send</Icon>
           </Button>
