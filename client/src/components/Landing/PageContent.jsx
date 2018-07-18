@@ -1,10 +1,11 @@
 import React from 'react';
+import Carousel from './Carousel.jsx';
 
 const PageContent = () => {
   return (
     <div>
       <h1>Back Woods</h1>
-      <h3>Pretend there are cool images that show off our application here</h3>
+      <Carousel />
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eget
         scelerisque velit, sed condimentum augue. Nunc rutrum venenatis enim, a
