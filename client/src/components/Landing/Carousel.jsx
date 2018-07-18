@@ -7,7 +7,7 @@ import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
 
-const tutorialSteps = [
+const Steps = [
   {
     label: '',
     imgPath: 'https://imgur.com/UH0ctZa.jpg'
@@ -44,7 +44,7 @@ const styles = theme => ({
   }
 });
 
-class TextMobileStepper extends React.Component {
+class Carousel extends React.Component {
   state = {
     activeStep: 0
   };
@@ -65,17 +65,17 @@ class TextMobileStepper extends React.Component {
     const { classes, theme } = this.props;
     const { activeStep } = this.state;
 
-    const maxSteps = tutorialSteps.length;
+    const maxSteps = Steps.length;
 
     return (
       <div className={classes.root}>
         <Paper square elevation={0} className={classes.header}>
-          <Typography>{tutorialSteps[activeStep].label}</Typography>
+          <Typography>{Steps[activeStep].label}</Typography>
         </Paper>
         <img
           className={classes.img}
-          src={tutorialSteps[activeStep].imgPath}
-          alt={tutorialSteps[activeStep].label}
+          src={Steps[activeStep].imgPath}
+          alt={Steps[activeStep].label}
         />
         <MobileStepper
           steps={maxSteps}
@@ -114,4 +114,4 @@ class TextMobileStepper extends React.Component {
   }
 }
 
-export default withStyles(styles, { withTheme: true })(TextMobileStepper);
+export default withStyles(styles, { withTheme: true })(Carousel);
