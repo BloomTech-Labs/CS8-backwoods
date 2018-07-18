@@ -49,4 +49,15 @@ const user = (sequelize, DataTypes) => {
   return User;
 };
 
+comparePasswords((password, hash, callback) => {
+  console.log('hello i am here');
+  bcrypt.compare(password, hash, function(error, isMatch) {
+    if (error) {
+      return callback(error);
+    }
+
+    return callback(null, isMatch);
+  });
+});
+
 module.exports = user;
