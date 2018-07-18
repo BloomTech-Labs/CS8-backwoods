@@ -26,7 +26,7 @@ _____________________________
 * [chai](http://www.chaijs.com/)
 * [chai-http](https://github.com/chaijs/chai-http)
 * [mocha](https://mochajs.org/)
-
+* [nodemon](https://nodemon.io/)
 ### Front-end Dependencies:
 * [sinon](http://sinonjs.org/)
 * [sinon-chai](https://github.com/domenic/sinon-chai)
