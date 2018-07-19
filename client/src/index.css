@@ -3,7 +3,16 @@ body {
   margin: 0 auto;
   font-family: Roboto;
 }
-
+.debug {
+  bottom: 0;
+  right: 5%;
+  position: fixed;
+  border: 1px solid black;
+}
+.debug > a:link,
+.debug > a:visited {
+  color: green;
+}
 .signUpController {
   margin-left: 50%;
   margin-top: 1%;
