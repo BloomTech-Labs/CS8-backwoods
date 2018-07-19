@@ -72,7 +72,7 @@ class SignInForm extends React.Component {
           margin="normal"
         />
         <div className="submitButton">
-          <Button variant="contained" className={classes.button}>
+          <Button variant="contained" className={classes.button} type="submit">
             Submit
             <Icon className={classes.rightIcon}>send</Icon>
           </Button>
