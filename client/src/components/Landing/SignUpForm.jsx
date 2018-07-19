@@ -20,13 +20,15 @@ const styles = theme => ({
 });
 
 class TextFields extends React.Component {
-  state = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    password: '',
-  };
-
+  constructor(props) {
+    super(props)
+    this.state = {
+      firstName: '',
+      lastName: '',
+      email: '',
+      password: '',
+    }
+  }
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value
@@ -43,7 +45,8 @@ class TextFields extends React.Component {
           id="firstName"
           label="First Name"
           className={classes.textField}
-          value={this.state.name}
+          type="text"
+          value={this.state.firstName}
           onChange={this.handleChange('firstName')}
           margin="normal"
         />
@@ -52,7 +55,8 @@ class TextFields extends React.Component {
           id="lastName"
           label="Last Name"
           className={classes.textField}
-          value={this.state.name}
+          type="text"
+          value={this.state.lastName}
           onChange={this.handleChange('lastName')}
           margin="normal"
         />
@@ -61,6 +65,7 @@ class TextFields extends React.Component {
           id="required"
           label="Email"
           className={classes.textField}
+          value={this.state.email}
           margin="normal"
         />
         <TextField
