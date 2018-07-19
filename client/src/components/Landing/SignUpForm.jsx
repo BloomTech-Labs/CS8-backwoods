@@ -2,7 +2,7 @@ import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
-
+import axios from 'axios'
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 //Started working on getting this setup with the backend
@@ -20,7 +20,11 @@ const styles = theme => ({
     width: 200
   }
 });
-
+const encode = (data) => {
+  return Object.keys(data)
+    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+    .join("&");
+}
 class TextFields extends React.Component {
   constructor(props) {
     super(props)
@@ -41,11 +45,21 @@ class TextFields extends React.Component {
       return true
     })
   }
+  
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value,
     });
   };
+  handleSubmit = e => {
+    e.preventDefault();
+    const { firstName, lastName, email, validatePassword} = this.state;
+    axios.post('http://localhost:8000/signup', { firstName, lastName, email, validatePassword })
+      .then(res => {
+        console.log(res)
+        console.log(res.data)
+      })
+  }
   render() {
     const { classes } = this.props;
     // noValidate autoComplete="off"
