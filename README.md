@@ -35,3 +35,4 @@ _____________________________
 * [google-maps-react](https://github.com/fullstackreact/google-maps-react)
 * [react-router-dom](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom)
 * [react-stripe-elements](https://github.com/stripe/react-stripe-elements)
+* [react-material-ui-form-validator](https://github.com/NewOldMax/react-material-ui-form-validator#readme)
