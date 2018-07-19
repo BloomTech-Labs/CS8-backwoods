@@ -29,7 +29,7 @@ class TextFields extends React.Component {
       lastName: '',
       email: '',
       password: '',
-      password2: ''
+      validatePassword: ''
     }
 
   }
@@ -107,8 +107,8 @@ class TextFields extends React.Component {
             label="Confirm Password"
             className={classes.textField}
             type="password"
-            value={this.state.password2}
-            onChange={this.handleChange('password2')}
+            value={this.state.validatePassword}
+            onChange={this.handleChange('validatePassword')}
             autoComplete="current-password"
             margin="normal"
             errorMessages={['password mismatch', 'this field is required']}
