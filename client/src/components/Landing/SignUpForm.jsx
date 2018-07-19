@@ -25,7 +25,7 @@ const styles = theme => ({
 //     .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
 //     .join("&");
 // }
-class TextFields extends React.Component {
+class SignUpForm extends React.Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -139,4 +139,4 @@ class TextFields extends React.Component {
   }
 }
 
-export default withStyles(styles)(TextFields);
+export default withStyles(styles)(SignUpForm);

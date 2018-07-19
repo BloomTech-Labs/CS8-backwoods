@@ -21,7 +21,7 @@ const styles = theme => ({
   }
 });
 
-class TextFields extends React.Component {
+class SignInForm extends React.Component {
   state = {
     email: '',
     password: ''
@@ -82,4 +82,4 @@ class TextFields extends React.Component {
   }
 }
 
-export default withStyles(styles)(TextFields);
+export default withStyles(styles)(SignInForm);
