@@ -20,11 +20,11 @@ const styles = theme => ({
     width: 200
   }
 });
-const encode = (data) => {
-  return Object.keys(data)
-    .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
-    .join("&");
-}
+// const encode = (data) => {
+//   return Object.keys(data)
+//     .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+//     .join("&");
+// }
 class TextFields extends React.Component {
   constructor(props) {
     super(props)
@@ -53,8 +53,8 @@ class TextFields extends React.Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    const { firstName, lastName, email, validatePassword} = this.state;
-    axios.post('http://localhost:8000/signup', { firstName, lastName, email, validatePassword })
+    const { firstName, lastName, email, password} = this.state;
+    axios.post('http://localhost:8000/signup', { firstName, lastName, email, password })
       .then(res => {
         console.log(res)
         console.log(res.data)
