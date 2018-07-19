@@ -1,6 +1,8 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
+import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
+
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 //Started working on getting this setup with the backend
@@ -27,19 +29,28 @@ class TextFields extends React.Component {
       lastName: '',
       email: '',
       password: '',
+      password2: ''
     }
+
+  }
+  componentWillMount() {
+    ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
+      if (value !== this.state.password) {
+        return false
+      }
+      return true
+    })
   }
   handleChange = name => event => {
     this.setState({
-      [name]: event.target.value
+      [name]: event.target.value,
     });
   };
-
   render() {
     const { classes } = this.props;
-
+    // noValidate autoComplete="off"
     return (
-      <form className={classes.container} noValidate autoComplete="off" onSubmit="this.handleSubmit">
+      <ValidatorForm className={classes.container} onSubmit={this.handleSubmit}>
         <TextField
           required
           id="firstName"
@@ -47,7 +58,7 @@ class TextFields extends React.Component {
           className={classes.textField}
           type="text"
           value={this.state.firstName}
-          onChange={this.handleChange('firstName')}
+          onChange={this.handleChange('firstName')} //change this
           margin="normal"
         />
         <TextField
@@ -59,40 +70,57 @@ class TextFields extends React.Component {
           value={this.state.lastName}
           onChange={this.handleChange('lastName')}
           margin="normal"
+          name="firstName"
         />
         <TextField
           required
           id="required"
           label="Email"
           className={classes.textField}
+          type="email"
           value={this.state.email}
+          onChange={this.handleChange('email')}
+          autoComplete="email"
           margin="normal"
+          name="lastName"
         />
-        <TextField
-          required
-          id="password-input"
-          label="Password"
-          className={classes.textField}
-          type="password"
-          autoComplete="current-password"
-          margin="normal"
-        />
-        <TextField
-          required
-          id="password-input"
-          label="Confirm Password"
-          className={classes.textField}
-          type="password"
-          autoComplete="current-password"
-          margin="normal"
-        />
+        
+          <TextValidator
+            validators={['required']}
+            name="password"
+            required
+            id="password-input"
+            label="Password"
+            className={classes.textField}
+            type="password"
+            value={this.state.password}
+            onChange={this.handleChange('password')}
+            autoComplete="current-password"
+            margin="normal"
+            errorMessages={['this field is required']}
+          />
+          <TextValidator
+            validators={['isPasswordMatch', 'required']}
+            name="repeatPassword"
+            required
+            id="password-input"
+            label="Confirm Password"
+            className={classes.textField}
+            type="password"
+            value={this.state.password2}
+            onChange={this.handleChange('password2')}
+            autoComplete="current-password"
+            margin="normal"
+            errorMessages={['password mismatch', 'this field is required']}
+          />
+      
         <div className="submitButton">
           <Button variant="contained" className={classes.button} type="submit">
             Submit
             <Icon className={classes.rightIcon}>send</Icon>
           </Button>
         </div>
-      </form>
+      </ValidatorForm>
     );
   }
 }
