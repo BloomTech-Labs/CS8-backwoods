@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import axios from 'axios';
-import { Route, Redirect } from 'react-router-dom'
+// removed Redirect to get rid of react error
+import { Route } from 'react-router-dom'
 import Modal from './components/Sign-in-out-nav/Modal.jsx';
 import PageContent from './components/Landing/PageContent.jsx';
 import AccountForm from './components/Account/AccountForm.jsx';
@@ -12,61 +13,13 @@ import Trip from './components/Trip/Trip.jsx';
 import TripCreate from './components/Trip/TripCreate.jsx';
 import TripList from './components/TripList/TripList.jsx';
 import TripListEmpty from './components/TripList/TripListEmpty.jsx';
+import MySnackbarContent from './Snackbar'
 
 import Snackbar from '@material-ui/core/Snackbar';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
 import green from '@material-ui/core/colors/green';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import IconButton from '@material-ui/core/IconButton';
-import ErrorIcon from '@material-ui/icons/Error';
-import CloseIcon from '@material-ui/icons/Close';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+
 import { withStyles } from '@material-ui/core/styles';
 // import { Switch } from '../node_modules/@material-ui/core';
-
-const variantIcon = {
-  success: CheckCircleIcon,
-  error: ErrorIcon,
-};
-
-const MySnackbarContent = (props) => {
-  const { classes, className, message, onClose, variant, ...other } = props;
-  const Icon = variantIcon[variant];
-
-  return (
-    <SnackbarContent
-      className={classNames(classes[variant], className)}
-      aria-describedby="client-snackbar"
-      message={
-        <span id="client-snackbar" className={classes.message}>
-          <Icon className={classNames(classes.icon, classes.iconVariant)} />
-          {message}
-        </span>
-      }
-      action={[
-        <IconButton
-          key="close"
-          aria-label="Close"
-          color="inherit"
-          className={classes.close}
-          onClick={onClose}
-        >
-          <CloseIcon className={classes.icon} />
-        </IconButton>,
-      ]}
-      {...other}
-    />
-  );
-}
-
-MySnackbarContent.propTypes = {
-  classes: PropTypes.object.isRequired,
-  className: PropTypes.string,
-  message: PropTypes.node,
-  onClose: PropTypes.func,
-  variant: PropTypes.oneOf(['success', 'error']).isRequired,
-};
 
 const styles1 = theme => ({
   success: {
