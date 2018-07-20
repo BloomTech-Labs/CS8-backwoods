@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import axios from 'axios';
 // removed Redirect to get rid of react error
-import { Route } from 'react-router-dom'
+import { Route, Redirect } from 'react-router-dom'
 import Modal from './components/Sign-in-out-nav/Modal.jsx';
 import PageContent from './components/Landing/PageContent.jsx';
 import AccountForm from './components/Account/AccountForm.jsx';
@@ -62,6 +62,7 @@ class App extends Component {
       snackbarHorizontal: 'center',
       tabState: 0,
       open: false,
+      fireRedirect: false
     };
   }
   handleOpen = () => {
@@ -76,7 +77,7 @@ class App extends Component {
     const { email, password } = this.state;
     axios.post('http://localhost:8000/login', { email, password })
       .then(res => {
-        this.setState({ snackbarOpenSignIn: true, open: false }, this.handleLogInOut())
+        this.setState({ snackbarOpenSignIn: true, open: false, fireRedirect: true }, this.handleLogInOut())
         localStorage.setItem('token', res.data.token);
         console.log(res.data)
       }).catch(error => {
@@ -120,10 +121,7 @@ class App extends Component {
   };
 
   render() {
-    // const { redirect } = this.state;
-    // if (redirect) {
-    //   return <Redirect to="/trips" />;
-    // }
+    const { fireRedirect } = this.state
     return (
       <div>
         <React.Fragment>
@@ -192,6 +190,9 @@ class App extends Component {
               handleOpen={this.handleOpen}
               open={this.state.open}
             />
+            {fireRedirect && (
+              <Redirect to={"/trips"} />
+            )}
             <React.Fragment>
               <Route path="/*" component={DebugRoutes} />
               <Route exact path="/" component={PageContent} /> {/* Landing */}
