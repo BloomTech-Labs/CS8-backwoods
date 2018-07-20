@@ -36,6 +36,16 @@ class CenteredTabs extends React.Component {
     if (this.state.value === 0 && this.props.tabState === 0) {
       return (
         <TabContainer>
+          <Tabs
+            value={this.props.tabState}
+            onChange={this.props.handleTabChange}
+            indicatorColor="primary"
+            textColor="primary"
+            centered
+          >
+            <Tab label="Sign Up" />
+            <Tab label="Sign In" />
+          </Tabs>
           <SignUpForm
             handleChange={this.props.handleChange}
             handleSignUp={this.props.handleSignUp}
@@ -50,6 +60,16 @@ class CenteredTabs extends React.Component {
     } else if (this.state.value === 1 || this.props.tabState === 1) {
       return (
         <TabContainer>
+          <Tabs
+            value={this.props.tabState}
+            onChange={this.props.handleTabChange}
+            indicatorColor="primary"
+            textColor="primary"
+            centered
+          >
+            <Tab label="Sign Up" />
+            <Tab label="Sign In" />
+          </Tabs>
           <SignInForm
             handleChange={this.props.handleChange}
             handleSignIn={this.props.handleSignIn}
@@ -68,17 +88,6 @@ class CenteredTabs extends React.Component {
 
     return (
       <Paper className={classes.root}>
-        <Tabs
-          value={this.props.tabState}
-          onChange={this.props.handleTabChange}
-          indicatorColor="primary"
-          textColor="primary"
-          centered
-        >
-          <Tab label="Sign Up" />
-          <Tab label="Sign In" />
-        </Tabs>
-
         {this.SignInandUp()}
       </Paper>
     );
