@@ -29,7 +29,7 @@ class SignUpForm extends React.Component {
       return true
     })
   }
-  
+
   render() {
     const { classes } = this.props;
     // noValidate autoComplete="off"
@@ -44,6 +44,7 @@ class SignUpForm extends React.Component {
           value={this.props.firstName}
           onChange={this.props.handleChange('firstName')}
           margin="normal"
+          name="firstName"
         />
         <TextField
           required
@@ -54,7 +55,7 @@ class SignUpForm extends React.Component {
           value={this.props.lastName}
           onChange={this.props.handleChange('lastName')}
           margin="normal"
-          name="firstName"
+          name="lastName"
         />
         <TextField
           required
@@ -66,38 +67,38 @@ class SignUpForm extends React.Component {
           onChange={this.props.handleChange('email')}
           autoComplete="email"
           margin="normal"
-          name="lastName"
+          name="email"
         />
-        
-          <TextValidator
-            validators={['required']}
-            name="password"
-            required
-            id="password-input"
-            label="Password"
-            className={classes.textField}
-            type="password"
-            value={this.props.password}
-            onChange={this.props.handleChange('password')}
-            autoComplete="current-password"
-            margin="normal"
-            errorMessages={['this field is required']}
-          />
-          <TextValidator
-            validators={['isPasswordMatch', 'required']}
-            name="repeatPassword"
-            required
-            id="password-input"
-            label="Confirm Password"
-            className={classes.textField}
-            type="password"
-            value={this.props.validatePassword}
-            onChange={this.props.handleChange('validatePassword')}
-            autoComplete="current-password"
-            margin="normal"
-            errorMessages={['password mismatch', 'this field is required']}
-          />
-      
+
+        <TextValidator
+          validators={['required']}
+          name="password"
+          required
+          id="password-input"
+          label="Password"
+          className={classes.textField}
+          type="password"
+          value={this.props.password}
+          onChange={this.props.handleChange('password')}
+          autoComplete="current-password"
+          margin="normal"
+          errorMessages={['this field is required']}
+        />
+        <TextValidator
+          validators={['isPasswordMatch', 'required']}
+          name="repeatPassword"
+          required
+          id="password-input"
+          label="Confirm Password"
+          className={classes.textField}
+          type="password"
+          value={this.props.validatePassword}
+          onChange={this.props.handleChange('validatePassword')}
+          autoComplete="current-password"
+          margin="normal"
+          errorMessages={['password mismatch', 'this field is required']}
+        />
+
         <div className="submitButton">
           <Button variant="contained" className={classes.button} type="submit">
             Submit

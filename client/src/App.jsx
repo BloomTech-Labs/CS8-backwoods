@@ -93,11 +93,13 @@ class App extends Component {
       password: '',
       validatePassword: '',
       isLoggedIn: false,
-      snackbarOpen: false,
+      snackbarOpenSignIn: false,
+      snackbarOpenError: false,
+      snackbarOpenSignUp: false,
+      snackbarOpenSignUpError: false,
       snackbarVertical: 'top',
       snackbarHorizontal: 'center'
     };
-    this.handleLogIn = this.handleLogIn.bind(this);
   }
 
   handleSignIn = e => {
@@ -105,11 +107,11 @@ class App extends Component {
     const { email, password } = this.state;
     axios.post('http://localhost:8000/login', { email, password })
       .then(res => {
-        this.setState({ snackbarOpen: true })
+        this.setState({ snackbarOpenSignIn: true })
         console.log(res);
         console.log(res.data)
       }).catch(error => {
-        this.setState({ snackbarOpen: true })
+        this.setState({ snackbarOpenError: true })
         console.log("INCORRECT USERNAME/PASSWORD")
       })
   }
@@ -119,8 +121,12 @@ class App extends Component {
     const { firstName, lastName, email, password } = this.state;
     axios.post('http://localhost:8000/signup', { firstName, lastName, email, password })
       .then(res => {
+        this.setState({ snackbarOpenSignUp: true })
         console.log(res)
         console.log(res.data)
+      }).catch(error => {
+        this.setState({ snackbarOpenSignUpError: true })
+        console.log("User Already Exists")
       })
   }
 
@@ -130,19 +136,20 @@ class App extends Component {
     });
   };
 
-  handleLogIn(e) {
+  handleLogIn = () => {
     this.setState({ isLoggedIn: true });
   }
+
   handleSnackbarClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
-    this.setState({ snackbarOpen: false });
+    this.setState({ snackbarOpenSignIn: false });
+    this.setState({ snackbarOpenError: false });
+    this.setState({ snackbarOpenSignUp: false });
+    this.setState({ snackbarOpenSignUpError: false })
   };
 
-  handleSnackbarClick = state => () => {
-    this.setState({ snackbarOpen: true, ...state });
-  };
 
 
 
@@ -152,9 +159,9 @@ class App extends Component {
         <React.Fragment>
           <Snackbar
             anchorOrigin={{ vertical: this.state.snackbarVertical, horizontal: this.state.snackbarHorizontal }}
-            open={this.state.snackbarOpen}
+            open={this.state.snackbarOpenError}
             onClose={this.handleSnackbarClose}
-            autoHideDuration={6000}
+            autoHideDuration={2000}
           >
             <MySnackbarContentWrapper
               onClose={this.handleSnackbarClose}
@@ -164,14 +171,38 @@ class App extends Component {
           </Snackbar>
           <Snackbar
             anchorOrigin={{ vertical: this.state.snackbarVertical, horizontal: this.state.snackbarHorizontal }}
-            open={this.state.snackbarOpen}
+            open={this.state.snackbarOpenSignIn}
             onClose={this.handleSnackbarClose}
-            autoHideDuration={6000}
+            autoHideDuration={2000}
           >
             <MySnackbarContentWrapper
               onClose={this.handleSnackbarClose}
               variant="success"
               message="Logged in successful!"
+            />
+          </Snackbar>
+          <Snackbar
+            anchorOrigin={{ vertical: this.state.snackbarVertical, horizontal: this.state.snackbarHorizontal }}
+            open={this.state.snackbarOpenSignUp}
+            onClose={this.handleSnackbarClose}
+            autoHideDuration={2000}
+          >
+            <MySnackbarContentWrapper
+              onClose={this.handleSnackbarClose}
+              variant="success"
+              message="User successfully created!"
+            />
+          </Snackbar>
+          <Snackbar
+            anchorOrigin={{ vertical: this.state.snackbarVertical, horizontal: this.state.snackbarHorizontal }}
+            open={this.state.snackbarOpenSignUpError}
+            onClose={this.handleSnackbarClose}
+            autoHideDuration={2000}
+          >
+            <MySnackbarContentWrapper
+              onClose={this.handleSnackbarClose}
+              variant="error"
+              message="User already exists!"
             />
           </Snackbar>
           <CssBaseline>

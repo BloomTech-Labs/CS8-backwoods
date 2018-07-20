@@ -19,19 +19,20 @@ const styles = theme => ({
   }
 });
 
-const SignInForm = (props)  => {
-    const { classes } = props;
+class SignInForm extends React.Component {
+  render() {
+    const { classes } = this.props;
 
     // noValidate autoComplete="off"
     return (
-      <form className={classes.container} onSubmit={props.handleSignIn}>
+      <form className={classes.container} onSubmit={this.props.handleSignIn}>
         <TextField
           required
           id="required"
           label="Email"
           type="email"
-          value={props.email}
-          onChange={props.handleChange('email')}
+          value={this.props.email}
+          onChange={this.props.handleChange('email')}
           autoComplete="email"
           className={classes.textField}
           margin="normal"
@@ -40,8 +41,8 @@ const SignInForm = (props)  => {
           required
           id="password-input"
           label="Password"
-          value={props.password}
-          onChange={props.handleChange('password')}
+          value={this.props.password}
+          onChange={this.props.handleChange('password')}
           className={classes.textField}
           type="password"
           autoComplete="current-password"
@@ -56,6 +57,7 @@ const SignInForm = (props)  => {
       </form>
     );
   }
+}
 
 
 export default withStyles(styles)(SignInForm);
