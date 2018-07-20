@@ -1,13 +1,13 @@
 import React, { Component } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import axios from 'axios';
-import { Route } from 'react-router-dom';
+import { Route, Redirect } from 'react-router-dom'
 import Modal from './components/Sign-in-out-nav/Modal.jsx';
 import PageContent from './components/Landing/PageContent.jsx';
 import AccountForm from './components/Account/AccountForm.jsx';
 import BillingForm from './components/Billing/BillingForm.jsx';
 import DebugRoutes from './components/Debug/DebugRoutes.jsx';
-import Nav from './components/Nav/Nav.jsx';
+// import Nav from './components/Nav/Nav.jsx';
 import Trip from './components/Trip/Trip.jsx';
 import TripCreate from './components/Trip/TripCreate.jsx';
 import TripList from './components/TripList/TripList.jsx';
@@ -108,7 +108,7 @@ class App extends Component {
       snackbarVertical: 'top',
       snackbarHorizontal: 'center',
       tabState: 0,
-      open: false
+      open: false,
     };
   }
   handleOpen = () => {
@@ -124,7 +124,7 @@ class App extends Component {
     axios.post('http://localhost:8000/login', { email, password })
       .then(res => {
         this.setState({ snackbarOpenSignIn: true, open: false }, this.handleLogInOut())
-        console.log(res);
+        localStorage.setItem('token', res.data.token);
         console.log(res.data)
       }).catch(error => {
         this.setState({ snackbarOpenError: true })
@@ -138,7 +138,6 @@ class App extends Component {
     axios.post('http://localhost:8000/signup', { firstName, lastName, email, password })
       .then(res => {
         this.setState({ snackbarOpenSignUp: true, tabState: 1 })
-        console.log(res)
         console.log(res.data)
       }).catch(error => {
         this.setState({ snackbarOpenSignUpError: true })
@@ -154,6 +153,7 @@ class App extends Component {
 
   handleLogInOut = () => {
     this.setState({ isLoggedIn: !this.state.isLoggedIn });
+    localStorage.removeItem('token');
   }
 
   handleSnackbarClose = (event, reason) => {
@@ -167,6 +167,10 @@ class App extends Component {
   };
 
   render() {
+    // const { redirect } = this.state;
+    // if (redirect) {
+    //   return <Redirect to="/trips" />;
+    // }
     return (
       <div>
         <React.Fragment>
@@ -235,17 +239,17 @@ class App extends Component {
               handleOpen={this.handleOpen}
               open={this.state.open}
             />
-          <React.Fragment>
-            <Route path="/*" component={DebugRoutes} />
-            <Route exact path="/" component={PageContent} /> {/* Landing */}
-            <Route path="/trips/*" component={Nav} />
-            <Route exact path="/trips/" component={TripList} />
-            <Route exact path="/trips/id/:id/" component={Trip} />
-            <Route exact path="/trips/create/" component={TripCreate} />
-            <Route exact path="/trips/empty/" component={TripListEmpty} />
-            <Route exact path="/trips/settings/" component={AccountForm} />
-            <Route exact path="/trips/billing/" component={BillingForm} />
-          </React.Fragment>
+            <React.Fragment>
+              <Route path="/*" component={DebugRoutes} />
+              <Route exact path="/" component={PageContent} /> {/* Landing */}
+              {/* <Route path="/trips/*" component={Nav} /> */}
+              <Route exact path="/trips" component={TripList} />
+              <Route exact path="/trips/id/:id/" component={Trip} />
+              <Route exact path="/trips/create/" component={TripCreate} />
+              <Route exact path="/trips/empty/" component={TripListEmpty} />
+              <Route exact path="/trips/settings/" component={AccountForm} />
+              <Route exact path="/trips/billing/" component={BillingForm} />
+            </React.Fragment>
           </CssBaseline>
         </React.Fragment>
       </div>
