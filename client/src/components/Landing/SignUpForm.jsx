@@ -45,7 +45,7 @@ class SignUpForm extends React.Component {
       return true
     })
   }
-  
+
   handleChange = name => event => {
     this.setState({
       [name]: event.target.value,
@@ -53,11 +53,12 @@ class SignUpForm extends React.Component {
   };
   handleSubmit = e => {
     e.preventDefault();
-    const { firstName, lastName, email, password} = this.state;
+    const { firstName, lastName, email, password } = this.state;
     axios.post('http://localhost:8000/signup', { firstName, lastName, email, password })
       .then(res => {
-        console.log(res)
         console.log(res.data)
+      }).catch(err => {
+        console.log(err)
       })
   }
   render() {
@@ -84,7 +85,7 @@ class SignUpForm extends React.Component {
           value={this.state.lastName}
           onChange={this.handleChange('lastName')}
           margin="normal"
-          name="firstName"
+          name="lastName"
         />
         <TextField
           required
@@ -96,38 +97,38 @@ class SignUpForm extends React.Component {
           onChange={this.handleChange('email')}
           autoComplete="email"
           margin="normal"
-          name="lastName"
+          name="email"
         />
-        
-          <TextValidator
-            validators={['required']}
-            name="password"
-            required
-            id="password-input"
-            label="Password"
-            className={classes.textField}
-            type="password"
-            value={this.state.password}
-            onChange={this.handleChange('password')}
-            autoComplete="current-password"
-            margin="normal"
-            errorMessages={['this field is required']}
-          />
-          <TextValidator
-            validators={['isPasswordMatch', 'required']}
-            name="repeatPassword"
-            required
-            id="password-input"
-            label="Confirm Password"
-            className={classes.textField}
-            type="password"
-            value={this.state.validatePassword}
-            onChange={this.handleChange('validatePassword')}
-            autoComplete="current-password"
-            margin="normal"
-            errorMessages={['password mismatch', 'this field is required']}
-          />
-      
+
+        <TextValidator
+          validators={['required']}
+          name="password"
+          required
+          id="password-input"
+          label="Password"
+          className={classes.textField}
+          type="password"
+          value={this.state.password}
+          onChange={this.handleChange('password')}
+          autoComplete="current-password"
+          margin="normal"
+          errorMessages={['this field is required']}
+        />
+        <TextValidator
+          validators={['isPasswordMatch', 'required']}
+          name="repeatPassword"
+          required
+          id="password-input"
+          label="Confirm Password"
+          className={classes.textField}
+          type="password"
+          value={this.state.validatePassword}
+          onChange={this.handleChange('validatePassword')}
+          autoComplete="current-password"
+          margin="normal"
+          errorMessages={['password mismatch', 'this field is required']}
+        />
+
         <div className="submitButton">
           <Button variant="contained" className={classes.button} type="submit">
             Submit
