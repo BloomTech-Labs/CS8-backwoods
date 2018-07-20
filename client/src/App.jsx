@@ -107,16 +107,23 @@ class App extends Component {
       snackbarOpenSignUpError: false,
       snackbarVertical: 'top',
       snackbarHorizontal: 'center',
-      tabState: 0
+      tabState: 0,
+      open: false
     };
   }
+  handleOpen = () => {
+    this.setState({ open: true });
+  };
 
+  handleClose = () => {
+    this.setState({ open: false });
+  };
   handleSignIn = e => {
     e.preventDefault();
     const { email, password } = this.state;
     axios.post('http://localhost:8000/login', { email, password })
       .then(res => {
-        this.setState({ snackbarOpenSignIn: true }, this.handleLogInOut())
+        this.setState({ snackbarOpenSignIn: true, open: false }, this.handleLogInOut())
         console.log(res);
         console.log(res.data)
       }).catch(error => {
@@ -224,6 +231,9 @@ class App extends Component {
               password={this.state.password}
               validatePassword={this.state.validatePassword}
               isLoggedIn={this.state.isLoggedIn}
+              handleClose={this.handleClose}
+              handleOpen={this.handleOpen}
+              open={this.state.open}
             />
           <React.Fragment>
             <Route path="/*" component={DebugRoutes} />
