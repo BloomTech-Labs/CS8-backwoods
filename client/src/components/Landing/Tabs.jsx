@@ -48,12 +48,25 @@ class CenteredTabs extends React.Component {
         </Tabs>
         {this.state.value === 0 && (
           <TabContainer>
-            <SignUpForm />
+            <SignUpForm 
+              handleChange={this.props.handleChange}
+              handleSignUp={this.props.handleSignUp}
+              firstName={this.props.firstName}
+              lastName={this.props.lastName}
+              email={this.props.email}
+              password={this.props.password}
+              validatePassword={this.props.validatePassword}
+              />
           </TabContainer>
         )}
         {this.state.value === 1 && (
           <TabContainer>
-            <SignInForm />
+            <SignInForm
+              handleChange={this.props.handleChange}
+              handleSignIn={this.props.handleSignIn}
+              email={this.props.email}
+              password={this.props.password}
+              />
           </TabContainer>
         )}
       </Paper>

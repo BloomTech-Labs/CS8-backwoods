@@ -47,7 +47,16 @@ class SimpleModal extends React.Component {
         <Button onClick={this.handleOpen}>Sign Up / Sign In</Button>
         <Modal open={this.state.open} onClose={this.handleClose}>
           <div style={getModalStyle()} className={classes.paper}>
-            <Tabs />
+            <Tabs 
+              handleChange={this.props.handleChange}
+              handleSignUp={this.props.handleSignUp}
+              handleSignIn={this.props.handleSignIn}
+              firstName={this.props.firstName}
+              lastName={this.props.lastName}
+              email={this.props.email}
+              password={this.props.password}
+              validatePassword={this.props.validatePassword}
+              />
           </div>
         </Modal>
       </div>
