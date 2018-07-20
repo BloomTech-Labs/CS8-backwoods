@@ -106,7 +106,7 @@ class App extends Component {
   };
 
   handleLogInOut = () => {
-    this.setState({ isLoggedIn: !this.state.isLoggedIn });
+    this.setState({ isLoggedIn: !this.state.isLoggedIn, tabState: 0 });
     localStorage.removeItem('token');
   }
 
@@ -119,6 +119,9 @@ class App extends Component {
     this.setState({ snackbarOpenSignUp: false });
     this.setState({ snackbarOpenSignUpError: false })
   };
+  handleTabChange = (event, value) => {
+    this.setState({ tabState: value })
+  }
 
   render() {
     const { fireRedirect } = this.state
@@ -175,6 +178,7 @@ class App extends Component {
           </Snackbar>
           <CssBaseline>
             <Modal
+              handleTabChange={this.handleTabChange}
               handleLogInOut={this.handleLogInOut}
               tabState={this.state.tabState}
               handleChange={this.handleChange}

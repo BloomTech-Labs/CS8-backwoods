@@ -31,13 +31,13 @@ class SimpleModal extends React.Component {
     open: false
   };
 
-  handleOpen = () => {
-    this.setState({ open: true });
-  };
+  // handleOpen = () => {
+  //   this.setState({ open: true });
+  // };
 
-  handleClose = () => {
-    this.setState({ open: false });
-  };
+  // handleClose = () => {
+  //   this.setState({ open: false });
+  // };
 
   render() {
     const { classes } = this.props;
@@ -51,6 +51,7 @@ class SimpleModal extends React.Component {
         <Modal open={this.props.open} onClose={this.props.handleClose}>
           <div style={getModalStyle()} className={classes.paper}>
             <Tabs
+              handleTabChange={this.props.handleTabChange}
               tabState={this.props.tabState}
               handleChange={this.props.handleChange}
               handleSignUp={this.props.handleSignUp}

@@ -28,7 +28,7 @@ class CenteredTabs extends React.Component {
   };
 
   handleChange = (event, value) => {
-    console.log(event)
+    
     console.log(value)
     this.setState({ value });
   };
@@ -48,8 +48,6 @@ class CenteredTabs extends React.Component {
         </TabContainer>
       )
     } else if (this.state.value === 1 || this.props.tabState === 1) {
-      console.log('value yo', this.state.value)
-      console.log('from props you', this.props.tabState)
       return (
         <TabContainer>
           <SignInForm
@@ -71,8 +69,8 @@ class CenteredTabs extends React.Component {
     return (
       <Paper className={classes.root}>
         <Tabs
-          value={this.state.value}
-          onChange={this.handleChange}
+          value={this.props.tabState}
+          onChange={this.props.handleTabChange}
           indicatorColor="primary"
           textColor="primary"
           centered
