@@ -98,7 +98,8 @@ class App extends Component {
       snackbarOpenSignUp: false,
       snackbarOpenSignUpError: false,
       snackbarVertical: 'top',
-      snackbarHorizontal: 'center'
+      snackbarHorizontal: 'center',
+      tabState: 0
     };
   }
 
@@ -121,7 +122,7 @@ class App extends Component {
     const { firstName, lastName, email, password } = this.state;
     axios.post('http://localhost:8000/signup', { firstName, lastName, email, password })
       .then(res => {
-        this.setState({ snackbarOpenSignUp: true })
+        this.setState({ snackbarOpenSignUp: true, tabState: 1 })
         console.log(res)
         console.log(res.data)
       }).catch(error => {
@@ -149,9 +150,6 @@ class App extends Component {
     this.setState({ snackbarOpenSignUp: false });
     this.setState({ snackbarOpenSignUpError: false })
   };
-
-
-
 
   render() {
     return (
@@ -207,6 +205,7 @@ class App extends Component {
           </Snackbar>
           <CssBaseline>
             <Modal
+              tabState={this.state.tabState}
               handleChange={this.handleChange}
               handleSignUp={this.handleSignUp}
               handleSignIn={this.handleSignIn}

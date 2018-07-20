@@ -28,8 +28,42 @@ class CenteredTabs extends React.Component {
   };
 
   handleChange = (event, value) => {
+    console.log(event)
+    console.log(value)
     this.setState({ value });
   };
+  SignInandUp() {
+    if (this.state.value === 0 && this.props.tabState === 0) {
+      return (
+        <TabContainer>
+          <SignUpForm 
+            handleChange={this.props.handleChange}
+            handleSignUp={this.props.handleSignUp}
+            firstName={this.props.firstName}
+            lastName={this.props.lastName}
+            email={this.props.email}
+            password={this.props.password}
+            validatePassword={this.props.validatePassword}
+          />
+        </TabContainer>
+      )
+    } else if (this.state.value === 1 || this.props.tabState === 1) {
+      {console.log('value yo', this.state.value)}
+      {console.log('from props you', this.props.tabState)}
+      return (
+        <TabContainer>
+          <SignInForm
+            handleChange={this.props.handleChange}
+            handleSignIn={this.props.handleSignIn}
+            email={this.props.email}
+            password={this.props.password}
+          />
+        </TabContainer>
+      )
+     
+    }
+    
+  }
 
   render() {
     const { classes } = this.props;
@@ -46,29 +80,8 @@ class CenteredTabs extends React.Component {
           <Tab label="Sign Up" />
           <Tab label="Sign In" />
         </Tabs>
-        {this.state.value === 0 && (
-          <TabContainer>
-            <SignUpForm 
-              handleChange={this.props.handleChange}
-              handleSignUp={this.props.handleSignUp}
-              firstName={this.props.firstName}
-              lastName={this.props.lastName}
-              email={this.props.email}
-              password={this.props.password}
-              validatePassword={this.props.validatePassword}
-              />
-          </TabContainer>
-        )}
-        {this.state.value === 1 && (
-          <TabContainer>
-            <SignInForm
-              handleChange={this.props.handleChange}
-              handleSignIn={this.props.handleSignIn}
-              email={this.props.email}
-              password={this.props.password}
-              />
-          </TabContainer>
-        )}
+       
+        {this.SignInandUp()}
       </Paper>
     );
   }

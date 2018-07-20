@@ -48,6 +48,7 @@ class SimpleModal extends React.Component {
         <Modal open={this.state.open} onClose={this.handleClose}>
           <div style={getModalStyle()} className={classes.paper}>
             <Tabs 
+              tabState={this.props.tabState}
               handleChange={this.props.handleChange}
               handleSignUp={this.props.handleSignUp}
               handleSignIn={this.props.handleSignIn}
