@@ -4,6 +4,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import Tabs from './Tabs.jsx';
+import { Link } from 'react-router-dom'
 
 function getModalStyle() {
   const top = 50;
@@ -44,10 +45,10 @@ class SimpleModal extends React.Component {
 
     return (
       <div className="signUpController">
-      {this.props.isLoggedIn ? <Button onClick={this.props.handleLogInOut}>log out</Button> :
-      <Button onClick={this.props.handleOpen}>Sign Up / Sign In</Button>
-    
-    }
+        {this.props.isLoggedIn ? <Link to="/"><Button onClick={this.props.handleLogInOut}>log out</Button></Link> :
+          <Button onClick={this.props.handleOpen}>Sign Up / Sign In</Button>
+
+        }
         <Modal open={this.props.open} onClose={this.props.handleClose}>
           <div style={getModalStyle()} className={classes.paper}>
             <Tabs
@@ -61,7 +62,7 @@ class SimpleModal extends React.Component {
               email={this.props.email}
               password={this.props.password}
               validatePassword={this.props.validatePassword}
-              />
+            />
           </div>
         </Modal>
       </div>

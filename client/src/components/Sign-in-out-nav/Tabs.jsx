@@ -28,7 +28,7 @@ class CenteredTabs extends React.Component {
   };
 
   handleChange = (event, value) => {
-    
+
     console.log(value)
     this.setState({ value });
   };
@@ -36,7 +36,7 @@ class CenteredTabs extends React.Component {
     if (this.state.value === 0 && this.props.tabState === 0) {
       return (
         <TabContainer>
-          <SignUpForm 
+          <SignUpForm
             handleChange={this.props.handleChange}
             handleSignUp={this.props.handleSignUp}
             firstName={this.props.firstName}
@@ -58,9 +58,9 @@ class CenteredTabs extends React.Component {
           />
         </TabContainer>
       )
-     
+
     }
-    
+
   }
 
   render() {
@@ -78,7 +78,7 @@ class CenteredTabs extends React.Component {
           <Tab label="Sign Up" />
           <Tab label="Sign In" />
         </Tabs>
-       
+
         {this.SignInandUp()}
       </Paper>
     );

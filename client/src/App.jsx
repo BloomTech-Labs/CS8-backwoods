@@ -62,7 +62,7 @@ class App extends Component {
       snackbarHorizontal: 'center',
       tabState: 0,
       open: false,
-      fireRedirect: false
+      fireRedirect: false,
     };
   }
   handleOpen = () => {
