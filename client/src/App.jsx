@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import axios from 'axios';
-import BuyNow from './components/Landing/BuyNow.jsx';
-import Modal from './components/Landing/Modal.jsx';
+import { Route } from 'react-router-dom';
+import Modal from './components/Sign-in-out-nav/Modal.jsx';
 import PageContent from './components/Landing/PageContent.jsx';
-
+import AccountForm from './components/Account/AccountForm.jsx';
+import BillingForm from './components/Billing/BillingForm.jsx';
+import DebugRoutes from './components/Debug/DebugRoutes.jsx';
+import Nav from './components/Nav/Nav.jsx';
+import Trip from './components/Trip/Trip.jsx';
+import TripCreate from './components/Trip/TripCreate.jsx';
+import TripList from './components/TripList/TripList.jsx';
+import TripListEmpty from './components/TripList/TripListEmpty.jsx';
 
 import Snackbar from '@material-ui/core/Snackbar';
 import SnackbarContent from '@material-ui/core/SnackbarContent';
@@ -16,6 +23,7 @@ import ErrorIcon from '@material-ui/icons/Error';
 import CloseIcon from '@material-ui/icons/Close';
 import CheckCircleIcon from '@material-ui/icons/CheckCircle';
 import { withStyles } from '@material-ui/core/styles';
+// import { Switch } from '../node_modules/@material-ui/core';
 
 const variantIcon = {
   success: CheckCircleIcon,
@@ -108,7 +116,7 @@ class App extends Component {
     const { email, password } = this.state;
     axios.post('http://localhost:8000/login', { email, password })
       .then(res => {
-        this.setState({ snackbarOpenSignIn: true })
+        this.setState({ snackbarOpenSignIn: true }, this.handleLogInOut())
         console.log(res);
         console.log(res.data)
       }).catch(error => {
@@ -137,8 +145,8 @@ class App extends Component {
     });
   };
 
-  handleLogIn = () => {
-    this.setState({ isLoggedIn: true });
+  handleLogInOut = () => {
+    this.setState({ isLoggedIn: !this.state.isLoggedIn });
   }
 
   handleSnackbarClose = (event, reason) => {
@@ -205,6 +213,7 @@ class App extends Component {
           </Snackbar>
           <CssBaseline>
             <Modal
+              handleLogInOut={this.handleLogInOut}
               tabState={this.state.tabState}
               handleChange={this.handleChange}
               handleSignUp={this.handleSignUp}
@@ -214,9 +223,19 @@ class App extends Component {
               email={this.state.email}
               password={this.state.password}
               validatePassword={this.state.validatePassword}
+              isLoggedIn={this.state.isLoggedIn}
             />
-            <PageContent />
-            <BuyNow />
+          <React.Fragment>
+            <Route path="/*" component={DebugRoutes} />
+            <Route exact path="/" component={PageContent} /> {/* Landing */}
+            <Route path="/trips/*" component={Nav} />
+            <Route exact path="/trips/" component={TripList} />
+            <Route exact path="/trips/id/:id/" component={Trip} />
+            <Route exact path="/trips/create/" component={TripCreate} />
+            <Route exact path="/trips/empty/" component={TripListEmpty} />
+            <Route exact path="/trips/settings/" component={AccountForm} />
+            <Route exact path="/trips/billing/" component={BillingForm} />
+          </React.Fragment>
           </CssBaseline>
         </React.Fragment>
       </div>

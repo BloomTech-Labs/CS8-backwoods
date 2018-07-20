@@ -44,10 +44,13 @@ class SimpleModal extends React.Component {
 
     return (
       <div className="signUpController">
-        <Button onClick={this.handleOpen}>Sign Up / Sign In</Button>
+      {this.props.isLoggedIn ? <Button onClick={this.props.handleLogInOut}>log out</Button> :
+      <Button onClick={this.handleOpen}>Sign Up / Sign In</Button>
+    
+    }
         <Modal open={this.state.open} onClose={this.handleClose}>
           <div style={getModalStyle()} className={classes.paper}>
-            <Tabs 
+            <Tabs
               tabState={this.props.tabState}
               handleChange={this.props.handleChange}
               handleSignUp={this.props.handleSignUp}

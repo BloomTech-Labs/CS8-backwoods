@@ -48,8 +48,8 @@ class CenteredTabs extends React.Component {
         </TabContainer>
       )
     } else if (this.state.value === 1 || this.props.tabState === 1) {
-      {console.log('value yo', this.state.value)}
-      {console.log('from props you', this.props.tabState)}
+      console.log('value yo', this.state.value)
+      console.log('from props you', this.props.tabState)
       return (
         <TabContainer>
           <SignInForm
