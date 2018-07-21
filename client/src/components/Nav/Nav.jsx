@@ -1,7 +1,8 @@
 import React from 'react';
+import NavBar from './NavBar.jsx';
 
 const Nav = () => {
-  return <h1>Nav Output</h1>;
+  return <NavBar />;
 };
 
 export default Nav;
