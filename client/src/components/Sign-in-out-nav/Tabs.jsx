@@ -21,77 +21,44 @@ function TabContainer(props) {
     </Typography>
   );
 }
-
-class CenteredTabs extends React.Component {
-  state = {
-    value: 0
-  };
-
-  handleChange = (event, value) => {
-
-    console.log(value)
-    this.setState({ value });
-  };
-  SignInandUp() {
-    if (this.state.value === 0 && this.props.tabState === 0) {
-      return (
-        <TabContainer>
-          <Tabs
-            value={this.props.tabState}
-            onChange={this.props.handleTabChange}
-            indicatorColor="primary"
-            textColor="primary"
-            centered
-          >
-            <Tab label="Sign Up" />
-            <Tab label="Sign In" />
-          </Tabs>
+const CenteredTabs = (props) => {
+  const { classes } = props;
+  
+  return (
+    <Paper className={classes.root}>
+      <Tabs
+        value={props.tabState}
+        onChange={props.handleTabChange}
+        indicatorColor="primary"
+        textColor="primary"
+        centered
+      >
+        <Tab label="Sign Up" />
+        <Tab label="Sign In" />
+      </Tabs>
+      <TabContainer>
+        {props.tabState === 0 && 
           <SignUpForm
-            handleChange={this.props.handleChange}
-            handleSignUp={this.props.handleSignUp}
-            firstName={this.props.firstName}
-            lastName={this.props.lastName}
-            email={this.props.email}
-            password={this.props.password}
-            validatePassword={this.props.validatePassword}
+            handleChange={props.handleChange}
+            handleSignUp={props.handleSignUp}
+            firstName={props.firstName}
+            lastName={props.lastName}
+            email={props.email}
+            password={props.password}
+            validatePassword={props.validatePassword}
           />
-        </TabContainer>
-      )
-    } else if (this.state.value === 1 || this.props.tabState === 1) {
-      return (
-        <TabContainer>
-          <Tabs
-            value={this.props.tabState}
-            onChange={this.props.handleTabChange}
-            indicatorColor="primary"
-            textColor="primary"
-            centered
-          >
-            <Tab label="Sign Up" />
-            <Tab label="Sign In" />
-          </Tabs>
+        }
+        {props.tabState === 1 &&
           <SignInForm
-            handleChange={this.props.handleChange}
-            handleSignIn={this.props.handleSignIn}
-            email={this.props.email}
-            password={this.props.password}
+            handleChange={props.handleChange}
+            handleSignIn={props.handleSignIn}
+            email={props.email}
+            password={props.password}
           />
-        </TabContainer>
-      )
-
-    }
-
-  }
-
-  render() {
-    const { classes } = this.props;
-
-    return (
-      <Paper className={classes.root}>
-        {this.SignInandUp()}
-      </Paper>
-    );
-  }
+        }
+      </TabContainer>
+    </Paper>
+  )
 }
 
 CenteredTabs.propTypes = {
