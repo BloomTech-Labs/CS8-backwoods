@@ -32,7 +32,7 @@ function NavBar(props) {
         </Link>
       </List>
       <List component="nav">
-        <Link to="/trips/account">
+        <Link to="/trips/settings">
           <ListItem button>
             <ListItemText primary="Account" />
           </ListItem>
