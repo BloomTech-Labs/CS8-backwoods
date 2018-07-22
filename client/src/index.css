@@ -17,6 +17,17 @@ body {
   margin-left: 50%;
   margin-top: 1%;
 }
+.navBar {
+  margin-top: 7.5%;
+  width: 20%;
+  height: 70%;
+  border: 1px solid black;
+  margin-left: 1%;
+  position: absolute;
+}
+.signOut {
+  margin-left: 75%;
+}
 .submitButton {
   margin-left: 30%;
   margin-top: 5%;

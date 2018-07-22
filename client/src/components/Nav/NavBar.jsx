@@ -15,9 +15,8 @@ const styles = theme => ({
 });
 
 function NavBar(props) {
-  const { classes } = props;
   return (
-    <div className={classes.root}>
+    <div className="navBar">
       <List component="nav">
         <Link to="/trips/">
           <ListItem button>
