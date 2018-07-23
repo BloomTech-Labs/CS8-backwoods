@@ -11,7 +11,7 @@ const createUser = (req, res) => {
       res.status(201).json(response);
     })
     .catch(err => {
-      res.status(422).json(err);
+      res.status(500).json(err);
     });
 };
 

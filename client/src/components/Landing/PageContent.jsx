@@ -1,6 +1,6 @@
 import React from 'react';
 import Carousel from './Carousel.jsx';
-
+import BuyNow from './BuyNow';
 const PageContent = () => {
   return (
     <div>
@@ -16,6 +16,7 @@ const PageContent = () => {
         purus, sit amet placerat eros diam nec metus. Please buy our application
         we have families to feed thank you{' '}
       </p>
+      <BuyNow />
     </div>
   );
 };
