@@ -18,5 +18,8 @@
   "scripts": {
     "test": "mocha",
     "start": "nodemon server.js"
-  }
+  },
+  "production": {
+    "use_env_variable": "DATABASE_URL"
+}
 }
