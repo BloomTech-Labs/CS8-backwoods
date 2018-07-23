@@ -1,11 +1,7 @@
 const Sequelize = require('sequelize');
 
-//       DB Name     DB Username  DB Password
-// const sequelize = new Sequelize('backwoods', 'postgres', 'dbsuperuser', {
-//   dialect: 'postgres'
-// });
-
-// for production this will be changed to:
+// connects to Heroku DB when using the Heroku deployed link or connects locally when run through
+// your termial by doing yarn start in the root directory
 if (process.env.DATABASE_URL) {
   sequelize = new Sequelize(process.env.DATABASE_URL, {
     dialect: 'postgres',
