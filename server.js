@@ -8,13 +8,14 @@ app.use(bodyParser.json());
 const models = require('./models');
 const routes = require('./routes/routes');
 
+const port = process.env.PORT || 8000
 // Test GET request
 app.get('/', (req, res) => {
   res.send('GET request');
 });
 
 models.sequelize.sync({ force: true }).then(() => {
-  app.listen('8000', () => console.log('Server listening on port 8000'));
+  app.listen(port, () => console.log(`Server listening on ${port}`));
 });
 
 routes(app);
