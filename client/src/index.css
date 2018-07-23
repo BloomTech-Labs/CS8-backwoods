@@ -21,9 +21,11 @@ body {
   margin-top: 7.5%;
   width: 20%;
   height: 70%;
-  border: 1px solid black;
   margin-left: 1%;
   position: absolute;
+}
+.navBar a {
+  text-decoration: none;
 }
 .signOut {
   margin-left: 75%;
@@ -46,6 +48,11 @@ body {
 .submitButton {
   margin-left: 30%;
   margin-top: 5%;
+}
+.navBreadcrumb {
+  margin-right: 75%;
+  margin-left: 1%;
+  width: 10%;
 }
 p {
   margin-left: 10%;

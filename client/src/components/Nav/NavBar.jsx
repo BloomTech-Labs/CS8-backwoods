@@ -5,6 +5,7 @@ import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import { Link } from 'react-router-dom';
+import Paper from '@material-ui/core/Paper';
 
 const styles = theme => ({
   root: {
@@ -16,7 +17,7 @@ const styles = theme => ({
 
 function NavBar(props) {
   return (
-    <div className="navBar">
+    <Paper className="navBar">
       <List component="nav">
         <Link to="/trips/">
           <ListItem button>
@@ -37,7 +38,7 @@ function NavBar(props) {
           </ListItem>
         </Link>
       </List>
-    </div>
+    </Paper>
   );
 }
 
