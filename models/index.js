@@ -1,3 +1,4 @@
+const DATABASE_URL = require('../config')
 const Sequelize = require('sequelize');
 
 //       DB Name     DB Username  DB Password
@@ -5,7 +6,14 @@ const sequelize = new Sequelize('backwoods', 'postgres', 'dbsuperuser', {
   dialect: 'postgres'
 });
 // for production this will be changed to:
-// const sequelize = new Sequelize('postgres://user:pass@example.com:5432/dbname');
+// const sequelize = new Sequelize(DB_CONFIG);
+
+// const sequelize = new Sequelize({
+//   connectionString: process.env.DATABASE_URL,
+//   ssl: true,
+// });
+
+
 
 // Test to see if we are connected to sequelize/db
 sequelize
