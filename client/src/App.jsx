@@ -58,7 +58,7 @@ class App extends Component {
       snackbarOpenError: false,
       snackbarOpenSignUp: false,
       snackbarOpenSignUpError: false,
-      snackbarOpenLogOut: false,
+      snackbarLogOut: false,
       snackbarVertical: 'top',
       snackbarHorizontal: 'center',
       tabState: 0,
@@ -107,7 +107,7 @@ class App extends Component {
   };
 
   handleLogInOut = () => {
-    this.setState({ isLoggedIn: !this.state.isLoggedIn, tabState: 0, snackbarOpenLogOut: true, fireRedirect: false });
+    this.setState({ isLoggedIn: !this.state.isLoggedIn, tabState: 0, snackbarLogOut: true, fireRedirect: false });
     localStorage.removeItem('token');
   }
 
@@ -119,7 +119,7 @@ class App extends Component {
     this.setState({ snackbarOpenError: false });
     this.setState({ snackbarOpenSignUp: false });
     this.setState({ snackbarOpenSignUpError: false })
-    this.setState({ snackbarOpenLogOut: false })
+    this.setState({ snackbarLogOut: false })
   };
   handleTabChange = (event, value) => {
     this.setState({ tabState: value })
@@ -130,6 +130,18 @@ class App extends Component {
     return (
       <div>
         <React.Fragment>
+          <Snackbar
+            anchorOrigin={{ vertical: this.state.snackbarVertical, horizontal: this.state.snackbarHorizontal }}
+            open={this.state.snackbarLogOut}
+            onClose={this.handleSnackbarClose}
+            autoHideDuration={2000}
+          >
+            <MySnackbarContentWrapper
+              onClose={this.handleSnackbarClose}
+              variant="success"
+              message="Logged out successfully!"
+            />
+          </Snackbar>
           <Snackbar
             anchorOrigin={{ vertical: this.state.snackbarVertical, horizontal: this.state.snackbarHorizontal }}
             open={this.state.snackbarOpenError}
@@ -176,18 +188,6 @@ class App extends Component {
               onClose={this.handleSnackbarClose}
               variant="error"
               message="User already exists!"
-            />
-          </Snackbar>
-          <Snackbar
-            anchorOrigin={{ vertical: this.state.snackbarVertical, horizontal: this.state.snackbarHorizontal }}
-            open={this.state.snackbarOpenLogOut}
-            onClose={this.handleSnackbarClose}
-            autoHideDuration={2000}
-          >
-            <MySnackbarContentWrapper
-              onClose={this.handleSnackbarClose}
-              variant="success"
-              message="Logged out successfully!"
             />
           </Snackbar>
           <CssBaseline>
