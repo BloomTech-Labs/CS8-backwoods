@@ -4,10 +4,10 @@ body {
   font-family: Roboto;
 }
 .debug {
-  bottom: 0;
+  bottom: 15px;
   right: 5%;
   position: fixed;
-  border: 1px solid black;
+  padding: 5px;
 }
 .debug > a:link,
 .debug > a:visited {
@@ -17,8 +17,69 @@ body {
   margin-left: 50%;
   margin-top: 1%;
 }
+.navBar {
+  margin-top: 7.5%;
+  width: 20%;
+  height: 70%;
+  margin-left: 1%;
+  position: absolute;
+}
+.navBar a {
+  text-decoration: none;
+}
+.signOut {
+  margin-left: 75%;
+}
+.tripListEmptyPaper {
+  width: 30%;
+  padding: 2%;
+  margin-left: 30%;
+  margin-top: 10%;
+}
+.tripListEmptyPaper-text {
+  padding-bottom: 7%;
+}
+.formPaper {
+  width: 37%;
+  padding: 1%;
+  margin-left: 30%;
+  margin-top: 10%;
+}
 .submitButton {
   margin-left: 30%;
+  margin-top: 5%;
+}
+.navBreadcrumb {
+  margin-right: 75%;
+  margin-left: 1%;
+  width: 10%;
+}
+.StripeElement {
+  background-color: white;
+  height: 40px;
+  padding: 10px 12px;
+  border-radius: 4px;
+  border: 1px solid transparent;
+  box-shadow: 0 1px 3px 0 #e6ebf1;
+  -webkit-transition: box-shadow 150ms ease;
+  transition: box-shadow 150ms ease;
+}
+.StripeElement--focus {
+  box-shadow: 0 1px 3px 0 #cfd7df;
+}
+.StripeElement--invalid {
+  border-color: #fa755a;
+}
+.StripeElement--webkit-autofill {
+  background-color: #fefde5 !important;
+}
+.checkoutForm {
+  width: 37%;
+  padding: 1%;
+  margin-left: 30%;
+  margin-top: 10%;
+}
+.button.MuiButtonBase-root-33:nth-child(2) {
   margin-top: 5%;
 }
 p {
