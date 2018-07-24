@@ -1,7 +1,15 @@
 import React from 'react';
+import CheckoutForm from './CheckoutForm.jsx';
+import { Elements } from 'react-stripe-elements';
 
 const BillingForm = () => {
-  return <h1>Billing Form Page</h1>;
+  return (
+    <div>
+      <Elements>
+        <CheckoutForm />
+      </Elements>
+    </div>
+  );
 };
 
 export default BillingForm;
