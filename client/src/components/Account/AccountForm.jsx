@@ -69,6 +69,9 @@ class AccountForm extends React.Component {
     e.preventDefault();
     const token = localStorage.getItem('token');
     const { email, password } = this.state;
+    // Deployed Testing
+    // axios.put('https://ancient-inlet-94126.herokuapp.com/trips/settings', { email, password }, { headers: { authorization: token } })
+    // local testing
     axios.put('http://localhost:8000/trips/settings', { email, password }, { headers: { authorization: token } })
       .then(res => {
         this.setState({ snackbarChange: true });
