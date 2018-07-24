@@ -14,7 +14,7 @@ import TripCreate from './components/Trip/TripCreate.jsx';
 import TripList from './components/TripList/TripList.jsx';
 import TripListEmpty from './components/TripList/TripListEmpty.jsx';
 import MySnackbarContent from './Snackbar';
-
+import { StripeProvider } from 'react-stripe-elements';
 import Snackbar from '@material-ui/core/Snackbar';
 import green from '@material-ui/core/colors/green';
 
@@ -145,116 +145,118 @@ class App extends Component {
   render() {
     const { fireRedirect } = this.state;
     return (
-      <div>
-        <React.Fragment>
-          <Snackbar
-            anchorOrigin={{
-              vertical: this.state.snackbarVertical,
-              horizontal: this.state.snackbarHorizontal
-            }}
-            open={this.state.snackbarLogOut}
-            onClose={this.handleSnackbarClose}
-            autoHideDuration={2000}
-          >
-            <MySnackbarContentWrapper
+      <StripeProvider apiKey="pk_test_6pRNASCoBOKtIshFeQd4XMUh">
+        <div>
+          <React.Fragment>
+            <Snackbar
+              anchorOrigin={{
+                vertical: this.state.snackbarVertical,
+                horizontal: this.state.snackbarHorizontal
+              }}
+              open={this.state.snackbarLogOut}
               onClose={this.handleSnackbarClose}
-              variant="success"
-              message="Logged out successfully!"
-            />
-          </Snackbar>
-          <Snackbar
-            anchorOrigin={{
-              vertical: this.state.snackbarVertical,
-              horizontal: this.state.snackbarHorizontal
-            }}
-            open={this.state.snackbarOpenError}
-            onClose={this.handleSnackbarClose}
-            autoHideDuration={2000}
-          >
-            <MySnackbarContentWrapper
+              autoHideDuration={2000}
+            >
+              <MySnackbarContentWrapper
+                onClose={this.handleSnackbarClose}
+                variant="success"
+                message="Logged out successfully!"
+              />
+            </Snackbar>
+            <Snackbar
+              anchorOrigin={{
+                vertical: this.state.snackbarVertical,
+                horizontal: this.state.snackbarHorizontal
+              }}
+              open={this.state.snackbarOpenError}
               onClose={this.handleSnackbarClose}
-              variant="error"
-              message="Incorrect Username/Password"
-            />
-          </Snackbar>
-          <Snackbar
-            anchorOrigin={{
-              vertical: this.state.snackbarVertical,
-              horizontal: this.state.snackbarHorizontal
-            }}
-            open={this.state.snackbarOpenSignIn}
-            onClose={this.handleSnackbarClose}
-            autoHideDuration={2000}
-          >
-            <MySnackbarContentWrapper
+              autoHideDuration={2000}
+            >
+              <MySnackbarContentWrapper
+                onClose={this.handleSnackbarClose}
+                variant="error"
+                message="Incorrect Username/Password"
+              />
+            </Snackbar>
+            <Snackbar
+              anchorOrigin={{
+                vertical: this.state.snackbarVertical,
+                horizontal: this.state.snackbarHorizontal
+              }}
+              open={this.state.snackbarOpenSignIn}
               onClose={this.handleSnackbarClose}
-              variant="success"
-              message="Logged in successful!"
-            />
-          </Snackbar>
-          <Snackbar
-            anchorOrigin={{
-              vertical: this.state.snackbarVertical,
-              horizontal: this.state.snackbarHorizontal
-            }}
-            open={this.state.snackbarOpenSignUp}
-            onClose={this.handleSnackbarClose}
-            autoHideDuration={2000}
-          >
-            <MySnackbarContentWrapper
+              autoHideDuration={2000}
+            >
+              <MySnackbarContentWrapper
+                onClose={this.handleSnackbarClose}
+                variant="success"
+                message="Logged in successful!"
+              />
+            </Snackbar>
+            <Snackbar
+              anchorOrigin={{
+                vertical: this.state.snackbarVertical,
+                horizontal: this.state.snackbarHorizontal
+              }}
+              open={this.state.snackbarOpenSignUp}
               onClose={this.handleSnackbarClose}
-              variant="success"
-              message="User successfully created!"
-            />
-          </Snackbar>
-          <Snackbar
-            anchorOrigin={{
-              vertical: this.state.snackbarVertical,
-              horizontal: this.state.snackbarHorizontal
-            }}
-            open={this.state.snackbarOpenSignUpError}
-            onClose={this.handleSnackbarClose}
-            autoHideDuration={2000}
-          >
-            <MySnackbarContentWrapper
+              autoHideDuration={2000}
+            >
+              <MySnackbarContentWrapper
+                onClose={this.handleSnackbarClose}
+                variant="success"
+                message="User successfully created!"
+              />
+            </Snackbar>
+            <Snackbar
+              anchorOrigin={{
+                vertical: this.state.snackbarVertical,
+                horizontal: this.state.snackbarHorizontal
+              }}
+              open={this.state.snackbarOpenSignUpError}
               onClose={this.handleSnackbarClose}
-              variant="error"
-              message="User already exists!"
-            />
-          </Snackbar>
-          <CssBaseline>
-            <Modal
-              handleTabChange={this.handleTabChange}
-              handleLogInOut={this.handleLogInOut}
-              tabState={this.state.tabState}
-              handleChange={this.handleChange}
-              handleSignUp={this.handleSignUp}
-              handleSignIn={this.handleSignIn}
-              firstName={this.state.firstName}
-              lastName={this.state.lastName}
-              email={this.state.email}
-              password={this.state.password}
-              validatePassword={this.state.validatePassword}
-              isLoggedIn={this.state.isLoggedIn}
-              handleClose={this.handleClose}
-              handleOpen={this.handleOpen}
-              open={this.state.open}
-            />
-            {fireRedirect && <Redirect to={'/trips'} />}
-            <React.Fragment>
-              <Route path="/*" component={DebugRoutes} />
-              <Route exact path="/" component={PageContent} /> {/* Landing */}
-              <Route path="/trips/*" component={Nav} />
-              <Route exact path="/trips" component={TripList} />
-              <Route exact path="/trips/id/:id/" component={Trip} />
-              <Route exact path="/trips/create/" component={TripCreate} />
-              <Route exact path="/trips/empty/" component={TripListEmpty} />
-              <Route exact path="/trips/settings/" component={AccountForm} />
-              <Route exact path="/trips/billing/" component={BillingForm} />
-            </React.Fragment>
-          </CssBaseline>
-        </React.Fragment>
-      </div>
+              autoHideDuration={2000}
+            >
+              <MySnackbarContentWrapper
+                onClose={this.handleSnackbarClose}
+                variant="error"
+                message="User already exists!"
+              />
+            </Snackbar>
+            <CssBaseline>
+              <Modal
+                handleTabChange={this.handleTabChange}
+                handleLogInOut={this.handleLogInOut}
+                tabState={this.state.tabState}
+                handleChange={this.handleChange}
+                handleSignUp={this.handleSignUp}
+                handleSignIn={this.handleSignIn}
+                firstName={this.state.firstName}
+                lastName={this.state.lastName}
+                email={this.state.email}
+                password={this.state.password}
+                validatePassword={this.state.validatePassword}
+                isLoggedIn={this.state.isLoggedIn}
+                handleClose={this.handleClose}
+                handleOpen={this.handleOpen}
+                open={this.state.open}
+              />
+              {fireRedirect && <Redirect to={'/trips'} />}
+              <React.Fragment>
+                <Route path="/*" component={DebugRoutes} />
+                <Route exact path="/" component={PageContent} /> {/* Landing */}
+                <Route path="/trips/*" component={Nav} />
+                <Route exact path="/trips" component={TripList} />
+                <Route exact path="/trips/id/:id/" component={Trip} />
+                <Route exact path="/trips/create/" component={TripCreate} />
+                <Route exact path="/trips/empty/" component={TripListEmpty} />
+                <Route exact path="/trips/settings/" component={AccountForm} />
+                <Route exact path="/trips/billing/" component={BillingForm} />
+              </React.Fragment>
+            </CssBaseline>
+          </React.Fragment>
+        </div>
+      </StripeProvider>
     );
   }
 }
