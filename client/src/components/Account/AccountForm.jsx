@@ -4,6 +4,10 @@ import TextField from '@material-ui/core/TextField';
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
+import axios from 'axios';
+import MySnackbarContent from './Snackbar.js';
+import Snackbar from '@material-ui/core/Snackbar';
+import green from '@material-ui/core/colors/green';
 
 // import axios from 'axios';
 
@@ -22,11 +26,33 @@ const styles = theme => ({
   }
 });
 
+const styles1 = theme => ({
+  success: {
+    backgroundColor: green[600]
+  },
+  error: {
+    backgroundColor: theme.palette.error.dark
+  },
+  icon: {
+    fontSize: 20
+  },
+  iconVariant: {
+    opacity: 0.9,
+    marginRight: theme.spacing.unit
+  },
+  message: {
+    display: 'flex',
+    alignItems: 'center'
+  }
+});
+
+const MySnackbarContentWrapper = withStyles(styles1)(MySnackbarContent);
+
 class AccountForm extends React.Component {
   state = {
     email: '',
     password: '',
-    newPassword: ''
+    oldPassword: ''
   };
 
   handleChange = name => event => {
@@ -35,15 +61,16 @@ class AccountForm extends React.Component {
     });
   };
 
-  // handleSubmit = e => {
-  //   e.preventDefault();
-  //   const { email, password } = this.state;
-  //   axios.post('http://localhost:8000/login', { email, password })
-  //     .then(res => {
-  //       console.log(res);
-  //       console.log(res.data)
-  //     })
-  // }
+  handleSubmit = e => {
+    e.preventDefault();
+    const token = localStorage.getItem('token');
+    const { email, password } = this.state;
+    axios.put('http://localhost:8000/trips/settings', { email, password }, { headers: { authorization: token } })
+      .then(res => {
+        console.log(res);
+        console.log(res.data)
+      })
+  }
 
   render() {
     const { classes } = this.props;
@@ -67,8 +94,8 @@ class AccountForm extends React.Component {
               required
               id="password-input"
               label="Old Password"
-              value={this.state.password}
-              onChange={this.handleChange('password')}
+              value={this.state.oldPassword}
+              onChange={this.handleChange('oldPassword')}
               className={classes.textField}
               type="password"
               autoComplete="current-password"
@@ -78,8 +105,8 @@ class AccountForm extends React.Component {
               required
               id="password-input"
               label="New Password"
-              value={this.state.newPassword}
-              onChange={this.handleChange('newPassword')}
+              value={this.state.password}
+              onChange={this.handleChange('password')}
               className={classes.textField}
               type="password"
               margin="normal"
