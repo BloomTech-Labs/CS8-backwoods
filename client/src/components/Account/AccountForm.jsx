@@ -5,7 +5,7 @@ import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import axios from 'axios';
-import MySnackbarContent from './Snackbar.js';
+import MySnackbarContent from '../../Snackbar';
 import Snackbar from '@material-ui/core/Snackbar';
 import green from '@material-ui/core/colors/green';
 
@@ -52,7 +52,11 @@ class AccountForm extends React.Component {
   state = {
     email: '',
     password: '',
-    oldPassword: ''
+    oldPassword: '',
+    snackbarChange: false,
+    snackbarError: false,
+    snackbarVertical: 'top',
+    snackbarHorizontal: 'center',
   };
 
   handleChange = name => event => {
@@ -67,10 +71,21 @@ class AccountForm extends React.Component {
     const { email, password } = this.state;
     axios.put('http://localhost:8000/trips/settings', { email, password }, { headers: { authorization: token } })
       .then(res => {
-        console.log(res);
-        console.log(res.data)
+        this.setState({ snackbarChange: true });
+        console.log(res.data);
+      }).catch(error => {
+        this.setState({ snackbarError: true });
+        console.log(error);
       })
-  }
+  };
+
+  handleSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    this.setState({ snackbarChange: false });
+    this.setState({ snackbarError: false });
+  };
 
   render() {
     const { classes } = this.props;
@@ -125,6 +140,36 @@ class AccountForm extends React.Component {
             </div>
           </form>
         </Paper>
+        <Snackbar
+          anchorOrigin={{
+            vertical: this.state.snackbarVertical,
+            horizontal: this.state.snackbarHorizontal
+          }}
+          open={this.state.snackbarChange}
+          onClose={this.handleSnackbarClose}
+          autoHideDuration={2000}
+        >
+          <MySnackbarContentWrapper
+            onClose={this.handleSnackbarClose}
+            variant="success"
+            message="Changed Password Successfully!"
+          />
+        </Snackbar>
+        <Snackbar
+          anchorOrigin={{
+            vertical: this.state.snackbarVertical,
+            horizontal: this.state.snackbarHorizontal
+          }}
+          open={this.state.snackbarError}
+          onClose={this.handleSnackbarClose}
+          autoHideDuration={2000}
+        >
+          <MySnackbarContentWrapper
+            onClose={this.handleSnackbarClose}
+            variant="error"
+            message="Must Be Logged In To Change Password!"
+          />
+        </Snackbar>
       </div>
     );
   }
