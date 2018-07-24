@@ -4,6 +4,7 @@ const cors = require('cors');
 
 app.use(cors());
 app.use(bodyParser.json());
+app.use(bodyParser.text());
 
 const models = require('./models');
 const routes = require('./routes/routes');
