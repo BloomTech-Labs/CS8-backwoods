@@ -76,8 +76,11 @@ class App extends Component {
   handleSignIn = e => {
     e.preventDefault();
     const { email, password } = this.state;
-    axios
-      .post('http://localhost:8000/login', { email, password })
+    // Deploy axios post
+    // axios.post('https://ancient-inlet-94126.herokuapp.com/login', { email, password })
+    // DEV axios post
+    axios.post('http://localhost:8000/login', { email, password })
+
       .then(res => {
         this.setState(
           { snackbarOpenSignIn: true, open: false, fireRedirect: true },
@@ -95,6 +98,9 @@ class App extends Component {
   handleSignUp = e => {
     e.preventDefault();
     const { firstName, lastName, email, password } = this.state;
+    // Deploy axios call
+    // axios.post('https://ancient-inlet-94126.herokuapp.com/signup', { firstName, lastName, email, password })
+    // local dev axios call
     axios
       .post('http://localhost:8000/signup', {
         firstName,
@@ -102,6 +108,7 @@ class App extends Component {
         email,
         password
       })
+
       .then(res => {
         this.setState({ snackbarOpenSignUp: true, tabState: 1 });
         console.log(res.data);
