@@ -145,7 +145,8 @@ class App extends Component {
   render() {
     const { fireRedirect } = this.state;
     return (
-      <StripeProvider apiKey="pk_test_6pRNASCoBOKtIshFeQd4XMUh">
+      // test key need to put into config when using production key
+      <StripeProvider apiKey="pk_test_UIFQFAQQTuGQzdsoR1LhXtCz">
         <div>
           <React.Fragment>
             <Snackbar
