@@ -104,7 +104,7 @@ class App extends Component {
       isLoggedIn: !this.state.isLoggedIn,
       tabState: 0,
       snackbarLogOut: true,
-      fireRedirect: false
+      fireRedirect: !this.state.fireRedirect
     });
     localStorage.removeItem('token');
   };
@@ -158,14 +158,25 @@ class App extends Component {
                 handleOpen={this.handleOpen}
                 open={this.state.open}
               />
-              {fireRedirect && <Redirect to={`/${this.state.email}`} />}
+              {/* {fireRedirect && <Redirect to={`/${this.state.email}`} />} */}
 
               <React.Fragment>
                 {/* <Switch> */}
                 {/* <Route path="/*" component={DebugRoutes} /> */}
-                <Route exact path="/" component={PageContent} /> {/* Landing */}
+                {/* <Route exact path="/" component={PageContent} /> Landing */}
                 <Route path="/:user"
                   render={(props) => <User {...props} isLoggedIn={this.state.isLoggedIn} email={this.state.email}/>}/>
+
+                <Route exact path="/" render={() => (
+                  fireRedirect ? (
+                  <Redirect to="/:user"/>
+                  ) : (
+                  <PageContent/>
+                  )
+                )}/>
+
+
+
                 {/* <Route path="/trips/*" component={Nav} /> */}
                 <Route exact path="/trips" component={TripList} />
                 <Route exact path="/trips/id/:id/" component={Trip} />

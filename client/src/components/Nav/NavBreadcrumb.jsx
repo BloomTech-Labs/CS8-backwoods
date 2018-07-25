@@ -7,8 +7,8 @@ const NavBreadcrumb = (props) => {
 
   return (
     <Paper className="navBreadcrumb">
-      {/* <Link to={`/${props.user}`}>Home</Link> */}
-      <Link to={`/${currentLocation}`}>Home</Link>
+      <Link to={`/${props.user}`}>Home</Link>
+      {/* <Link to={`/${currentLocation}`}>Home</Link> */}
     </Paper>
   );
 };
