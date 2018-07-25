@@ -5,7 +5,7 @@ import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 import Paper from '@material-ui/core/Paper';
 import axios from 'axios';
-import MySnackbarContent from '../Snackbar/Snackbar';
+import MySnackbarContent from '../Snackbar/MySnackbarContent';
 import Snackbar from '@material-ui/core/Snackbar';
 import green from '@material-ui/core/colors/green';
 
