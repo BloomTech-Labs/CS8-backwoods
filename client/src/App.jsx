@@ -1,47 +1,18 @@
 import React, { Component } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import axios from 'axios';
-// removed Redirect to get rid of react error
+import MainSnackbar from './components/Snackbar/MainSnackbar'
 import { Route, Redirect } from 'react-router-dom';
 import Modal from './components/Sign-in-out-nav/Modal.jsx';
 import PageContent from './components/Landing/PageContent.jsx';
-import AccountForm from './components/Account/AccountForm.jsx';
-import BillingForm from './components/Billing/BillingForm.jsx';
 import DebugRoutes from './components/Debug/DebugRoutes.jsx';
-import Nav from './components/Nav/Nav.jsx';
 import Trip from './components/Trip/Trip.jsx';
 import TripCreate from './components/Trip/TripCreate.jsx';
 import TripList from './components/TripList/TripList.jsx';
 import TripListEmpty from './components/TripList/TripListEmpty.jsx';
-import MySnackbarContent from './Snackbar';
 import { StripeProvider } from 'react-stripe-elements';
-import Snackbar from '@material-ui/core/Snackbar';
-import green from '@material-ui/core/colors/green';
+import User from './components/User/User';
 
-import { withStyles } from '@material-ui/core/styles';
-// import { Switch } from '../node_modules/@material-ui/core';
-
-const styles1 = theme => ({
-  success: {
-    backgroundColor: green[600]
-  },
-  error: {
-    backgroundColor: theme.palette.error.dark
-  },
-  icon: {
-    fontSize: 20
-  },
-  iconVariant: {
-    opacity: 0.9,
-    marginRight: theme.spacing.unit
-  },
-  message: {
-    display: 'flex',
-    alignItems: 'center'
-  }
-});
-
-const MySnackbarContentWrapper = withStyles(styles1)(MySnackbarContent);
 
 // CssBaseline is the Material UI built in CSS reset
 class App extends Component {
@@ -130,7 +101,7 @@ class App extends Component {
       isLoggedIn: !this.state.isLoggedIn,
       tabState: 0,
       snackbarLogOut: true,
-      fireRedirect: false
+      fireRedirect: !this.state.fireRedirect
     });
     localStorage.removeItem('token');
   };
@@ -156,81 +127,16 @@ class App extends Component {
       <StripeProvider apiKey="pk_test_UIFQFAQQTuGQzdsoR1LhXtCz">
         <div>
           <React.Fragment>
-            <Snackbar
-              anchorOrigin={{
-                vertical: this.state.snackbarVertical,
-                horizontal: this.state.snackbarHorizontal
-              }}
-              open={this.state.snackbarLogOut}
-              onClose={this.handleSnackbarClose}
-              autoHideDuration={2000}
-            >
-              <MySnackbarContentWrapper
-                onClose={this.handleSnackbarClose}
-                variant="success"
-                message="Logged out successfully!"
+            <MainSnackbar
+              snackbarOpenSignIn={this.state.snackbarOpenSignIn}
+              snackbarOpenError={this.state.snackbarOpenError}
+              snackbarOpenSignUp={this.state.snackbarOpenSignUp}
+              snackbarOpenSignUpError={this.state.snackbarOpenSignUpError}
+              snackbarLogOut={this.state.snackbarLogOut}
+              handleSnackbarClose={this.handleSnackbarClose}
+              snackbarVertical={this.state.snackbarVertical}
+              snackbarHorizontal={this.state.snackbarHorizontal}
               />
-            </Snackbar>
-            <Snackbar
-              anchorOrigin={{
-                vertical: this.state.snackbarVertical,
-                horizontal: this.state.snackbarHorizontal
-              }}
-              open={this.state.snackbarOpenError}
-              onClose={this.handleSnackbarClose}
-              autoHideDuration={2000}
-            >
-              <MySnackbarContentWrapper
-                onClose={this.handleSnackbarClose}
-                variant="error"
-                message="Incorrect Username/Password"
-              />
-            </Snackbar>
-            <Snackbar
-              anchorOrigin={{
-                vertical: this.state.snackbarVertical,
-                horizontal: this.state.snackbarHorizontal
-              }}
-              open={this.state.snackbarOpenSignIn}
-              onClose={this.handleSnackbarClose}
-              autoHideDuration={2000}
-            >
-              <MySnackbarContentWrapper
-                onClose={this.handleSnackbarClose}
-                variant="success"
-                message="Logged in successful!"
-              />
-            </Snackbar>
-            <Snackbar
-              anchorOrigin={{
-                vertical: this.state.snackbarVertical,
-                horizontal: this.state.snackbarHorizontal
-              }}
-              open={this.state.snackbarOpenSignUp}
-              onClose={this.handleSnackbarClose}
-              autoHideDuration={2000}
-            >
-              <MySnackbarContentWrapper
-                onClose={this.handleSnackbarClose}
-                variant="success"
-                message="User successfully created!"
-              />
-            </Snackbar>
-            <Snackbar
-              anchorOrigin={{
-                vertical: this.state.snackbarVertical,
-                horizontal: this.state.snackbarHorizontal
-              }}
-              open={this.state.snackbarOpenSignUpError}
-              onClose={this.handleSnackbarClose}
-              autoHideDuration={2000}
-            >
-              <MySnackbarContentWrapper
-                onClose={this.handleSnackbarClose}
-                variant="error"
-                message="User already exists!"
-              />
-            </Snackbar>
             <CssBaseline>
               <Modal
                 handleTabChange={this.handleTabChange}
@@ -249,20 +155,25 @@ class App extends Component {
                 handleOpen={this.handleOpen}
                 open={this.state.open}
               />
-              {fireRedirect && <Redirect to={'/trips'} />}
               <React.Fragment>
-                <Route path="/*" component={DebugRoutes} />
-                <Route exact path="/" component={PageContent} /> {/* Landing */}
-                <Route path="/trips/*" component={Nav} />
+                <Route path="/:user"
+                  render={(props) => <User {...props} isLoggedIn={this.state.isLoggedIn} email={this.state.email}/>}/>
+                {/* If user logs in redirect User otherwise display landing page */}
+                <Route exact path="/" render={() => (
+                  fireRedirect ? (
+                  <Redirect to={`/${this.state.email}`}/>
+                  ) : (
+                  <PageContent/>
+                  )
+                )}/>
                 <Route exact path="/trips" component={TripList} />
                 <Route exact path="/trips/id/:id/" component={Trip} />
                 <Route exact path="/trips/create/" component={TripCreate} />
                 <Route exact path="/trips/empty/" component={TripListEmpty} />
-                <Route exact path="/trips/settings/" component={AccountForm} />
-                <Route exact path="/trips/billing/" component={BillingForm} />
               </React.Fragment>
             </CssBaseline>
           </React.Fragment>
+          <DebugRoutes/>
         </div>
       </StripeProvider>
     );

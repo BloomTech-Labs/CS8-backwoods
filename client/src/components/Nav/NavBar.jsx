@@ -19,24 +19,28 @@ function NavBar(props) {
   return (
     <Paper className="navBar">
       <List component="nav">
-        <Link to="/trips/">
+        <Link to={`/${props.user}`}>
           <ListItem button>
             <ListItemText primary="Trips" />
           </ListItem>
         </Link>
         <Divider />
-        <Link to="/trips/billing/">
+        {props.isLoggedIn && 
+        <div>
+        <Link to={`/${props.user}/billing`}>
           <ListItem button>
             <ListItemText primary="Billing" />
           </ListItem>
         </Link>
-      </List>
-      <List component="nav">
-        <Link to="/trips/settings">
+        <Divider />
+        
+        <Link to={`/${props.user}/settings`}>
           <ListItem button>
             <ListItemText primary="Account" />
           </ListItem>
         </Link>
+        </div>
+        }
       </List>
     </Paper>
   );
