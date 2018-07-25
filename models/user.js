@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const Trips = require('./trips');
 
 const user = (sequelize, DataTypes) => {
   const User = sequelize.define(
@@ -45,7 +46,7 @@ const user = (sequelize, DataTypes) => {
         throw new Error();
       });
   });
-  
+
   User.beforeUpdate((user, options) => {
     return bcrypt
       .hash(user.password, 10)
@@ -56,6 +57,9 @@ const user = (sequelize, DataTypes) => {
         throw new Error();
       });
   });
+
+  // User.hasMany(Trips, { as: 'userTrips' });
+
   return User;
 };
 

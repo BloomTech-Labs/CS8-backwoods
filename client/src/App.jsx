@@ -12,6 +12,7 @@ import TripList from './components/TripList/TripList.jsx';
 import TripListEmpty from './components/TripList/TripListEmpty.jsx';
 import { StripeProvider } from 'react-stripe-elements';
 import User from './components/User/User';
+import BackWoods404 from './components/404/404';
 
 
 // CssBaseline is the Material UI built in CSS reset
@@ -136,7 +137,7 @@ class App extends Component {
               handleSnackbarClose={this.handleSnackbarClose}
               snackbarVertical={this.state.snackbarVertical}
               snackbarHorizontal={this.state.snackbarHorizontal}
-              />
+            />
             <CssBaseline>
               <Modal
                 handleTabChange={this.handleTabChange}
@@ -157,23 +158,24 @@ class App extends Component {
               />
               <React.Fragment>
                 <Route path="/:user"
-                  render={(props) => <User {...props} isLoggedIn={this.state.isLoggedIn} email={this.state.email}/>}/>
+                  render={(props) => <User {...props} isLoggedIn={this.state.isLoggedIn} email={this.state.email} />} />
                 {/* If user logs in redirect User otherwise display landing page */}
                 <Route exact path="/" render={() => (
                   fireRedirect ? (
-                  <Redirect to={`/${this.state.email}`}/>
+                    <Redirect to={`/${this.state.email}`} />
                   ) : (
-                  <PageContent/>
-                  )
-                )}/>
+                      <PageContent />
+                    )
+                )} />
                 <Route exact path="/trips" component={TripList} />
                 <Route exact path="/trips/id/:id/" component={Trip} />
                 <Route exact path="/trips/create/" component={TripCreate} />
                 <Route exact path="/trips/empty/" component={TripListEmpty} />
+                <Route path='/404' component={BackWoods404} />
               </React.Fragment>
             </CssBaseline>
           </React.Fragment>
-          <DebugRoutes/>
+          <DebugRoutes />
         </div>
       </StripeProvider>
     );
