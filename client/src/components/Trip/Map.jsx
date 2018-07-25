@@ -1,12 +1,5 @@
 import React from 'react';
-import {
-  Map,
-  InfoWindow,
-  Marker,
-  Polygon,
-  GoogleApiWrapper
-} from 'google-maps-react';
-import Paper from '@material-ui/core/Paper';
+import { Map, Marker, Polygon, GoogleApiWrapper } from 'google-maps-react';
 import Coordinates from './Coordinates.jsx';
 
 const style = {
