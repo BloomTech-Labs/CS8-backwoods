@@ -9,13 +9,12 @@ if (process.env.DATABASE_URL) {
     dialectOptions: {
       ssl: true
     }
-  })
+  });
 } else {
   sequelize = new Sequelize('backwoods', 'postgres', 'dbsuperuser', {
     dialect: 'postgres'
-  })
+  });
 }
-
 
 // Test to see if we are connected to sequelize/db
 sequelize
