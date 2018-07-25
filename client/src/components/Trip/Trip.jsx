@@ -1,7 +1,12 @@
 import React from 'react';
+import Map from './Map.jsx';
 
 const Trip = () => {
-  return <h1>Individual Trip</h1>;
+  return (
+    <div>
+      <Map />
+    </div>
+  );
 };
 
 export default Trip;
