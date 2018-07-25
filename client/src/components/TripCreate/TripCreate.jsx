@@ -1,7 +1,12 @@
 import React from 'react';
+import TripCreateForm from './TripCreateForm.jsx';
 
 const TripCreate = () => {
-  return <h1>Trip Creation</h1>;
+  return (
+    <div>
+      <TripCreateForm />
+    </div>
+  );
 };
 
 export default TripCreate;
