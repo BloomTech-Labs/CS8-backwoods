@@ -27,7 +27,7 @@ function NavBar(props) {
         <Divider />
         {props.isLoggedIn && 
         <div>
-        <Link to={`/${props.user}/billing/`}>
+        <Link to={`/${props.user}/billing`}>
           <ListItem button>
             <ListItemText primary="Billing" />
           </ListItem>

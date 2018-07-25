@@ -11,7 +11,7 @@ const User = (props) => {
       <Nav user={props.email} isLoggedIn={props.isLoggedIn}/>
       <Route path="/:user" component={MainTriplist} exact/>
       <Route path="/:user/billing" component={BillingForm} exact/>
-      <Route exact path="/:user/settings/" component={AccountForm} />
+      <Route exact path="/:user/settings" component={AccountForm} />
     </div>
   )
 }

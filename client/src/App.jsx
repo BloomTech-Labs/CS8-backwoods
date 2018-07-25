@@ -169,7 +169,7 @@ class App extends Component {
 
                 <Route exact path="/" render={() => (
                   fireRedirect ? (
-                  <Redirect to="/:user"/>
+                  <Redirect to={`/${this.state.email}`}/>
                   ) : (
                   <PageContent/>
                   )
