@@ -13,7 +13,7 @@ import Trip from './components/Trip/Trip.jsx';
 import TripCreate from './components/Trip/TripCreate.jsx';
 import TripList from './components/TripList/TripList.jsx';
 import TripListEmpty from './components/TripList/TripListEmpty.jsx';
-import MySnackbarContent from './Snackbar';
+import MySnackbarContent from './components/Snackbar/Snackbar';
 import { StripeProvider } from 'react-stripe-elements';
 import Snackbar from '@material-ui/core/Snackbar';
 import green from '@material-ui/core/colors/green';
