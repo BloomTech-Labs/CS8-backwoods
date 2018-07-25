@@ -98,8 +98,8 @@ body {
   margin-left: 25%;
   margin-top: 5%;
 }
-.tripCreateForm formControl {
-  margin: 5%;
+.tripCreateForm > * {
+  margin: 20px;
 }
 .saveTripButton {
   padding-left: 5%;
