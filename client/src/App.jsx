@@ -15,7 +15,7 @@ import TripList from './components/TripList/TripList.jsx';
 import TripListEmpty from './components/TripList/TripListEmpty.jsx';
 import { StripeProvider } from 'react-stripe-elements';
 import User from './components/User/User';
-import { Switch } from '../node_modules/@material-ui/core';
+// import { Switch } from '../node_modules/@material-ui/core';
 
 // CssBaseline is the Material UI built in CSS reset
 class App extends Component {
