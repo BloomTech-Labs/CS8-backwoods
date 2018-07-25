@@ -2,11 +2,12 @@ import React from 'react';
 import NavBar from './NavBar.jsx';
 import NavBreadcrumb from './NavBreadcrumb.jsx';
 
-const Nav = () => {
+const Nav = (props) => {
   return (
     <div>
-      <NavBreadcrumb />
-      <NavBar />
+      
+      <NavBreadcrumb user={props.user}/>
+      <NavBar user={props.user} isLoggedIn={props.isLoggedIn}/>
     </div>
   );
 };
