@@ -21,7 +21,6 @@ class NavBreadcrumb extends React.Component {
     
   }
   render() {
-    let currentLocation = window.location.pathname;
     return (
       <Paper className="navBreadcrumb">
       <div style={bread}>

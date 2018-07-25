@@ -5,17 +5,14 @@ import MainSnackbar from './components/Snackbar/MainSnackbar'
 import { Route, Redirect } from 'react-router-dom';
 import Modal from './components/Sign-in-out-nav/Modal.jsx';
 import PageContent from './components/Landing/PageContent.jsx';
-// import AccountForm from './components/Account/AccountForm.jsx';
-// import BillingForm from './components/Billing/BillingForm.jsx';
 import DebugRoutes from './components/Debug/DebugRoutes.jsx';
-// import Nav from './components/Nav/Nav.jsx';
 import Trip from './components/Trip/Trip.jsx';
 import TripCreate from './components/Trip/TripCreate.jsx';
 import TripList from './components/TripList/TripList.jsx';
 import TripListEmpty from './components/TripList/TripListEmpty.jsx';
 import { StripeProvider } from 'react-stripe-elements';
 import User from './components/User/User';
-// import { Switch } from '../node_modules/@material-ui/core';
+
 
 // CssBaseline is the Material UI built in CSS reset
 class App extends Component {
@@ -158,15 +155,10 @@ class App extends Component {
                 handleOpen={this.handleOpen}
                 open={this.state.open}
               />
-              {/* {fireRedirect && <Redirect to={`/${this.state.email}`} />} */}
-
               <React.Fragment>
-                {/* <Switch> */}
-                {/* <Route path="/*" component={DebugRoutes} /> */}
-                {/* <Route exact path="/" component={PageContent} /> Landing */}
                 <Route path="/:user"
                   render={(props) => <User {...props} isLoggedIn={this.state.isLoggedIn} email={this.state.email}/>}/>
-
+                {/* If user logs in redirect User otherwise display landing page */}
                 <Route exact path="/" render={() => (
                   fireRedirect ? (
                   <Redirect to={`/${this.state.email}`}/>
@@ -174,17 +166,10 @@ class App extends Component {
                   <PageContent/>
                   )
                 )}/>
-
-
-
-                {/* <Route path="/trips/*" component={Nav} /> */}
                 <Route exact path="/trips" component={TripList} />
                 <Route exact path="/trips/id/:id/" component={Trip} />
                 <Route exact path="/trips/create/" component={TripCreate} />
                 <Route exact path="/trips/empty/" component={TripListEmpty} />
-                {/* <Route exact path="/trips/settings/" component={AccountForm} />
-                <Route exact path="/trips/billing/" component={BillingForm} /> */}
-                {/* </Switch> */}
               </React.Fragment>
             </CssBaseline>
           </React.Fragment>
