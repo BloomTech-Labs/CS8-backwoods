@@ -4,7 +4,8 @@ const createTrip = (req, res) => {
     models.Trips.create({
         tripName: req.body.tripName,
         startDate: req.body.startDate,
-        endDate: req.body.endDate
+        endDate: req.body.endDate,
+        email: req.body.email
     }).then(response => {
         res.json(response);
     }).catch(err => {
@@ -13,6 +14,7 @@ const createTrip = (req, res) => {
 }
 
 const getTrip = (req, res) => {
+    console.log("req backend",req)
     models.Trips.find(
         {
             where: {
@@ -20,6 +22,7 @@ const getTrip = (req, res) => {
             }
         }
     ).then(trips => {
+        console.log("trips backend", trips)
         res.json(trips)
     }).catch(err => {
         res.status(500).json(({ error: 'Error fetching trips' }))
