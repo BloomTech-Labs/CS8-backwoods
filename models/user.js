@@ -33,6 +33,16 @@ const user = (sequelize, DataTypes) => {
     },
     {
       timestamps: true
+    },
+    {
+      classMethods: {
+        associate: (models) => {
+          User.hasMany(models.Trips, {
+            foreignKey: 'userTrips',
+            as: 'Trips'
+          })
+        }
+      }
     }
   );
 
@@ -57,8 +67,6 @@ const user = (sequelize, DataTypes) => {
         throw new Error();
       });
   });
-
-  // User.hasMany(Trips, { as: 'userTrips' });
 
   return User;
 };

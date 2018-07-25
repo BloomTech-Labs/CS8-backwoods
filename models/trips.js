@@ -1,7 +1,6 @@
-
 const trips = (sequelize, DataTypes) => {
     const Trips = sequelize.define('trips', {
-        TripName: {
+        tripName: {
             type: DataTypes.STRING,
             allowNull: false
         },
