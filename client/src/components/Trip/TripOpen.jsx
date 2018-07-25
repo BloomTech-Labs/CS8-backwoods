@@ -7,7 +7,7 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Coordinates from './Coordinates.jsx';
 import Paper from '@material-ui/core/Paper';
 
-function TripInfo() {
+function TripOpen() {
   return (
     <Paper className="tripInfo">
       <ExpansionPanel>
@@ -44,4 +44,4 @@ function TripInfo() {
   );
 }
 
-export default TripInfo;
+export default TripOpen;

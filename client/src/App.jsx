@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import axios from 'axios';
-import MainSnackbar from './components/Snackbar/MainSnackbar'
+import MainSnackbar from './components/Snackbar/MainSnackbar';
 import { Route, Redirect } from 'react-router-dom';
 import Modal from './components/Sign-in-out-nav/Modal.jsx';
 import PageContent from './components/Landing/PageContent.jsx';
 import DebugRoutes from './components/Debug/DebugRoutes.jsx';
 import Trip from './components/Trip/Trip.jsx';
-import TripCreate from './components/Trip/TripCreate.jsx';
+import TripCreate from './components/TripCreate/TripCreate.jsx';
 import TripList from './components/TripList/TripList.jsx';
 import TripListEmpty from './components/TripList/TripListEmpty.jsx';
 import { StripeProvider } from 'react-stripe-elements';
 import User from './components/User/User';
-
 
 // CssBaseline is the Material UI built in CSS reset
 class App extends Component {
@@ -50,7 +49,8 @@ class App extends Component {
     // Deploy axios post
     // axios.post('https://ancient-inlet-94126.herokuapp.com/login', { email, password })
     // DEV axios post
-    axios.post('http://localhost:8000/login', { email, password })
+    axios
+      .post('http://localhost:8000/login', { email, password })
 
       .then(res => {
         this.setState(
@@ -136,7 +136,7 @@ class App extends Component {
               handleSnackbarClose={this.handleSnackbarClose}
               snackbarVertical={this.state.snackbarVertical}
               snackbarHorizontal={this.state.snackbarHorizontal}
-              />
+            />
             <CssBaseline>
               <Modal
                 handleTabChange={this.handleTabChange}
@@ -156,16 +156,28 @@ class App extends Component {
                 open={this.state.open}
               />
               <React.Fragment>
-                <Route path="/:user"
-                  render={(props) => <User {...props} isLoggedIn={this.state.isLoggedIn} email={this.state.email}/>}/>
+                <Route
+                  path="/:user"
+                  render={props => (
+                    <User
+                      {...props}
+                      isLoggedIn={this.state.isLoggedIn}
+                      email={this.state.email}
+                    />
+                  )}
+                />
                 {/* If user logs in redirect User otherwise display landing page */}
-                <Route exact path="/" render={() => (
-                  fireRedirect ? (
-                  <Redirect to={`/${this.state.email}`}/>
-                  ) : (
-                  <PageContent/>
-                  )
-                )}/>
+                <Route
+                  exact
+                  path="/"
+                  render={() =>
+                    fireRedirect ? (
+                      <Redirect to={`/${this.state.email}`} />
+                    ) : (
+                      <PageContent />
+                    )
+                  }
+                />
                 <Route exact path="/trips" component={TripList} />
                 <Route exact path="/trips/id/:id/" component={Trip} />
                 <Route exact path="/trips/create/" component={TripCreate} />
@@ -173,7 +185,7 @@ class App extends Component {
               </React.Fragment>
             </CssBaseline>
           </React.Fragment>
-          <DebugRoutes/>
+          <DebugRoutes />
         </div>
       </StripeProvider>
     );

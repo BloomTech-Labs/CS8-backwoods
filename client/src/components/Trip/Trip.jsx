@@ -1,6 +1,6 @@
 import React from 'react';
 import Map from './Map.jsx';
-import TripInfo from './TripInfo.jsx';
+import TripInfo from './TripOpen.jsx';
 
 const Trip = () => {
   return (
