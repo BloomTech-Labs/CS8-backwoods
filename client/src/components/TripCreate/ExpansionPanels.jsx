@@ -12,6 +12,16 @@ function TripOpen() {
     <Paper className="expansionPanels">
       <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography>Start Date</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <Typography>
+            {Coordinates[0].lat}, {Coordinates[0].lng}
+          </Typography>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+      <ExpansionPanel>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography>Point 1</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
@@ -37,6 +47,16 @@ function TripOpen() {
         <ExpansionPanelDetails>
           <Typography>
             {Coordinates[2].lat}, {Coordinates[2].lng}
+          </Typography>
+        </ExpansionPanelDetails>
+      </ExpansionPanel>
+      <ExpansionPanel>
+        <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+          <Typography>End Date</Typography>
+        </ExpansionPanelSummary>
+        <ExpansionPanelDetails>
+          <Typography>
+            {Coordinates[0].lat}, {Coordinates[0].lng}
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
