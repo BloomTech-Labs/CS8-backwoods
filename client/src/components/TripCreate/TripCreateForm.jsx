@@ -4,6 +4,9 @@ import Input from '@material-ui/core/Input';
 import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Paper from '@material-ui/core/Paper';
+import Icon from '@material-ui/core/Icon';
+import Button from '@material-ui/core/Button';
+import TextField from '@material-ui/core/TextField';
 
 const styles = theme => ({
   container: {
@@ -46,25 +49,30 @@ class TripCreate extends React.Component {
             <Input
               id="numberOfWaypoints"
               value={this.state.name}
+              type="number"
               onChange={this.handleChange('numberOfWaypoints')}
             />
           </FormControl>
-          <FormControl>
-            <InputLabel htmlFor="startDate">Start Date</InputLabel>
-            <Input
-              id="startDate"
-              value={this.state.name}
-              onChange={this.handleChange('startDate')}
-            />
-          </FormControl>
-          <FormControl>
-            <InputLabel htmlFor="endDate">End Date</InputLabel>
-            <Input
-              id="endDate"
-              value={this.state.name}
-              onChange={this.handleChange('endDate')}
-            />
-          </FormControl>
+          <TextField
+            id="startDate"
+            type="date"
+            label="Start Date"
+            defaultValue="2018-07-25"
+            value={this.state.name}
+            onChange={this.handleChange('startDate')}
+          />
+          <TextField
+            id="endDate"
+            type="date"
+            label="End Date"
+            defaultValue="2018-07-30"
+            value={this.state.name}
+            onChange={this.handleChange('endDate')}
+          />
+          <Button className="saveTripButton" variant="contained" type="submit">
+            Save Trip
+            <Icon>send</Icon>
+          </Button>
         </Paper>
       </div>
     );

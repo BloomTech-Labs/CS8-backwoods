@@ -93,10 +93,16 @@ body {
   margin-top: 9%;
 }
 .tripCreateForm {
-  width: 50%;
+  width: 60%;
   padding: 1%;
   margin-left: 25%;
   margin-top: 5%;
+}
+.tripCreateForm formControl {
+  margin: 5%;
+}
+.saveTripButton {
+  padding-left: 5%;
 }
 p {
   margin-left: 10%;
