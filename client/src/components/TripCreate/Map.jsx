@@ -6,8 +6,23 @@ const style = {
   width: '40%',
   height: '60%'
 };
-
+const markers = [];
 export class MapContainer extends React.Component {
+  constructor(props) {
+    super(props);
+    this.addMarker = this.addMarker.bind(this);
+  }
+
+  addMarker = location => {
+    const marker = new Marker({
+      position: location,
+      map: Map
+    });
+    console.log('marker added');
+    markers.push(marker);
+    console.log(markers);
+  };
+
   render() {
     return (
       <div className="tripCreateMap">
@@ -16,6 +31,10 @@ export class MapContainer extends React.Component {
           style={style}
           className={'map'}
           zoom={11}
+          onClick={event => {
+            console.log('click');
+            this.addMarker(event.latLng);
+          }}
         >
           <Marker position={Coordinates[0]} />
           <Marker position={Coordinates[1]} />
