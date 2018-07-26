@@ -18,7 +18,7 @@ const getTrip = (req, res) => {
         where: { email: req.params.user }
     })
         .then((trips) => {
-            if (!trips) {
+            if (trips.length === 0) {
                 res.status(422).json({ "error": "User doesn't have trips" })
                 return
             }

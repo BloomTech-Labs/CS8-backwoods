@@ -12,16 +12,17 @@ class User extends React.Component {
     this.state = {
       noUser: false,
       error: false,
-      firstName: '',
-      lastName: '',
       email: '',
+      tripName: '',
+      startDate: '',
+      endDate: ''
     }
   }
 
   componentWillMount() {
     axios.get(`http://localhost:8000/${this.props.match.params.user}`).then(res => {
       console.log(res);
-      this.setState({ email: res.data.email, firstName: res.data.firstName, lastName: res.data.lastName })
+      this.setState({ tripName: res.data.trips[0].tripName, startDate: res.data.trips[0].startDate, endDate: res.data.trips[0].endDate })
     }).catch(err => {
       this.setState({ noUser: true })
       console.log(err);
@@ -38,7 +39,7 @@ class User extends React.Component {
             :
             <div>
               <Nav user={this.props.email} isLoggedIn={this.props.isLoggedIn} />
-              {this.state.firstName} {this.state.lastName}
+              {this.state.tripName} start: {this.state.startDate} end: {this.state.endDate}
               <Route path="/:user" component={MainTriplist} exact />
               <Route path="/:user/billing" component={BillingForm} exact />
               <Route exact path="/:user/settings" component={AccountForm} />
