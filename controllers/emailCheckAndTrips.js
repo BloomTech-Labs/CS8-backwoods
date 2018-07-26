@@ -12,7 +12,7 @@ const emailCheckAndTrips = (req, res, next) => {
             res.status(422).json({ "error": "User does not exist" })
             return
         }
-        res.json({ email: user.email, firstName: user.firstName, lastName: user.lastName })
+        // res.json({ email: user.email, firstName: user.firstName, lastName: user.lastName })
         next();
     })
         .catch((err) => {
