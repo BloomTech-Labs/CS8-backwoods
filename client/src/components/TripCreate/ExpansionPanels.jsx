@@ -4,8 +4,8 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Coordinates from './Coordinates.jsx';
 import Paper from '@material-ui/core/Paper';
+import ExpansionPanelForm from './ExpansionPanelForm';
 
 function TripOpen() {
   return (
@@ -15,9 +15,7 @@ function TripOpen() {
           <Typography>Start</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography>
-            {Coordinates[0].lat}, {Coordinates[0].lng}
-          </Typography>
+          <ExpansionPanelForm />
         </ExpansionPanelDetails>
       </ExpansionPanel>
       <ExpansionPanel>
@@ -26,7 +24,7 @@ function TripOpen() {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
-            {Coordinates[0].lat}, {Coordinates[0].lng}
+            <ExpansionPanelForm />
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
@@ -36,7 +34,7 @@ function TripOpen() {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
-            {Coordinates[1].lat}, {Coordinates[1].lng}
+            <ExpansionPanelForm />
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
@@ -46,7 +44,7 @@ function TripOpen() {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
-            {Coordinates[2].lat}, {Coordinates[2].lng}
+            <ExpansionPanelForm />
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
@@ -56,7 +54,7 @@ function TripOpen() {
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
-            {Coordinates[0].lat}, {Coordinates[0].lng}
+            <ExpansionPanelForm />
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>

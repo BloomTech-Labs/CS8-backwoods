@@ -34,7 +34,7 @@ export class MapContainer extends React.Component {
           onClick={event => {
             console.log('click');
             this.addMarker(event.LatLng);
-            console.log('line 36', event);
+            console.log('line 36', this.props);
           }}
         />
       </div>
