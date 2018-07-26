@@ -14,8 +14,11 @@ export class MapContainer extends React.Component {
   }
 
   addMarker = location => {
+    let lat = location.latLng.lat();
+    let lng = location.latLng.lng();
+
     const marker = new Marker({
-      position: location,
+      position: { lat: lat, lng: lng },
       map: Map
     });
     console.log(location);
@@ -33,8 +36,8 @@ export class MapContainer extends React.Component {
           zoom={11}
           onClick={event => {
             console.log('click');
-            this.addMarker(event.LatLng);
-            console.log('line 36', this.props);
+            console.log('line 36', event);
+            this.addMarker(event);
           }}
         />
       </div>

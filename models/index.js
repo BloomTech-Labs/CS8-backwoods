@@ -11,7 +11,7 @@ if (process.env.DATABASE_URL) {
     }
   });
 } else {
-  sequelize = new Sequelize('backwoods', 'postgres', 'dbsuperuser', {
+  sequelize = new Sequelize('backwoods', 'postgres', '5353', {
     dialect: 'postgres'
   });
 }
