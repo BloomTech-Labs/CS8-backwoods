@@ -12,6 +12,7 @@ import TripList from './components/TripList/TripList.jsx';
 import TripListEmpty from './components/TripList/TripListEmpty.jsx';
 import { StripeProvider } from 'react-stripe-elements';
 import User from './components/User/User';
+import BackWoods404 from './components/404/404';
 
 // CssBaseline is the Material UI built in CSS reset
 class App extends Component {
@@ -182,6 +183,7 @@ class App extends Component {
                 <Route exact path="/trips/id/:id/" component={Trip} />
                 <Route exact path="/trips/create/" component={TripCreate} />
                 <Route exact path="/trips/empty/" component={TripListEmpty} />
+                <Route path="/404" component={BackWoods404} />
               </React.Fragment>
             </CssBaseline>
           </React.Fragment>

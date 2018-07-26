@@ -5,22 +5,24 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 // import TripList from './TripList';
 // import Trip from '../Trip/Trip';
-import NewTrip from './AddNewTrip'
-const TripList = []
+import Trip from './AddNewTrip'
+
 class MainTriplist extends React.Component {
-  
-  addNewTrip() {
-    TripList.push(NewTrip)
-  }
+ 
   
   render() {
     return (
       <div>
-        {TripList.map((trip, index) => {
+        {
+          this.props.trips.map((trip, index) => {
           return (
             <div key={index}>
-          
-            <NewTrip />
+
+            <Trip  tripName={trip.tripName} 
+                      createdAt={trip.createdAt} 
+                      updatedAt={trip.updatedAt}
+                      startDate={trip.startDate}
+                      endDate={trip.endDate}/>
           
           </div>
           )
@@ -39,7 +41,7 @@ class MainTriplist extends React.Component {
             variant="fab" 
             color="primary" 
             aria-label="Add"
-            onClick={this.addNewTrip}>
+            onClick={this.props.addNewTrip}>
             <AddIcon />
           </Button>
         </Paper>
