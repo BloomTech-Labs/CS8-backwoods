@@ -11,7 +11,7 @@ if (process.env.DATABASE_URL) {
     }
   });
 } else {
-  sequelize = new Sequelize('backwoods', 'postgres', '5353', {
+  sequelize = new Sequelize('backwoods', 'postgres', 'dbsuperuser', {
     dialect: 'postgres'
   });
 }
@@ -31,8 +31,6 @@ const models = {
   User: sequelize.import('./user'),
   Trips: sequelize.import('./trips')
 };
-
-
 
 // Creates relationship between models. I.E A User and their Trips.
 // Object.keys(models).forEach(modelName => {
