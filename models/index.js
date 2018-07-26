@@ -29,16 +29,26 @@ sequelize
 
 // imports the models to the database
 const models = {
-  User: sequelize.import('./user')
+  User: sequelize.import('./user'),
+  Trips: sequelize.import('./trips')
 };
 
+
+
 // Creates relationship between models. I.E A User and their Trips.
-Object.keys(models).forEach(key => {
-  if ('associate' in models[key]) {
-    models[key].associate(models);
+// Object.keys(models).forEach(modelName => {
+//   if ('classMethods' in models[modelName].options) {
+//     if ('associate' in models[modelName].options['classMethods']) {
+//       models[modelName].options.classMethods.associate(models);
+//     }
+//   }
+// });
+Object.keys(models).forEach(modelName => {
+  if (models[modelName].associate) {
+    models[modelName].associate(models);
   }
 });
 
 models.sequelize = sequelize;
-
+models.Sequelize = Sequelize;
 module.exports = models;

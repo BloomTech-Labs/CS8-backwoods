@@ -1,4 +1,5 @@
 const bcrypt = require('bcrypt');
+const Trips = require('./trips');
 
 const user = (sequelize, DataTypes) => {
   const User = sequelize.define(
@@ -15,7 +16,8 @@ const user = (sequelize, DataTypes) => {
       email: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true
+        unique: true,
+        primaryKey: true
       },
       password: {
         type: DataTypes.STRING,
@@ -32,6 +34,13 @@ const user = (sequelize, DataTypes) => {
     },
     {
       timestamps: true
+    },
+    {
+      classMethods: {
+        associate: (models) => {
+          User.hasMany(models.Trips)
+        }
+      }
     }
   );
 
@@ -45,7 +54,7 @@ const user = (sequelize, DataTypes) => {
         throw new Error();
       });
   });
-  
+
   User.beforeUpdate((user, options) => {
     return bcrypt
       .hash(user.password, 10)
@@ -56,6 +65,10 @@ const user = (sequelize, DataTypes) => {
         throw new Error();
       });
   });
+  User.associate = function(models) {
+    models.User.hasMany(models.Trips, { foreignKey: 'email', targetKey: 'fk_user'});
+    // models.Trips.belongsTo(models.User,{foreignKey: 'fk_user', targetKey: 'email'})
+  };
   return User;
 };
 

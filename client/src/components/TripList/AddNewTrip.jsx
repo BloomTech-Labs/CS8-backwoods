@@ -1,21 +1,29 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-
-const NewTrip = () => {
+import '../../index.css'
+const Trip = (props) => {
   return (
-    <Paper className="tripListEmptyPaper" elevation={1}>
-            <Typography
-              className="tripListEmptyPaper-text"
-              variant="headline"
-              component="h2"
-            >
-            hello
-    
-            </Typography>
-          
-          </Paper>
+    <div className="createNew">
+      <Paper className="tripListEmptyPaper" elevation={1}>
+        <Typography
+          className="tripListEmptyPaper-text"
+          variant="headline"
+          component="h2"
+        >
+        {props.tripName}
+        
+      </Typography>
+      <div className="createNew">
+      Start Date: {props.startDate}
+        {" "}
+        End Date: {props.endDate}{" "}
+      </div>
+       
+    </Paper>
+  </div>
+   
   )
 }
 
-export default NewTrip
+export default Trip

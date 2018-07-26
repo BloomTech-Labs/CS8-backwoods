@@ -101,3 +101,9 @@ h4,
 p {
   padding: 1%;
 }
+
+
+.createNew {
+  display: flex;
+  flex-direction: column;
+}
