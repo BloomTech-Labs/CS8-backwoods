@@ -14,19 +14,19 @@ const createTrip = (req, res) => {
 }
 
 const getTrip = (req, res) => {
-    console.log("req backend",req)
-    models.Trips.find(
-        {
-            where: {
-                email: req.params.user
-            }
-        }
-    ).then(trips => {
-        console.log("trips backend", trips)
-        res.json(trips)
-    }).catch(err => {
-        res.status(500).json(({ error: 'Error fetching trips' }))
+    models.Trips.findAll({
+        where: { email: req.params.user }
     })
+        .then((trips) => {
+            if (!trips) {
+                res.status(422).json({ "error": "User doesn't have trips" })
+                return
+            }
+            res.json({ trips })
+        })
+        .catch(err => {
+            res.json(err)
+        })
 };
 
 module.exports = { createTrip, getTrip }
