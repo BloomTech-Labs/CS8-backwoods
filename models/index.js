@@ -9,13 +9,12 @@ if (process.env.DATABASE_URL) {
     dialectOptions: {
       ssl: true
     }
-  })
+  });
 } else {
   sequelize = new Sequelize('backwoods', 'postgres', 'dbsuperuser', {
     dialect: 'postgres'
-  })
+  });
 }
-
 
 // Test to see if we are connected to sequelize/db
 sequelize
@@ -32,8 +31,6 @@ const models = {
   User: sequelize.import('./user'),
   Trips: sequelize.import('./trips')
 };
-
-
 
 // Creates relationship between models. I.E A User and their Trips.
 // Object.keys(models).forEach(modelName => {

@@ -1,12 +1,12 @@
 import React from 'react';
 import Map from './Map.jsx';
-import TripInfo from './TripInfo.jsx';
+import TripOpen from './TripOpen.jsx';
 
 const Trip = () => {
   return (
     <div>
       <Map />
-      <TripInfo />
+      <TripOpen />
     </div>
   );
 };
