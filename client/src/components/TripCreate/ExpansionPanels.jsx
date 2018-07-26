@@ -12,7 +12,7 @@ function TripOpen() {
     <Paper className="expansionPanels">
       <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography>Start Date</Typography>
+          <Typography>Start</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
@@ -22,7 +22,7 @@ function TripOpen() {
       </ExpansionPanel>
       <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography>Point 1</Typography>
+          <Typography>Checkpoint 1</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
@@ -32,7 +32,7 @@ function TripOpen() {
       </ExpansionPanel>
       <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography>Point 2</Typography>
+          <Typography>Checkpoint 2</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
@@ -42,7 +42,7 @@ function TripOpen() {
       </ExpansionPanel>
       <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography>Point 3</Typography>
+          <Typography>Checkpoint 3</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
@@ -52,7 +52,7 @@ function TripOpen() {
       </ExpansionPanel>
       <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-          <Typography>End Date</Typography>
+          <Typography>End</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
           <Typography>
