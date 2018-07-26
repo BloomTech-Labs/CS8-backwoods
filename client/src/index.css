@@ -27,6 +27,9 @@ body {
 .navBar a {
   text-decoration: none;
 }
+.material-icons {
+  height: 100%;
+}
 .signOut {
   margin-left: 75%;
 }
@@ -52,7 +55,9 @@ body {
 .navBreadcrumb {
   margin-right: 75%;
   margin-left: 1%;
+  padding: 0.2%;
   width: 10%;
+  display: 'flex';
 }
 .StripeElement {
   background-color: white;
@@ -111,6 +116,9 @@ body {
 .expansionPanels {
   width: 30%;
   margin-left: 66%;
+}
+.breadCrumbText {
+  margin-bottom: 20px;
 }
 p {
   margin-left: 10%;
