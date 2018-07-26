@@ -5,8 +5,8 @@ import BillingForm from '../Billing/BillingForm';
 import AccountForm from '../Account/AccountForm';
 import { Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
+// import Paper from '@material-ui/core/Paper';
+// import Typography from '@material-ui/core/Typography';
 
 class User extends React.Component {
   constructor(props) {
@@ -15,6 +15,7 @@ class User extends React.Component {
       noUser: false,
       error: false,
       email: '',
+      trips: [],
       tripName: '',
       startDate: '',
       endDate: '',
@@ -24,12 +25,14 @@ class User extends React.Component {
 
   componentWillMount() {
     axios.get(`http://localhost:8000/${this.props.match.params.user}`).then(res => {
-      console.log(res);
+      // console.log(res);
       if (!res.data) {
         this.setState({ hasTrips: false });
         return
       }
-      this.setState({ hasTrips: true, tripName: res.data.trips[0].tripName, startDate: res.data.trips[0].startDate, endDate: res.data.trips[0].endDate })
+      // console.log(Array.isArray(res.data.trips))
+      // tripName: res.data.trips[0].tripName, startDate: res.data.trips[0].startDate, endDate: res.data.trips[0].endDate
+      this.setState({ hasTrips: true, trips: res.data.trips })
     }).catch(err => {
       if (!this.props.isLoggedIn) {
         this.setState({ noUser: true })
@@ -37,6 +40,17 @@ class User extends React.Component {
       console.log(err);
     })
     // console.log(this.props);
+  } 
+  addNewTrip = () => {
+    const hardCodeNewTrip = {
+        tripName: "Next Trip",
+        startDate: "bla bla",
+        endDate: "more bla",
+        email: 'bla'
+      }
+    this.setState({ 
+      trips: [...this.state.trips, hardCodeNewTrip]
+    })
   }
 
   render() {
@@ -48,20 +62,11 @@ class User extends React.Component {
             :
             <div>
               <Nav user={this.props.email} isLoggedIn={this.props.isLoggedIn} />
-              <Paper className="tripListEmptyPaper" elevation={1}>
-                <Typography
-                  className="tripListEmptyPaper-text"
-                  variant="headline"
-                  component="h2"
-                >
-                  {this.state.hasTrips ?
-                    `${this.state.tripName} start: ${this.state.startDate} end: ${this.state.endDate}`
-                    :
-                    'user has no trips'
-                  }
-                </Typography>
-              </Paper>
-              <Route path="/:user" component={MainTriplist} exact />
+              <Route path="/:user"
+                render={(props) => <MainTriplist {...props} 
+                trips={this.state.trips}
+                addNewTrip={this.addNewTrip}
+              />} exact />
               <Route path="/:user/billing" component={BillingForm} exact />
               <Route exact path="/:user/settings" component={AccountForm} />
             </div>
