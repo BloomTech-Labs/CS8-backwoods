@@ -3,14 +3,14 @@ import GoogleMapReact from 'google-map-react';
 import Coordinates from './Coordinates.jsx';
 
 const Marker = ({ text }) => <div>{text}</div>;
-
 class Map extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       lat: 37.73018235769022,
       lng: -122.33512938022614,
-      text: 'frog'
+      text: 'O',
+      markers: [{ lat: 37.73018235769022, lng: -122.33512938022614 }] // initializing this array with values so that when you map through it you won't receive and error
     };
     this.addMarker = this.addMarker.bind(this);
   }
@@ -29,12 +29,22 @@ class Map extends React.Component {
     console.log('Y:', event.y);
     console.log('LAT:', event.lat);
     console.log('LNG:', event.lng);
-    this.setState({ lat: event.lat, lng: event.lng });
+    let lat = event.lat;
+    let lng = event.lng;
+
+    const marker = {
+      lat: lat,
+      lng: lng
+    };
+
+    this.state.markers.push(marker);
+    this.setState({ lat: lat, lng: lng });
+    console.log(this.state.markers);
   };
 
   render() {
     return (
-      <div style={{ height: '400px', width: '600px', marginLeft: '30%' }}>
+      <div className="tripCreateMap" style={{ height: '400px', width: '30%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyCj6JgxqozDSyHp0IF-q9QeieiYu8I4OPw' }}
           defaultCenter={this.props.center}
@@ -54,49 +64,3 @@ class Map extends React.Component {
   }
 }
 export default Map;
-// const style = {
-//   width: '40%',
-//   height: '60%'
-// };
-// const markers = [];
-// export class MapContainer extends React.Component {
-//   constructor(props) {
-//     super(props);
-//     this.addMarker = this.addMarker.bind(this);
-//   }
-//
-//   addMarker = location => {
-//     let lat = location.latLng.lat();
-//     let lng = location.latLng.lng();
-//
-//     const marker = new Marker({
-//       position: { lat: lat, lng: lng },
-//       map: Map
-//     });
-//     console.log(location);
-//     markers.push(marker);
-//     console.log(markers);
-//   };
-//
-//   render() {
-//     return (
-//       <div className="tripCreateMap">
-//         <Map
-//           google={this.props.google}
-//           style={style}
-//           className={'map'}
-//           zoom={11}
-//           onClick={event => {
-//             console.log('click');
-//             console.log('line 36', event);
-//             this.addMarker(event);
-//           }}
-//         />
-//       </div>
-//     );
-//   }
-// }
-//
-// export default GoogleApiWrapper({
-//   apiKey: 'AIzaSyCj6JgxqozDSyHp0IF-q9QeieiYu8I4OPw'
-// })(MapContainer);
