@@ -29,6 +29,7 @@ class MainTriplist extends React.Component {
             )
 
           })}
+          {console.log(this.props.trips)}
         <Paper className="tripListEmptyPaper" elevation={1}>
 
           <Typography

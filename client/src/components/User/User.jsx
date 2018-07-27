@@ -69,9 +69,9 @@ class User extends React.Component {
                   user={this.props.email}
                 // addNewTrip={this.addNewTrip}
                 />} exact />
-              <Route exact path="/:user/create" render={props => (<TripCreate {...props} email={this.props.email} />)} />
-              <Route path="/:user/billing" component={BillingForm} exact />
-              <Route exact path="/:user/settings" component={AccountForm} />
+              <Route path="/:user/create" render={props => (<TripCreate {...props} email={this.props.email}/>)} />
+              <Route path="/:user/billing" component={BillingForm}  />
+              <Route  path="/:user/settings" component={AccountForm} />
             </div>
         }
       </div>
