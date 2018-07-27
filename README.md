@@ -2,7 +2,7 @@
 This Lambda Labs Project is a location based trip planner to keep your family and friends informed of your adventures.
 ## Tech Stack
 React, Express, Node, Postgres
-
+## Deploy URL [Backwoods](https://backwoods.netlify.com/)
 ## To run project locally 
 _______________________________
 1. Clone repo.
@@ -80,3 +80,14 @@ _________
 }
 ```
 (Under headers/Authorization you will need to pass back the JWT token from the `/login` route)
+_______
+#### Change password
+* PUT route `/trips/settings`
+#### Example json object of required data
+```
+{
+	"email": "test@test.com",
+	"oldPassword": "test"
+	"password": "newTest"
+}
+(Requires auth JWT token from login to work)
