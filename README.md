@@ -2,7 +2,7 @@
 This Lambda Labs Project is a location based trip planner to keep your family and friends informed of your adventures.
 ## Tech Stack
 React, Express, Node, Postgres
-
+## Deploy URL [Backwoods](https://backwoods.netlify.com/)
 ## To run project locally 
 _______________________________
 1. Clone repo.
@@ -36,3 +36,58 @@ _____________________________
 * [react-router-dom](https://github.com/ReactTraining/react-router/tree/master/packages/react-router-dom)
 * [react-stripe-elements](https://github.com/stripe/react-stripe-elements)
 * [react-material-ui-form-validator](https://github.com/NewOldMax/react-material-ui-form-validator#readme)
+
+
+### API
+____________
+#### Sign up a new user
+* POST route `/signup` 
+##### Example json object of required data
+```
+{
+	"firstName": "Test",
+	"lastName": "Test",
+	"email": "test@test.com",
+	"password": "test"   
+}
+```
+_______
+#### Sign in as existing user
+* POST route `/login`
+##### Example json object of required data
+```
+{
+	"email": "test@test.com",
+	"password":"test"
+}
+```
+(This route will return a JWT token that you will need to create trips)
+_______
+#### Checking if user has trips
+* GET route `/:user`
+##### Example route (no data required other then user email in route)
+`/test@test.com`
+_________
+#### Create Trip with existing user
+* POST route `/createTrips
+##### Example json object of required data
+```
+{
+	"tripName": "test",
+	"startDate": "10-23-18",
+	"endDate": "11-24-18",
+	"email": "new@test.com"
+}
+```
+(Under headers/Authorization you will need to pass back the JWT token from the `/login` route)
+_______
+#### Change password
+* PUT route `/trips/settings`
+#### Example json object of required data
+```
+{
+	"email": "test@test.com",
+	"oldPassword": "test"
+	"password": "newTest"
+}
+(Requires auth JWT token from login to work)
