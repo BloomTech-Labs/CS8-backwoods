@@ -14,6 +14,7 @@ class TripCreate extends React.Component {
     numberOfWaypoints: '',
     startDate: '',
     endDate: '',
+    email: ''
   };
 
   handleChange = name => event => {
@@ -24,7 +25,8 @@ class TripCreate extends React.Component {
     e.preventDefault();
     const token = localStorage.getItem('token')
     const { tripName, startDate, endDate } = this.state;
-    axios.post(`http://localhost:8000/createTrips`, { tripName, startDate, endDate }, { headers: { authorization: token } })
+    const { email } = this.props;
+    axios.post(`http://localhost:8000/createTrips`, { tripName, startDate, endDate, email }, { headers: { authorization: token } })
       .then(res => {
         console.log(res);
       }).catch(error => {
@@ -36,6 +38,7 @@ class TripCreate extends React.Component {
     return (
       <form onSubmit={this.handleSubmit}>
         <div>
+          {console.log(this.props)}
           <Paper className="tripCreateForm">
             <FormControl>
               <InputLabel htmlFor="tripName">Trip Name</InputLabel>

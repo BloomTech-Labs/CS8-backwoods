@@ -7,7 +7,6 @@ import Modal from './components/Sign-in-out-nav/Modal.jsx';
 import PageContent from './components/Landing/PageContent.jsx';
 import DebugRoutes from './components/Debug/DebugRoutes.jsx';
 import Trip from './components/Trip/Trip.jsx';
-import TripCreate from './components/TripCreate/TripCreate.jsx';
 import TripList from './components/TripList/TripList.jsx';
 import TripListEmpty from './components/TripList/TripListEmpty.jsx';
 import { StripeProvider } from 'react-stripe-elements';
@@ -181,7 +180,6 @@ class App extends Component {
                 />
                 <Route exact path="/trips" component={TripList} />
                 <Route exact path="/trips/id/:id/" component={Trip} />
-                <Route exact path="/trips/create/" render={props => (<TripCreate {...props} email={this.state.email} />)} />
                 <Route exact path="/trips/empty/" component={TripListEmpty} />
                 <Route path="/404" component={BackWoods404} />
               </React.Fragment>

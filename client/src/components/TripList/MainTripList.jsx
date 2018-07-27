@@ -38,7 +38,7 @@ class MainTriplist extends React.Component {
           >
             Add your first trip!
           </Typography>
-          <Link to='/trips/create/'>
+          <Link to={`/${this.props.user}/create`}>
             <Button
               variant="fab"
               color="primary"

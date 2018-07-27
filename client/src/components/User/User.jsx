@@ -1,6 +1,7 @@
 import React from 'react';
 import Nav from '../Nav/Nav';
 import MainTriplist from '../TripList/MainTripList';
+import TripCreate from '../TripCreate/TripCreate';
 import BillingForm from '../Billing/BillingForm';
 import AccountForm from '../Account/AccountForm';
 import { Route, Redirect } from 'react-router-dom';
@@ -65,8 +66,10 @@ class User extends React.Component {
               <Route path="/:user"
                 render={(props) => <MainTriplist {...props}
                   trips={this.state.trips}
+                  user={this.props.email}
                 // addNewTrip={this.addNewTrip}
                 />} exact />
+              <Route exact path="/:user/create" render={props => (<TripCreate {...props} email={this.props.email} />)} />
               <Route path="/:user/billing" component={BillingForm} exact />
               <Route exact path="/:user/settings" component={AccountForm} />
             </div>
