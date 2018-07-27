@@ -29,7 +29,8 @@ sequelize
 // imports the models to the database
 const models = {
   User: sequelize.import('./user'),
-  Trips: sequelize.import('./trips')
+  Trips: sequelize.import('./trips'),
+  Markers: sequelize.import('./markers')
 };
 
 // Creates relationship between models. I.E A User and their Trips.

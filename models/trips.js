@@ -4,7 +4,7 @@ const trips = (sequelize, DataTypes) => {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true
-          },
+        },
         tripName: {
             type: DataTypes.STRING,
             allowNull: false
@@ -20,8 +20,9 @@ const trips = (sequelize, DataTypes) => {
     })
     Trips.associate = function (models) {
         models.Trips.belongsTo(models.User)
-        };
-    
+        models.Trips.hasMany(models.Markers)
+    };
+
     return Trips;
 };
 
