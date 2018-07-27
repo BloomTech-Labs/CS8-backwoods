@@ -112,10 +112,13 @@ body {
 .tripCreateMap {
   margin-top: 1%;
   margin-left: 25%;
+  display: block;
 }
 .expansionPanels {
   width: 30%;
-  margin-left: 66%;
+  display: inline-block;
+  margin-left: 60%;
+  margin-bottom: 30%;
 }
 .breadCrumbText {
   margin-bottom: 20px;
@@ -129,7 +132,6 @@ h4,
 p {
   padding: 1%;
 }
-
 
 .createNew {
   display: flex;

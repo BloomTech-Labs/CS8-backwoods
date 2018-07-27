@@ -1,50 +1,78 @@
 import React from 'react';
-import { Map, Marker, Polygon, GoogleApiWrapper } from 'google-maps-react';
+import GoogleMapReact from 'google-map-react';
 import Coordinates from './Coordinates.jsx';
-
 const style = {
-  width: '40%',
-  height: '60%'
+  height: '45px',
+  width: '45px'
 };
-const markers = [];
-export class MapContainer extends React.Component {
+const Marker = ({ text }) => (
+  <img style={style} src={'https://i.imgur.com/Lsk9eVr.png'} />
+);
+class Map extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      lat: 37.73018235769022,
+      lng: -122.33512938022614,
+      text: 'O',
+      markers: [{ lat: 37.73018235769022, lng: -122.33512938022614 }] // initializing this array with values so that when you map through it you won't receive and error
+    };
     this.addMarker = this.addMarker.bind(this);
   }
 
-  addMarker = location => {
-    let lat = location.latLng.lat();
-    let lng = location.latLng.lng();
+  static defaultProps = {
+    center: {
+      lat: 37.774929,
+      lng: -122.419416
+    },
+    zoom: 12
+  };
 
-    const marker = new Marker({
-      position: { lat: lat, lng: lng },
-      map: Map
-    });
-    console.log(location);
-    markers.push(marker);
-    console.log(markers);
+  addMarker = event => {
+    console.log('== CLICK ==');
+    console.log('X:', event.x);
+    console.log('Y:', event.y);
+    console.log('LAT:', event.lat);
+    console.log('LNG:', event.lng);
+    let lat = event.lat;
+    let lng = event.lng;
+
+    const marker = {
+      lat: lat,
+      lng: lng
+    };
+
+    this.state.markers.push(marker);
+    this.setState({ lat: lat, lng: lng });
+    console.log(this.state.markers);
   };
 
   render() {
     return (
-      <div className="tripCreateMap">
-        <Map
-          google={this.props.google}
-          style={style}
-          className={'map'}
-          zoom={11}
+      <div className="tripCreateMap" style={{ height: '400px', width: '30%' }}>
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: 'AIzaSyCj6JgxqozDSyHp0IF-q9QeieiYu8I4OPw' }}
+          defaultCenter={this.props.center}
+          defaultZoom={this.props.zoom}
           onClick={event => {
-            console.log('click');
-            console.log('line 36', event);
             this.addMarker(event);
           }}
-        />
+        >
+          <Marker
+            lat={this.state.lat}
+            lng={this.state.lng}
+            text={this.state.text}
+          />
+        </GoogleMapReact>
+        {this.state.markers.map((markers, i) => {
+          return (
+            <p key={i}>
+              {markers.lat}, {markers.lng}
+            </p>
+          );
+        })}
       </div>
     );
   }
 }
-
-export default GoogleApiWrapper({
-  apiKey: 'AIzaSyCj6JgxqozDSyHp0IF-q9QeieiYu8I4OPw'
-})(MapContainer);
+export default Map;
