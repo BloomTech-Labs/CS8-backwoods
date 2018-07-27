@@ -175,13 +175,13 @@ class App extends Component {
                     fireRedirect ? (
                       <Redirect to={`/${this.state.email}`} />
                     ) : (
-                      <PageContent />
-                    )
+                        <PageContent />
+                      )
                   }
                 />
                 <Route exact path="/trips" component={TripList} />
                 <Route exact path="/trips/id/:id/" component={Trip} />
-                <Route exact path="/trips/create/" component={TripCreate} />
+                <Route exact path="/trips/create/" render={props => (<TripCreate {...props} email={this.state.email} />)} />
                 <Route exact path="/trips/empty/" component={TripListEmpty} />
                 <Route path="/404" component={BackWoods404} />
               </React.Fragment>

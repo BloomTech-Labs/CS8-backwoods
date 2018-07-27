@@ -14,7 +14,6 @@ class TripCreate extends React.Component {
     numberOfWaypoints: '',
     startDate: '',
     endDate: '',
-    email: '',
   };
 
   handleChange = name => event => {
@@ -25,11 +24,9 @@ class TripCreate extends React.Component {
     e.preventDefault();
     const token = localStorage.getItem('token')
     const { tripName, startDate, endDate } = this.state;
-    axios.post('http://localhost:8000/createTrips', { tripName, startDate, endDate }, { headers: { authorization: token } })
+    axios.post(`http://localhost:8000/createTrips`, { tripName, startDate, endDate }, { headers: { authorization: token } })
       .then(res => {
-        this.setState({ email: this.props.match.email })
-        console.log(res)
-        res.json(res);
+        console.log(res);
       }).catch(error => {
         console.log(error);
       })
@@ -44,7 +41,7 @@ class TripCreate extends React.Component {
               <InputLabel htmlFor="tripName">Trip Name</InputLabel>
               <Input
                 id="tripName"
-                value={this.state.name}
+                value={this.state.tripName}
                 onChange={this.handleChange('tripName')}
               />
             </FormControl>
@@ -59,20 +56,18 @@ class TripCreate extends React.Component {
                 onChange={this.handleChange('numberOfWaypoints')}
               />
             </FormControl>
+            <InputLabel htmlFor="startDate">Start Date</InputLabel>
             <TextField
               id="startDate"
               type="date"
-              label="Start Date"
-              defaultValue="2018-07-25"
-              value={this.state.name}
+              value={this.state.startDate}
               onChange={this.handleChange('startDate')}
             />
+            <InputLabel htmlFor="endDate">End Date</InputLabel>
             <TextField
               id="endDate"
               type="date"
-              label="End Date"
-              defaultValue="2018-07-30"
-              value={this.state.name}
+              value={this.state.endDate}
               onChange={this.handleChange('endDate')}
             />
             <Button className="saveTripButton" variant="contained" type="submit">
