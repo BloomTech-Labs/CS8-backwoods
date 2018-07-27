@@ -3,8 +3,6 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-// import TripList from './TripList';
-// import Trip from '../Trip/Trip';
 import Trip from './AddNewTrip'
 import { Link } from 'react-router-dom';
 
@@ -29,7 +27,7 @@ class MainTriplist extends React.Component {
             )
 
           })}
-          {console.log(this.props.trips)}
+        {console.log(this.props.trips)}
         <Paper className="tripListEmptyPaper" elevation={1}>
 
           <Typography

@@ -6,8 +6,6 @@ import BillingForm from '../Billing/BillingForm';
 import AccountForm from '../Account/AccountForm';
 import { Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
-// import Paper from '@material-ui/core/Paper';
-// import Typography from '@material-ui/core/Typography';
 
 class User extends React.Component {
   constructor(props) {
@@ -62,18 +60,6 @@ class User extends React.Component {
     })
   }
 
-  // addNewTrip = () => {
-  //   // const hardCodeNewTrip = {
-  //   //     tripName: "Next Trip",
-  //   //     startDate: "bla bla",
-  //   //     endDate: "more bla",
-  //   //     email: 'bla'
-  //   //   }
-  //   // this.setState({ 
-  //   //   trips: [...this.state.trips, hardCodeNewTrip]
-  //   // })
-  // }
-
   render() {
     return (
       <div>
@@ -87,7 +73,6 @@ class User extends React.Component {
                 render={(props) => <MainTriplist {...props}
                   trips={this.state.trips}
                   user={this.props.email}
-                // addNewTrip={this.addNewTrip}
                 />} exact />
               <Route path="/:user/create" render={props => (<TripCreate {...props} email={this.props.email} user={this.props.email} getUsersAgain={this.getUsersAgain} />)} />
               <Route path="/:user/billing" component={BillingForm} />
