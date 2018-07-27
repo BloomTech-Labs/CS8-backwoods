@@ -25,6 +25,10 @@ class User extends React.Component {
   }
 
   componentWillMount() {
+    // DEPLOY URL FOR AXIOS CALL
+    // axios.get(`https://ancient-inlet-94126.herokuapp.com/${this.props.match.params.user}`).then(res => {
+    
+    // TEST URL FOR AXIOS CALL
     axios.get(`http://localhost:8000/${this.props.match.params.user}`).then(res => {
       if (!res.data) {
         this.setState({ hasTrips: false });
@@ -40,6 +44,10 @@ class User extends React.Component {
   }
 
   getUsersAgain = () => {
+    // DEPLOY URL FOR AXIOS CALL
+    // axios.get(`https://ancient-inlet-94126.herokuapp.com/${this.props.match.params.user}`).then(res => {
+    
+    // TEST URL FOR AXIOS CALL
     axios.get(`http://localhost:8000/${this.props.match.params.user}`).then(res => {
       if (!res.data) {
         this.setState({ hasTrips: false });
