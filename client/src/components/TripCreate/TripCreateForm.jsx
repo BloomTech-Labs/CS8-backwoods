@@ -29,7 +29,7 @@ class TripCreate extends React.Component {
     const { tripName, startDate, endDate } = this.state;
     const { email } = this.props;
     // Deploy axios call
-    // axios.post(`https://ancient-inlet-94126.herokuapp.com/`, { tripName, startDate, endDate, email }, { headers: { authorization: token } })
+    // axios.post(`https://ancient-inlet-94126.herokuapp.com/createTrips`, { tripName, startDate, endDate, email }, { headers: { authorization: token } })
     // Test axios call
     axios.post(`http://localhost:8000/createTrips`, { tripName, startDate, endDate, email }, { headers: { authorization: token } })
       .then(res => {
