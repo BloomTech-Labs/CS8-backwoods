@@ -40,18 +40,18 @@ class User extends React.Component {
       console.log(err);
     })
     // console.log(this.props);
-  } 
-  addNewTrip = () => {
-    const hardCodeNewTrip = {
-        tripName: "Next Trip",
-        startDate: "bla bla",
-        endDate: "more bla",
-        email: 'bla'
-      }
-    this.setState({ 
-      trips: [...this.state.trips, hardCodeNewTrip]
-    })
   }
+  // addNewTrip = () => {
+  //   // const hardCodeNewTrip = {
+  //   //     tripName: "Next Trip",
+  //   //     startDate: "bla bla",
+  //   //     endDate: "more bla",
+  //   //     email: 'bla'
+  //   //   }
+  //   // this.setState({ 
+  //   //   trips: [...this.state.trips, hardCodeNewTrip]
+  //   // })
+  // }
 
   render() {
     return (
@@ -63,10 +63,10 @@ class User extends React.Component {
             <div>
               <Nav user={this.props.email} isLoggedIn={this.props.isLoggedIn} />
               <Route path="/:user"
-                render={(props) => <MainTriplist {...props} 
-                trips={this.state.trips}
-                addNewTrip={this.addNewTrip}
-              />} exact />
+                render={(props) => <MainTriplist {...props}
+                  trips={this.state.trips}
+                // addNewTrip={this.addNewTrip}
+                />} exact />
               <Route path="/:user/billing" component={BillingForm} exact />
               <Route exact path="/:user/settings" component={AccountForm} />
             </div>
