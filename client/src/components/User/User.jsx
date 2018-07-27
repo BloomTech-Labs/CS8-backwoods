@@ -26,13 +26,10 @@ class User extends React.Component {
 
   componentWillMount() {
     axios.get(`http://localhost:8000/${this.props.match.params.user}`).then(res => {
-      // console.log(res);
       if (!res.data) {
         this.setState({ hasTrips: false });
         return
       }
-      // console.log(Array.isArray(res.data.trips))
-      // tripName: res.data.trips[0].tripName, startDate: res.data.trips[0].startDate, endDate: res.data.trips[0].endDate
       this.setState({ hasTrips: true, trips: res.data.trips })
     }).catch(err => {
       if (!this.props.isLoggedIn) {
@@ -40,8 +37,23 @@ class User extends React.Component {
       }
       console.log(err);
     })
-    // console.log(this.props);
   }
+
+  getUsersAgain = () => {
+    axios.get(`http://localhost:8000/${this.props.match.params.user}`).then(res => {
+      if (!res.data) {
+        this.setState({ hasTrips: false });
+        return
+      }
+      this.setState({ hasTrips: true, trips: res.data.trips })
+    }).catch(err => {
+      if (!this.props.isLoggedIn) {
+        this.setState({ noUser: true })
+      }
+      console.log(err);
+    })
+  }
+
   // addNewTrip = () => {
   //   // const hardCodeNewTrip = {
   //   //     tripName: "Next Trip",
@@ -69,9 +81,9 @@ class User extends React.Component {
                   user={this.props.email}
                 // addNewTrip={this.addNewTrip}
                 />} exact />
-              <Route path="/:user/create" render={props => (<TripCreate {...props} email={this.props.email}/>)} />
-              <Route path="/:user/billing" component={BillingForm}  />
-              <Route  path="/:user/settings" component={AccountForm} />
+              <Route path="/:user/create" render={props => (<TripCreate {...props} email={this.props.email} user={this.props.email} getUsersAgain={this.getUsersAgain} />)} />
+              <Route path="/:user/billing" component={BillingForm} />
+              <Route path="/:user/settings" component={AccountForm} />
             </div>
         }
       </div>

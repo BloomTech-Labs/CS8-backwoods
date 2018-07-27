@@ -7,6 +7,7 @@ import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
+import { Redirect } from 'react-router-dom';
 
 class TripCreate extends React.Component {
   state = {
@@ -14,7 +15,8 @@ class TripCreate extends React.Component {
     numberOfWaypoints: '',
     startDate: '',
     endDate: '',
-    email: ''
+    email: '',
+    fireRedirect: false,
   };
 
   handleChange = name => event => {
@@ -28,6 +30,8 @@ class TripCreate extends React.Component {
     const { email } = this.props;
     axios.post(`http://localhost:8000/createTrips`, { tripName, startDate, endDate, email }, { headers: { authorization: token } })
       .then(res => {
+        this.props.getUsersAgain();
+        this.setState({ fireRedirect: true })
         console.log(res);
       }).catch(error => {
         console.log(error);
@@ -35,51 +39,57 @@ class TripCreate extends React.Component {
   }
 
   render() {
+    const { fireRedirect } = this.state
     return (
-      <form onSubmit={this.handleSubmit}>
-        <div>
-          {console.log(this.props)}
-          <Paper className="tripCreateForm">
-            <FormControl>
-              <InputLabel htmlFor="tripName">Trip Name</InputLabel>
-              <Input
-                id="tripName"
-                value={this.state.tripName}
-                onChange={this.handleChange('tripName')}
-              />
-            </FormControl>
-            <FormControl>
-              <InputLabel htmlFor="numberOfWaypoints">
-                Number of Waypoints
+      <React.Fragment>
+        <form onSubmit={this.handleSubmit}>
+          <div>
+            {console.log(this.props)}
+            <Paper className="tripCreateForm">
+              <FormControl>
+                <InputLabel htmlFor="tripName">Trip Name</InputLabel>
+                <Input
+                  id="tripName"
+                  value={this.state.tripName}
+                  onChange={this.handleChange('tripName')}
+                />
+              </FormControl>
+              <FormControl>
+                <InputLabel htmlFor="numberOfWaypoints">
+                  Number of Waypoints
             </InputLabel>
-              <Input
-                id="numberOfWaypoints"
-                value={this.state.name}
-                type="number"
-                onChange={this.handleChange('numberOfWaypoints')}
+                <Input
+                  id="numberOfWaypoints"
+                  value={this.state.name}
+                  type="number"
+                  onChange={this.handleChange('numberOfWaypoints')}
+                />
+              </FormControl>
+              <InputLabel htmlFor="startDate">Start Date</InputLabel>
+              <TextField
+                id="startDate"
+                type="date"
+                value={this.state.startDate}
+                onChange={this.handleChange('startDate')}
               />
-            </FormControl>
-            <InputLabel htmlFor="startDate">Start Date</InputLabel>
-            <TextField
-              id="startDate"
-              type="date"
-              value={this.state.startDate}
-              onChange={this.handleChange('startDate')}
-            />
-            <InputLabel htmlFor="endDate">End Date</InputLabel>
-            <TextField
-              id="endDate"
-              type="date"
-              value={this.state.endDate}
-              onChange={this.handleChange('endDate')}
-            />
-            <Button className="saveTripButton" variant="contained" type="submit">
-              Save Trip
+              <InputLabel htmlFor="endDate">End Date</InputLabel>
+              <TextField
+                id="endDate"
+                type="date"
+                value={this.state.endDate}
+                onChange={this.handleChange('endDate')}
+              />
+              <Button className="saveTripButton" variant="contained" type="submit">
+                Save Trip
             <Icon>send</Icon>
-            </Button>
-          </Paper>
-        </div>
-      </form>
+              </Button>
+            </Paper>
+          </div>
+        </form>
+        {fireRedirect && (
+          <Redirect to={`/${this.props.email}`} />
+        )}
+      </React.Fragment>
     );
   }
 }
