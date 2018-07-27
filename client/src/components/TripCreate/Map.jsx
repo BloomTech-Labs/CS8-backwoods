@@ -1,8 +1,13 @@
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
 import Coordinates from './Coordinates.jsx';
-
-const Marker = ({ text }) => <div>{text}</div>;
+const style = {
+  height: '45px',
+  width: '45px'
+};
+const Marker = ({ text }) => (
+  <img style={style} src={'https://i.imgur.com/Lsk9eVr.png'} />
+);
 class Map extends React.Component {
   constructor(props) {
     super(props);
@@ -59,6 +64,13 @@ class Map extends React.Component {
             text={this.state.text}
           />
         </GoogleMapReact>
+        {this.state.markers.map((markers, i) => {
+          return (
+            <p key={i}>
+              {markers.lat}, {markers.lng}
+            </p>
+          );
+        })}
       </div>
     );
   }
