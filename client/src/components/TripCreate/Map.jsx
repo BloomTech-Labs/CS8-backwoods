@@ -1,11 +1,17 @@
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
 import Coordinates from './Coordinates.jsx';
-const AnyReactComponent = ({ text }) => <div>{text}</div>;
+
+const Marker = ({ text }) => <div>{text}</div>;
 
 class Map extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      lat: 37.73018235769022,
+      lng: -122.33512938022614,
+      text: 'frog'
+    };
     this.addMarker = this.addMarker.bind(this);
   }
 
@@ -23,6 +29,7 @@ class Map extends React.Component {
     console.log('Y:', event.y);
     console.log('LAT:', event.lat);
     console.log('LNG:', event.lng);
+    this.setState({ lat: event.lat, lng: event.lng });
   };
 
   render() {
@@ -36,10 +43,10 @@ class Map extends React.Component {
             this.addMarker(event);
           }}
         >
-          <AnyReactComponent
-            lat={59.955413}
-            lng={30.337844}
-            text={'Kreyser Avrora'}
+          <Marker
+            lat={this.state.lat}
+            lng={this.state.lng}
+            text={this.state.text}
           />
         </GoogleMapReact>
       </div>
