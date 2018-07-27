@@ -1,33 +1,40 @@
 import React from 'react';
-import { Map, Marker, Polygon, GoogleApiWrapper } from 'google-maps-react';
-import {
-  withGoogleMap,
-  withScriptjs,
-  GoogleMap,
-  Marker
-} from 'react-google-maps';
+import GoogleMapReact from 'google-map-react';
 import Coordinates from './Coordinates.jsx';
+const AnyReactComponent = ({ text }) => <div>{text}</div>;
 
-export class MapContainer extends React.Component {
+class Map extends React.Component {
   constructor(props) {
     super(props);
+    this.addMarker = this.addMarker.bind(this);
   }
 
-  defaultProps = {
+  static defaultProps = {
     center: {
       lat: 37.774929,
       lng: -122.419416
     },
-    zoom: 11
+    zoom: 12
+  };
+
+  addMarker = event => {
+    console.log('== CLICK ==');
+    console.log('X:', event.x);
+    console.log('Y:', event.y);
+    console.log('LAT:', event.lat);
+    console.log('LNG:', event.lng);
   };
 
   render() {
     return (
-      <div style={{ height: '100vh', width: '100%' }}>
+      <div style={{ height: '400px', width: '600px', marginLeft: '30%' }}>
         <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyCj6JgxqozDSyHp0IF-q9QeieiYu8I4OPw' }}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
+          onClick={event => {
+            this.addMarker(event);
+          }}
         >
           <AnyReactComponent
             lat={59.955413}
@@ -39,7 +46,7 @@ export class MapContainer extends React.Component {
     );
   }
 }
-
+export default Map;
 // const style = {
 //   width: '40%',
 //   height: '60%'
