@@ -6,6 +6,7 @@ const { changePassword } = require('../controllers/changePassword');
 const { emailCheckAndTrips } = require('../controllers/emailCheckAndTrips');
 const { createTrip } = require('../controllers/trips');
 const { getTrip } = require('../controllers/trips');
+const { createMarker } = require('../controllers/markers');
 
 module.exports = app => {
   app.route('/signup').post(createUser);
@@ -14,4 +15,5 @@ module.exports = app => {
   app.route('/trips/settings').put(authenticate, changePassword);
   app.route('/:user').get(emailCheckAndTrips, getTrip);
   app.route('/createTrips').post(authenticate, createTrip);
+  app.route('/createMarker').post(authenticate, createMarker);
 };

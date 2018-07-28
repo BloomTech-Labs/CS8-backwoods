@@ -9,7 +9,7 @@ const markers = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        ETA: {
+        eta: {
             type: DataTypes.STRING,
             allowNull: false
         },
