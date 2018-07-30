@@ -46,7 +46,7 @@ class MainTriplist extends React.Component {
               variant="fab"
               color="primary"
               aria-label="Add"
-              onClick={this.props.addNewTrip}>
+            >
               <AddIcon />
             </Button>
           </Link>

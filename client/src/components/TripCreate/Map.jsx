@@ -55,10 +55,10 @@ class Map extends React.Component {
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
           onClick={event => {
-            this.addMarker(event);
+            this.props.addMarker(event);
           }}
         >
-          {this.state.markers.map((markers, i) => {
+          {this.props.markers.map((markers, i) => {
             return (
               <Marker
                 key={i}
@@ -75,7 +75,7 @@ class Map extends React.Component {
             text={this.state.text}
           /> */}
         </GoogleMapReact>
-        {this.state.markers.map((markers, i) => {
+        {this.props.markers.map((markers, i) => {
           return (
             <p key={i}>
               {markers.lat}, {markers.lng}

@@ -1,7 +1,7 @@
 import React from 'react';
 import TripCreateForm from './TripCreateForm.jsx';
 import Map from './Map.jsx';
-import ExpansionPanels from './ExpansionPanels.jsx';
+import WaypointList from './WaypointList';
 import slugify from 'slugify';
 import axios from 'axios';
 
@@ -10,17 +10,50 @@ class TripCreate extends React.Component {
     super(props); 
     this.state = {
       tripName: '',
-      numberOfWaypoints: [],
+      wayPoints: [],
+      numberOfWayPoints: 0,
       startDate: '',
       endDate: '',
       email: '',
       fireRedirect: false,
+      markerName: '',
+      eta: '',
+      lng: '',
+      lat: '',
+      tripId: '',
+      markers: [{ lat: 37.73018235769022, lng: -122.33512938022614 }]
     }
+  }
+  addWaypoint = () => {
+    let newWayPoint = {
+      markerName: 'bla',
+      eta: '',
+      long: '',
+      lat: '',
+      tripId: ''
+    }
+    this.setState({ 
+      wayPoints: [...this.state.wayPoints, newWayPoint]
+    })
   }
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
   };
 
+  handleWaypointChange = (e, wayPointKey) => {
+    console.log(e.target.value)
+    console.log(wayPointKey)
+    let updatedWayPoint = {
+      markerName: e.target.value,
+      eta: '',
+      long: '',
+      lat: '',
+      tripId: ''
+    }
+    this.setState({
+      wayPoints: [...this.state.wayPoints, updatedWayPoint]
+    })
+  }
   handleSubmit = e => {
     e.preventDefault();
     const token = localStorage.getItem('token')
@@ -40,6 +73,26 @@ class TripCreate extends React.Component {
       })
   }
 
+  addMarker = event => {
+    console.log('== CLICK ==');
+    console.log('X:', event.x);
+    console.log('Y:', event.y);
+    console.log('LAT:', event.lat);
+    console.log('LNG:', event.lng);
+    let lat = event.lat;
+    let lng = event.lng;
+
+    const marker = {
+      lat: lat,
+      lng: lng
+    };
+
+    this.state.markers.push(marker);
+    this.setState({ lat: lat, lng: lng });
+    console.log(this.state.markers);
+  };
+
+
   render() {
     return (
       <div>
@@ -48,9 +101,16 @@ class TripCreate extends React.Component {
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
           fireRedirect={this.state.fireRedirect}
-          />
-        <Map />
-        <ExpansionPanels />
+        />
+        <Map  
+          addMarker={this.addMarker}
+          markers={this.state.markers}
+        />
+        <WaypointList
+          handleChange={this.handleChange}
+          addWaypoint={this.addWaypoint} 
+          wayPoints={this.state.wayPoints}
+        />
       </div>
     );
   }
