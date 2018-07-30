@@ -18,11 +18,19 @@ class TripCreate extends React.Component {
       fireRedirect: false,
       markerName: '',
       eta: '',
+      mapOpacity: 0.4,
       lng: '',
       lat: '',
       tripId: '',
-      markers: [{ lat: 37.73018235769022, lng: -122.33512938022614 }]
+      markers: [{ lat: 37.73018235769022, lng: -122.33512938022614 }],
+      MarkerCreated: false
     }
+  }
+  activateMap = () => {
+    this.setState({
+      mapOpacity: 1,
+      MarkerCreated: true
+    })
   }
   addWaypoint = () => {
     let newWayPoint = {
@@ -33,7 +41,14 @@ class TripCreate extends React.Component {
       tripId: ''
     }
     this.setState({ 
-      wayPoints: [...this.state.wayPoints, newWayPoint]
+      wayPoints: [...this.state.wayPoints, newWayPoint],
+    }, this.activateMap)
+  }
+  deactivateMap = () => {
+    console.log("Was I called at all?")
+    this.setState({
+      mapOpacity: 0.4,
+      MarkerCreated: false
     })
   }
   handleChange = name => event => {
@@ -102,14 +117,21 @@ class TripCreate extends React.Component {
           handleChange={this.handleChange}
           fireRedirect={this.state.fireRedirect}
         />
+       
         <Map  
+          mapOpacity={this.state.mapOpacity}
           addMarker={this.addMarker}
           markers={this.state.markers}
+          MarkerCreated={this.state.MarkerCreated}
         />
+      
+        
         <WaypointList
           handleChange={this.handleChange}
           addWaypoint={this.addWaypoint} 
           wayPoints={this.state.wayPoints}
+          activateMap={this.activateMap}
+          deactivateMap={this.deactivateMap}
         />
       </div>
     );

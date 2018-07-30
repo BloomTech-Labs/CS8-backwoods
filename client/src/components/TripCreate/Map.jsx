@@ -49,13 +49,16 @@ class Map extends React.Component {
 
   render() {
     return (
-      <div className="tripCreateMap" style={{ height: '400px', width: '30%' }}>
-        <GoogleMapReact
+      <div className="tripCreateMap" style={{ height: '400px', width: '30%', opacity: this.props.mapOpacity }} >
+        <GoogleMapReact 
           bootstrapURLKeys={{ key: 'AIzaSyCj6JgxqozDSyHp0IF-q9QeieiYu8I4OPw' }}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
           onClick={event => {
-            this.props.addMarker(event);
+            if(this.props.MarkerCreated) {
+              this.props.addMarker(event);
+            }
+            console.log('map off')
           }}
         >
           {this.props.markers.map((markers, i) => {

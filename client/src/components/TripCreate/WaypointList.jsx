@@ -15,11 +15,13 @@ const WaypointList = (props) => {
       <Typography>Start</Typography>
       {props.wayPoints.map((wayPoint, index) => {
         return (
-         <WayPoint 
+          <WayPoint 
             wayPoint={wayPoint}
             wayPointKey={index}
             key={index}
             handleChange={props.handleChange}
+            activateMap={props.activateMap}
+            deactivateMap={props.deactivateMap}
           />
         )
       })}
