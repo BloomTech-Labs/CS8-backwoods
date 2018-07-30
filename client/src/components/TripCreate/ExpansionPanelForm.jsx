@@ -22,8 +22,8 @@ const ExpansionPanelForm = () => {
           'aria-label': 'Description'
         }}
       />
-      <Button className="saveTripButton" variant="contained" type="submit">
-        Select Location
+      <Button className="saveLocationButton" variant="contained" type="submit">
+        Select
         <Icon>send</Icon>
       </Button>
     </form>

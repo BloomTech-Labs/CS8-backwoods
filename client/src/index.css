@@ -69,6 +69,13 @@ body {
   -webkit-transition: box-shadow 150ms ease;
   transition: box-shadow 150ms ease;
 }
+.saveTripButton {
+  padding-left: 5%;
+  margin-left: 15% !important; /* this button and the one below wont move without !important and i don't know why */
+}
+.saveLocationButton {
+  margin-left: 64px !important;
+}
 .StripeElement--focus {
   box-shadow: 0 1px 3px 0 #cfd7df;
 }
@@ -105,10 +112,6 @@ body {
 }
 .tripCreateForm > * {
   margin: 20px;
-}
-.saveTripButton {
-  padding-left: 5%;
-  margin-left: 20% !important; /* this button wont move without !important and i don't know why */
 }
 .tripCreateMap {
   margin-top: 1%;
