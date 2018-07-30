@@ -58,11 +58,22 @@ class Map extends React.Component {
             this.addMarker(event);
           }}
         >
-          <Marker
+          {this.state.markers.map((markers, i) => {
+            return (
+              <Marker
+                key={i}
+                lat={markers.lat}
+                lng={markers.lng}
+              >
+                {markers.lat}, {markers.lng}
+              </Marker>
+            );
+          })}
+          {/* <Marker
             lat={this.state.lat}
             lng={this.state.lng}
             text={this.state.text}
-          />
+          /> */}
         </GoogleMapReact>
         {this.state.markers.map((markers, i) => {
           return (
