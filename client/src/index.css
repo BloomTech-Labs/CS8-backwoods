@@ -74,7 +74,7 @@ body {
   margin-left: 15% !important; /* this button and the one below wont move without !important and i don't know why */
 }
 .saveLocationButton {
-  margin-left: 55px !important;
+  margin-left: 48px !important;
 }
 .StripeElement--focus {
   box-shadow: 0 1px 3px 0 #cfd7df;
