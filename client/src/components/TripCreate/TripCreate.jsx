@@ -72,7 +72,7 @@ class TripCreate extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     const token = localStorage.getItem('token')
-    const { tripName, startDate, endDate } = this.state;
+    const { tripName, startDate, endDate, tripId, lng, lat, eta, markerName } = this.state;
     const { email } = this.props;
     const slug = slugify(tripName)
     // Deploy axios call
@@ -80,13 +80,17 @@ class TripCreate extends React.Component {
     // Test axios call
     axios.post(`http://localhost:8000/createTrips`, { tripName, startDate, endDate, email, slug: slug }, { headers: { authorization: token } })
       .then(res => {
+        console.log("This is the id you need",res)
         this.props.getUsersAgain();
-        this.setState({ fireRedirect: true })
-        console.log(res);
+        this.setState({ fireRedirect: true, tripId: res.data.id })
+
+        return axios.post(`http://localhost:8000/createMarker`, {tripId: res.data.id, markerName, eta, long: lng, lat }, { headers: { authorization: token } })
+      }).then(res => {
+          console.log(res);
       }).catch(error => {
         console.log(error);
       })
-  }
+    }
 
   addMarker = event => {
     console.log('== CLICK ==');
