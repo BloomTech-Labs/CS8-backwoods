@@ -5,7 +5,8 @@ const createTrip = (req, res) => {
         tripName: req.body.tripName,
         startDate: req.body.startDate,
         endDate: req.body.endDate,
-        email: req.body.email
+        email: req.body.email,
+        slug: req.body.slug
     }).then(response => {
         res.json(response);
     }).catch(err => {

@@ -8,7 +8,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import axios from 'axios';
 import { Redirect } from 'react-router-dom';
-
+import slugify from 'slugify';
 class TripCreate extends React.Component {
   state = {
     tripName: '',
@@ -28,10 +28,11 @@ class TripCreate extends React.Component {
     const token = localStorage.getItem('token')
     const { tripName, startDate, endDate } = this.state;
     const { email } = this.props;
+    const slug = slugify(tripName)
     // Deploy axios call
     // axios.post(`https://ancient-inlet-94126.herokuapp.com/createTrips`, { tripName, startDate, endDate, email }, { headers: { authorization: token } })
     // Test axios call
-    axios.post(`http://localhost:8000/createTrips`, { tripName, startDate, endDate, email }, { headers: { authorization: token } })
+    axios.post(`http://localhost:8000/createTrips`, { tripName, startDate, endDate, email, slug: slug }, { headers: { authorization: token } })
       .then(res => {
         this.props.getUsersAgain();
         this.setState({ fireRedirect: true })
@@ -45,8 +46,10 @@ class TripCreate extends React.Component {
     const { fireRedirect } = this.state
     return (
       <React.Fragment>
+        
         <form onSubmit={this.handleSubmit}>
           <div>
+          
             {console.log(this.props)}
             <Paper className="tripCreateForm">
               <FormControl>
