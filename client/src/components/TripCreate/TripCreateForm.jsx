@@ -16,7 +16,7 @@ class TripCreate extends React.Component {
     startDate: '',
     endDate: '',
     email: '',
-    fireRedirect: false,
+    fireRedirect: false
   };
 
   handleChange = name => event => {
@@ -25,24 +25,30 @@ class TripCreate extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem('token');
     const { tripName, startDate, endDate } = this.state;
     const { email } = this.props;
     // Deploy axios call
     // axios.post(`https://ancient-inlet-94126.herokuapp.com/createTrips`, { tripName, startDate, endDate, email }, { headers: { authorization: token } })
     // Test axios call
-    axios.post(`http://localhost:8000/createTrips`, { tripName, startDate, endDate, email }, { headers: { authorization: token } })
+    axios
+      .post(
+        `http://localhost:8000/createTrips`,
+        { tripName, startDate, endDate, email },
+        { headers: { authorization: token } }
+      )
       .then(res => {
         this.props.getUsersAgain();
-        this.setState({ fireRedirect: true })
+        this.setState({ fireRedirect: true });
         console.log(res);
-      }).catch(error => {
-        console.log(error);
       })
-  }
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   render() {
-    const { fireRedirect } = this.state
+    const { fireRedirect } = this.state;
     return (
       <React.Fragment>
         <form onSubmit={this.handleSubmit}>
@@ -60,7 +66,7 @@ class TripCreate extends React.Component {
               <FormControl>
                 <InputLabel htmlFor="numberOfWaypoints">
                   Number of Waypoints
-            </InputLabel>
+                </InputLabel>
                 <Input
                   id="numberOfWaypoints"
                   value={this.state.name}
@@ -82,16 +88,18 @@ class TripCreate extends React.Component {
                 value={this.state.endDate}
                 onChange={this.handleChange('endDate')}
               />
-              <Button className="saveTripButton" variant="contained" type="submit">
+              <Button
+                className="saveTripButton"
+                variant="contained"
+                type="submit"
+              >
                 Save Trip
-            <Icon>send</Icon>
+                <Icon>send</Icon>
               </Button>
             </Paper>
           </div>
         </form>
-        {fireRedirect && (
-          <Redirect to={`/${this.props.email}`} />
-        )}
+        {fireRedirect && <Redirect to={`/${this.props.email}`} />}
       </React.Fragment>
     );
   }

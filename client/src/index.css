@@ -108,6 +108,7 @@ body {
 }
 .saveTripButton {
   padding-left: 5%;
+  margin-left: 20% !important; /* this button wont move without !important and i don't know why */
 }
 .tripCreateMap {
   margin-top: 1%;
