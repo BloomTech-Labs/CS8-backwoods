@@ -18,6 +18,7 @@ const ExpansionPanelForm = () => {
       />
       <Input
         placeholder="Waypoint Name"
+        className="waypointName"
         inputProps={{
           'aria-label': 'Description'
         }}

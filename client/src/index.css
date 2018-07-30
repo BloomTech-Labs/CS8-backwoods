@@ -74,7 +74,7 @@ body {
   margin-left: 15% !important; /* this button and the one below wont move without !important and i don't know why */
 }
 .saveLocationButton {
-  margin-left: 64px !important;
+  margin-left: 55px !important;
 }
 .StripeElement--focus {
   box-shadow: 0 1px 3px 0 #cfd7df;
@@ -126,6 +126,9 @@ body {
   margin-left: -10%;
   margin-bottom: 30%;
   margin-top: 1%;
+}
+.waypointName {
+  margin-left: 5px;
 }
 .breadCrumbText {
   margin-bottom: 20px;
