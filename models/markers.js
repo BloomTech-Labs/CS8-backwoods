@@ -23,10 +23,6 @@ const markers = (sequelize, DataTypes) => {
         },
     })
 
-    Markers.associate = function (models) {
-        models.Markers.belongsTo(models.Trips)
-    }
-
     return Markers;
 };
 

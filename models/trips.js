@@ -18,10 +18,6 @@ const trips = (sequelize, DataTypes) => {
             allowNull: false
         },
     })
-    Trips.associate = function (models) {
-        models.Trips.belongsTo(models.User)
-        models.Trips.hasMany(models.Markers)
-    };
 
     return Trips;
 };

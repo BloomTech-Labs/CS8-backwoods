@@ -2,6 +2,7 @@ const models = require('../models');
 
 const createMarker = (req, res) => {
     models.Markers.create({
+        tripId: req.body.tripId,
         markerName: req.body.markerName,
         eta: req.body.eta,
         long: req.body.long,
@@ -14,18 +15,18 @@ const createMarker = (req, res) => {
 }
 
 const getMarkers = (req, res) => {
-    models.Trips.findAll({
-        where: { email: req.params.user }
+    models.Markers.findAll({
+        where: { tripId: req.params.tripId }
     })
-        .then((trips) => {
-            if (trips.length === 0) {
-                res.status(422).json({ "error": "User doesn't have trips" })
+        .then((marker) => {
+            if (marker.length === 0) {
+                res.status(422).json({ "error": "Trip has no markers" })
                 return
             }
-            res.json({ trips })
+            res.json({ marker })
         })
         .catch(err => {
-            res.json(err)
+            res.json({"error": err})
         })
 };
 

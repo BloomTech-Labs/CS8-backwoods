@@ -41,12 +41,16 @@ const models = {
 //     }
 //   }
 // });
-Object.keys(models).forEach(modelName => {
-  if (models[modelName].associate) {
-    models[modelName].associate(models);
-  }
-});
+// Object.keys(models).forEach(modelName => {
+//   if (models[modelName].associate) {
+//     models[modelName].associate(models);
+//   }
+// });
 
+models.User.hasMany(models.Trips, { foreignKey: 'email', targetKey: 'email'});
+// models.Trips.belongsTo(models.User);
+models.Trips.hasMany(models.Markers);
+models.Markers.belongsTo(models.Trips);
 models.sequelize = sequelize;
 models.Sequelize = Sequelize;
 module.exports = models;
