@@ -59,6 +59,7 @@ class TripCreate extends React.Component {
                 <InputLabel htmlFor="tripName">Trip Name</InputLabel>
                 <Input
                   id="tripName"
+                  className="tripName"
                   value={this.state.tripName}
                   onChange={this.handleChange('tripName')}
                 />
