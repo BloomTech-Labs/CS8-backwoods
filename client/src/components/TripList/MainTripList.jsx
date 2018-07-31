@@ -9,7 +9,7 @@ import { Link } from 'react-router-dom';
 class MainTriplist extends React.Component {
 
 
-  render() { 
+  render() {
     return (
       <div>
         {
@@ -21,16 +21,15 @@ class MainTriplist extends React.Component {
                   createdAt={trip.createdAt}
                   updatedAt={trip.updatedAt}
                   startDate={trip.startDate}
-                  endDate={trip.endDate} 
+                  endDate={trip.endDate}
                   slug={trip.slug}
                   email={trip.email}
-                  />
+                />
 
               </div>
             )
 
           })}
-        {console.log(this.props.trips)}
         <Paper className="tripListEmptyPaper" elevation={1}>
 
           <Typography
@@ -38,7 +37,7 @@ class MainTriplist extends React.Component {
             variant="headline"
             component="h2"
           >
-          
+
             Add your first trip!
           </Typography>
           <Link to={`/${this.props.user}/create`}>
