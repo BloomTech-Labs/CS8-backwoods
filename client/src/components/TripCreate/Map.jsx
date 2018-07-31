@@ -77,6 +77,7 @@ class Map extends React.Component {
             text={this.state.text}
           /> */}
         </GoogleMapReact>
+        {/* this shows the lat, lng below the map when clicking a marker */}
         {this.props.markers.map((markers, i) => {
           return (
             <p key={i}>
