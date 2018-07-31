@@ -14,7 +14,6 @@ const Waypoint = (props) => {
   return (
     <ExpansionPanel>
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-        {/* <Typography> */}
         <Input
           placeholder={props.wayPoint.markerName}
           inputProps={{
@@ -22,29 +21,21 @@ const Waypoint = (props) => {
           }}
           onChange={props.handleChange('markerName')}
         />
-        {/* </Typography> */}
 
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
-        {/* <Typography> */}
-        {/* <form> */}
         <TextField
           id="date"
           label="ETA"
           type="date"
           defaultValue="2017-05-24"
           onChange={props.handleChange("eta")}
-        // InputLabelProps={{
-        //   shrink: true
-        // }}
         />
 
         <Button className="saveTripButton" variant="contained" onClick={props.handleNewWaypoint}>
           Save Location
         <Icon>send</Icon>
         </Button>
-        {/* </form>
-        </Typography> */}
       </ExpansionPanelDetails>
     </ExpansionPanel>
   )

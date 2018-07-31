@@ -80,7 +80,7 @@ class TripCreate extends React.Component {
   handleSubmit = e => {
     e.preventDefault();
     const token = localStorage.getItem('token')
-    const { tripName, startDate, endDate, tripId, lng, lat, eta, markerName, newMarkersArr } = this.state;
+    const { tripName, startDate, endDate, newMarkersArr } = this.state;
     const { email } = this.props;
     const slug = slugify(tripName)
     // Deploy axios call
@@ -88,16 +88,13 @@ class TripCreate extends React.Component {
     // Test axios call
     axios.post(`http://localhost:8000/createTrips`, { tripName, startDate, endDate, email, slug: slug }, { headers: { authorization: token } })
       .then(res => {
-        console.log("This is the id you need", res)
         this.props.getUsersAgain();
         this.setState({ fireRedirect: true })
-        // tripId: res.data.id, markerName, eta, long: lng, lat
         const tripId = res.data.id;
         let markersArr = [...newMarkersArr]
         markersArr.forEach(item => {
           item.tripId = tripId
         });
-        console.log('this is the newArr', markersArr);
         return axios.post(`http://localhost:8000/createMarker`, { markersArr }, { headers: { authorization: token } })
       }).then(res => {
         console.log(res);
@@ -107,11 +104,11 @@ class TripCreate extends React.Component {
   }
 
   addMarker = event => {
-    console.log('== CLICK ==');
-    console.log('X:', event.x);
-    console.log('Y:', event.y);
-    console.log('LAT:', event.lat);
-    console.log('LNG:', event.lng);
+    // console.log('== CLICK ==');
+    // console.log('X:', event.x);
+    // console.log('Y:', event.y);
+    // console.log('LAT:', event.lat);
+    // console.log('LNG:', event.lng);
     let lat = event.lat;
     let lng = event.lng;
 
@@ -122,7 +119,7 @@ class TripCreate extends React.Component {
 
     this.state.markers.push(marker);
     this.setState({ lat: lat, lng: lng });
-    console.log(this.state.markers);
+    // console.log(this.state.markers);
   };
 
 
