@@ -7,10 +7,11 @@ import axios from 'axios';
 
 class TripCreate extends React.Component {
   constructor(props) {
-    super(props); 
+    super(props);
     this.state = {
       tripName: '',
       wayPoints: [],
+      newMarkersArr: [],
       numberOfWayPoints: 0,
       startDate: '',
       endDate: '',
@@ -26,12 +27,16 @@ class TripCreate extends React.Component {
       MarkerCreated: false
     }
   }
+
+
   activateMap = () => {
     this.setState({
       mapOpacity: 1,
       MarkerCreated: true
     })
   }
+
+
   addWaypoint = () => {
     let newWayPoint = {
       markerName: 'bla',
@@ -40,39 +45,42 @@ class TripCreate extends React.Component {
       lat: '',
       tripId: ''
     }
-    this.setState({ 
+    this.setState({
       wayPoints: [...this.state.wayPoints, newWayPoint],
     }, this.activateMap)
   }
+
+
   deactivateMap = () => {
-    console.log("Was I called at all?")
     this.setState({
       mapOpacity: 0.4,
       MarkerCreated: false
     })
   }
+
+
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
   };
 
-  handleWaypointChange = (e, wayPointKey) => {
-    console.log(e.target.value)
-    console.log(wayPointKey)
-    let updatedWayPoint = {
-      markerName: e.target.value,
-      eta: '',
-      long: '',
-      lat: '',
-      tripId: ''
+  handleNewWaypoint = () => {
+    let newWayPoint = {
+      markerName: this.state.markerName,
+      eta: this.state.eta,
+      long: this.state.lng,
+      lat: this.state.lat,
+      tripId: '',
     }
     this.setState({
-      wayPoints: [...this.state.wayPoints, updatedWayPoint]
-    })
+      newMarkersArr: [...this.state.newMarkersArr, newWayPoint]
+    }, this.deactivateMap);
   }
+
+
   handleSubmit = e => {
     e.preventDefault();
     const token = localStorage.getItem('token')
-    const { tripName, startDate, endDate, tripId, lng, lat, eta, markerName } = this.state;
+    const { tripName, startDate, endDate, tripId, lng, lat, eta, markerName, newMarkersArr } = this.state;
     const { email } = this.props;
     const slug = slugify(tripName)
     // Deploy axios call
@@ -80,17 +88,23 @@ class TripCreate extends React.Component {
     // Test axios call
     axios.post(`http://localhost:8000/createTrips`, { tripName, startDate, endDate, email, slug: slug }, { headers: { authorization: token } })
       .then(res => {
-        console.log("This is the id you need",res)
+        console.log("This is the id you need", res)
         this.props.getUsersAgain();
-        this.setState({ fireRedirect: true, tripId: res.data.id })
-
-        return axios.post(`http://localhost:8000/createMarker`, {tripId: res.data.id, markerName, eta, long: lng, lat }, { headers: { authorization: token } })
+        this.setState({ fireRedirect: true })
+        // tripId: res.data.id, markerName, eta, long: lng, lat
+        const tripId = res.data.id;
+        let markersArr = [...newMarkersArr]
+        markersArr.forEach(item => {
+          item.tripId = tripId
+        });
+        console.log('this is the newArr', markersArr);
+        return axios.post(`http://localhost:8000/createMarker`, { markersArr }, { headers: { authorization: token } })
       }).then(res => {
-          console.log(res);
+        console.log(res);
       }).catch(error => {
         console.log(error);
       })
-    }
+  }
 
   addMarker = event => {
     console.log('== CLICK ==');
@@ -115,27 +129,27 @@ class TripCreate extends React.Component {
   render() {
     return (
       <div>
-        <TripCreateForm 
+        <TripCreateForm
           email={this.props.email}
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
           fireRedirect={this.state.fireRedirect}
         />
-       
-        <Map  
+
+        <Map
           mapOpacity={this.state.mapOpacity}
           addMarker={this.addMarker}
           markers={this.state.markers}
           MarkerCreated={this.state.MarkerCreated}
         />
-      
-        
+
+
         <WaypointList
           handleChange={this.handleChange}
-          addWaypoint={this.addWaypoint} 
+          addWaypoint={this.addWaypoint}
           wayPoints={this.state.wayPoints}
           activateMap={this.activateMap}
-          deactivateMap={this.deactivateMap}
+          handleNewWaypoint={this.handleNewWaypoint}
         />
       </div>
     );

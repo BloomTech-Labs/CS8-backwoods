@@ -13,37 +13,37 @@ import Icon from '@material-ui/core/Icon';
 const Waypoint = (props) => {
   return (
     <ExpansionPanel>
-    <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-      {/* <Typography> */}
-      <Input
-        placeholder={props.wayPoint.markerName}
-        inputProps={{
-          'aria-label': 'Description'
-        }}
-        onChange={props.handleChange('markerName')}
-      />
-      {/* </Typography> */}
-  
-    </ExpansionPanelSummary>
-    <ExpansionPanelDetails>
+      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+        {/* <Typography> */}
+        <Input
+          placeholder={props.wayPoint.markerName}
+          inputProps={{
+            'aria-label': 'Description'
+          }}
+          onChange={props.handleChange('markerName')}
+        />
+        {/* </Typography> */}
+
+      </ExpansionPanelSummary>
+      <ExpansionPanelDetails>
         {/* <Typography> */}
         {/* <form> */}
-      <TextField
-        id="date"
-        label="ETA"
-        type="date"
-        defaultValue="2017-05-24"
-        onChange={props.handleChange("eta")}
+        <TextField
+          id="date"
+          label="ETA"
+          type="date"
+          defaultValue="2017-05-24"
+          onChange={props.handleChange("eta")}
         // InputLabelProps={{
         //   shrink: true
         // }}
-      />
-     
-      <Button className="saveTripButton" variant="contained" onClick={props.deactivateMap}>
-        Save Location
+        />
+
+        <Button className="saveTripButton" variant="contained" onClick={props.handleNewWaypoint}>
+          Save Location
         <Icon>send</Icon>
-      </Button>
-    {/* </form>
+        </Button>
+        {/* </form>
         </Typography> */}
       </ExpansionPanelDetails>
     </ExpansionPanel>

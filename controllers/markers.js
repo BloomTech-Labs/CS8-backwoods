@@ -1,23 +1,8 @@
 const models = require('../models');
 
 const createMarker = (req, res) => {
-    const markersArr = [
-        {
-            tripId: req.body.tripId,
-            markerName: req.body.markerName,
-            eta: req.body.eta,
-            long: req.body.long,
-            lat: req.body.lat,
-        },
-        {
-            tripId: req.body.tripId,
-            markerName: req.body.markerName,
-            eta: req.body.eta,
-            long: req.body.long,
-            lat: req.body.lat,
-        }
-    ];
-    models.Markers.bulkCreate(markersArr).then(response => {
+    const markers = req.body.markersArr
+    models.Markers.bulkCreate(markers).then(response => {
         res.json(response);
     }).catch(err => {
         res.json(err);

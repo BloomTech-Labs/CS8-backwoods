@@ -21,7 +21,7 @@ const WaypointList = (props) => {
             key={index}
             handleChange={props.handleChange}
             activateMap={props.activateMap}
-            deactivateMap={props.deactivateMap}
+            handleNewWaypoint={props.handleNewWaypoint}
           />
         )
       })}
