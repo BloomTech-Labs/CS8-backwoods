@@ -1,9 +1,11 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
+import { Link } from 'react-router-dom';
 import '../../index.css'
 const Trip = (props) => {
   return (
+  <Link to={`/${props.email}/${props.slug}`} style={{textDecoration: "none"}}>
     <div className="createNew">
       <Paper className="tripListEmptyPaper" elevation={1}>
         <Typography
@@ -22,7 +24,7 @@ const Trip = (props) => {
        
     </Paper>
   </div>
-   
+</Link>
   )
 }
 

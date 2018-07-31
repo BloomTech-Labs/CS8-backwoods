@@ -17,6 +17,10 @@ const trips = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        slug: {
+            type: DataTypes.STRING,
+            allowNull: false
+        }
     })
 
     return Trips;

@@ -16,12 +16,12 @@ const ExpansionPanelForm = () => {
           shrink: true
         }}
       />
-      <Input
+      {/* <Input
         placeholder="Waypoint Name"
         inputProps={{
           'aria-label': 'Description'
         }}
-      />
+      /> */}
       <Button className="saveTripButton" variant="contained" type="submit">
         Select Location
         <Icon>send</Icon>

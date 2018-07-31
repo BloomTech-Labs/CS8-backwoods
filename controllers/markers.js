@@ -1,18 +1,14 @@
 const models = require('../models');
 
 const createMarker = (req, res) => {
-    models.Markers.create({
-        tripId: req.body.tripId,
-        markerName: req.body.markerName,
-        eta: req.body.eta,
-        long: req.body.long,
-        lat: req.body.lat,
-    }).then(response => {
+    const markers = req.body.markersArr
+    models.Markers.bulkCreate(markers).then(response => {
         res.json(response);
     }).catch(err => {
         res.json(err);
     })
 }
+
 
 const getMarkers = (req, res) => {
     models.Markers.findAll({
@@ -26,7 +22,7 @@ const getMarkers = (req, res) => {
             res.json({ marker })
         })
         .catch(err => {
-            res.json({"error": err})
+            res.json({ "error": err })
         })
 };
 
