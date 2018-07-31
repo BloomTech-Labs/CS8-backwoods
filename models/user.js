@@ -65,10 +65,7 @@ const user = (sequelize, DataTypes) => {
         throw new Error();
       });
   });
-  User.associate = function(models) {
-    models.User.hasMany(models.Trips, { foreignKey: 'email', targetKey: 'fk_user'});
-    // models.Trips.belongsTo(models.User,{foreignKey: 'fk_user', targetKey: 'email'})
-  };
+  
   return User;
 };
 

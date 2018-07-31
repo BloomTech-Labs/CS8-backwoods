@@ -1,30 +1,31 @@
-const trips = (sequelize, DataTypes) => {
-    const Trips = sequelize.define('trips', {
+const markers = (sequelize, DataTypes) => {
+    const Markers = sequelize.define('markers', {
         id: {
             type: DataTypes.UUID,
             defaultValue: DataTypes.UUIDV4,
             primaryKey: true
         },
-        tripName: {
+        markerName: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        startDate: {
+        eta: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        endDate: {
+        long: {
             type: DataTypes.STRING,
             allowNull: false
         },
-        slug: {
+        lat: {
             type: DataTypes.STRING,
             allowNull: false
-        }
+        },
     })
 
-    return Trips;
+    return Markers;
 };
 
 
-module.exports = trips;
+
+module.exports = markers;
