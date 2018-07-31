@@ -12,7 +12,6 @@ class TripCreate extends React.Component {
       tripName: '',
       wayPoints: [],
       newMarkersArr: [],
-      numberOfWayPoints: 0,
       startDate: '',
       endDate: '',
       email: '',

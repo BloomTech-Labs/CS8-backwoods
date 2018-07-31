@@ -11,54 +11,43 @@ import { Redirect } from 'react-router-dom';
 
 const TripCreateForm = (props) => {
   return (
-    <React.Fragment>  
-    <form onSubmit={props.handleSubmit}>
-      <div>
-        <Paper className="tripCreateForm">
-          <FormControl>
-            <InputLabel htmlFor="tripName">Trip Name</InputLabel>
-            <Input
-              id="tripName"
-              value={props.tripName}
-              onChange={props.handleChange('tripName')}
+    <React.Fragment>
+      <form onSubmit={props.handleSubmit}>
+        <div>
+          <Paper className="tripCreateForm">
+            <FormControl>
+              <InputLabel htmlFor="tripName">Trip Name</InputLabel>
+              <Input
+                id="tripName"
+                value={props.tripName}
+                onChange={props.handleChange('tripName')}
+              />
+            </FormControl>
+            <InputLabel htmlFor="startDate">Start Date</InputLabel>
+            <TextField
+              id="startDate"
+              type="date"
+              value={props.startDate}
+              onChange={props.handleChange('startDate')}
             />
-          </FormControl>
-          <FormControl>
-            <InputLabel htmlFor="numberOfWaypoints">
-              Number of Waypoints
-        </InputLabel>
-            <Input
-              id="numberOfWaypoints"
-              value={props.name}
-              type="number"
-              onChange={props.handleChange('numberOfWaypoints')}
+            <InputLabel htmlFor="endDate">End Date</InputLabel>
+            <TextField
+              id="endDate"
+              type="date"
+              value={props.endDate}
+              onChange={props.handleChange('endDate')}
             />
-          </FormControl>
-          <InputLabel htmlFor="startDate">Start Date</InputLabel>
-          <TextField
-            id="startDate"
-            type="date"
-            value={props.startDate}
-            onChange={props.handleChange('startDate')}
-          />
-          <InputLabel htmlFor="endDate">End Date</InputLabel>
-          <TextField
-            id="endDate"
-            type="date"
-            value={props.endDate}
-            onChange={props.handleChange('endDate')}
-          />
-          <Button className="saveTripButton" variant="contained" type="submit">
-            Save Trip
+            <Button className="saveTripButton" variant="contained" type="submit">
+              Save Trip
         <Icon>send</Icon>
-          </Button>
-        </Paper>
-      </div>
-    </form>
-    {props.fireRedirect && (
-      <Redirect to={`/${props.email}`} />
-    )}
-  </React.Fragment>
+            </Button>
+          </Paper>
+        </div>
+      </form>
+      {props.fireRedirect && (
+        <Redirect to={`/${props.email}`} />
+      )}
+    </React.Fragment>
   )
 
 }
