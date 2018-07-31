@@ -6,36 +6,6 @@ import Icon from '@material-ui/core/Icon';
 
 const ExpansionPanelForm = () => {
   return (
-<<<<<<< HEAD
-    <div>
-      <form>
-        <TextField
-          id="date"
-          label="ETA"
-          type="date"
-          defaultValue="2017-05-24"
-          InputLabelProps={{
-            shrink: true
-          }}
-        />
-        <Input
-          placeholder="Waypoint Name"
-          className="waypointName"
-          inputProps={{
-            'aria-label': 'Description'
-          }}
-        />
-        <Button
-          className="saveLocationButton"
-          variant="contained"
-          type="submit"
-        >
-          Select
-          <Icon>send</Icon>
-        </Button>
-      </form>
-    </div>
-=======
     <form>
       <TextField
         id="date"
@@ -57,7 +27,6 @@ const ExpansionPanelForm = () => {
         <Icon>send</Icon>
       </Button>
     </form>
->>>>>>> master
   );
 };
 

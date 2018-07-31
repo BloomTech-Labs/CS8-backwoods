@@ -6,7 +6,7 @@ import BillingForm from '../Billing/BillingForm';
 import AccountForm from '../Account/AccountForm';
 import { Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
-import TripOpen from '../Trip/TripOpen'
+import TripOpen from '../Trip/TripOpen';
 class User extends React.Component {
   constructor(props) {
     super(props);
@@ -69,47 +69,32 @@ class User extends React.Component {
   render() {
     return (
       <div>
-        {this.state.noUser ? (
-          <Redirect to="/404" />
-        ) : (
-          <div>
-            <Nav user={this.props.email} isLoggedIn={this.props.isLoggedIn} />
-            <Route
-              path="/:user"
-              render={props => (
-                <MainTripList
-                  {...props}
-                  trips={this.state.trips}
-                  user={this.props.email}
-<<<<<<< HEAD
-                />
-              )}
-              exact
+        <Nav user={this.props.email} isLoggedIn={this.props.isLoggedIn} />
+        <Route
+          path="/:user"
+          render={props => (
+            <MainTripList
+              {...props}
+              trips={this.state.trips}
+              user={this.props.email}
             />
-            <Route
-              path="/:user/create"
-              render={props => (
-                <TripCreate
-                  {...props}
-                  email={this.props.email}
-                  user={this.props.email}
-                  getUsersAgain={this.getUsersAgain}
-                />
-              )}
+          )}
+          exact
+        />
+        <Route
+          path="/:user/create"
+          render={props => (
+            <TripCreate
+              {...props}
+              email={this.props.email}
+              user={this.props.email}
+              getUsersAgain={this.getUsersAgain}
             />
-            <Route path="/:user/billing" component={BillingForm} />
-            <Route path="/:user/settings" component={AccountForm} />
-          </div>
-        )}
-=======
-                />} exact />
-              <Route path="/:user/create" render={props => (<TripCreate {...props} email={this.props.email} user={this.props.email} getUsersAgain={this.getUsersAgain} />)} />
-              <Route path="/:user/billing" component={BillingForm} />
-              <Route path="/:user/settings" component={AccountForm} />
-              <Route path="/:user/:slug" component={TripOpen} />
-            </div>
-        }
->>>>>>> master
+          )}
+        />
+        <Route path="/:user/billing" component={BillingForm} />
+        <Route path="/:user/settings" component={AccountForm} />
+        <Route path="/:user/:slug" component={TripOpen} />
       </div>
     );
   }

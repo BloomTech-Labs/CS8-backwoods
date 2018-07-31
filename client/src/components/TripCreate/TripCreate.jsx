@@ -1,20 +1,6 @@
 import React from 'react';
 import TripCreateForm from './TripCreateForm.jsx';
 import Map from './Map.jsx';
-<<<<<<< HEAD
-import ExpansionPanels from './ExpansionPanels.jsx';
-
-const TripCreate = props => {
-  return (
-    <div>
-      <TripCreateForm email={props.email} getUsersAgain={props.getUsersAgain} />
-      <div className="mapAndExpPanels">
-        <Map />
-        <ExpansionPanels />
-      </div>
-    </div>
-  );
-=======
 import WaypointList from './WaypointList';
 import slugify from 'slugify';
 import axios from 'axios';
@@ -39,17 +25,15 @@ class TripCreate extends React.Component {
       tripId: '',
       markers: [{ lat: 37.73018235769022, lng: -122.33512938022614 }],
       MarkerCreated: false
-    }
+    };
   }
-
 
   activateMap = () => {
     this.setState({
       mapOpacity: 1,
       MarkerCreated: true
-    })
-  }
-
+    });
+  };
 
   addWaypoint = () => {
     let newWayPoint = {
@@ -58,20 +42,21 @@ class TripCreate extends React.Component {
       long: '',
       lat: '',
       tripId: ''
-    }
-    this.setState({
-      wayPoints: [...this.state.wayPoints, newWayPoint],
-    }, this.activateMap)
-  }
-
+    };
+    this.setState(
+      {
+        wayPoints: [...this.state.wayPoints, newWayPoint]
+      },
+      this.activateMap
+    );
+  };
 
   deactivateMap = () => {
     this.setState({
       mapOpacity: 0.4,
       MarkerCreated: false
-    })
-  }
-
+    });
+  };
 
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
@@ -83,39 +68,52 @@ class TripCreate extends React.Component {
       eta: this.state.eta,
       long: this.state.lng,
       lat: this.state.lat,
-      tripId: '',
-    }
-    this.setState({
-      newMarkersArr: [...this.state.newMarkersArr, newWayPoint]
-    }, this.deactivateMap);
-  }
-
+      tripId: ''
+    };
+    this.setState(
+      {
+        newMarkersArr: [...this.state.newMarkersArr, newWayPoint]
+      },
+      this.deactivateMap
+    );
+  };
 
   handleSubmit = e => {
     e.preventDefault();
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem('token');
     const { tripName, startDate, endDate, newMarkersArr } = this.state;
     const { email } = this.props;
-    const slug = slugify(tripName)
+    const slug = slugify(tripName);
     // Deploy axios call
     // axios.post(`https://ancient-inlet-94126.herokuapp.com/createTrips`, { tripName, startDate, endDate, email }, { headers: { authorization: token } })
     // Test axios call
-    axios.post(`http://localhost:8000/createTrips`, { tripName, startDate, endDate, email, slug: slug }, { headers: { authorization: token } })
+    axios
+      .post(
+        `http://localhost:8000/createTrips`,
+        { tripName, startDate, endDate, email, slug: slug },
+        { headers: { authorization: token } }
+      )
       .then(res => {
         this.props.getUsersAgain();
-        this.setState({ fireRedirect: true })
+        this.setState({ fireRedirect: true });
         const tripId = res.data.id;
-        let markersArr = [...newMarkersArr]
+        let markersArr = [...newMarkersArr];
         markersArr.forEach(item => {
-          item.tripId = tripId
+          item.tripId = tripId;
         });
-        return axios.post(`http://localhost:8000/createMarker`, { markersArr }, { headers: { authorization: token } })
-      }).then(res => {
-        console.log(res);
-      }).catch(error => {
-        console.log(error);
+        return axios.post(
+          `http://localhost:8000/createMarker`,
+          { markersArr },
+          { headers: { authorization: token } }
+        );
       })
-  }
+      .then(res => {
+        console.log(res);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   addMarker = event => {
     // console.log('== CLICK ==');
@@ -136,7 +134,6 @@ class TripCreate extends React.Component {
     // console.log(this.state.markers);
   };
 
-
   render() {
     return (
       <div>
@@ -154,7 +151,6 @@ class TripCreate extends React.Component {
           MarkerCreated={this.state.MarkerCreated}
         />
 
-
         <WaypointList
           handleChange={this.handleChange}
           addWaypoint={this.addWaypoint}
@@ -165,7 +161,6 @@ class TripCreate extends React.Component {
       </div>
     );
   }
->>>>>>> master
-};
+}
 
 export default TripCreate;
