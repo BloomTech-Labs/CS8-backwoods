@@ -6,10 +6,10 @@ import Typography from '@material-ui/core/Typography';
 
 const TripListEmpty = () => {
   return (
-    <div>
-      <Paper className="tripListEmptyPaper" elevation={1}>
+    <div className="tripList">
+      <Paper className="tripListPaper" elevation={1}>
         <Typography
-          className="tripListEmptyPaper-text"
+          className="tripListPaper-text"
           variant="headline"
           component="h2"
         >
