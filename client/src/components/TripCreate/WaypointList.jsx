@@ -32,7 +32,7 @@ const WaypointList = (props) => {
               Add Marker
               
             </Button>
-          <Button className="saveTripButton" variant="contained" onClick={props.removeMarker}>
+          <Button className="saveTripButton" variant="contained" onClick={props.removeMarker} disabled={props.disableRemoveMarker}>
               <Icon>delete</Icon>
               Remove Marker
               

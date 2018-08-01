@@ -22,9 +22,10 @@ class TripCreate extends React.Component {
       lng: '',
       lat: '',
       tripId: '',
-      markers: [{ lat: 37.73018235769022, lng: -122.33512938022614 }],
+      markers: [],
       MarkerCreated: false,
       disableAddMarker: false,
+      disableRemoveMarker: true,
     }
   }
 
@@ -71,7 +72,9 @@ class TripCreate extends React.Component {
       tripId: '',
     }
     this.setState({
-      newMarkersArr: [...this.state.newMarkersArr, newWayPoint]
+      newMarkersArr: [...this.state.newMarkersArr, newWayPoint],
+      disableAddMarker: false,
+      disableRemoveMarker: false,
     }, this.deactivateMap);
   }
 
@@ -105,6 +108,12 @@ class TripCreate extends React.Component {
   // removes marker after hitting save location
   removeMarker = () => {
     this.state.newMarkersArr.pop();
+    this.state.wayPoints.pop();
+    this.state.markers.pop();
+    this.setState({
+      disableAddMarker: false,
+      disableRemoveMarker: true,
+    })
   };
 
   addMarker = event => {
@@ -153,6 +162,7 @@ class TripCreate extends React.Component {
           handleNewWaypoint={this.handleNewWaypoint}
           removeMarker={this.removeMarker}
           disableAddMarker={this.state.disableAddMarker}
+          disableRemoveMarker={this.state.disableRemoveMarker}
         />
       </div>
     );
