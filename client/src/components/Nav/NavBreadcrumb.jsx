@@ -13,7 +13,7 @@ class NavBreadcrumb extends React.Component {
       return null;
     } else {
       return [
-        <i className="material-icons">keyboard_arrow_right</i>,
+        <i class="material-icons">keyboard_arrow_right</i>,
         <span>{t[t.length - 1]}</span>
       ];
     }
