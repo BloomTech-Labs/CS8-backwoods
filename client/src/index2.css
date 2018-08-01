@@ -138,7 +138,7 @@ p {
   flex-direction: column;
 }
 
-.tripname {
+/* .tripname {
   width: 50%;
   position: absolute;
 }
@@ -148,5 +148,5 @@ p {
   width: 30%;
   margin-left: 27%;
   margin-bottom: 56%;
-}
+} */
 

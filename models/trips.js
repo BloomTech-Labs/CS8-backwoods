@@ -20,6 +20,10 @@ const trips = (sequelize, DataTypes) => {
         slug: {
             type: DataTypes.STRING,
             allowNull: false
+        },
+        Archived: {
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         }
     })
 

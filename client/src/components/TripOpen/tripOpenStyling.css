@@ -1,0 +1,27 @@
+.tripOpen {
+  width: 100%;
+  display: flex;
+  flex-direction: column
+}
+
+.tripOpen-wrapper {
+  display: flex;
+  height: 32%;
+  padding-top: 6%;
+}
+
+
+.tripOpenMap {
+  height: 600px;
+  width: 71%;
+}
+
+.tripInfo {
+  width: 30%;
+  margin-left: 2%;
+}
+
+.tripname {
+  position: absolute;
+  padding-top: 3%;
+}
