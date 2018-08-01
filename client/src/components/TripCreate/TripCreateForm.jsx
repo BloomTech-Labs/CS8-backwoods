@@ -37,7 +37,7 @@ const TripCreateForm = (props) => {
               value={props.endDate}
               onChange={props.handleChange('endDate')}
             />
-            <Button className="saveTripButton" variant="contained" type="submit">
+            <Button variant="contained" type="submit">
               Save Trip
         <Icon>send</Icon>
             </Button>
