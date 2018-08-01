@@ -22,6 +22,7 @@ class User extends React.Component {
       endDate: '',
       hasTrips: false,
     }
+    this.archiveTrip = this.archiveTrip.bind(this);
   }
 
   componentWillMount() {
@@ -62,11 +63,11 @@ class User extends React.Component {
     })
   }
 
-  archiveTrip = (TripId) => {
+  archiveTrip(TripId) {
     const token = localStorage.getItem('token');
     const id = TripId;
     console.log(id);
-    axios.put(`http://localhost:8000$${this.props.match.params.user}/archiveTrip`, { id: id, Archive: true }, { headers: { authorization: token } })
+    axios.put(`http://localhost:8000/${this.props.match.params.user}/archiveTrip`, { id: id, Archived: true }, { headers: { authorization: token } })
       .then(res => {
         console.log(res)
       }).catch(err => {
