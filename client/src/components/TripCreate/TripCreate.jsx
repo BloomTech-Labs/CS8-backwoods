@@ -26,6 +26,7 @@ class TripCreate extends React.Component {
       MarkerCreated: false,
       disableAddMarker: false,
       disableRemoveMarker: true,
+      expanded: null
     }
   }
 
@@ -135,6 +136,11 @@ class TripCreate extends React.Component {
     // console.log(this.state.markers);
   };
 
+  handleWayPointExpand = panel => (event, expanded) => {
+    this.setState({
+      expanded: expanded ? panel : false,
+    });
+  };
 
   render() {
     return (
@@ -163,6 +169,8 @@ class TripCreate extends React.Component {
           removeMarker={this.removeMarker}
           disableAddMarker={this.state.disableAddMarker}
           disableRemoveMarker={this.state.disableRemoveMarker}
+          expanded={this.state.expanded}
+          handleWayPointExpand={this.handleWayPointExpand}
         />
       </div>
     );

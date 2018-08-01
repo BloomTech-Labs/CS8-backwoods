@@ -13,7 +13,9 @@ import InputLabel from '@material-ui/core/InputLabel';
 
 const Waypoint = (props) => {
   return (
-    <ExpansionPanel>
+    <ExpansionPanel 
+      expanded={props.expanded === `panel${props.wayPointKey}`}
+      onChange={props.handleWayPointExpand(`panel${props.wayPointKey}`)}>>
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
         <Input
           placeholder={props.wayPoint.markerName}

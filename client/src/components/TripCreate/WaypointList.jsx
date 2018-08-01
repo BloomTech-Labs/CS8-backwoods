@@ -23,6 +23,8 @@ const WaypointList = (props) => {
             activateMap={props.activateMap}
             handleNewWaypoint={props.handleNewWaypoint}
             disableAddMarker={props.disableAddMarker}
+            handleWayPointExpand={props.handleWayPointExpand}
+            expanded={props.expanded}
           />
         )
       })}
