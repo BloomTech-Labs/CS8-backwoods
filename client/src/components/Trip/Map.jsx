@@ -1,38 +1,33 @@
 import React from 'react';
-// import { Map, Marker, Polygon, GoogleApiWrapper } from 'google-maps-react';
+import GoogleMapReact from 'google-map-react';
 
 const style = {
-  width: '40%',
-  height: '60%'
+  height: '45px',
+  width: '45px'
 };
 
 export class MapContainer extends React.Component {
+  static defaultProps = {
+    center: {
+      lat: 37.774929,
+      lng: -122.419416
+    },
+    zoom: 12
+  };
+
+
   render() {
     return (
-      <div className="mapTest">
-        <Map
-          google={this.props.google}
-          style={style}
-          className={'map'}
-          zoom={11}
+      <div className="tripOpenMap">
+        <GoogleMapReact
+          bootstrapURLKeys={{ key: 'AIzaSyCj6JgxqozDSyHp0IF-q9QeieiYu8I4OPw' }}
+          defaultCenter={this.props.center}
+          defaultZoom={this.props.zoom}
         >
-          <Marker position={Coordinates[0]} />
-          <Marker position={Coordinates[1]} />
-          <Marker position={Coordinates[2]} />
-          <Polygon
-            paths={Coordinates}
-            strokeColor="#0000FF"
-            strokeOpacity={0.8}
-            strokeWeight={2}
-            fillColor="rgba(0, 0, 0, 0)"
-            fillOpacity={0.35}
-          />
-        </Map>
+        </GoogleMapReact>
       </div>
     );
   }
 }
 
-export default GoogleApiWrapper({
-  apiKey: 'AIzaSyCj6JgxqozDSyHp0IF-q9QeieiYu8I4OPw'
-})(MapContainer);
+export default MapContainer;

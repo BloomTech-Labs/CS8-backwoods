@@ -24,6 +24,7 @@ class MainTriplist extends React.Component {
                   endDate={trip.endDate}
                   slug={trip.slug}
                   email={trip.email}
+                  id={trip.id}
                 />
 
               </div>

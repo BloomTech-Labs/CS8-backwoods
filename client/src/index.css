@@ -143,7 +143,10 @@ p {
   position: absolute;
 }
 
-.MuiPaper-root-45 {
-  background-color: none;
+.tripOpenMap {
+  height: 433px;
+  width: 30%;
+  margin-left: 27%;
+  margin-bottom: 56%;
 }
 
