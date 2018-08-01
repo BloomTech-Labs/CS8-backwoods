@@ -24,6 +24,7 @@ class MainTriplist extends React.Component {
                   email={trip.email}
                   id={trip.id}
                   archiveTrip={this.props.archiveTrip}
+                  index={index}
                 />
 
               </div>

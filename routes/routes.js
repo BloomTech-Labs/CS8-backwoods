@@ -4,9 +4,7 @@ const { payment } = require('../controllers/payment');
 const authenticate = require('../middleware/authMiddleware');
 const { changePassword } = require('../controllers/changePassword');
 const { emailCheckAndTrips } = require('../controllers/emailCheckAndTrips');
-const { createTrip } = require('../controllers/trips');
-const { getTrip } = require('../controllers/trips');
-const { archiveTrip } = require('../controllers/trips');
+const { createTrip, getTrip, archiveTrip, getTripAchived } = require('../controllers/trips');
 const { createMarker, getMarkers } = require('../controllers/markers');
 
 module.exports = app => {
@@ -19,4 +17,5 @@ module.exports = app => {
   app.route('/getMarkers/:tripId').get(getMarkers);
   app.route('/:user').get(emailCheckAndTrips, getTrip);
   app.route('/:user/archiveTrip').put(authenticate, archiveTrip);
+  app.route('/:user/getArchivedTrips').get(authenticate, getTripAchived)
 };
