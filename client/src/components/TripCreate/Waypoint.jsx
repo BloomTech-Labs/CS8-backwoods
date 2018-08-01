@@ -13,7 +13,7 @@ import InputLabel from '@material-ui/core/InputLabel';
 
 const Waypoint = (props) => {
   return (
-    <ExpansionPanel 
+    <ExpansionPanel
       expanded={props.expanded === `panel${props.wayPointKey}`}
       onChange={props.handleWayPointExpand(`panel${props.wayPointKey}`)}>>
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
@@ -34,7 +34,7 @@ const Waypoint = (props) => {
           onChange={props.handleChange("eta")}
         />
 
-        <Button className="saveTripButton" variant="contained" onClick={props.handleNewWaypoint}>
+        <Button className="saveTripButton" variant="contained" onClick={props.handleNewWaypoint} disabled={!props.markerEnabled}>
           Save Location
         <Icon>send</Icon>
         </Button>

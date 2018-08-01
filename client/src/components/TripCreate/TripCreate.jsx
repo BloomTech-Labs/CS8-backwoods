@@ -156,7 +156,16 @@ class TripCreate extends React.Component {
     });
   };
 
+
+
   render() {
+    const isEnabled =
+      this.state.tripName.length > 0 &&
+      this.state.startDate.length > 0 &&
+      this.state.endDate.length > 0;
+    const markerEnabled =
+      this.state.markerName.length > 0 &&
+      this.state.eta.length > 0;
     return (
       <div className="tripCreateWrapper">
         <TripCreateForm
@@ -164,6 +173,7 @@ class TripCreate extends React.Component {
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
           fireRedirect={this.state.fireRedirect}
+          isEnabled={isEnabled}
         />
         <div className="MapWaypointWrapper">
           <Map
@@ -187,6 +197,7 @@ class TripCreate extends React.Component {
             disableRemoveMarker={this.state.disableRemoveMarker}
             expanded={this.state.expanded}
             handleWayPointExpand={this.handleWayPointExpand}
+            markerEnabled={markerEnabled}
           />
         </div>
       </div>
