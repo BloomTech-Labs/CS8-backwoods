@@ -137,3 +137,13 @@ p {
   display: flex;
   flex-direction: column;
 }
+
+.tripname {
+  width: 50%;
+  position: absolute;
+}
+
+.MuiPaper-root-45 {
+  background-color: none;
+}
+

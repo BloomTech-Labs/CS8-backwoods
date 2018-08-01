@@ -6,9 +6,22 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Paper from '@material-ui/core/Paper';
 
-function TripOpen() {
+const TripOpen = (props) => {
+
   return (
-    <Paper className="tripInfo">
+    < Paper className="tripInfo" >
+      <Typography
+        className="tripInfo-startdate"
+      >
+
+        Start: {props.startDate}
+      </Typography>
+      <Typography
+        className="tripInfo-endddate"
+      >
+
+        End: {props.endDate}
+      </Typography>
       <ExpansionPanel>
         <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
           <Typography>Point 1</Typography>
@@ -36,7 +49,7 @@ function TripOpen() {
           </Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
-    </Paper>
+    </Paper >
   );
 }
 
