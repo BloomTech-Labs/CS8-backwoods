@@ -110,7 +110,7 @@ class AccountForm extends React.Component {
             />
             <TextField
               required
-              id="password-input"
+              // id="password-input"
               label="Old Password"
               value={this.state.oldPassword}
               onChange={this.handleChange('oldPassword')}
@@ -121,7 +121,7 @@ class AccountForm extends React.Component {
             />
             <TextField
               required
-              id="password-input"
+              // id="password-input"
               label="New Password"
               value={this.state.password}
               onChange={this.handleChange('password')}
