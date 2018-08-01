@@ -14,7 +14,7 @@ body {
   color: green;
 }
 .signUpController {
-  margin-left: 70%;
+  margin-left: 50%;
   margin-top: 1%;
 }
 .navBar {
@@ -33,17 +33,13 @@ body {
 .signOut {
   margin-left: 75%;
 }
-.createNew {
+.tripListEmptyPaper {
   width: 30%;
   padding: 2%;
   margin-left: 30%;
   margin-top: 10%;
-  display: flex;
-  flex-direction: row;
 }
-.tripListPaper {
-}
-.tripListPaper-text {
+.tripListEmptyPaper-text {
   padding-bottom: 7%;
 }
 .formPaper {
@@ -72,13 +68,6 @@ body {
   box-shadow: 0 1px 3px 0 #e6ebf1;
   -webkit-transition: box-shadow 150ms ease;
   transition: box-shadow 150ms ease;
-}
-.saveTripButton {
-  padding-left: 5%;
-  margin-left: 15% !important; /* this button and the one below wont move without !important and i don't know why */
-}
-.saveLocationButton {
-  margin-left: 48px !important;
 }
 .StripeElement--focus {
   box-shadow: 0 1px 3px 0 #cfd7df;
@@ -109,7 +98,7 @@ body {
   margin-top: 9%;
 }
 .tripCreateForm {
-  width: 67%;
+  width: 60%;
   padding: 1%;
   margin-left: 25%;
   margin-top: 5%;
@@ -117,37 +106,22 @@ body {
 .tripCreateForm > * {
   margin: 20px;
 }
-.tripName {
-  margin-right: 5px;
+.saveTripButton {
+  padding-left: 5%;
 }
 .tripCreateMap {
   margin-top: 1%;
-  margin-left: 16.9%;
-  display: flex;
-  flex-direction: column;
+  margin-left: 25%;
+  display: block;
 }
 .expansionPanels {
   width: 30%;
-  display: flex;
-  flex-direction: column;
-  margin-left: -10%;
+  display: inline-block;
+  margin-left: 60%;
   margin-bottom: 30%;
-  margin-top: 1%;
-}
-.waypointName {
-  margin-left: 5px;
 }
 .breadCrumbText {
   margin-bottom: 20px;
-}
-.mapAndExpPanels {
-  margin-top: 1%;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-around;
-}
-.debugCoordinates {
-  display: block;
 }
 p {
   margin-left: 10%;
