@@ -31,25 +31,25 @@ class MainTriplist extends React.Component {
             )
 
           })}
-        <Paper className="trip" id="addNewTripWrapper" elevation={1}>
-
-          <Typography
-            variant="headline"
-            component="h2"
-          >
-
-            Add your first trip!
-          </Typography>
-          <Link to={`/${this.props.user}/create`}>
-            <Button
-              variant="fab"
-              color="primary"
-              aria-label="Add"
-            >
-              <AddIcon />
-            </Button>
-          </Link>
-        </Paper>
+          {this.props.isLoggedIn && 
+            <Paper className="trip" id="addNewTripWrapper" elevation={1}>
+              <Typography
+                variant="headline"
+                component="h2"
+              >
+                Add your first trip!
+              </Typography>
+              <Link to={`/${this.props.user}/create`}>
+                <Button
+                  variant="fab"
+                  color="primary"
+                  aria-label="Add"
+                >
+                  <AddIcon />
+                </Button>
+              </Link>
+            </Paper>
+          }
       </div>
     );
   }

@@ -94,6 +94,7 @@ class User extends React.Component {
                     trips={this.state.trips}
                     user={this.props.email}
                     archiveTrip={this.archiveTrip}
+                    isLoggedIn={this.props.isLoggedIn}
                   />} exact />
 
                 <Route path="/:user/create" render={props => (<TripCreate {...props} email={this.props.email} user={this.props.email} getUsersAgain={this.getUsersAgain} />)} exact />

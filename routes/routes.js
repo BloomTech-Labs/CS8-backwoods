@@ -17,5 +17,5 @@ module.exports = app => {
   app.route('/getMarkers/:tripId').get(getMarkers);
   app.route('/:user').get(emailCheckAndTrips, getTrip);
   app.route('/:user/archiveTrip').put(authenticate, archiveTrip);
-  app.route('/:user/getArchivedTrips').get(authenticate, getTripAchived)
+  app.route('/:user/getArchivedTrips').get(getTripAchived)
 };
