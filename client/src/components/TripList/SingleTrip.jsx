@@ -2,6 +2,7 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
+import MapImg from './Google-Maps.jpg'
 
 
 const SingleTrip = (props) => {
@@ -13,26 +14,31 @@ const SingleTrip = (props) => {
     param4: props.endDate
   }
   return (
-    <Link to={TripOpen} style={{ textDecoration: "none" }}>
-      <div className="createNew">
-        <Paper className="tripListEmptyPaper" elevation={1}>
-          <Typography
-            className="tripListEmptyPaper-text"
-            variant="headline"
-            component="h2"
-          >
-            {props.tripName}
-
-          </Typography>
-          <div className="createNew">
+    <Paper className="trip" elevation={1}>
+      <Link to={TripOpen} style={{ textDecoration: "none" }}>
+        <Typography
+          variant="headline"
+          component="h2"
+          className="TripTitle"
+        >
+          {props.tripName}
+        </Typography>
+        <img src={MapImg} alt="" className="mapsIcon"/>
+      </Link>
+      <div className="tripDatesWrapper">
+        <div className="tripdates">
+          <span>
             Start Date: {props.startDate}
-            {" "}
-            End Date: {props.endDate}{" "}
-          </div>
-
+          </span>
+          {" "}
+          <span>
+            End Date: {props.endDate}
+          </span>
+          {" "}
+        </div>
+        <button onClick={() => console.log("This button doesn't work")}>Archive</button>
+        </div>
         </Paper>
-      </div>
-    </Link>
   )
 }
 

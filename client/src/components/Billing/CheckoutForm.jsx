@@ -28,7 +28,7 @@ class CheckoutForm extends Component {
         <p>Payment Info</p>
         <CardElement />
         <Button
-          className="buyNowButton"
+          // className="buyNowButton"
           onClick={this.submit}
           variant="contained"
           color="primary"

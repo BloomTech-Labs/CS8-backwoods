@@ -5,7 +5,7 @@ import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import Tabs from './Tabs.jsx';
 import { Link } from 'react-router-dom'
-
+import './SignInOut.css'
 function getModalStyle() {
   const top = 50;
   const left = 50;
@@ -29,7 +29,7 @@ const styles = theme => ({
 const SignInOut = (props) => {
   const { classes } = props;
   return (
-    <div className="signUpController">
+    <div className="singInOutWrapper">
       {props.isLoggedIn ? 
         <Link to="/"><Button onClick={props.handleLogInOut}>log out</Button></Link>
         :

@@ -8,6 +8,7 @@ import axios from 'axios';
 import MySnackbarContent from '../Snackbar/MySnackbarContent';
 import Snackbar from '@material-ui/core/Snackbar';
 import green from '@material-ui/core/colors/green';
+import './Account.css';
 
 const styles = theme => ({
   container: {

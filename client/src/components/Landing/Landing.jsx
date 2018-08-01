@@ -1,6 +1,7 @@
 import React from 'react';
 import Carousel from './Carousel.jsx';
 import BuyNow from './BuyNow';
+import './Landing.css';
 
 const Landing = () => {
   return (
