@@ -3,7 +3,7 @@ import MapContainer from './Map';
 import WaypointList from './TripOpenWaypointList.jsx';
 import TripOpenName from './TripOpenName';
 import axios from 'axios';
-
+import './tripOpenStyling.css'
 class TripOpen extends React.Component {
   constructor(props) {
     super(props);
@@ -22,15 +22,17 @@ class TripOpen extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="tripOpen">
         <TripOpenName
           tripName={this.props.location.param2}
         />
-        <WaypointList
-          startDate={this.props.location.param3}
-          endDate={this.props.location.param4}
-        />
-        <MapContainer />
+        <div className="tripOpen-wrapper">
+          <MapContainer />
+          <WaypointList
+            startDate={this.props.location.param3}
+            endDate={this.props.location.param4}
+          />
+        </div>
       </div>
     );
   };
