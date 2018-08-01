@@ -3,7 +3,7 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import Trip from './Trip'
+import SingleTrip from './SingleTrip'
 import { Link } from 'react-router-dom';
 
 class MainTriplist extends React.Component {
@@ -17,7 +17,7 @@ class MainTriplist extends React.Component {
             return (
               <div key={index}>
 
-                <Trip tripName={trip.tripName}
+                <SingleTrip tripName={trip.tripName}
                   createdAt={trip.createdAt}
                   updatedAt={trip.updatedAt}
                   startDate={trip.startDate}
