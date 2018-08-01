@@ -9,21 +9,19 @@ import MySnackbarContent from '../Snackbar/MySnackbarContent';
 import Snackbar from '@material-ui/core/Snackbar';
 import green from '@material-ui/core/colors/green';
 import './Account.css';
+import { Typography } from '../../../node_modules/@material-ui/core';
 
-// const styles = theme => ({
-//   container: {
-//     display: 'flex',
-//     justifyContent: "center"
-//   },
-//   textField: {
-//     marginLeft: theme.spacing.unit,
-//     marginRight: theme.spacing.unit,
-//     width: 200
-//   },
-//   menu: {
-//     width: 200
-//   }
-// });
+const styles = theme => ({
+  button: {
+    margin: 'auto',
+    textAlign: 'center'
+  },
+  // textField: {
+  //   marginLeft: theme.spacing.unit,
+  //   marginRight: theme.spacing.unit,
+  //   width: 200
+  // }
+});
 
 const styles1 = theme => ({
   success: {
@@ -90,11 +88,16 @@ class AccountForm extends React.Component {
   };
 
   render() {
-    // const { classes } = this.props;
+    const { classes } = this.props;
 
     return (
       <div className="accountWrapper">
         <Paper className="formPaper">
+          <Typography
+            variant="headline"
+          >
+            Change Password
+          </Typography>
           <form onSubmit={this.handleSubmit} className="accountForm">
             <div className="accountTextFieldWrapper">
             <TextField
@@ -134,11 +137,9 @@ class AccountForm extends React.Component {
             <div className="accountSubmitWrapper">
               <Button
                 variant="contained"
-                className="accountSubmitButton"
+                className={classes.button}
                 type="submit"
               >
-                {' '}
-                <br />
                 Submit
                 <Icon className="accountSubmitIcon">send</Icon>
               </Button>
@@ -180,4 +181,4 @@ class AccountForm extends React.Component {
   }
 }
 
-export default AccountForm;
+export default withStyles(styles)(AccountForm);
