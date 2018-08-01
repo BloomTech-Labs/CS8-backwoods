@@ -15,7 +15,7 @@ const styles = theme => ({
   }
 });
 
-function NavBar(props) {
+const NavBar = (props) => {
   return (
     <Paper className="navBar">
       <List component="nav">
@@ -33,7 +33,6 @@ function NavBar(props) {
           </ListItem>
         </Link>
         <Divider />
-        
         <Link to={`/${props.user}/settings`}>
           <ListItem button>
             <ListItemText primary="Account" />
