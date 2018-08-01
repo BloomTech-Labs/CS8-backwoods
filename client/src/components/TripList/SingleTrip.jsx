@@ -37,7 +37,9 @@ const SingleTrip = (props) => {
           </span>
           {" "}
         </div>
-        <button onClick={() => props.archiveTrip(props.id, props.index)}>Archive</button>
+        {props.isLoggedIn && 
+          <button onClick={() => props.archiveTrip(props.id, props.index)}>Archive</button>
+        }
       </div>
     </Paper>
   )

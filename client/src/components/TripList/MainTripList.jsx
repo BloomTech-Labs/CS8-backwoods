@@ -25,6 +25,7 @@ class MainTriplist extends React.Component {
                   id={trip.id}
                   archiveTrip={this.props.archiveTrip}
                   index={index}
+                  isLoggedIn={this.props.isLoggedIn}
                 />
 
               </div>
