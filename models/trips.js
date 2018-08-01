@@ -21,7 +21,7 @@ const trips = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        Archived: {
+        archived: {
             type: DataTypes.BOOLEAN,
             defaultValue: false
         }

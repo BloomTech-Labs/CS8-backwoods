@@ -68,7 +68,7 @@ class User extends React.Component {
     const token = localStorage.getItem('token');
     const id = TripId;
     console.log(index);
-    axios.put(`http://localhost:8000/${this.props.match.params.user}/archiveTrip`, { id: id, Archived: true }, { headers: { authorization: token } })
+    axios.put(`http://localhost:8000/${this.props.match.params.user}/archiveTrip`, { id: id, archived: true }, { headers: { authorization: token } })
       .then(res => {
         const newTrips = trips.splice(index, 1)
         this.setState({trips: trips})

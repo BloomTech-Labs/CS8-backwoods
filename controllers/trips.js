@@ -29,7 +29,7 @@ const archiveTrip = (req, res) => {
 
 const getTrip = (req, res) => {
     models.Trips.findAll({
-        where: { email: req.params.user, Archived: false }
+        where: { email: req.params.user, archived: false }
     })
         .then((trips) => {
             if (trips.length === 0) {
@@ -45,7 +45,7 @@ const getTrip = (req, res) => {
 
 const getTripAchived = (req, res) => {
     models.Trips.findAll({
-        where: { email: req.params.user, Archived: true }
+        where: { email: req.params.user, archived: true }
     })
         .then((trips) => {
             if (trips.length === 0) {
