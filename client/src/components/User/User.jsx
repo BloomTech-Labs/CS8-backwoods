@@ -7,6 +7,7 @@ import AccountForm from '../Account/AccountForm';
 import { Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import TripOpen from '../Trip/TripOpen'
+import { Switch } from 'react-router-dom'
 class User extends React.Component {
   constructor(props) {
     super(props);
@@ -67,17 +68,20 @@ class User extends React.Component {
           this.state.noUser ?
             <Redirect to='/404' />
             :
-            <div>
+            <div className="mainWrapper">
               <Nav user={this.props.email} isLoggedIn={this.props.isLoggedIn} />
-              <Route path="/:user"
-                render={(props) => <MainTriplist {...props}
+              <Switch>
+                <Route path="/:user"
+                  render={(props) => <MainTriplist {...props}
                   trips={this.state.trips}
                   user={this.props.email}
-                />} exact />
-              <Route path="/:user/create" render={props => (<TripCreate {...props} email={this.props.email} user={this.props.email} getUsersAgain={this.getUsersAgain} />)} />
-              <Route path="/:user/billing" component={BillingForm} />
-              <Route path="/:user/settings" component={AccountForm} />
-              <Route path="/:user/:slug" component={TripOpen} />
+                  />} exact/>
+              
+                <Route path="/:user/create" render={props => (<TripCreate {...props} email={this.props.email} user={this.props.email} getUsersAgain={this.getUsersAgain} />)} exact/>
+                <Route path="/:user/billing" component={BillingForm} exact/>
+                <Route path="/:user/settings" component={AccountForm} exact/>
+                <Route path="/:user/:slug" component={TripOpen} exact/>
+              </Switch>
             </div>
         }
       </div>
