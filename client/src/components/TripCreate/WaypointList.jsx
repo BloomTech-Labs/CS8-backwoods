@@ -25,6 +25,7 @@ const WaypointList = (props) => {
             disableAddMarker={props.disableAddMarker}
             handleWayPointExpand={props.handleWayPointExpand}
             expanded={props.expanded}
+            markerEnabled={props.markerEnabled}
           />
         )
       })}

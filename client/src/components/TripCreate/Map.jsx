@@ -13,9 +13,7 @@ class Map extends React.Component {
     super(props);
     this.state = {
       lat: 37.73018235769022,
-      lng: -122.33512938022614,
-      text: 'O',
-      markers: [{ lat: 37.73018235769022, lng: -122.33512938022614 }] // initializing this array with values so that when you map through it you won't receive and error
+      lng: -122.33512938022614
     };
     this.addMarker = this.addMarker.bind(this);
   }
@@ -37,13 +35,20 @@ class Map extends React.Component {
       lng: lng
     };
 
-    this.state.markers.push(marker);
     this.setState({ lat: lat, lng: lng });
+    this.props.newMarkersArr.push(marker);
   };
 
   render() {
     return (
-      <div className="tripCreateMap" style={{ height: '400px', width: '450px', opacity: this.props.mapOpacity }} >
+      <div
+        className="tripCreateMap"
+        style={{
+          height: '400px',
+          width: '450px',
+          opacity: this.props.mapOpacity
+        }}
+      >
         <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyCj6JgxqozDSyHp0IF-q9QeieiYu8I4OPw' }}
           defaultCenter={this.props.center}
@@ -54,13 +59,11 @@ class Map extends React.Component {
             }
           }}
         >
-          {this.props.markers.map((markers, i) => {
+          <Marker lat={this.props.lat} lng={this.props.lng} />
+
+          {this.props.newMarkersArr.map((markers, i) => {
             return (
-              <Marker
-                key={i}
-                lat={markers.lat}
-                lng={markers.lng}
-              >
+              <Marker key={i} lat={markers.lat} lng={markers.lng}>
                 {markers.lat}, {markers.lng}
               </Marker>
             );
