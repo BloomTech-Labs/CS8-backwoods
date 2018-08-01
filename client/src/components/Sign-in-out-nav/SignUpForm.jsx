@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
-//Started working on getting this setup with the backend
+
 const styles = theme => ({
   container: {
     display: 'flex',

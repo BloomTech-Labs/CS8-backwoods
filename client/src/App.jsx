@@ -3,7 +3,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import axios from 'axios';
 import MainSnackbar from './components/Snackbar/MainSnackbar';
 import { Route, Redirect } from 'react-router-dom';
-import Modal from './components/Sign-in-out-nav/Modal.jsx';
+import SignInOut from './components/Sign-in-out-nav/SignInOut.jsx';
 import Landing from './components/Landing/Landing.jsx';
 import DebugRoutes from './components/Debug/DebugRoutes.jsx';
 import Trip from './components/Trip/Trip.jsx';
@@ -138,7 +138,7 @@ class App extends Component {
               snackbarHorizontal={this.state.snackbarHorizontal}
             />
             <CssBaseline>
-              <Modal
+              <SignInOut
                 handleTabChange={this.handleTabChange}
                 handleLogInOut={this.handleLogInOut}
                 tabState={this.state.tabState}

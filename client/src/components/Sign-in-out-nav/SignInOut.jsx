@@ -26,7 +26,7 @@ const styles = theme => ({
     padding: theme.spacing.unit * 4
   }
 });
-const SimpleModal = (props) => {
+const SignInOut = (props) => {
   const { classes } = props;
   return (
     <div className="signUpController">
@@ -55,11 +55,11 @@ const SimpleModal = (props) => {
   )
 }
 
-SimpleModal.propTypes = {
+SignInOut.propTypes = {
   classes: PropTypes.object.isRequired
 };
 
 // We need an intermediary variable for handling the recursive nesting.
-const SimpleModalWrapped = withStyles(styles)(SimpleModal);
+const SignInOutWrapped = withStyles(styles)(SignInOut);
 
-export default SimpleModalWrapped;
+export default SignInOutWrapped;
