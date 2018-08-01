@@ -6,8 +6,7 @@ import BillingForm from '../Billing/BillingForm';
 import AccountForm from '../Account/AccountForm';
 import { Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
-// import TripOpen from '../Trip/TripOpen'
-import Trip from '../Trip/Trip';
+import TripOpen from '../TripOpen/TripOpen';
 import { Switch } from 'react-router-dom'
 class User extends React.Component {
   constructor(props) {
@@ -81,7 +80,7 @@ class User extends React.Component {
                 <Route path="/:user/create" render={props => (<TripCreate {...props} email={this.props.email} user={this.props.email} getUsersAgain={this.getUsersAgain} />)} exact />
                 <Route path="/:user/billing" component={BillingForm} exact />
                 <Route path="/:user/settings" component={AccountForm} exact />
-                <Route path="/:user/:slug" component={Trip} exact />
+                <Route path="/:user/:slug" component={TripOpen} exact />
               </Switch>
             </div>
         }

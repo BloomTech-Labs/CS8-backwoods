@@ -1,10 +1,10 @@
 import React from 'react';
 import MapContainer from './Map';
-import TripOpen from './TripOpen.jsx';
+import WaypointList from './TripOpenWaypointList.jsx';
 import TripOpenName from './TripOpenName';
 import axios from 'axios';
 
-class Trip extends React.Component {
+class TripOpen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -26,7 +26,7 @@ class Trip extends React.Component {
         <TripOpenName
           tripName={this.props.location.param2}
         />
-        <TripOpen
+        <WaypointList
           startDate={this.props.location.param3}
           endDate={this.props.location.param4}
         />
@@ -36,4 +36,4 @@ class Trip extends React.Component {
   };
 }
 
-export default Trip;
+export default TripOpen;

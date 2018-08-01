@@ -6,7 +6,7 @@ import { Route, Redirect } from 'react-router-dom';
 import SignInOut from './components/Sign-in-out-nav/SignInOut.jsx';
 import Landing from './components/Landing/Landing.jsx';
 import DebugRoutes from './components/Debug/DebugRoutes.jsx';
-import Trip from './components/Trip/Trip.jsx';
+import TripOpen from './components/TripOpen/TripOpen.jsx';
 import TripList from './components/TripList/TripList.jsx';
 import TripListEmpty from './components/TripList/TripListEmpty.jsx';
 import { StripeProvider } from 'react-stripe-elements';
@@ -179,7 +179,7 @@ class App extends Component {
                   }
                 />
                 <Route exact path="/trips" component={TripList} />
-                <Route exact path="/trips/id/:id/" component={Trip} />
+                <Route exact path="/trips/id/:id/" component={TripOpen} />
                 <Route exact path="/trips/empty/" component={TripListEmpty} />
                 <Route path="/404" component={BackWoods404} />
               </React.Fragment>

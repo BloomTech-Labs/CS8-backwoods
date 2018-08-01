@@ -6,7 +6,7 @@ import Typography from '@material-ui/core/Typography';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Paper from '@material-ui/core/Paper';
 
-const TripOpen = (props) => {
+const WaypointList = (props) => {
 
   return (
     < Paper className="tripInfo" >
@@ -53,4 +53,4 @@ const TripOpen = (props) => {
   );
 }
 
-export default TripOpen;
+export default WaypointList;
