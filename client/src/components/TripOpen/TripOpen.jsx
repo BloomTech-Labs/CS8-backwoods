@@ -29,6 +29,7 @@ class TripOpen extends React.Component {
         <div className="tripOpen-wrapper">
           <MapContainer />
           <WaypointList
+            markers={this.state.markers}
             startDate={this.props.location.param3}
             endDate={this.props.location.param4}
           />
