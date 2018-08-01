@@ -11,7 +11,7 @@ if (process.env.DATABASE_URL) {
     }
   });
 } else {
-  sequelize = new Sequelize('backwoods', 'postgres', 'dbsuperuser', {
+  sequelize = new Sequelize('backwoods', 'postgres', '5353', {
     dialect: 'postgres'
   });
 }
@@ -47,7 +47,7 @@ const models = {
 //   }
 // });
 
-models.User.hasMany(models.Trips, { foreignKey: 'email', targetKey: 'email'});
+models.User.hasMany(models.Trips, { foreignKey: 'email', targetKey: 'email' });
 // models.Trips.belongsTo(models.User);
 models.Trips.hasMany(models.Markers);
 models.Markers.belongsTo(models.Trips);

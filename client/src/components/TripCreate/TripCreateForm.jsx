@@ -27,6 +27,7 @@ const TripCreateForm = props => {
               label="Start Date"
               type="date"
               defaultValue="2018-07-25"
+              className="startDate"
               value={props.startDate}
               onChange={props.handleChange('startDate')}
             />
@@ -41,6 +42,7 @@ const TripCreateForm = props => {
             <Button
               variant="contained"
               type="submit"
+              class="saveTripButton"
               disabled={!props.isEnabled}
             >
               Save Trip

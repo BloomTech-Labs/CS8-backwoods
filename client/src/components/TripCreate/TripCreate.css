@@ -2,9 +2,14 @@
   display: flex;
   flex-direction: column;
   margin-top: 60px;
-
 }
-
+/* .startDate {
+  margin-left: 15px;
+  margin-right: 15px;
+}
+.saveTripButton {
+  margin-left: 11%;
+} */
 .MapWaypointWrapper {
   display: flex;
   margin-top: 20px;
@@ -15,8 +20,8 @@
 }
 
 .tripCreateForm {
- padding: 10px;
- display: flex;
+  padding: 10px;
+  display: flex;
 }
 
 .WaypointListWrapper {
