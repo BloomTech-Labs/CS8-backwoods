@@ -8,8 +8,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { Redirect } from 'react-router-dom';
 
-
-const TripCreateForm = (props) => {
+const TripCreateForm = props => {
   return (
     <React.Fragment>
       <form onSubmit={props.handleSubmit}>
@@ -23,32 +22,35 @@ const TripCreateForm = (props) => {
                 onChange={props.handleChange('tripName')}
               />
             </FormControl>
-            <InputLabel htmlFor="startDate">Start Date</InputLabel>
             <TextField
               id="startDate"
+              label="Start Date"
               type="date"
+              defaultValue="2018-07-25"
               value={props.startDate}
               onChange={props.handleChange('startDate')}
             />
-            <InputLabel htmlFor="endDate">End Date</InputLabel>
             <TextField
               id="endDate"
+              label="End Date"
               type="date"
+              defaultValue="2018-07-25"
               value={props.endDate}
               onChange={props.handleChange('endDate')}
             />
-            <Button variant="contained" type="submit" disabled={!props.isEnabled}>
+            <Button
+              variant="contained"
+              type="submit"
+              disabled={!props.isEnabled}
+            >
               Save Trip
-        <Icon>send</Icon>
+              <Icon>send</Icon>
             </Button>
           </Paper>
         </div>
       </form>
-      {props.fireRedirect && (
-        <Redirect to={`/${props.email}`} />
-      )}
+      {props.fireRedirect && <Redirect to={`/${props.email}`} />}
     </React.Fragment>
-  )
-
-}
+  );
+};
 export default TripCreateForm;
