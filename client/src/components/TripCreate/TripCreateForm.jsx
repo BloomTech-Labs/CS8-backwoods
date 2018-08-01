@@ -15,9 +15,13 @@ const TripCreateForm = props => {
         <div>
           <Paper className="tripCreateForm">
             <FormControl>
-              <InputLabel htmlFor="tripName">Trip Name</InputLabel>
+              <InputLabel htmlFor="name-simple" className="spacingLeft">
+                Name
+              </InputLabel>
               <Input
                 id="tripName"
+                label="Trip Name"
+                className="spacingLeft"
                 value={props.tripName}
                 onChange={props.handleChange('tripName')}
               />
@@ -27,7 +31,7 @@ const TripCreateForm = props => {
               label="Start Date"
               type="date"
               defaultValue="2018-07-25"
-              className="startDate"
+              className="spacingLeft spacingRight"
               value={props.startDate}
               onChange={props.handleChange('startDate')}
             />
@@ -35,6 +39,7 @@ const TripCreateForm = props => {
               id="endDate"
               label="End Date"
               type="date"
+              className="spacingRight"
               defaultValue="2018-07-25"
               value={props.endDate}
               onChange={props.handleChange('endDate')}
@@ -42,7 +47,7 @@ const TripCreateForm = props => {
             <Button
               variant="contained"
               type="submit"
-              class="saveTripButton"
+              // class="saveTripButton"
               disabled={!props.isEnabled}
             >
               Save Trip
