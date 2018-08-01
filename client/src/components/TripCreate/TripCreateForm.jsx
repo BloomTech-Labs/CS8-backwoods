@@ -7,6 +7,15 @@ import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { Redirect } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles = theme => ({
+  button: {
+    marginLeft: '6%',
+    marginRight: '5%',
+    textAlign: 'center'
+  }
+});
 
 const TripCreateForm = props => {
   return (
@@ -60,4 +69,5 @@ const TripCreateForm = props => {
     </React.Fragment>
   );
 };
-export default TripCreateForm;
+
+export default withStyles(styles)(TripCreateForm);
