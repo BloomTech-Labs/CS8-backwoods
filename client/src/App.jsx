@@ -3,12 +3,9 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import axios from 'axios';
 import MainSnackbar from './components/Snackbar/MainSnackbar';
 import { Route, Redirect } from 'react-router-dom';
-import Modal from './components/Sign-in-out-nav/Modal.jsx';
-import PageContent from './components/Landing/PageContent.jsx';
-import DebugRoutes from './components/Debug/DebugRoutes.jsx';
-import Trip from './components/Trip/Trip.jsx';
-import TripList from './components/TripList/TripList.jsx';
-import TripListEmpty from './components/TripList/TripListEmpty.jsx';
+import SignInOut from './components/SignInOut/SignInOut.jsx';
+import Landing from './components/Landing/Landing.jsx';
+// import DebugRoutes from './components/Debug/DebugRoutes.jsx';
 import { StripeProvider } from 'react-stripe-elements';
 import User from './components/User/User';
 import BackWoods404 from './components/404/404';
@@ -138,7 +135,7 @@ class App extends Component {
               snackbarHorizontal={this.state.snackbarHorizontal}
             />
             <CssBaseline>
-              <Modal
+              <SignInOut
                 handleTabChange={this.handleTabChange}
                 handleLogInOut={this.handleLogInOut}
                 tabState={this.state.tabState}
@@ -174,18 +171,15 @@ class App extends Component {
                     fireRedirect ? (
                       <Redirect to={`/${this.state.email}`} />
                     ) : (
-                        <PageContent />
+                        <Landing />
                       )
                   }
                 />
-                <Route exact path="/trips" component={TripList} />
-                <Route exact path="/trips/id/:id/" component={Trip} />
-                <Route exact path="/trips/empty/" component={TripListEmpty} />
                 <Route path="/404" component={BackWoods404} />
               </React.Fragment>
             </CssBaseline>
           </React.Fragment>
-          <DebugRoutes />
+          {/* <DebugRoutes /> */}
         </div>
       </StripeProvider>
     );

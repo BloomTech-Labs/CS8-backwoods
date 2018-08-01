@@ -9,10 +9,13 @@ import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
+import InputLabel from '@material-ui/core/InputLabel';
 
 const Waypoint = (props) => {
   return (
-    <ExpansionPanel>
+    <ExpansionPanel 
+      expanded={props.expanded === `panel${props.wayPointKey}`}
+      onChange={props.handleWayPointExpand(`panel${props.wayPointKey}`)}>>
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
         <Input
           placeholder={props.wayPoint.markerName}
@@ -24,11 +27,10 @@ const Waypoint = (props) => {
 
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
+        <InputLabel htmlFor="ETA">ETA</InputLabel>
         <TextField
           id="date"
-          label="ETA"
           type="date"
-          defaultValue="2017-05-24"
           onChange={props.handleChange("eta")}
         />
 

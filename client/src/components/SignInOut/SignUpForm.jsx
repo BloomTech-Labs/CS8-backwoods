@@ -4,7 +4,7 @@ import TextField from '@material-ui/core/TextField';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
-//Started working on getting this setup with the backend
+
 const styles = theme => ({
   container: {
     display: 'flex',
@@ -37,7 +37,7 @@ class SignUpForm extends React.Component {
       <ValidatorForm className={classes.container} onSubmit={this.props.handleSignUp}>
         <TextField
           required
-          id="firstName"
+          // id="firstName"
           label="First Name"
           className={classes.textField}
           type="text"
@@ -48,7 +48,7 @@ class SignUpForm extends React.Component {
         />
         <TextField
           required
-          id="lastName"
+          // id="lastName"
           label="Last Name"
           className={classes.textField}
           type="text"
@@ -59,7 +59,7 @@ class SignUpForm extends React.Component {
         />
         <TextField
           required
-          id="required"
+          // id="required"
           label="Email"
           className={classes.textField}
           type="email"
@@ -74,7 +74,7 @@ class SignUpForm extends React.Component {
           validators={['required']}
           name="password"
           required
-          id="password-input"
+          // id="password-input"
           label="Password"
           className={classes.textField}
           type="password"
@@ -88,7 +88,7 @@ class SignUpForm extends React.Component {
           validators={['isPasswordMatch', 'required']}
           name="repeatPassword"
           required
-          id="password-input"
+          // id="password-input"
           label="Confirm Password"
           className={classes.textField}
           type="password"

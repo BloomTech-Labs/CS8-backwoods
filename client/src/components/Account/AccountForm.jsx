@@ -9,8 +9,6 @@ import MySnackbarContent from '../Snackbar/MySnackbarContent';
 import Snackbar from '@material-ui/core/Snackbar';
 import green from '@material-ui/core/colors/green';
 
-// import axios from 'axios';
-
 const styles = theme => ({
   container: {
     display: 'flex',
@@ -110,7 +108,7 @@ class AccountForm extends React.Component {
             />
             <TextField
               required
-              id="password-input"
+              // id="password-input"
               label="Old Password"
               value={this.state.oldPassword}
               onChange={this.handleChange('oldPassword')}
@@ -121,7 +119,7 @@ class AccountForm extends React.Component {
             />
             <TextField
               required
-              id="password-input"
+              // id="password-input"
               label="New Password"
               value={this.state.password}
               onChange={this.handleChange('password')}

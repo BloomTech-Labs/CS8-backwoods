@@ -1,12 +1,12 @@
 import React from 'react';
 import GoogleMapReact from 'google-map-react';
-import Coordinates from './Coordinates.jsx';
+
 const style = {
   height: '45px',
   width: '45px'
 };
 const Marker = ({ text }) => (
-  <img style={style} src={'https://i.imgur.com/Lsk9eVr.png'} />
+  <img style={style} src={'https://i.imgur.com/Lsk9eVr.png'} alt="" />
 );
 class Map extends React.Component {
   constructor(props) {
@@ -29,11 +29,6 @@ class Map extends React.Component {
   };
 
   addMarker = event => {
-    console.log('== CLICK ==');
-    console.log('X:', event.x);
-    console.log('Y:', event.y);
-    console.log('LAT:', event.lat);
-    console.log('LNG:', event.lng);
     let lat = event.lat;
     let lng = event.lng;
 
@@ -44,21 +39,19 @@ class Map extends React.Component {
 
     this.state.markers.push(marker);
     this.setState({ lat: lat, lng: lng });
-    console.log(this.state.markers);
   };
 
   render() {
     return (
       <div className="tripCreateMap" style={{ height: '400px', width: '30%', opacity: this.props.mapOpacity }} >
-        <GoogleMapReact 
+        <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyCj6JgxqozDSyHp0IF-q9QeieiYu8I4OPw' }}
           defaultCenter={this.props.center}
           defaultZoom={this.props.zoom}
           onClick={event => {
-            if(this.props.MarkerCreated) {
+            if (this.props.MarkerCreated) {
               this.props.addMarker(event);
             }
-            console.log('map off')
           }}
         >
           {this.props.markers.map((markers, i) => {
@@ -72,12 +65,8 @@ class Map extends React.Component {
               </Marker>
             );
           })}
-          {/* <Marker
-            lat={this.state.lat}
-            lng={this.state.lng}
-            text={this.state.text}
-          /> */}
         </GoogleMapReact>
+        {/* this shows the lat, lng below the map when clicking a marker */}
         {this.props.markers.map((markers, i) => {
           return (
             <p key={i}>

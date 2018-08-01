@@ -1,7 +1,8 @@
 import React from 'react';
 import Carousel from './Carousel.jsx';
 import BuyNow from './BuyNow';
-const PageContent = () => {
+
+const Landing = () => {
   return (
     <div>
       <h1>Back Woods</h1>
@@ -21,4 +22,4 @@ const PageContent = () => {
   );
 };
 
-export default PageContent;
+export default Landing;

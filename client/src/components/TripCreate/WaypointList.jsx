@@ -22,16 +22,19 @@ const WaypointList = (props) => {
             handleChange={props.handleChange}
             activateMap={props.activateMap}
             handleNewWaypoint={props.handleNewWaypoint}
+            disableAddMarker={props.disableAddMarker}
+            handleWayPointExpand={props.handleWayPointExpand}
+            expanded={props.expanded}
           />
         )
       })}
           
-            <Button className="saveTripButton" variant="contained" onClick={props.addWaypoint}>
+            <Button className="saveTripButton" variant="contained" onClick={() => props.addWaypoint()} disabled={props.disableAddMarker}>
               <Icon>add</Icon>
               Add Marker
               
             </Button>
-          <Button className="saveTripButton" variant="contained">
+          <Button className="saveTripButton" variant="contained" onClick={props.removeMarker} disabled={props.disableRemoveMarker}>
               <Icon>delete</Icon>
               Remove Marker
               

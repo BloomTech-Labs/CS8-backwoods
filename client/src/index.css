@@ -137,3 +137,16 @@ p {
   display: flex;
   flex-direction: column;
 }
+
+.tripname {
+  width: 50%;
+  position: absolute;
+}
+
+.tripOpenMap {
+  height: 433px;
+  width: 30%;
+  margin-left: 27%;
+  margin-bottom: 56%;
+}
+

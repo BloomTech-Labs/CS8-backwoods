@@ -12,7 +12,6 @@ class TripCreate extends React.Component {
       tripName: '',
       wayPoints: [],
       newMarkersArr: [],
-      numberOfWayPoints: 0,
       startDate: '',
       endDate: '',
       email: '',
@@ -23,8 +22,11 @@ class TripCreate extends React.Component {
       lng: '',
       lat: '',
       tripId: '',
-      markers: [{ lat: 37.73018235769022, lng: -122.33512938022614 }],
-      MarkerCreated: false
+      markers: [],
+      MarkerCreated: false,
+      disableAddMarker: false,
+      disableRemoveMarker: true,
+      expanded: null
     }
   }
 
@@ -36,10 +38,9 @@ class TripCreate extends React.Component {
     })
   }
 
-
   addWaypoint = () => {
     let newWayPoint = {
-      markerName: 'bla',
+      markerName: 'Marker Name Here',
       eta: '',
       long: '',
       lat: '',
@@ -47,6 +48,7 @@ class TripCreate extends React.Component {
     }
     this.setState({
       wayPoints: [...this.state.wayPoints, newWayPoint],
+      disableAddMarker: true
     }, this.activateMap)
   }
 
@@ -57,7 +59,6 @@ class TripCreate extends React.Component {
       MarkerCreated: false
     })
   }
-
 
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
@@ -72,7 +73,9 @@ class TripCreate extends React.Component {
       tripId: '',
     }
     this.setState({
-      newMarkersArr: [...this.state.newMarkersArr, newWayPoint]
+      newMarkersArr: [...this.state.newMarkersArr, newWayPoint],
+      disableAddMarker: false,
+      disableRemoveMarker: false,
     }, this.deactivateMap);
   }
 
@@ -103,6 +106,17 @@ class TripCreate extends React.Component {
       })
   }
 
+  // removes marker after hitting save location
+  removeMarker = () => {
+    this.state.newMarkersArr.pop();
+    this.state.wayPoints.pop();
+    this.state.markers.pop();
+    this.setState({
+      disableAddMarker: false,
+      disableRemoveMarker: true,
+    })
+  };
+
   addMarker = event => {
     // console.log('== CLICK ==');
     // console.log('X:', event.x);
@@ -122,6 +136,11 @@ class TripCreate extends React.Component {
     // console.log(this.state.markers);
   };
 
+  handleWayPointExpand = panel => (event, expanded) => {
+    this.setState({
+      expanded: expanded ? panel : false,
+    });
+  };
 
   render() {
     return (
@@ -147,6 +166,11 @@ class TripCreate extends React.Component {
           wayPoints={this.state.wayPoints}
           activateMap={this.activateMap}
           handleNewWaypoint={this.handleNewWaypoint}
+          removeMarker={this.removeMarker}
+          disableAddMarker={this.state.disableAddMarker}
+          disableRemoveMarker={this.state.disableRemoveMarker}
+          expanded={this.state.expanded}
+          handleWayPointExpand={this.handleWayPointExpand}
         />
       </div>
     );

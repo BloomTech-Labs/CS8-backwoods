@@ -3,13 +3,13 @@ import Button from '@material-ui/core/Button';
 import AddIcon from '@material-ui/icons/Add';
 import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
-import Trip from './Trip'
+import SingleTrip from './SingleTrip'
 import { Link } from 'react-router-dom';
 
 class MainTriplist extends React.Component {
 
 
-  render() { 
+  render() {
     return (
       <div>
         {
@@ -17,20 +17,20 @@ class MainTriplist extends React.Component {
             return (
               <div key={index}>
 
-                <Trip tripName={trip.tripName}
+                <SingleTrip tripName={trip.tripName}
                   createdAt={trip.createdAt}
                   updatedAt={trip.updatedAt}
                   startDate={trip.startDate}
-                  endDate={trip.endDate} 
+                  endDate={trip.endDate}
                   slug={trip.slug}
                   email={trip.email}
-                  />
+                  id={trip.id}
+                />
 
               </div>
             )
 
           })}
-        {console.log(this.props.trips)}
         <Paper className="tripListEmptyPaper" elevation={1}>
 
           <Typography
@@ -38,7 +38,7 @@ class MainTriplist extends React.Component {
             variant="headline"
             component="h2"
           >
-          
+
             Add your first trip!
           </Typography>
           <Link to={`/${this.props.user}/create`}>
