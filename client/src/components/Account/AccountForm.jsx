@@ -9,20 +9,18 @@ import MySnackbarContent from '../Snackbar/MySnackbarContent';
 import Snackbar from '@material-ui/core/Snackbar';
 import green from '@material-ui/core/colors/green';
 import './Account.css';
+import { Typography } from '../../../node_modules/@material-ui/core';
 
 const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap'
+  button: {
+    margin: 'auto',
+    textAlign: 'center'
   },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200
-  },
-  menu: {
-    width: 200
-  }
+  // textField: {
+  //   marginLeft: theme.spacing.unit,
+  //   marginRight: theme.spacing.unit,
+  //   width: 200
+  // }
 });
 
 const styles1 = theme => ({
@@ -93,9 +91,15 @@ class AccountForm extends React.Component {
     const { classes } = this.props;
 
     return (
-      <div>
+      <div className="accountWrapper">
         <Paper className="formPaper">
-          <form className={classes.container} onSubmit={this.handleSubmit}>
+          <Typography
+            variant="headline"
+          >
+            Change Password
+          </Typography>
+          <form onSubmit={this.handleSubmit} className="accountForm">
+            <div className="accountTextFieldWrapper">
             <TextField
               required
               id="required"
@@ -104,7 +108,7 @@ class AccountForm extends React.Component {
               value={this.state.email}
               onChange={this.handleChange('email')}
               autoComplete="email"
-              className={classes.textField}
+              // className={classes.textField}
               margin="normal"
             />
             <TextField
@@ -113,7 +117,7 @@ class AccountForm extends React.Component {
               label="Old Password"
               value={this.state.oldPassword}
               onChange={this.handleChange('oldPassword')}
-              className={classes.textField}
+              // className={classes.textField}
               type="password"
               autoComplete="current-password"
               margin="normal"
@@ -124,20 +128,20 @@ class AccountForm extends React.Component {
               label="New Password"
               value={this.state.password}
               onChange={this.handleChange('password')}
-              className={classes.textField}
+              // className={classes.textField}
               type="password"
               margin="normal"
             />
-            <div className="submitButton">
+            </div>
+            
+            <div className="accountSubmitWrapper">
               <Button
                 variant="contained"
                 className={classes.button}
                 type="submit"
               >
-                {' '}
-                <br />
                 Submit
-                <Icon className={classes.rightIcon}>send</Icon>
+                <Icon className="accountSubmitIcon">send</Icon>
               </Button>
             </div>
           </form>
