@@ -4,7 +4,7 @@ import axios from 'axios';
 import MainSnackbar from './components/Snackbar/MainSnackbar';
 import { Route, Redirect } from 'react-router-dom';
 import Modal from './components/Sign-in-out-nav/Modal.jsx';
-import PageContent from './components/Landing/PageContent.jsx';
+import Landing from './components/Landing/Landing.jsx';
 import DebugRoutes from './components/Debug/DebugRoutes.jsx';
 import Trip from './components/Trip/Trip.jsx';
 import TripList from './components/TripList/TripList.jsx';
@@ -174,7 +174,7 @@ class App extends Component {
                     fireRedirect ? (
                       <Redirect to={`/${this.state.email}`} />
                     ) : (
-                        <PageContent />
+                        <Landing />
                       )
                   }
                 />
