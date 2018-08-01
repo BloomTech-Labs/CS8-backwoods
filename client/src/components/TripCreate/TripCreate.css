@@ -1,0 +1,24 @@
+.tripCreateWrapper {
+  display: flex;
+  flex-direction: column;
+  margin-top: 60px;
+
+}
+
+.MapWaypointWrapper {
+  display: flex;
+  margin-top: 20px;
+}
+
+.tripCreateMap {
+  margin-right: 20px;
+}
+
+.tripCreateForm {
+ padding: 10px;
+ display: flex;
+}
+
+.WaypointListWrapper {
+  text-align: center;
+}

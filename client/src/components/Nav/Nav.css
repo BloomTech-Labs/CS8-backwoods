@@ -1,0 +1,23 @@
+.navWrapper {
+  margin-right: 20px;
+  width: 250px;
+}
+
+.navBar {
+  height: 100%;
+  width: 250px;
+  height: 80vh;
+}
+
+.navBar a {
+  text-decoration: none;
+}
+
+.navBreadcrumb {
+  padding: 10px;
+  margin-bottom: 10px;
+  height: 50px;
+}
+.material-icons {
+  height: 100%;
+}

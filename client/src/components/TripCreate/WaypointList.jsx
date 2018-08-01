@@ -11,7 +11,7 @@ import WayPoint from './Waypoint';
 
 const WaypointList = (props) => {
   return (
-    <Paper className="expansionPanels">
+    <Paper className="WaypointListWrapper">
       <Typography>Start</Typography>
       {props.wayPoints.map((wayPoint, index) => {
         return (
@@ -29,12 +29,12 @@ const WaypointList = (props) => {
         )
       })}
           
-            <Button className="saveTripButton" variant="contained" onClick={() => props.addWaypoint()} disabled={props.disableAddMarker}>
+            <Button variant="contained" onClick={() => props.addWaypoint()} disabled={props.disableAddMarker}>
               <Icon>add</Icon>
               Add Marker
               
             </Button>
-          <Button className="saveTripButton" variant="contained" onClick={props.removeMarker} disabled={props.disableRemoveMarker}>
+          <Button variant="contained" onClick={props.removeMarker} disabled={props.disableRemoveMarker}>
               <Icon>delete</Icon>
               Remove Marker
               

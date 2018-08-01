@@ -1,10 +1,11 @@
 import React from 'react';
 import NavBar from './NavBar.jsx';
 import NavBreadcrumb from './NavBreadcrumb.jsx';
+import './Nav.css';
 
 const Nav = (props) => {
   return (
-    <div>  
+    <div className="navWrapper">  
       <NavBreadcrumb user={props.user}/>
       <NavBar user={props.user} isLoggedIn={props.isLoggedIn}/>
     </div>

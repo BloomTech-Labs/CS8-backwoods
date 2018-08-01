@@ -5,13 +5,11 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import SingleTrip from './SingleTrip'
 import { Link } from 'react-router-dom';
-
+import './TripList.css';
 class MainTriplist extends React.Component {
-
-
   render() {
     return (
-      <div>
+      <div className="mainTripList">
         {
           this.props.trips.map((trip, index) => {
             return (
@@ -31,10 +29,9 @@ class MainTriplist extends React.Component {
             )
 
           })}
-        <Paper className="tripListEmptyPaper" elevation={1}>
+        <Paper className="trip" id="addNewTripWrapper" elevation={1}>
 
           <Typography
-            className="tripListEmptyPaper-text"
             variant="headline"
             component="h2"
           >

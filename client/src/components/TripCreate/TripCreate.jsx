@@ -4,7 +4,7 @@ import Map from './Map.jsx';
 import WaypointList from './WaypointList';
 import slugify from 'slugify';
 import axios from 'axios';
-
+import './TripCreate.css';
 class TripCreate extends React.Component {
   constructor(props) {
     super(props);
@@ -144,14 +144,14 @@ class TripCreate extends React.Component {
 
   render() {
     return (
-      <div>
+      <div className="tripCreateWrapper">
         <TripCreateForm
           email={this.props.email}
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
           fireRedirect={this.state.fireRedirect}
         />
-
+      <div className="MapWaypointWrapper">
         <Map
           mapOpacity={this.state.mapOpacity}
           addMarker={this.addMarker}
@@ -172,6 +172,7 @@ class TripCreate extends React.Component {
           expanded={this.state.expanded}
           handleWayPointExpand={this.handleWayPointExpand}
         />
+        </div>
       </div>
     );
   }

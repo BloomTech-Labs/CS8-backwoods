@@ -43,7 +43,7 @@ class Map extends React.Component {
 
   render() {
     return (
-      <div className="tripCreateMap" style={{ height: '400px', width: '30%', opacity: this.props.mapOpacity }} >
+      <div className="tripCreateMap" style={{ height: '400px', width: '450px', opacity: this.props.mapOpacity }} >
         <GoogleMapReact
           bootstrapURLKeys={{ key: 'AIzaSyCj6JgxqozDSyHp0IF-q9QeieiYu8I4OPw' }}
           defaultCenter={this.props.center}
