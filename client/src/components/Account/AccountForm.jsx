@@ -10,20 +10,20 @@ import Snackbar from '@material-ui/core/Snackbar';
 import green from '@material-ui/core/colors/green';
 import './Account.css';
 
-const styles = theme => ({
-  container: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
-  textField: {
-    marginLeft: theme.spacing.unit,
-    marginRight: theme.spacing.unit,
-    width: 200
-  },
-  menu: {
-    width: 200
-  }
-});
+// const styles = theme => ({
+//   container: {
+//     display: 'flex',
+//     justifyContent: "center"
+//   },
+//   textField: {
+//     marginLeft: theme.spacing.unit,
+//     marginRight: theme.spacing.unit,
+//     width: 200
+//   },
+//   menu: {
+//     width: 200
+//   }
+// });
 
 const styles1 = theme => ({
   success: {
@@ -90,12 +90,13 @@ class AccountForm extends React.Component {
   };
 
   render() {
-    const { classes } = this.props;
+    // const { classes } = this.props;
 
     return (
-      <div>
+      <div className="accountWrapper">
         <Paper className="formPaper">
-          <form className={classes.container} onSubmit={this.handleSubmit}>
+          <form onSubmit={this.handleSubmit} className="accountForm">
+            <div className="accountTextFieldWrapper">
             <TextField
               required
               id="required"
@@ -104,7 +105,7 @@ class AccountForm extends React.Component {
               value={this.state.email}
               onChange={this.handleChange('email')}
               autoComplete="email"
-              className={classes.textField}
+              // className={classes.textField}
               margin="normal"
             />
             <TextField
@@ -113,7 +114,7 @@ class AccountForm extends React.Component {
               label="Old Password"
               value={this.state.oldPassword}
               onChange={this.handleChange('oldPassword')}
-              className={classes.textField}
+              // className={classes.textField}
               type="password"
               autoComplete="current-password"
               margin="normal"
@@ -124,20 +125,22 @@ class AccountForm extends React.Component {
               label="New Password"
               value={this.state.password}
               onChange={this.handleChange('password')}
-              className={classes.textField}
+              // className={classes.textField}
               type="password"
               margin="normal"
             />
-            <div className="submitButton">
+            </div>
+            
+            <div className="accountSubmitWrapper">
               <Button
                 variant="contained"
-                className={classes.button}
+                className="accountSubmitButton"
                 type="submit"
               >
                 {' '}
                 <br />
                 Submit
-                <Icon className={classes.rightIcon}>send</Icon>
+                <Icon className="accountSubmitIcon">send</Icon>
               </Button>
             </div>
           </form>
@@ -177,4 +180,4 @@ class AccountForm extends React.Component {
   }
 }
 
-export default withStyles(styles)(AccountForm);
+export default AccountForm;
