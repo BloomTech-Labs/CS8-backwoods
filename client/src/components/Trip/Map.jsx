@@ -1,6 +1,5 @@
 import React from 'react';
 // import { Map, Marker, Polygon, GoogleApiWrapper } from 'google-maps-react';
-import Coordinates from './Coordinates.jsx';
 
 const style = {
   width: '40%',
