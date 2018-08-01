@@ -9,8 +9,6 @@ import MySnackbarContent from '../Snackbar/MySnackbarContent';
 import Snackbar from '@material-ui/core/Snackbar';
 import green from '@material-ui/core/colors/green';
 
-// import axios from 'axios';
-
 const styles = theme => ({
   container: {
     display: 'flex',
