@@ -13,6 +13,7 @@ const SingleTrip = (props) => {
     param3: props.startDate,
     param4: props.endDate
   }
+
   return (
     <Paper className="trip" elevation={1}>
       <Link to={TripOpen} style={{ textDecoration: "none" }}>
@@ -23,7 +24,7 @@ const SingleTrip = (props) => {
         >
           {props.tripName}
         </Typography>
-        <img src={MapImg} alt="" className="mapsIcon"/>
+        <img src={MapImg} alt="" className="mapsIcon" />
       </Link>
       <div className="tripDatesWrapper">
         <div className="tripdates">
@@ -36,9 +37,9 @@ const SingleTrip = (props) => {
           </span>
           {" "}
         </div>
-        <button onClick={() => console.log("This button doesn't work")}>Archive</button>
-        </div>
-        </Paper>
+        <button onClick={props.archiveTrip(props.id)}>Archive</button>
+      </div>
+    </Paper>
   )
 }
 

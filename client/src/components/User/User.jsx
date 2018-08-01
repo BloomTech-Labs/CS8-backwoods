@@ -62,6 +62,18 @@ class User extends React.Component {
     })
   }
 
+  archiveTrip = (TripId) => {
+    const token = localStorage.getItem('token');
+    const id = TripId;
+    console.log(id);
+    axios.put(`http://localhost:8000$${this.props.match.params.user}/archiveTrip`, { id: id, Archive: true }, { headers: { authorization: token } })
+      .then(res => {
+        console.log(res)
+      }).catch(err => {
+        console.log(err)
+      })
+  }
+
   render() {
     return (
       <div>
@@ -76,6 +88,7 @@ class User extends React.Component {
                   render={(props) => <MainTriplist {...props}
                     trips={this.state.trips}
                     user={this.props.email}
+                    archiveTrip={this.archiveTrip}
                   />} exact />
 
                 <Route path="/:user/create" render={props => (<TripCreate {...props} email={this.props.email} user={this.props.email} getUsersAgain={this.getUsersAgain} />)} exact />

@@ -23,6 +23,7 @@ class MainTriplist extends React.Component {
                   slug={trip.slug}
                   email={trip.email}
                   id={trip.id}
+                  archiveTrip={this.props.archiveTrip}
                 />
 
               </div>
