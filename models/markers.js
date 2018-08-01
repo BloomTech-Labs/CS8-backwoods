@@ -13,7 +13,7 @@ const markers = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             allowNull: false
         },
-        long: {
+        lng: {
             type: DataTypes.STRING,
             allowNull: false
         },
