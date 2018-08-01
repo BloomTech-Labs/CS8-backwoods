@@ -27,38 +27,39 @@ class TripCreate extends React.Component {
       disableAddMarker: false,
       disableRemoveMarker: true,
       expanded: null
-    }
+    };
   }
-
 
   activateMap = () => {
     this.setState({
       mapOpacity: 1,
       MarkerCreated: true
-    })
-  }
+    });
+  };
 
   addWaypoint = () => {
     let newWayPoint = {
       markerName: 'Marker Name Here',
       eta: '',
-      long: '',
+      lng: '',
       lat: '',
       tripId: ''
-    }
-    this.setState({
-      wayPoints: [...this.state.wayPoints, newWayPoint],
-      disableAddMarker: true
-    }, this.activateMap)
-  }
-
+    };
+    this.setState(
+      {
+        wayPoints: [...this.state.wayPoints, newWayPoint],
+        disableAddMarker: true
+      },
+      this.activateMap
+    );
+  };
 
   deactivateMap = () => {
     this.setState({
       mapOpacity: 0.4,
       MarkerCreated: false
-    })
-  }
+    });
+  };
 
   handleChange = name => event => {
     this.setState({ [name]: event.target.value });
@@ -68,43 +69,56 @@ class TripCreate extends React.Component {
     let newWayPoint = {
       markerName: this.state.markerName,
       eta: this.state.eta,
-      long: this.state.lng,
+      lng: this.state.lng,
       lat: this.state.lat,
-      tripId: '',
-    }
-    this.setState({
-      newMarkersArr: [...this.state.newMarkersArr, newWayPoint],
-      disableAddMarker: false,
-      disableRemoveMarker: false,
-    }, this.deactivateMap);
-  }
-
+      tripId: ''
+    };
+    this.setState(
+      {
+        newMarkersArr: [...this.state.newMarkersArr, newWayPoint],
+        disableAddMarker: false,
+        disableRemoveMarker: false
+      },
+      this.deactivateMap
+    );
+  };
 
   handleSubmit = e => {
     e.preventDefault();
-    const token = localStorage.getItem('token')
+    const token = localStorage.getItem('token');
     const { tripName, startDate, endDate, newMarkersArr } = this.state;
     const { email } = this.props;
-    const slug = slugify(tripName)
+    const slug = slugify(tripName);
     // Deploy axios call
     // axios.post(`https://ancient-inlet-94126.herokuapp.com/createTrips`, { tripName, startDate, endDate, email }, { headers: { authorization: token } })
     // Test axios call
-    axios.post(`http://localhost:8000/createTrips`, { tripName, startDate, endDate, email, slug: slug }, { headers: { authorization: token } })
+    axios
+      .post(
+        `http://localhost:8000/createTrips`,
+        { tripName, startDate, endDate, email, slug: slug },
+        { headers: { authorization: token } }
+      )
       .then(res => {
         this.props.getUsersAgain();
-        this.setState({ fireRedirect: true })
+        this.setState({ fireRedirect: true });
         const tripId = res.data.id;
-        let markersArr = [...newMarkersArr]
+        let markersArr = [...newMarkersArr];
         markersArr.forEach(item => {
-          item.tripId = tripId
+          item.tripId = tripId;
         });
-        return axios.post(`http://localhost:8000/createMarker`, { markersArr }, { headers: { authorization: token } })
-      }).then(res => {
-        console.log(res);
-      }).catch(error => {
-        console.log(error);
+        return axios.post(
+          `http://localhost:8000/createMarker`,
+          { markersArr },
+          { headers: { authorization: token } }
+        );
       })
-  }
+      .then(res => {
+        console.log(res);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   // removes marker after hitting save location
   removeMarker = () => {
@@ -113,8 +127,8 @@ class TripCreate extends React.Component {
     this.state.markers.pop();
     this.setState({
       disableAddMarker: false,
-      disableRemoveMarker: true,
-    })
+      disableRemoveMarker: true
+    });
   };
 
   addMarker = event => {
@@ -138,7 +152,7 @@ class TripCreate extends React.Component {
 
   handleWayPointExpand = panel => (event, expanded) => {
     this.setState({
-      expanded: expanded ? panel : false,
+      expanded: expanded ? panel : false
     });
   };
 
@@ -151,31 +165,33 @@ class TripCreate extends React.Component {
           handleChange={this.handleChange}
           fireRedirect={this.state.fireRedirect}
         />
-      <div className="MapWaypointWrapper">
-        <Map
-          mapOpacity={this.state.mapOpacity}
-          addMarker={this.addMarker}
-          markers={this.state.markers}
-          MarkerCreated={this.state.MarkerCreated}
-        />
+        <div className="MapWaypointWrapper">
+          <Map
+            mapOpacity={this.state.mapOpacity}
+            addMarker={this.addMarker}
+            markers={this.state.markers}
+            MarkerCreated={this.state.MarkerCreated}
+            newMarkersArr={this.state.newMarkersArr}
+            lat={this.state.lat}
+            lng={this.state.lng}
+          />
 
-
-        <WaypointList
-          handleChange={this.handleChange}
-          addWaypoint={this.addWaypoint}
-          wayPoints={this.state.wayPoints}
-          activateMap={this.activateMap}
-          handleNewWaypoint={this.handleNewWaypoint}
-          removeMarker={this.removeMarker}
-          disableAddMarker={this.state.disableAddMarker}
-          disableRemoveMarker={this.state.disableRemoveMarker}
-          expanded={this.state.expanded}
-          handleWayPointExpand={this.handleWayPointExpand}
-        />
+          <WaypointList
+            handleChange={this.handleChange}
+            addWaypoint={this.addWaypoint}
+            wayPoints={this.state.wayPoints}
+            activateMap={this.activateMap}
+            handleNewWaypoint={this.handleNewWaypoint}
+            removeMarker={this.removeMarker}
+            disableAddMarker={this.state.disableAddMarker}
+            disableRemoveMarker={this.state.disableRemoveMarker}
+            expanded={this.state.expanded}
+            handleWayPointExpand={this.handleWayPointExpand}
+          />
         </div>
       </div>
     );
   }
-};
+}
 
 export default TripCreate;
