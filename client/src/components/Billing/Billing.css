@@ -1,19 +1,22 @@
 .billing {
   display: flex;
   width: 100%;
-  align-items: center;
-  justify-content: center;
   align-content: center;
+  margin-top: 50px;
 }
-
 .checkoutForm {
-  width: 250px;
-  height: 250px;
+  width: 28%;
+  height: 50%;
   padding: 1%;
-  /* margin-left: 30%; */
-  /* margin-top: 10%; */
 }
-
+.buyNowButton {
+  margin-left: 25% !important;
+  margin-top: 5% !important;
+}
+.paymentInfo {
+  margin-left: 25% !important;
+  margin-bottom: 5% !important;
+}
 .StripeElement {
   background-color: white;
   height: 40px;

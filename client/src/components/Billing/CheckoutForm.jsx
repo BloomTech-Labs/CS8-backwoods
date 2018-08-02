@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import { CardElement, injectStripe } from 'react-stripe-elements';
+import { Typography } from '../../../node_modules/@material-ui/core';
 
 class CheckoutForm extends Component {
   constructor(props) {
@@ -12,12 +13,12 @@ class CheckoutForm extends Component {
 
   async submit(ev) {
     // User clicked submit
-    let { token } = await this.props.stripe.createToken({ name: "Name" });
-    let response = await fetch("/charge", {
-      method: "POST",
-      headers: { "Content-Type": "text/plain" },
+    let { token } = await this.props.stripe.createToken({ name: 'Name' });
+    let response = await fetch('/charge', {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain' },
       body: token.id
-    })
+    });
     if (response.ok) this.setState({ complete: true });
   }
 
@@ -25,15 +26,17 @@ class CheckoutForm extends Component {
     if (this.state.complete) return <h1>Purchase Complete</h1>;
     return (
       <Paper className="checkoutForm">
-        <p>Payment Info</p>
+        <Typography className="paymentInfo" variant="headline">
+          Payment Information
+        </Typography>
         <CardElement />
         <Button
-          // className="buyNowButton"
+          className="buyNowButton"
           onClick={this.submit}
           variant="contained"
           color="primary"
         >
-          Buy Now
+          Complete Purchase
         </Button>
       </Paper>
     );
