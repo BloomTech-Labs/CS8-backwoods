@@ -81,7 +81,7 @@ _______
 `/test@test.com`
 _________
 #### Create Trip with existing user
-* POST route `/createTrips
+* POST route `/createTrips`
 ##### Example json object of required data
 ```
 {
@@ -102,4 +102,64 @@ _______
 	"oldPassword": "test"
 	"password": "newTest"
 }
+```
 (Requires auth JWT token from login to work)
+_______
+#### Create Marker
+* POST route `/createMarker`
+#### Example json object of required data
+```
+{
+	"markersArr": [
+		{
+			"tripId":"3ce4b524-3f55-45f0-ada1-203da7c557e4",
+			"markerName":"test1",
+			"eta":"test1",
+			"long":"test1",
+			"lat":"test1"
+		},
+		{
+			"tripId":"3ce4b524-3f55-45f0-ada1-203da7c557e4",
+			"markerName":"test2",
+			"eta":"test2",
+			"long":"test2",
+			"lat":"test2"
+		},
+		{
+			"tripId":"3ce4b524-3f55-45f0-ada1-203da7c557e4",
+			"markerName":"test3",
+			"eta":"test3",
+			"long":"test3",
+			"lat":"test3"
+		},
+			{
+			"tripId":"3ce4b524-3f55-45f0-ada1-203da7c557e4",
+			"markerName":"test4",
+			"eta":"test4",
+			"long":"test4",
+			"lat":"test4"
+		}
+	]
+}
+```
+(requires the id from the trip you created and inserted here as tripID and requires auth JWT token from login to work)
+_______
+#### Get Markers
+* GET `/getMarkers/:tripId`
+(need to pass in your id from the trip you created that is connected to the markers)
+_______
+#### Archive Trip
+* PUT `/:user/archiveTrip`
+#### Example json object of required data
+```
+{
+	"id": "60efdf74-64a9-4268-bae6-4999e4a8cde0",
+	"Archived":"true"
+}
+```
+(pass in the id from the trip you want archived)
+_______
+#### Get Archived Trips
+* GET `/:user/getArchivedTrips`
+(need to pass in Auth token from login)
+_______
