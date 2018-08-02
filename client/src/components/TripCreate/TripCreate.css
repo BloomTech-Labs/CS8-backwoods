@@ -9,6 +9,9 @@
 .spacingRight {
   margin-right: 15px !important;
 }
+.spacingRightBig {
+  margin-right: 60px !important;
+}
 .MapWaypointWrapper {
   display: flex;
   margin-top: 20px;
