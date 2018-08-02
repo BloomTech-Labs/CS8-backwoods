@@ -16,8 +16,11 @@
 .navBreadcrumb {
   padding: 10px;
   margin-bottom: 10px;
-  height: 50px;
+  height: 40px;
 }
 .material-icons {
-  height: 100%;
+  transform: scale(0.75);
+}
+.breadCrumb {
+  padding-top: 2px;
 }

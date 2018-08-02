@@ -1,6 +1,7 @@
 import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import { Link } from 'react-router-dom';
+import Typography from '@material-ui/core/Typography';
 
 const bread = {
   display: 'flex'
@@ -14,7 +15,7 @@ class NavBreadcrumb extends React.Component {
     } else {
       return [
         <i className="material-icons">keyboard_arrow_right</i>,
-        <span>{t[t.length - 1]}</span>
+        <Typography className="breadCrumb">{t[t.length - 1]}</Typography>
       ];
     }
   }
@@ -22,7 +23,9 @@ class NavBreadcrumb extends React.Component {
     return (
       <Paper className="navBreadcrumb">
         <div style={bread}>
-          <Link to={`/${this.props.user}`}>Home</Link>
+          <Typography>
+            <Link to={`/${this.props.user}`}>Home</Link>
+          </Typography>
           {this.nextBreadCrumb()}
         </div>
       </Paper>

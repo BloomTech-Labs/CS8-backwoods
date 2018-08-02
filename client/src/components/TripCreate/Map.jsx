@@ -2,8 +2,10 @@ import React from 'react';
 import GoogleMapReact from 'google-map-react';
 
 const style = {
-  height: '45px',
-  width: '45px'
+  height: '40px',
+  width: '40px',
+  position: 'absolute',
+  transform: 'translate(-50%, -50%)'
 };
 const Marker = ({ text }) => (
   <img style={style} src={'https://i.imgur.com/Lsk9eVr.png'} alt="" />
@@ -44,8 +46,8 @@ class Map extends React.Component {
       <div
         className="tripCreateMap"
         style={{
-          height: '400px',
-          width: '450px',
+          height: '500px',
+          width: '600px',
           opacity: this.props.mapOpacity
         }}
       >
@@ -70,13 +72,13 @@ class Map extends React.Component {
           })}
         </GoogleMapReact>
         {/* this shows the lat, lng below the map when clicking a marker */}
-        {this.props.markers.map((markers, i) => {
+        {/* {this.props.markers.map((markers, i) => {
           return (
             <p key={i}>
               {markers.lat}, {markers.lng}
             </p>
           );
-        })}
+        })} */}
       </div>
     );
   }

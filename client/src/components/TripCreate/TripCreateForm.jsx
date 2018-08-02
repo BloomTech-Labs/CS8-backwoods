@@ -7,48 +7,67 @@ import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { Redirect } from 'react-router-dom';
+import { withStyles } from '@material-ui/core/styles';
 
+const styles = theme => ({
+  button: {
+    marginLeft: '6%',
+    marginRight: '5%',
+    textAlign: 'center'
+  }
+});
 
-const TripCreateForm = (props) => {
+const TripCreateForm = props => {
   return (
     <React.Fragment>
       <form onSubmit={props.handleSubmit}>
         <div>
           <Paper className="tripCreateForm">
             <FormControl>
-              <InputLabel htmlFor="tripName">Trip Name</InputLabel>
+              <InputLabel htmlFor="name-simple" className="spacingLeft">
+                Name
+              </InputLabel>
               <Input
                 id="tripName"
+                label="Trip Name"
+                className="spacingLeft"
                 value={props.tripName}
                 onChange={props.handleChange('tripName')}
               />
             </FormControl>
-            <InputLabel htmlFor="startDate">Start Date</InputLabel>
             <TextField
               id="startDate"
+              label="Start Date"
               type="date"
+              defaultValue="2018-09-25"
+              className="spacingLeft spacingRight"
               value={props.startDate}
               onChange={props.handleChange('startDate')}
             />
-            <InputLabel htmlFor="endDate">End Date</InputLabel>
             <TextField
               id="endDate"
+              label="End Date"
               type="date"
+              className="spacingRight spacingRightBig "
+              defaultValue="2018-09-28"
               value={props.endDate}
               onChange={props.handleChange('endDate')}
             />
-            <Button variant="contained" type="submit" disabled={!props.isEnabled}>
+            <Button
+              variant="contained"
+              type="submit"
+              // class="saveTripButton"
+              disabled={!props.isEnabled}
+            >
               Save Trip
-        <Icon>send</Icon>
+              <Icon>send</Icon>
             </Button>
           </Paper>
         </div>
       </form>
-      {props.fireRedirect && (
-        <Redirect to={`/${props.email}`} />
-      )}
+      {props.fireRedirect && <Redirect to={`/${props.email}`} />}
     </React.Fragment>
-  )
+  );
+};
 
-}
-export default TripCreateForm;
+export default withStyles(styles)(TripCreateForm);
