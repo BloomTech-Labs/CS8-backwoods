@@ -19,5 +19,8 @@
   height: 50px;
 }
 .material-icons {
-  height: 100%;
+  transform: scale(0.75);
+}
+.breadCrumb {
+  padding-top: 2px;
 }
