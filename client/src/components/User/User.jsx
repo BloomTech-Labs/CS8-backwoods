@@ -1,3 +1,4 @@
+import API_URL from '../../API_URL';
 import React from 'react';
 import Nav from '../Nav/Nav';
 import MainTriplist from '../TripList/MainTripList';
@@ -57,11 +58,7 @@ class User extends React.Component {
   }
 
   componentWillMount() {
-    // DEPLOY URL FOR AXIOS CALL
-    // axios.get(`https://ancient-inlet-94126.herokuapp.com/${this.props.match.params.user}`).then(res => {
-
-    // TEST URL FOR AXIOS CALL
-    axios.get(`http://localhost:8000/${this.props.match.params.user}`).then(res => {
+    axios.get(`${API_URL}/${this.props.match.params.user}`).then(res => {
       if (!res.data) {
         this.setState({ hasTrips: false });
         return
@@ -76,11 +73,7 @@ class User extends React.Component {
   }
 
   getUsersAgain = () => {
-    // DEPLOY URL FOR AXIOS CALL
-    // axios.get(`https://ancient-inlet-94126.herokuapp.com/${this.props.match.params.user}`).then(res => {
-
-    // TEST URL FOR AXIOS CALL
-    axios.get(`http://localhost:8000/${this.props.match.params.user}`).then(res => {
+    axios.get(`${API_URL}/${this.props.match.params.user}`).then(res => {
       if (!res.data) {
         this.setState({ hasTrips: false });
         return
@@ -98,10 +91,7 @@ class User extends React.Component {
     const trips = [...this.state.trips]
     const token = localStorage.getItem('token');
     const id = TripId;
-    // Deploy Route
-    // axios.put(`https://ancient-inlet-94126.herokuapp.com/${this.props.match.params.user}/archiveTrip`, { id: id, archived: true }, { headers: { authorization: token } })
-    // Development Route
-    axios.put(`http://localhost:8000/${this.props.match.params.user}/archiveTrip`, { id: id, archived: true }, { headers: { authorization: token } })
+    axios.put(`${API_URL}/${this.props.match.params.user}/archiveTrip`, { id: id, archived: true }, { headers: { authorization: token } })
       .then(res => {
         const newTrips = trips.splice(index, 1)
         this.setState({ trips: trips, snackbarArchive: true })

@@ -1,3 +1,4 @@
+import API_URL from '../../API_URL';
 import React from 'react';
 import TripCreateForm from './TripCreateForm.jsx';
 import Map from './Map.jsx';
@@ -5,6 +6,7 @@ import WaypointList from './WaypointList';
 import slugify from 'slugify';
 import axios from 'axios';
 import './TripCreate.css';
+
 class TripCreate extends React.Component {
   constructor(props) {
     super(props);
@@ -89,15 +91,7 @@ class TripCreate extends React.Component {
     const { tripName, startDate, endDate, newMarkersArr } = this.state;
     const { email } = this.props;
     const slug = slugify(tripName);
-    // Deploy axios call
-    // axios.post(`https://ancient-inlet-94126.herokuapp.com/createTrips`, { tripName, startDate, endDate, email, slug: slug }, { headers: { authorization: token } })
-    // Test axios call
-    axios
-      .post(
-        `http://localhost:8000/createTrips`,
-        { tripName, startDate, endDate, email, slug: slug },
-        { headers: { authorization: token } }
-      )
+    axios.post(`${API_URL}/createTrips`, { tripName, startDate, endDate, email, slug: slug }, { headers: { authorization: token } })
       .then(res => {
         this.props.getUsersAgain();
         this.setState({ fireRedirect: true });
@@ -106,19 +100,7 @@ class TripCreate extends React.Component {
         markersArr.forEach(item => {
           item.tripId = tripId;
         });
-        // Deploy axios call
-
-        // return axios.post(
-        //   `https://ancient-inlet-94126.herokuapp.com/createMarker`,
-        //   { markersArr },
-        //   { headers: { authorization: token } }
-        // );
-
-        // Development axios call
-        return axios.post(
-          `http://localhost:8000/createMarker`,
-          { markersArr },
-          { headers: { authorization: token } }
+        return axios.post(`${API_URL}/createMarker`, { markersArr }, { headers: { authorization: token } }
         );
       })
       .then(res => {
