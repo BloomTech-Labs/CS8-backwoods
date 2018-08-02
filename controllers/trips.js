@@ -29,7 +29,7 @@ const archiveTrip = (req, res) => {
 
 const getTrip = (req, res) => {
     models.Trips.findAll({
-        where: { email: req.params.user, Archived: false }
+        where: { email: req.params.user, archived: false }
     })
         .then((trips) => {
             if (trips.length === 0) {
@@ -43,4 +43,20 @@ const getTrip = (req, res) => {
         })
 };
 
-module.exports = { createTrip, getTrip, archiveTrip }
+const getTripAchived = (req, res) => {
+    models.Trips.findAll({
+        where: { email: req.params.user, archived: true }
+    })
+        .then((trips) => {
+            if (trips.length === 0) {
+                res.status(422).json({ "error": "User doesn't have trips" })
+                return
+            }
+            res.json({ trips })
+        })
+        .catch(err => {
+            res.json(err)
+        })
+};
+
+module.exports = { createTrip, getTrip, archiveTrip, getTripAchived }

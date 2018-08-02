@@ -27,6 +27,12 @@ const NavBar = (props) => {
         <Divider />
         {props.isLoggedIn && 
         <div>
+        <Link to={`/${props.user}/archived`}>
+          <ListItem button>
+            <ListItemText primary="Archived" />
+          </ListItem>
+        </Link>
+        <Divider />
         <Link to={`/${props.user}/billing`}>
           <ListItem button>
             <ListItemText primary="Billing" />
