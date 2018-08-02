@@ -49,7 +49,7 @@ const TripCreateForm = props => {
               label="End Date"
               type="date"
               className="spacingRight spacingRightBig "
-              defaultValue="2018-09-25"
+              defaultValue="2018-09-28"
               value={props.endDate}
               onChange={props.handleChange('endDate')}
             />

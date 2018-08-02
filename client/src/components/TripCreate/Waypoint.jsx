@@ -33,7 +33,7 @@ const Waypoint = props => {
           label="ETA"
           id="date"
           type="date"
-          defaultValue="2018-07-25"
+          defaultValue="2018-09-25"
           className="spacingRight"
           onChange={props.handleChange('eta')}
         />
