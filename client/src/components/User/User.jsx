@@ -4,6 +4,7 @@ import MainTriplist from '../TripList/MainTripList';
 import TripCreate from '../TripCreate/TripCreate';
 import BillingForm from '../Billing/BillingForm';
 import AccountForm from '../Account/AccountForm';
+import Archived from '../Archived/Archived';
 import { Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import TripOpen from '../TripOpen/TripOpen';
@@ -21,6 +22,7 @@ class User extends React.Component {
       endDate: '',
       hasTrips: false,
     }
+    this.archiveTrip = this.archiveTrip.bind(this);
   }
 
   componentWillMount() {
@@ -61,6 +63,22 @@ class User extends React.Component {
     })
   }
 
+  archiveTrip(TripId, index) {
+    const trips = [...this.state.trips]
+    const token = localStorage.getItem('token');
+    const id = TripId;
+    console.log(index);
+    axios.put(`http://localhost:8000/${this.props.match.params.user}/archiveTrip`, { id: id, archived: true }, { headers: { authorization: token } })
+      .then(res => {
+        const newTrips = trips.splice(index, 1)
+        this.setState({trips: trips})
+        console.log(res)
+
+      }).catch(err => {
+        console.log(err)
+      })
+  }
+
   render() {
     return (
       <div>
@@ -75,9 +93,12 @@ class User extends React.Component {
                   render={(props) => <MainTriplist {...props}
                     trips={this.state.trips}
                     user={this.props.email}
+                    archiveTrip={this.archiveTrip}
+                    isLoggedIn={this.props.isLoggedIn}
                   />} exact />
 
                 <Route path="/:user/create" render={props => (<TripCreate {...props} email={this.props.email} user={this.props.email} getUsersAgain={this.getUsersAgain} />)} exact />
+                <Route path="/:user/archived" component={Archived} exact />
                 <Route path="/:user/billing" component={BillingForm} exact />
                 <Route path="/:user/settings" component={AccountForm} exact />
                 <Route path="/:user/:slug" component={TripOpen} exact />

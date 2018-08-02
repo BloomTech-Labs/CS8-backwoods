@@ -9,10 +9,10 @@ import Paper from '@material-ui/core/Paper';
 const TripOpenName = (props) => {
 
     return (
-        <Paper className="TripOpenName">
+        <Paper className="OpenTripName">
             <Typography
                 className="tripname"
-                variant="h2"
+                variant="title"
             >
 
                 {props.tripName}
