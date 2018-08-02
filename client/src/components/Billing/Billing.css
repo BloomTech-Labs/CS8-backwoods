@@ -5,9 +5,17 @@
   margin-top: 50px;
 }
 .checkoutForm {
-  width: 40%;
+  width: 28%;
   height: 50%;
   padding: 1%;
+}
+.buyNowButton {
+  margin-left: 25% !important;
+  margin-top: 5% !important;
+}
+.paymentInfo {
+  margin-left: 25% !important;
+  margin-bottom: 5% !important;
 }
 .StripeElement {
   background-color: white;
