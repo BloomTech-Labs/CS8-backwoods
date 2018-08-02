@@ -9,6 +9,33 @@ import { Route, Redirect } from 'react-router-dom';
 import axios from 'axios';
 import TripOpen from '../TripOpen/TripOpen';
 import { Switch } from 'react-router-dom'
+import MySnackbarContent from '../Snackbar/MySnackbarContent';
+import Snackbar from '@material-ui/core/Snackbar';
+import green from '@material-ui/core/colors/green';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles1 = theme => ({
+  success: {
+    backgroundColor: green[600]
+  },
+  error: {
+    backgroundColor: theme.palette.error.dark
+  },
+  icon: {
+    fontSize: 20
+  },
+  iconVariant: {
+    opacity: 0.9,
+    marginRight: theme.spacing.unit
+  },
+  message: {
+    display: 'flex',
+    alignItems: 'center'
+  }
+});
+
+const MySnackbarContentWrapper = withStyles(styles1)(MySnackbarContent);
+
 class User extends React.Component {
   constructor(props) {
     super(props);
@@ -21,6 +48,10 @@ class User extends React.Component {
       startDate: '',
       endDate: '',
       hasTrips: false,
+      snackbarArchive: false,
+      snackbarError: false,
+      snackbarVertical: 'top',
+      snackbarHorizontal: 'center',
     }
     this.archiveTrip = this.archiveTrip.bind(this);
   }
@@ -70,13 +101,22 @@ class User extends React.Component {
     axios.put(`http://localhost:8000/${this.props.match.params.user}/archiveTrip`, { id: id, archived: true }, { headers: { authorization: token } })
       .then(res => {
         const newTrips = trips.splice(index, 1)
-        this.setState({trips: trips})
+        this.setState({ trips: trips, snackbarArchive: true })
         console.log(res)
 
       }).catch(err => {
         console.log(err)
+        this.setState({ snackbarError: true })
       })
   }
+
+  handleSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    this.setState({ snackbarArchive: false });
+    this.setState({ snackbarError: false });
+  };
 
   render() {
     return (
@@ -95,7 +135,6 @@ class User extends React.Component {
                     archiveTrip={this.archiveTrip}
                     isLoggedIn={this.props.isLoggedIn}
                   />} exact />
-
                 <Route path="/:user/create" render={props => (<TripCreate {...props} email={this.props.email} user={this.props.email} getUsersAgain={this.getUsersAgain} />)} exact />
                 <Route path="/:user/archived" render={props => (<GetArchived {...props} getUsersAgain={this.getUsersAgain} />)} exact />
                 <Route path="/:user/billing" component={BillingForm} exact />
@@ -104,6 +143,36 @@ class User extends React.Component {
               </Switch>
             </div>
         }
+        <Snackbar
+          anchorOrigin={{
+            vertical: this.state.snackbarVertical,
+            horizontal: this.state.snackbarHorizontal
+          }}
+          open={this.state.snackbarArchive}
+          onClose={this.handleSnackbarClose}
+          autoHideDuration={2000}
+        >
+          <MySnackbarContentWrapper
+            onClose={this.handleSnackbarClose}
+            variant="success"
+            message="Trip Archived Successfully!"
+          />
+        </Snackbar>
+        <Snackbar
+          anchorOrigin={{
+            vertical: this.state.snackbarVertical,
+            horizontal: this.state.snackbarHorizontal
+          }}
+          open={this.state.snackbarError}
+          onClose={this.state.snackbarHorizontal}
+          autoHideDuration={2000}
+        >
+          <MySnackbarContentWrapper
+            onClose={this.handleSnackbarClose}
+            variant="error"
+            message="Server Cannot Archive Trip!"
+          />
+        </Snackbar>
       </div>
     )
   }
