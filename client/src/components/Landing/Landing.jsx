@@ -5,7 +5,7 @@ import './Landing.css';
 
 const Landing = () => {
   return (
-    <div>
+    <div className="landingWrapper">
       <h1>Back Woods</h1>
       <Carousel />
       <p>
