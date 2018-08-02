@@ -22,16 +22,15 @@ class GetArchived extends React.Component {
   }
 
   UnarchiveTrip(TripId, index) {
-    console.log('from getTrips',this.state.trips);
     const trips = [...this.state.trips]
     const token = localStorage.getItem('token');
     const id = TripId;
-    console.log(index);
     axios.put(`http://localhost:8000/${this.props.match.params.user}/archiveTrip`, { id: id, archived: false }, { headers: { authorization: token } })
       .then(res => {
         const newTrips = trips.splice(index, 1)
         this.setState({trips: trips})
         console.log(res)
+        this.props.getUsersAgain();
 
       }).catch(err => {
         console.log(err)

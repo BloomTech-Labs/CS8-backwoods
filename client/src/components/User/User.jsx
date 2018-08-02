@@ -67,7 +67,6 @@ class User extends React.Component {
     const trips = [...this.state.trips]
     const token = localStorage.getItem('token');
     const id = TripId;
-    console.log(index);
     axios.put(`http://localhost:8000/${this.props.match.params.user}/archiveTrip`, { id: id, archived: true }, { headers: { authorization: token } })
       .then(res => {
         const newTrips = trips.splice(index, 1)
@@ -98,7 +97,7 @@ class User extends React.Component {
                   />} exact />
 
                 <Route path="/:user/create" render={props => (<TripCreate {...props} email={this.props.email} user={this.props.email} getUsersAgain={this.getUsersAgain} />)} exact />
-                <Route path="/:user/archived" component={GetArchived} exact />
+                <Route path="/:user/archived" render={props => (<GetArchived {...props} getUsersAgain={this.getUsersAgain} />)} exact />
                 <Route path="/:user/billing" component={BillingForm} exact />
                 <Route path="/:user/settings" component={AccountForm} exact />
                 <Route path="/:user/:slug" component={TripOpen} exact />

@@ -16,7 +16,6 @@ const SingleAchived = (props) => {
 
   return (
     <Paper className="trip" elevation={1}>
-    {console.log('from single archived',props)}
       <Link to={TripOpen} style={{ textDecoration: "none" }}>
         <Typography
           variant="headline"
