@@ -13,6 +13,9 @@ class TripOpen extends React.Component {
   }
 
   componentWillMount() {
+    // Deploy Route
+    // axios.get(`https://ancient-inlet-94126.herokuapp.com/getMarkers/${this.props.location.param1}`)
+    // Development Route
     axios.get(`http://localhost:8000/getMarkers/${this.props.location.param1}`)
       .then(res => {
         console.log(res.data.marker)

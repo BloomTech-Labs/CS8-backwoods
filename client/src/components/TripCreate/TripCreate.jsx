@@ -90,7 +90,7 @@ class TripCreate extends React.Component {
     const { email } = this.props;
     const slug = slugify(tripName);
     // Deploy axios call
-    // axios.post(`https://ancient-inlet-94126.herokuapp.com/createTrips`, { tripName, startDate, endDate, email }, { headers: { authorization: token } })
+    // axios.post(`https://ancient-inlet-94126.herokuapp.com/createTrips`, { tripName, startDate, endDate, email, slug: slug }, { headers: { authorization: token } })
     // Test axios call
     axios
       .post(
@@ -106,6 +106,15 @@ class TripCreate extends React.Component {
         markersArr.forEach(item => {
           item.tripId = tripId;
         });
+        // Deploy axios call
+
+        // return axios.post(
+        //   `https://ancient-inlet-94126.herokuapp.com/createMarker`,
+        //   { markersArr },
+        //   { headers: { authorization: token } }
+        // );
+
+        // Development axios call
         return axios.post(
           `http://localhost:8000/createMarker`,
           { markersArr },
