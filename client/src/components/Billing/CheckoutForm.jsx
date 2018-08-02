@@ -26,19 +26,25 @@ class CheckoutForm extends Component {
     if (this.state.complete) return <h1>Purchase Complete</h1>;
     return (
       <Paper className="checkoutForm">
-        <Typography className="paymentInfo" variant="headline">
+      <div className="checkoutName">
+      <Typography className="paymentInfo" variant="headline">
           Payment Information
         </Typography>
+      </div>
+      <div>
         <CardElement />
+      </div>
+      <div>
         <Button
-          className="buyNowButton"
+          id="buyNowButton"
           onClick={this.submit}
           variant="contained"
           color="primary"
         >
           Complete Purchase
         </Button>
-      </Paper>
+      </div>
+    </Paper>
     );
   }
 }
