@@ -1,24 +1,57 @@
 import React from 'react';
 import axios from 'axios';
 import Archived from './Archived';
+import MySnackbarContent from '../Snackbar/MySnackbarContent';
+import Snackbar from '@material-ui/core/Snackbar';
+import green from '@material-ui/core/colors/green';
+import { withStyles } from '@material-ui/core/styles';
+
+const styles1 = theme => ({
+  success: {
+    backgroundColor: green[600]
+  },
+  error: {
+    backgroundColor: theme.palette.error.dark
+  },
+  icon: {
+    fontSize: 20
+  },
+  iconVariant: {
+    opacity: 0.9,
+    marginRight: theme.spacing.unit
+  },
+  message: {
+    display: 'flex',
+    alignItems: 'center'
+  }
+});
+
+const MySnackbarContentWrapper = withStyles(styles1)(MySnackbarContent);
 
 class GetArchived extends React.Component {
-  constructor(){
+  constructor() {
     super()
-      this.state = {
-        trips: []
-      }
+    this.state = {
+      trips: [],
+      snackbarUnArchive: false,
+      snackbarArchive: false,
+      snackbarError: false,
+      snackbarVertical: 'top',
+      snackbarHorizontal: 'center',
+    }
     this.UnarchiveTrip = this.UnarchiveTrip.bind(this);
   }
-  
+
   componentWillMount() {
     const token = localStorage.getItem('token');
-    axios.get(`http://localhost:8000/${this.props.match.params.user}/getArchivedTrips`,{email: this.props.match.params.user}, { headers: { authorization: token } })
+    axios.get(`http://localhost:8000/${this.props.match.params.user}/getArchivedTrips`, { email: this.props.match.params.user }, { headers: { authorization: token } })
       .then(res => {
         this.setState({ trips: res.data.trips })
         console.log(res)
-    })
-    .catch(error => console.log(error))
+      })
+      .catch(error => {
+        console.log(error)
+      })
   }
 
   UnarchiveTrip(TripId, index) {
@@ -28,23 +61,64 @@ class GetArchived extends React.Component {
     axios.put(`http://localhost:8000/${this.props.match.params.user}/archiveTrip`, { id: id, archived: false }, { headers: { authorization: token } })
       .then(res => {
         const newTrips = trips.splice(index, 1)
-        this.setState({trips: trips})
+        this.setState({ trips: trips })
         console.log(res)
         this.props.getUsersAgain();
-
+        this.setState({ snackbarUnArchive: true })
       }).catch(err => {
         console.log(err)
+        this.setState({ snackbarError: true })
       })
   }
+
+  handleSnackbarClose = (event, reason) => {
+    if (reason === 'clickaway') {
+      return;
+    }
+    this.setState({ snackbarUnArchive: false });
+    this.setState({ snackbarError: false });
+  };
   render() {
     return (
-      <Archived
-        trips={this.state.trips}
-        UnarchiveTrip={this.UnarchiveTrip}
-      />
+      <div>
+        <Archived
+          trips={this.state.trips}
+          UnarchiveTrip={this.UnarchiveTrip}
+        />
+        <Snackbar
+          anchorOrigin={{
+            vertical: this.state.snackbarVertical,
+            horizontal: this.state.snackbarHorizontal
+          }}
+          open={this.state.snackbarUnArchive}
+          onClose={this.handleSnackbarClose}
+          autoHideDuration={2000}
+        >
+          <MySnackbarContentWrapper
+            onClose={this.handleSnackbarClose}
+            variant="success"
+            message="Trip Unarchived Successfully!"
+          />
+        </Snackbar>
+        <Snackbar
+          anchorOrigin={{
+            vertical: this.state.snackbarVertical,
+            horizontal: this.state.snackbarHorizontal
+          }}
+          open={this.state.snackbarError}
+          onClose={this.state.snackbarHorizontal}
+          autoHideDuration={2000}
+        >
+          <MySnackbarContentWrapper
+            onClose={this.handleSnackbarClose}
+            variant="error"
+            message="Server Cannot Unarchive Trip!"
+          />
+        </Snackbar>
+      </div>
     )
   }
-  
+
 }
 
 export default GetArchived;

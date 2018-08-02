@@ -37,7 +37,7 @@ const SingleAchived = (props) => {
           </span>
           {" "}
         </div>
-          <button onClick={() => props.UnarchiveTrip(props.id, props.index)}>Unarchive</button>
+        <button onClick={() => props.UnarchiveTrip(props.id, props.index)}>Unarchive</button>
       </div>
     </Paper>
   )
