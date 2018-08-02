@@ -70,13 +70,13 @@ class Map extends React.Component {
           })}
         </GoogleMapReact>
         {/* this shows the lat, lng below the map when clicking a marker */}
-        {this.props.markers.map((markers, i) => {
+        {/* {this.props.markers.map((markers, i) => {
           return (
             <p key={i}>
               {markers.lat}, {markers.lng}
             </p>
           );
-        })}
+        })} */}
       </div>
     );
   }
