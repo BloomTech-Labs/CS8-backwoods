@@ -25,7 +25,6 @@ const Steps = [
 const styles = theme => ({
   root: {
     maxWidth: 750,
-    flexGrow: 1,
     margin: '0 auto'
   },
   header: {

@@ -1,11 +1,18 @@
 .navWrapper {
   margin-right: 20px;
-  width: 250px;
+  
 }
-
+@media(min-width: 550px) {
+  .navWrapper {
+    width: 250px;
+  }
+  /* .navBar {
+    width: 250px;
+  } */
+}
 .navBar {
   height: 100%;
-  width: 250px;
+  width: 100%;
   height: 80vh;
 }
 

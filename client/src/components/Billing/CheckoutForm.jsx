@@ -68,19 +68,26 @@ class CheckoutForm extends Component {
   render() {
     return (
       <Paper className="checkoutForm">
-        <Typography className="paymentInfo" variant="headline">
+      <div className="checkoutName">
+      <Typography className="paymentInfo" variant="headline">
           Payment Information
         </Typography>
+      </div>
+      <div>
         <CardElement />
+      </div>
+      <div>
         <Button
-          className="buyNowButton"
+          id="buyNowButton"
           onClick={this.submit}
           variant="contained"
           color="primary"
         >
           Complete Purchase
         </Button>
-        <Snackbar
+
+      </div>
+           <Snackbar
           anchorOrigin={{
             vertical: this.state.snackbarVertical,
             horizontal: this.state.snackbarHorizontal
@@ -110,7 +117,7 @@ class CheckoutForm extends Component {
             message="Cannot Complete Purchase!"
           />
         </Snackbar>
-      </Paper>
+    </Paper>
     );
   }
 }
