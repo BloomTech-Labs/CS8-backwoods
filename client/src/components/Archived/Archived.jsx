@@ -1,5 +1,7 @@
 import React from 'react';
-import axios from 'axios'
+import axios from 'axios';
+import SingleTrip from '../TripList/SingleTrip';
+
 class Archived extends React.Component {
   state = {
     trips: []
@@ -18,10 +20,11 @@ class Archived extends React.Component {
   }
   render() {
     return (
-      <div>
-        {/* {console.log(this.props.match.params.user)}
-        {console.log('state from archived',this.state.trips)} */}
-        hello
+      <div className="mainTripList">
+        {/* {this.state.trips.map((trip, index) => {
+         <SingleTrip />
+
+        })} */}
       </div>
     )
   }
