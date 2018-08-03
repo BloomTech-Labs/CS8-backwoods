@@ -29,7 +29,6 @@ class MainTriplist extends React.Component {
                   createdAt={trip.createdAt}
                   updatedAt={trip.updatedAt}
                   startDate={trip.startDate}
-                  count={count}
                   endDate={trip.endDate}
                   slug={trip.slug}
                   email={trip.email}
@@ -41,7 +40,6 @@ class MainTriplist extends React.Component {
                 
               </div>
             )
-            {count += 50}
           })}
         {this.props.isLoggedIn &&
           <Paper className="trip" id="addNewTripWrapper" elevation={1}>
