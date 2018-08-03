@@ -12,6 +12,7 @@ const WaypointList = props => {
       {props.wayPoints.map((wayPoint, index) => {
         return (
           <WayPoint
+            eta={props.eta}
             wayPoint={wayPoint}
             wayPointKey={index}
             key={index}

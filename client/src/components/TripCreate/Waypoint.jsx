@@ -11,7 +11,7 @@ import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 
 const Waypoint = props => {
-  // let date = new Date().toISOString().split('T')[0];
+  
   // console.log(date);
   return (
     <ExpansionPanel
@@ -34,7 +34,7 @@ const Waypoint = props => {
           label="ETA"
           id="date"
           type="date"
-          // defaultValue={props.wayPoint.eta}
+          defaultValue={props.eta}
           className="spacingRight"
           InputLabelProps={{
             shrink: true,

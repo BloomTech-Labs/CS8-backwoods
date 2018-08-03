@@ -7,6 +7,7 @@ import slugify from 'slugify';
 import axios from 'axios';
 import './TripCreate.css';
 
+let date = new Date().toISOString().split('T')[0];
 class TripCreate extends React.Component {
   constructor(props) {
     super(props);
@@ -19,7 +20,7 @@ class TripCreate extends React.Component {
       email: '',
       fireRedirect: false,
       markerName: '',
-      eta: '',
+      eta: date,
       time: '',
       mapOpacity: 0.4,
       lng: null,
@@ -208,6 +209,7 @@ class TripCreate extends React.Component {
           />
 
           <WaypointList
+            eta={this.state.eta}
             handleChange={this.handleChange}
             addWaypoint={this.addWaypoint}
             wayPoints={this.state.wayPoints}
