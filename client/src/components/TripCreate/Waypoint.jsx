@@ -9,9 +9,10 @@ import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
-import InputLabel from '@material-ui/core/InputLabel';
 
 const Waypoint = props => {
+  // let date = new Date().toISOString().split('T')[0];
+  // console.log(date);
   return (
     <ExpansionPanel
       expanded={props.expanded === `panel${props.wayPointKey}`}
@@ -33,16 +34,30 @@ const Waypoint = props => {
           label="ETA"
           id="date"
           type="date"
-          defaultValue="2018-09-25"
+          // defaultValue={props.wayPoint.eta}
           className="spacingRight"
+          InputLabelProps={{
+            shrink: true,
+          }}
           onChange={props.handleChange('eta')}
+        />
+
+        <TextField
+          label="Time"
+          id="time"
+          type="time"
+          className="spacingRight"
+          InputLabelProps={{
+            shrink: true,
+          }}
+          onChange={props.handleChange('time')}
         />
 
         <Button
           className="saveTripButton"
           variant="contained"
           onClick={props.handleNewWaypoint}
-          disabled={!props.markerEnabled}
+          disabled={props.saveLocationEnabled}
         >
           Save Location
           <Icon>send</Icon>

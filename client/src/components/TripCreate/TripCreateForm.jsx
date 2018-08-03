@@ -39,9 +39,11 @@ const TripCreateForm = props => {
               id="startDate"
               label="Start Date"
               type="date"
-              defaultValue="2018-09-25"
               className="spacingLeft spacingRight"
               value={props.startDate}
+              InputLabelProps={{
+                shrink: true,
+              }}
               onChange={props.handleChange('startDate')}
             />
             <TextField
@@ -49,8 +51,10 @@ const TripCreateForm = props => {
               label="End Date"
               type="date"
               className="spacingRight spacingRightBig "
-              defaultValue="2018-09-28"
               value={props.endDate}
+              InputLabelProps={{
+                shrink: true,
+              }}
               onChange={props.handleChange('endDate')}
             />
             <Button
