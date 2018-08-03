@@ -1,3 +1,4 @@
+import API_URL from '../../API_URL';
 import React from 'react';
 import axios from 'axios';
 import Archived from './Archived';
@@ -44,10 +45,7 @@ class GetArchived extends React.Component {
 
   componentWillMount() {
     const token = localStorage.getItem('token');
-    // Deploy Route
-    // axios.get(`https://ancient-inlet-94126.herokuapp.com/${this.props.match.params.user}/getArchivedTrips`, { email: this.props.match.params.user }, { headers: { authorization: token } })
-    // Development Route
-    axios.get(`http://localhost:8000/${this.props.match.params.user}/getArchivedTrips`, { email: this.props.match.params.user }, { headers: { authorization: token } })
+    axios.get(`${API_URL}/${this.props.match.params.user}/getArchivedTrips`, { email: this.props.match.params.user }, { headers: { authorization: token } })
       .then(res => {
         this.setState({ trips: res.data.trips })
         console.log(res)
@@ -61,10 +59,7 @@ class GetArchived extends React.Component {
     const trips = [...this.state.trips]
     const token = localStorage.getItem('token');
     const id = TripId;
-    // Deploy Route
-    // axios.put(`https://ancient-inlet-94126.herokuapp.com/${this.props.match.params.user}/archiveTrip`, { id: id, archived: false }, { headers: { authorization: token } })
-    // Development Route
-    axios.put(`http://localhost:8000/${this.props.match.params.user}/archiveTrip`, { id: id, archived: false }, { headers: { authorization: token } })
+    axios.put(`${API_URL}/${this.props.match.params.user}/archiveTrip`, { id: id, archived: false }, { headers: { authorization: token } })
       .then(res => {
         const newTrips = trips.splice(index, 1)
         this.setState({ trips: trips })

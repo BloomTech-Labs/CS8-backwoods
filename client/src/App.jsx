@@ -1,3 +1,4 @@
+import API_URL from './API_URL';
 import React, { Component } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import axios from 'axios';
@@ -43,12 +44,7 @@ class App extends Component {
   handleSignIn = e => {
     e.preventDefault();
     const { email, password } = this.state;
-    // Deploy axios post
-    // axios.post('https://ancient-inlet-94126.herokuapp.com/login', { email, password })
-    // DEV axios post
-    axios
-      .post('http://localhost:8000/login', { email, password })
-
+    axios.post(`${API_URL}/login`, { email, password })
       .then(res => {
         this.setState(
           { snackbarOpenSignIn: true, open: false, fireRedirect: true },
@@ -66,17 +62,7 @@ class App extends Component {
   handleSignUp = e => {
     e.preventDefault();
     const { firstName, lastName, email, password } = this.state;
-    // Deploy axios call
-    // axios.post('https://ancient-inlet-94126.herokuapp.com/signup', { firstName, lastName, email, password })
-    // local dev axios call
-    axios
-      .post('http://localhost:8000/signup', {
-        firstName,
-        lastName,
-        email,
-        password
-      })
-
+    axios.post(`${API_URL}/signup`, { firstName, lastName, email, password })
       .then(res => {
         this.setState({ snackbarOpenSignUp: true, tabState: 1 });
         console.log(res.data);
