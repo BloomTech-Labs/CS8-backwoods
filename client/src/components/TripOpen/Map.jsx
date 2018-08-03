@@ -2,8 +2,10 @@ import React from 'react';
 import GoogleMapReact from 'google-map-react';
 
 const style = {
-  height: '45px',
-  width: '45px'
+  height: '40px',
+  width: '40px',
+  position: 'absolute',
+  transform: 'translate(-50%, -50%)'
 };
 const Marker = ({ text }) => (
   <img style={style} src={'https://i.imgur.com/Lsk9eVr.png'} alt="" />
