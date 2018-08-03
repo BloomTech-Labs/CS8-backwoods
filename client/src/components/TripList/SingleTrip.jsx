@@ -3,6 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import MapImg from './Google-Maps.jpg'
+import Grow from '@material-ui/core/Grow';
 
 
 const SingleTrip = (props) => {
@@ -15,6 +16,11 @@ const SingleTrip = (props) => {
   }
 
   return (
+    <Grow
+    in={props.animateList}
+    style={{ transformOrigin: '0 0 0' }}
+    {...(props.animateList ? { timeout: props.count } : {})}
+  >
     <Paper className="trip" elevation={1}>
       <Link to={TripOpen} style={{ textDecoration: "none" }}>
         <Typography
@@ -42,6 +48,7 @@ const SingleTrip = (props) => {
         }
       </div>
     </Paper>
+    </Grow>
   )
 }
 

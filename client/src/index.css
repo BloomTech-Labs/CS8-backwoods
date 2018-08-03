@@ -1,3 +1,6 @@
+body {
+  font-family: Roboto;
+}
 .mainWrapper {
   display: flex;
   width: 100vw; 
