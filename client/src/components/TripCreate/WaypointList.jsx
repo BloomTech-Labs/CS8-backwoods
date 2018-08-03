@@ -12,6 +12,7 @@ const WaypointList = props => {
       {props.wayPoints.map((wayPoint, index) => {
         return (
           <WayPoint
+            eta={props.eta}
             wayPoint={wayPoint}
             wayPointKey={index}
             key={index}
@@ -21,7 +22,7 @@ const WaypointList = props => {
             disableAddMarker={props.disableAddMarker}
             handleWayPointExpand={props.handleWayPointExpand}
             expanded={props.expanded}
-            markerEnabled={props.markerEnabled}
+            saveLocationEnabled={props.saveLocationEnabled}
           />
         );
       })}

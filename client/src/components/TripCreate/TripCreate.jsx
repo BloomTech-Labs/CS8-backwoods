@@ -7,6 +7,7 @@ import slugify from 'slugify';
 import axios from 'axios';
 import './TripCreate.css';
 
+let date = new Date().toISOString().split('T')[0];
 class TripCreate extends React.Component {
   constructor(props) {
     super(props);
@@ -19,14 +20,16 @@ class TripCreate extends React.Component {
       email: '',
       fireRedirect: false,
       markerName: '',
-      eta: '',
+      eta: date,
+      time: '',
       mapOpacity: 0.4,
-      lng: '',
-      lat: '',
+      lng: null,
+      lat: null,
       tripId: '',
       markers: [],
       MarkerCreated: false,
       disableAddMarker: false,
+      saveLocationEnabled: true,
       disableRemoveMarker: true,
       expanded: null
     };
@@ -43,6 +46,7 @@ class TripCreate extends React.Component {
     let newWayPoint = {
       markerName: 'Marker Name Here',
       eta: '',
+      time: '',
       lng: '',
       lat: '',
       tripId: ''
@@ -50,7 +54,8 @@ class TripCreate extends React.Component {
     this.setState(
       {
         wayPoints: [...this.state.wayPoints, newWayPoint],
-        disableAddMarker: true
+        disableAddMarker: true,
+        saveLocationEnabled: true,
       },
       this.activateMap
     );
@@ -59,18 +64,22 @@ class TripCreate extends React.Component {
   deactivateMap = () => {
     this.setState({
       mapOpacity: 0.4,
-      MarkerCreated: false
+      MarkerCreated: false,
+      time: '',
+      lat: null,
+      lng: null
     });
   };
 
   handleChange = name => event => {
-    this.setState({ [name]: event.target.value });
+    this.setState({ [name]: event.target.value }, this._CheckMarkers());
   };
 
   handleNewWaypoint = () => {
     let newWayPoint = {
       markerName: this.state.markerName,
       eta: this.state.eta,
+      time: this.state.time,
       lng: this.state.lng,
       lat: this.state.lat,
       tripId: ''
@@ -79,7 +88,8 @@ class TripCreate extends React.Component {
       {
         newMarkersArr: [...this.state.newMarkersArr, newWayPoint],
         disableAddMarker: false,
-        disableRemoveMarker: false
+        disableRemoveMarker: false,
+        saveLocationEnabled: true,
       },
       this.deactivateMap
     );
@@ -100,6 +110,7 @@ class TripCreate extends React.Component {
         markersArr.forEach(item => {
           item.tripId = tripId;
         });
+        console.log(markersArr);
         return axios.post(`${API_URL}/createMarker`, { markersArr }, { headers: { authorization: token } }
         );
       })
@@ -118,9 +129,17 @@ class TripCreate extends React.Component {
     this.state.markers.pop();
     this.setState({
       disableAddMarker: false,
-      disableRemoveMarker: true
-    });
+      eta: '',
+      time: '',
+      markerName: '',
+    }, this.markerCheck);
   };
+
+  markerCheck = () => {
+    if (this.state.newMarkersArr.length === 0) {
+      return this.setState({ disableRemoveMarker: true })
+    }
+  }
 
   addMarker = event => {
     // console.log('== CLICK ==');
@@ -137,7 +156,7 @@ class TripCreate extends React.Component {
     };
 
     this.state.markers.push(marker);
-    this.setState({ lat: lat, lng: lng });
+    this.setState({ lat: lat, lng: lng }, this.disableSaveLocation());
     // console.log(this.state.markers);
   };
 
@@ -147,6 +166,21 @@ class TripCreate extends React.Component {
     });
   };
 
+  disableSaveLocation = () => {
+    if (this.state.markerName.length > 0 && this.state.time.length > 0) {
+      return this.setState({ saveLocationEnabled: false })
+    } else {
+      return this.setState({ saveLocationEnabled: true })
+    }
+  }
+
+  _CheckMarkers = () => {
+    if (this.state.lat === null && this.state.lng === null) {
+      return this.setState({ saveLocationEnabled: true })
+    } else {
+      return this.setState({ saveLocationEnabled: false })
+    }
+  }
 
 
   render() {
@@ -154,9 +188,6 @@ class TripCreate extends React.Component {
       this.state.tripName.length > 0 &&
       this.state.startDate.length > 0 &&
       this.state.endDate.length > 0;
-    const markerEnabled =
-      this.state.markerName.length > 0 &&
-      this.state.eta.length > 0;
     return (
       <div className="tripCreateWrapper">
         <TripCreateForm
@@ -178,6 +209,7 @@ class TripCreate extends React.Component {
           />
 
           <WaypointList
+            eta={this.state.eta}
             handleChange={this.handleChange}
             addWaypoint={this.addWaypoint}
             wayPoints={this.state.wayPoints}
@@ -188,7 +220,7 @@ class TripCreate extends React.Component {
             disableRemoveMarker={this.state.disableRemoveMarker}
             expanded={this.state.expanded}
             handleWayPointExpand={this.handleWayPointExpand}
-            markerEnabled={markerEnabled}
+            saveLocationEnabled={this.state.saveLocationEnabled}
           />
         </div>
       </div>

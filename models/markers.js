@@ -10,8 +10,11 @@ const markers = (sequelize, DataTypes) => {
             allowNull: false
         },
         eta: {
-            type: DataTypes.STRING,
-            allowNull: false
+            type: DataTypes.DATEONLY,
+        },
+        time: {
+            type: DataTypes.TIME,
+            allowNull: false,
         },
         lng: {
             type: DataTypes.STRING,

@@ -14,7 +14,7 @@ const SingleTripOpen = props => {
           <Typography>Checkpoint Name: {props.marker.markerName}</Typography>
         </ExpansionPanelSummary>
         <ExpansionPanelDetails>
-          <Typography>ETA: {props.marker.eta}</Typography>
+          <Typography>ETA: {props.marker.eta} Time: {props.marker.time}</Typography>
         </ExpansionPanelDetails>
       </ExpansionPanel>
     </Paper>
