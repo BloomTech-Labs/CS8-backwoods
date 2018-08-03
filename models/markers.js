@@ -11,7 +11,6 @@ const markers = (sequelize, DataTypes) => {
         },
         eta: {
             type: DataTypes.DATEONLY,
-            // defaultValue: sequelize.literal('NOW()')
         },
         time: {
             type: DataTypes.TIME,
