@@ -13,7 +13,7 @@ const WaypointList = props => {
         End: {props.endDate}
       </Typography>
       {props.markers.map((marker, index) => {
-        return <SingleTripOpen marker={marker} />;
+        return <SingleTripOpen marker={marker} key={marker.markerName} />;
       })}
     </Paper>
   );

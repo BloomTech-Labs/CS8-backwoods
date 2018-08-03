@@ -14,8 +14,12 @@ class NavBreadcrumb extends React.Component {
       return null;
     } else {
       return [
-        <i className="material-icons">keyboard_arrow_right</i>,
-        <Typography className="breadCrumb">{t[t.length - 1]}</Typography>
+        <i key={1} className="material-icons">
+          keyboard_arrow_right
+        </i>,
+        <Typography key={2} className="breadCrumb">
+          {t[t.length - 1]}
+        </Typography>
       ];
     }
   }
