@@ -12,17 +12,16 @@ class MainTriplist extends React.Component {
     let count = 550;
     return (
       <div className="mainTripList">
-      {console.log(this.props.grow)}
         {
           this.props.trips.map((trip, index) => {
-            if(index > 0) {
+            if (index > 0) {
               count += 250;
             } else if (count > 2000) {
               count -= 250;
             }
             return (
-              <div key={index}>              
-                <SingleTrip 
+              <div key={index}>
+                <SingleTrip
                   tripName={trip.tripName}
                   animateList={this.state.animateList}
                   count={count}
@@ -37,7 +36,7 @@ class MainTriplist extends React.Component {
                   index={index}
                   isLoggedIn={this.props.isLoggedIn}
                 />
-                
+
               </div>
             )
           })}
@@ -54,6 +53,7 @@ class MainTriplist extends React.Component {
                 variant="fab"
                 color="primary"
                 aria-label="Add"
+                onClick={this.props.setSaveTripFalse}
               >
                 <AddIcon />
               </Button>

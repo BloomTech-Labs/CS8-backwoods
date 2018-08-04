@@ -5,21 +5,11 @@ import Map from './Map.jsx';
 import WaypointList from './WaypointList';
 import slugify from 'slugify';
 import axios from 'axios';
-import Modal from '@material-ui/core/Modal';
 import './TripCreate.css';
 
 let date = new Date().toISOString().split('T')[0];
 
-function getModalStyle() {
-  const top = 50;
-  const left = 50;
 
-  return {
-    top: `${top}%`,
-    left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`
-  };
-}
 class TripCreate extends React.Component {
   constructor(props) {
     super(props);
@@ -116,7 +106,7 @@ class TripCreate extends React.Component {
     axios.post(`${API_URL}/createTrips`, { tripName, startDate, endDate, email, slug: slug }, { headers: { authorization: token } })
       .then(res => {
         this.props.getUsersAgain();
-        this.setState({ fireRedirect: true });
+        this.setState({ fireRedirect: true }, this.props.setSaveTripTrue());
         const tripId = res.data.id;
         let markersArr = [...newMarkersArr];
         markersArr.forEach(item => {
@@ -132,7 +122,6 @@ class TripCreate extends React.Component {
       .catch(error => {
         console.log(error);
       });
-      // this.setSaveTrip()
   };
 
   // removes marker after hitting save location
@@ -235,12 +224,7 @@ class TripCreate extends React.Component {
             handleWayPointExpand={this.handleWayPointExpand}
             saveLocationEnabled={this.state.saveLocationEnabled}
           />
-        </div>    //BOOL 
-        <Modal open={this.props.tripSavedModal} onClose={this.props.tripModal}>
-        <div style={getModalStyle()}>
-          <h1>Shits crazy yo!</h1>
         </div>
-        </Modal>
       </div>
     );
   }

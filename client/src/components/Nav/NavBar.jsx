@@ -20,31 +20,31 @@ const NavBar = (props) => {
     <Paper className="navBar">
       <List component="nav">
         <Link to={`/${props.user}`}>
-          <ListItem button onClick={props.checkIfTripSaved}>
+          <ListItem button onClick={(e) => props.checkIfTripSaved(e, `/${props.user}`)}>
             <ListItemText primary="Trips" />
           </ListItem>
         </Link>
         <Divider />
-        {props.isLoggedIn && 
-        <div>
-        <Link to={`/${props.user}/archived`}>
-          <ListItem button onClick={props.checkIfTripSaved}>
-            <ListItemText primary="Archived" />
-          </ListItem>
-        </Link>
-        <Divider />
-        <Link to={`/${props.user}/billing`}>
-          <ListItem button onClick={props.checkIfTripSaved}>
-            <ListItemText primary="Billing" />
-          </ListItem>
-        </Link>
-        <Divider />
-        <Link to={`/${props.user}/settings`}>
-          <ListItem button onClick={props.checkIfTripSaved}>
-            <ListItemText primary="Account" />
-          </ListItem>
-        </Link>
-        </div>
+        {props.isLoggedIn &&
+          <div>
+            <Link to={`/${props.user}/archived`}>
+              <ListItem button onClick={(e) => props.checkIfTripSaved(e, `/${props.user}/archived`)}>
+                <ListItemText primary="Archived" />
+              </ListItem>
+            </Link>
+            <Divider />
+            <Link to={`/${props.user}/billing`}>
+              <ListItem button onClick={(e) => props.checkIfTripSaved(e, `/${props.user}/billing`)}>
+                <ListItemText primary="Billing" />
+              </ListItem>
+            </Link>
+            <Divider />
+            <Link to={`/${props.user}/settings`}>
+              <ListItem button onClick={(e) => props.checkIfTripSaved(e, `/${props.user}/settings`)}>
+                <ListItemText primary="Account" />
+              </ListItem>
+            </Link>
+          </div>
         }
       </List>
     </Paper>

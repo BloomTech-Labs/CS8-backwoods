@@ -9,15 +9,15 @@ import registerServiceWorker from './registerServiceWorker';
 import './index.css';
 
 // hot module replacement
-if (module.hot) {
-  module.hot.accept();
-}
+// if (module.hot) {
+//   module.hot.accept();
+// }
 ////////////////////////
 
 ReactDOM.render(
   <Router>
     <App />
   </Router>,
-    document.getElementById('root')
+  document.getElementById('root')
 );
 registerServiceWorker();

@@ -54,7 +54,8 @@ class User extends React.Component {
       snackbarVertical: 'top',
       snackbarHorizontal: 'center',
       tripSavedModal: false,
-      isTripSaved: false,
+      isTripSaved: true,
+      navRedirect: '',
     }
     this.archiveTrip = this.archiveTrip.bind(this);
   }
@@ -88,19 +89,51 @@ class User extends React.Component {
       console.log(err);
     })
   }
-  setSaveTrip = () => {
-    this.setState({ isTripSaved: this.state.isTripSaved})
+
+  setSaveTripTrue = () => {
+    console.log('IN SET SAVE TRIP TRUE')
+    this.setState({
+      isTripSaved:
+        true
+    })
   }
-  checkIfTripSaved = () => {
-    if(this.state.isTripSaved) {
-      return 
+
+  setSaveTripFalse = () => {
+    console.log('IN SET SAVE TRIP FALSE')
+    this.setState({
+      isTripSaved:
+        false
+    })
+  }
+
+  modalContinue = () => {
+    this.setState({ tripSavedModal: false, isTripSaved: true })
+  }
+
+  checkIfTripSaved = (e, navLink) => {
+    this.setState({ navRedirect: navLink })
+    if (!this.state.isTripSaved) {
+      console.log('is trip saved equal to false', this.state.isTripSaved);
+      e.preventDefault();
+      this.tripModalTrue();
     } else {
-      this.tripModal()
+      console.log('is trip saved equal to true', this.state.isTripSaved);
+      return
     }
   }
 
-  tripModal = () => {
-    this.setState({ tripSavedModal: !this.state.tripSavedModal})
+  tripModalTrue = () => {
+    console.log('IN TRIP MODAL TRUE')
+    this.setState({
+      tripSavedModal: true
+    })
+  }
+
+  tripModalFalse = () => {
+    console.log('IN TRIP MODAL FALSE')
+    this.setState({
+      tripSavedModal: false
+    })
   }
 
   archiveTrip(TripId, index) {
@@ -135,11 +168,16 @@ class User extends React.Component {
             <Redirect to='/404' />
             :
             <div className="mainWrapper">
-              <Nav 
+              <Nav
                 user={this.props.email}
-                isLoggedIn={this.props.isLoggedIn} 
+                isLoggedIn={this.props.isLoggedIn}
                 savedTripCheck={this.savedTripCheck}
-                checkIfTripSaved={this.checkIfTripSaved}/>
+                tripModalFalse={this.tripModalFalse}
+                checkIfTripSaved={this.checkIfTripSaved}
+                tripSavedModal={this.state.tripSavedModal}
+                navRedirect={this.state.navRedirect}
+                setSaveTripTrue={this.state.setSaveTripTrue}
+                modalContinue={this.modalContinue} />
               <Switch>
                 <Route path="/:user"
                   render={(props) => <MainTriplist {...props}
@@ -147,15 +185,15 @@ class User extends React.Component {
                     user={this.props.email}
                     archiveTrip={this.archiveTrip}
                     isLoggedIn={this.props.isLoggedIn}
+                    setSaveTripFalse={this.setSaveTripFalse}
                   />} exact />
-                <Route path="/:user/create" render={props => 
-                  (<TripCreate {...props} 
-                    setSaveTrip={this.setSaveTrip}
-                    email={this.props.email} 
-                    user={this.props.email} 
+                <Route path="/:user/create" render={props =>
+                  (<TripCreate {...props}
+                    setSaveTripTrue={this.setSaveTripTrue}
+                    email={this.props.email}
+                    user={this.props.email}
                     getUsersAgain={this.getUsersAgain}
-                    tripModal={this.tripModal}
-                    tripSavedModal={this.state.tripSavedModal}/>)} exact />
+                  />)} exact />
                 <Route path="/:user/archived" render={props => (<GetArchived {...props} getUsersAgain={this.getUsersAgain} />)} exact />
                 <Route path="/:user/billing" component={BillingForm} exact />
                 <Route path="/:user/settings" component={AccountForm} exact />
