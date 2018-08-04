@@ -53,6 +53,8 @@ class User extends React.Component {
       snackbarError: false,
       snackbarVertical: 'top',
       snackbarHorizontal: 'center',
+      tripSavedModal: false,
+      isTripSaved: false,
     }
     this.archiveTrip = this.archiveTrip.bind(this);
   }
@@ -85,6 +87,20 @@ class User extends React.Component {
       }
       console.log(err);
     })
+  }
+  setSaveTrip = () => {
+    this.setState({ isTripSaved: this.state.isTripSaved})
+  }
+  checkIfTripSaved = () => {
+    if(this.state.isTripSaved) {
+      return 
+    } else {
+      this.tripModal()
+    }
+  }
+
+  tripModal = () => {
+    this.setState({ tripSavedModal: !this.state.tripSavedModal})
   }
 
   archiveTrip(TripId, index) {
@@ -119,7 +135,11 @@ class User extends React.Component {
             <Redirect to='/404' />
             :
             <div className="mainWrapper">
-              <Nav user={this.props.email} isLoggedIn={this.props.isLoggedIn} />
+              <Nav 
+                user={this.props.email}
+                isLoggedIn={this.props.isLoggedIn} 
+                savedTripCheck={this.savedTripCheck}
+                checkIfTripSaved={this.checkIfTripSaved}/>
               <Switch>
                 <Route path="/:user"
                   render={(props) => <MainTriplist {...props}
@@ -128,7 +148,14 @@ class User extends React.Component {
                     archiveTrip={this.archiveTrip}
                     isLoggedIn={this.props.isLoggedIn}
                   />} exact />
-                <Route path="/:user/create" render={props => (<TripCreate {...props} email={this.props.email} user={this.props.email} getUsersAgain={this.getUsersAgain} />)} exact />
+                <Route path="/:user/create" render={props => 
+                  (<TripCreate {...props} 
+                    setSaveTrip={this.setSaveTrip}
+                    email={this.props.email} 
+                    user={this.props.email} 
+                    getUsersAgain={this.getUsersAgain}
+                    tripModal={this.tripModal}
+                    tripSavedModal={this.state.tripSavedModal}/>)} exact />
                 <Route path="/:user/archived" render={props => (<GetArchived {...props} getUsersAgain={this.getUsersAgain} />)} exact />
                 <Route path="/:user/billing" component={BillingForm} exact />
                 <Route path="/:user/settings" component={AccountForm} exact />

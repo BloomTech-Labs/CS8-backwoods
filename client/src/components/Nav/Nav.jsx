@@ -7,7 +7,7 @@ const Nav = (props) => {
   return (
     <div className="navWrapper">  
       <NavBreadcrumb user={props.user}/>
-      <NavBar user={props.user} isLoggedIn={props.isLoggedIn}/>
+      <NavBar user={props.user} isLoggedIn={props.isLoggedIn} checkIfTripSaved={props.checkIfTripSaved}/>
     </div>
   );
 };
