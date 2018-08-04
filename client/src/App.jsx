@@ -23,9 +23,10 @@ class App extends Component {
       validatePassword: '',
       isLoggedIn: false,
       snackbarOpenSignIn: false,
-      snackbarOpenError: false,
+      snackbarPasswordMismatch: false,
       snackbarOpenSignUp: false,
       snackbarOpenSignUpError: false,
+      snackbarUserDoesNotExist: false,
       snackbarLogOut: false,
       snackbarVertical: 'top',
       snackbarHorizontal: 'center',
@@ -54,8 +55,13 @@ class App extends Component {
         console.log(res.data);
       })
       .catch(error => {
-        this.setState({ snackbarOpenError: true });
-        console.log('INCORRECT USERNAME/PASSWORD');
+        if(error.response.status === 423) {
+          console.log('User does not exist')
+          this.setState({ snackbarUserDoesNotExist: true})
+        } else if (error.response.status === 422) {
+          console.log('Password does not match')
+          this.setState({ snackbarPasswordMismatch: true });
+        }
       });
   };
 
@@ -94,10 +100,11 @@ class App extends Component {
       return;
     }
     this.setState({ snackbarOpenSignIn: false });
-    this.setState({ snackbarOpenError: false });
+    this.setState({ snackbarPasswordMismatch: false });
     this.setState({ snackbarOpenSignUp: false });
     this.setState({ snackbarOpenSignUpError: false });
     this.setState({ snackbarLogOut: false });
+    this.setState({ snackbarUserDoesNotExist: false });
   };
   handleTabChange = (event, value) => {
     this.setState({ tabState: value });
@@ -112,13 +119,14 @@ class App extends Component {
           <React.Fragment>
             <MainSnackbar
               snackbarOpenSignIn={this.state.snackbarOpenSignIn}
-              snackbarOpenError={this.state.snackbarOpenError}
+              snackbarPasswordMismatch={this.state.snackbarPasswordMismatch}
               snackbarOpenSignUp={this.state.snackbarOpenSignUp}
               snackbarOpenSignUpError={this.state.snackbarOpenSignUpError}
               snackbarLogOut={this.state.snackbarLogOut}
               handleSnackbarClose={this.handleSnackbarClose}
               snackbarVertical={this.state.snackbarVertical}
               snackbarHorizontal={this.state.snackbarHorizontal}
+              snackbarUserDoesNotExist={this.state.snackbarUserDoesNotExist}
             />
             <CssBaseline>
               <SignInOut

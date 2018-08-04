@@ -13,7 +13,7 @@ const login = (req, res, next) => {
   )
     .then((user) => {
       if (!user) {
-        res.status(422).json({"error": "User does not exist"})
+        res.status(423).json({"error": "User does not exist"})
         return
       }
       bcrypt.compare(req.body.password, user.password, (err, hashMatch) => {
