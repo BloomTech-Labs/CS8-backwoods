@@ -6,6 +6,9 @@ import Modal from '@material-ui/core/Modal';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
+import Paper from '@material-ui/core/Paper';
+import Fade from '@material-ui/core/Fade';
+
 
 function getModalStyle() {
   const top = 50;
@@ -34,18 +37,27 @@ const Nav = (props) => {
     <div className="navWrapper">
       <NavBreadcrumb user={props.user} />
       <NavBar user={props.user} isLoggedIn={props.isLoggedIn} checkIfTripSaved={props.checkIfTripSaved} />
-      <Modal open={props.tripSavedModal} onClose={props.tripModalFalse}>
-        <div style={getModalStyle()} className={classes.paper}>
-          <h1>
-            Your trip will not be saved if you leave this page.
-            Do you want to Continue?
-          </h1>
-          <Link to={props.navRedirect}>
-            <Button onClick={props.modalContinue}>
-              Continue
-          </Button>
-          </Link>
-        </div>
+      <Modal 
+        open={props.tripSavedModal} 
+        onClose={props.tripModalFalse}
+        disableAutoFocus={true}
+      >
+        <Fade in={props.tripSavedModal}>
+          <Paper style={getModalStyle()} className={classes.paper} elevation={4}>
+            <h1>
+              Your trip will not be saved if you leave this page.
+              Do you want to Continue?
+            </h1>
+            <Button onClick={props.tripModalFalse}>
+              Stay
+            </Button>
+            <Link className="leaveButton" to={props.navRedirect}>
+              <Button onClick={props.modalContinue}>
+                Leave
+              </Button>
+            </Link>
+          </Paper>
+        </Fade>
       </Modal>
     </div>
   );

@@ -91,19 +91,11 @@ class User extends React.Component {
   }
 
   setSaveTripTrue = () => {
-    console.log('IN SET SAVE TRIP TRUE')
-    this.setState({
-      isTripSaved:
-        true
-    })
+    this.setState({ isTripSaved: true })
   }
 
   setSaveTripFalse = () => {
-    console.log('IN SET SAVE TRIP FALSE')
-    this.setState({
-      isTripSaved:
-        false
-    })
+    this.setState({ isTripSaved: false })
   }
 
   modalContinue = () => {
@@ -113,27 +105,19 @@ class User extends React.Component {
   checkIfTripSaved = (e, navLink) => {
     this.setState({ navRedirect: navLink })
     if (!this.state.isTripSaved) {
-      console.log('is trip saved equal to false', this.state.isTripSaved);
       e.preventDefault();
       this.tripModalTrue();
     } else {
-      console.log('is trip saved equal to true', this.state.isTripSaved);
       return
     }
   }
 
   tripModalTrue = () => {
-    console.log('IN TRIP MODAL TRUE')
-    this.setState({
-      tripSavedModal: true
-    })
+    this.setState({ tripSavedModal: true })
   }
 
   tripModalFalse = () => {
-    console.log('IN TRIP MODAL FALSE')
-    this.setState({
-      tripSavedModal: false
-    })
+    this.setState({ tripSavedModal: false })
   }
 
   archiveTrip(TripId, index) {
