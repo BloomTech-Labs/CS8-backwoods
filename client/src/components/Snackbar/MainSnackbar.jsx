@@ -25,7 +25,7 @@ const styles1 = theme => ({
 });
 
 const MySnackbarContentWrapper = withStyles(styles1)(MySnackbarContent);
-
+// snackbarUserDoesNotExist
 
 const MainSnackbar = (props) => {
   return (
@@ -50,14 +50,29 @@ const MainSnackbar = (props) => {
             vertical: props.snackbarVertical,
             horizontal: props.snackbarHorizontal
           }}
-          open={props.snackbarOpenError}
+          open={props.snackbarPasswordMismatch}
           onClose={props.handleSnackbarClose}
           autoHideDuration={2000}
         >
           <MySnackbarContentWrapper
             onClose={props.handleSnackbarClose}
             variant="error"
-            message="Incorrect Username/Password"
+            message="Password does not match"
+          />
+        </Snackbar>
+        <Snackbar
+          anchorOrigin={{
+            vertical: props.snackbarVertical,
+            horizontal: props.snackbarHorizontal
+          }}
+          open={props.snackbarUserDoesNotExist}
+          onClose={props.handleSnackbarClose}
+          autoHideDuration={2000}
+        >
+          <MySnackbarContentWrapper
+            onClose={props.handleSnackbarClose}
+            variant="error"
+            message="User does not exist"
           />
         </Snackbar>
         <Snackbar
