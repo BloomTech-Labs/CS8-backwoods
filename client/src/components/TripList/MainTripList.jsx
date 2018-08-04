@@ -7,15 +7,25 @@ import SingleTrip from './SingleTrip'
 import { Link } from 'react-router-dom';
 import './TripList.css';
 class MainTriplist extends React.Component {
+  state = { animateList: true }
   render() {
+    let count = 550;
     return (
       <div className="mainTripList">
+      {console.log(this.props.grow)}
         {
           this.props.trips.map((trip, index) => {
+            if(index > 0) {
+              count += 250;
+            } else if (count > 2000) {
+              count -= 250;
+            }
             return (
-              <div key={index}>
-
-                <SingleTrip tripName={trip.tripName}
+              <div key={index}>              
+                <SingleTrip 
+                  tripName={trip.tripName}
+                  animateList={this.state.animateList}
+                  count={count}
                   createdAt={trip.createdAt}
                   updatedAt={trip.updatedAt}
                   startDate={trip.startDate}
@@ -27,10 +37,9 @@ class MainTriplist extends React.Component {
                   index={index}
                   isLoggedIn={this.props.isLoggedIn}
                 />
-
+                
               </div>
             )
-
           })}
         {this.props.isLoggedIn &&
           <Paper className="trip" id="addNewTripWrapper" elevation={1}>
