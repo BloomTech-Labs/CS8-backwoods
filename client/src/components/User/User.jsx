@@ -126,7 +126,7 @@ class User extends React.Component {
     const id = TripId;
     axios.put(`${API_URL}/${this.props.match.params.user}/archiveTrip`, { id: id, archived: true }, { headers: { authorization: token } })
       .then(res => {
-        const newTrips = trips.splice(index, 1)
+        trips.splice(index, 1)
         this.setState({ trips: trips, snackbarArchive: true })
         console.log(res)
 
