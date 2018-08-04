@@ -8,6 +8,8 @@ import axios from 'axios';
 import './TripCreate.css';
 
 let date = new Date().toISOString().split('T')[0];
+
+
 class TripCreate extends React.Component {
   constructor(props) {
     super(props);
@@ -104,7 +106,7 @@ class TripCreate extends React.Component {
     axios.post(`${API_URL}/createTrips`, { tripName, startDate, endDate, email, slug: slug }, { headers: { authorization: token } })
       .then(res => {
         this.props.getUsersAgain();
-        this.setState({ fireRedirect: true });
+        this.setState({ fireRedirect: true }, this.props.setSaveTripTrue());
         const tripId = res.data.id;
         let markersArr = [...newMarkersArr];
         markersArr.forEach(item => {

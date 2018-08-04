@@ -53,6 +53,9 @@ class User extends React.Component {
       snackbarError: false,
       snackbarVertical: 'top',
       snackbarHorizontal: 'center',
+      tripSavedModal: false,
+      isTripSaved: true,
+      navRedirect: '',
     }
     this.archiveTrip = this.archiveTrip.bind(this);
   }
@@ -87,13 +90,43 @@ class User extends React.Component {
     })
   }
 
+  setSaveTripTrue = () => {
+    this.setState({ isTripSaved: true })
+  }
+
+  setSaveTripFalse = () => {
+    this.setState({ isTripSaved: false })
+  }
+
+  modalContinue = () => {
+    this.setState({ tripSavedModal: false, isTripSaved: true })
+  }
+
+  checkIfTripSaved = (e, navLink) => {
+    this.setState({ navRedirect: navLink })
+    if (!this.state.isTripSaved) {
+      e.preventDefault();
+      this.tripModalTrue();
+    } else {
+      return
+    }
+  }
+
+  tripModalTrue = () => {
+    this.setState({ tripSavedModal: true })
+  }
+
+  tripModalFalse = () => {
+    this.setState({ tripSavedModal: false })
+  }
+
   archiveTrip(TripId, index) {
     const trips = [...this.state.trips]
     const token = localStorage.getItem('token');
     const id = TripId;
     axios.put(`${API_URL}/${this.props.match.params.user}/archiveTrip`, { id: id, archived: true }, { headers: { authorization: token } })
       .then(res => {
-        const newTrips = trips.splice(index, 1)
+        trips.splice(index, 1)
         this.setState({ trips: trips, snackbarArchive: true })
         console.log(res)
 
@@ -119,7 +152,16 @@ class User extends React.Component {
             <Redirect to='/404' />
             :
             <div className="mainWrapper">
-              <Nav user={this.props.email} isLoggedIn={this.props.isLoggedIn} />
+              <Nav
+                user={this.props.email}
+                isLoggedIn={this.props.isLoggedIn}
+                savedTripCheck={this.savedTripCheck}
+                tripModalFalse={this.tripModalFalse}
+                checkIfTripSaved={this.checkIfTripSaved}
+                tripSavedModal={this.state.tripSavedModal}
+                navRedirect={this.state.navRedirect}
+                setSaveTripTrue={this.state.setSaveTripTrue}
+                modalContinue={this.modalContinue} />
               <Switch>
                 <Route path="/:user"
                   render={(props) => <MainTriplist {...props}
@@ -127,8 +169,15 @@ class User extends React.Component {
                     user={this.props.email}
                     archiveTrip={this.archiveTrip}
                     isLoggedIn={this.props.isLoggedIn}
+                    setSaveTripFalse={this.setSaveTripFalse}
                   />} exact />
-                <Route path="/:user/create" render={props => (<TripCreate {...props} email={this.props.email} user={this.props.email} getUsersAgain={this.getUsersAgain} />)} exact />
+                <Route path="/:user/create" render={props =>
+                  (<TripCreate {...props}
+                    setSaveTripTrue={this.setSaveTripTrue}
+                    email={this.props.email}
+                    user={this.props.email}
+                    getUsersAgain={this.getUsersAgain}
+                  />)} exact />
                 <Route path="/:user/archived" render={props => (<GetArchived {...props} getUsersAgain={this.getUsersAgain} />)} exact />
                 <Route path="/:user/billing" component={BillingForm} exact />
                 <Route path="/:user/settings" component={AccountForm} exact />
