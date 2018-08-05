@@ -1,5 +1,8 @@
 import React from 'react';
 import SingleAchived from './SingleAchived';
+import Typography from '@material-ui/core/Typography';
+import Paper from '@material-ui/core/Paper';
+import './Archived.css';
 
 const Archived = props => {
   if (props.trips.length > 0) {
@@ -30,7 +33,9 @@ const Archived = props => {
   } else {
     return (
       <div className="mainTripList">
-        <h1>no archived trips</h1>{' '}
+        <Paper className="noArchivedTripsPaper">
+          <Typography variant="headline">No archived trips yet!</Typography>
+        </Paper>
       </div>
     );
   }

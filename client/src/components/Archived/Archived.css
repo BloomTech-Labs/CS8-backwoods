@@ -1,1 +1,6 @@
-/* styles */
+.noArchivedTripsPaper {
+  height: 30%;
+  padding: 5%;
+  width: 350px;
+  align-content: center;
+}
