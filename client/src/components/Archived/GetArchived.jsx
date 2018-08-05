@@ -107,7 +107,7 @@ class GetArchived extends React.Component {
             horizontal: this.state.snackbarHorizontal
           }}
           open={this.state.snackbarError}
-          onClose={this.state.snackbarHorizontal}
+          onClose={this.handleSnackbarClose}
           autoHideDuration={2000}
         >
           <MySnackbarContentWrapper
