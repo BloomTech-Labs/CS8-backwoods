@@ -9,7 +9,6 @@ import { Link } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Fade from '@material-ui/core/Fade';
 
-
 function getModalStyle() {
   const top = 50;
   const left = 50;
@@ -26,35 +25,38 @@ const styles = theme => ({
     position: 'absolute',
     width: theme.spacing.unit * 50,
     backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4
+    boxShadow: theme.shadows[5]
   }
 });
 
-const Nav = (props) => {
+const Nav = props => {
   const { classes } = props;
   return (
     <div className="navWrapper">
       <NavBreadcrumb user={props.user} />
-      <NavBar user={props.user} isLoggedIn={props.isLoggedIn} checkIfTripSaved={props.checkIfTripSaved} />
-      <Modal 
-        open={props.tripSavedModal} 
+      <NavBar
+        user={props.user}
+        isLoggedIn={props.isLoggedIn}
+        checkIfTripSaved={props.checkIfTripSaved}
+      />
+      <Modal
+        open={props.tripSavedModal}
         onClose={props.tripModalFalse}
         disableAutoFocus={true}
       >
         <Fade in={props.tripSavedModal}>
-          <Paper style={getModalStyle()} className={classes.paper} elevation={4}>
+          <Paper
+            style={getModalStyle()}
+            className={classes.paper}
+            elevation={4}
+          >
             <h1>
-              Your trip will not be saved if you leave this page.
-              Do you want to Continue?
+              Your trip will not be saved if you leave this page. Do you want to
+              Continue?
             </h1>
-            <Button onClick={props.tripModalFalse}>
-              Stay
-            </Button>
+            <Button onClick={props.tripModalFalse}>Stay</Button>
             <Link className="leaveButton" to={props.navRedirect}>
-              <Button onClick={props.modalContinue}>
-                Leave
-              </Button>
+              <Button onClick={props.modalContinue}>Leave</Button>
             </Link>
           </Paper>
         </Fade>
@@ -63,7 +65,6 @@ const Nav = (props) => {
   );
 };
 
-
-const NavWrapped = withStyles(styles)(Nav)
+const NavWrapped = withStyles(styles)(Nav);
 
 export default NavWrapped;

@@ -4,8 +4,8 @@ import { withStyles } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import Tabs from './Tabs.jsx';
-import { Link } from 'react-router-dom'
-import './SignInOut.css'
+import { Link } from 'react-router-dom';
+import './SignInOut.css';
 function getModalStyle() {
   const top = 50;
   const left = 50;
@@ -22,19 +22,20 @@ const styles = theme => ({
     position: 'absolute',
     width: theme.spacing.unit * 50,
     backgroundColor: theme.palette.background.paper,
-    boxShadow: theme.shadows[5],
-    padding: theme.spacing.unit * 4
+    boxShadow: theme.shadows[5]
   }
 });
-const SignInOut = (props) => {
+const SignInOut = props => {
   const { classes } = props;
   return (
     <div className="singInOutWrapper">
-      {props.isLoggedIn ? 
-        <Link to="/"><Button onClick={props.handleLogInOut}>log out</Button></Link>
-        :
+      {props.isLoggedIn ? (
+        <Link to="/">
+          <Button onClick={props.handleLogInOut}>log out</Button>
+        </Link>
+      ) : (
         <Button onClick={props.handleOpen}>Sign Up / Sign In</Button>
-      }
+      )}
       <Modal open={props.open} onClose={props.handleClose}>
         <div style={getModalStyle()} className={classes.paper}>
           <Tabs
@@ -52,8 +53,8 @@ const SignInOut = (props) => {
         </div>
       </Modal>
     </div>
-  )
-}
+  );
+};
 
 SignInOut.propTypes = {
   classes: PropTypes.object.isRequired
