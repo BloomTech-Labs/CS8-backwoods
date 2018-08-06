@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import axios from 'axios';
 import MainSnackbar from './components/Snackbar/MainSnackbar';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, withRouter } from 'react-router-dom';
 import SignInOut from './components/SignInOut/SignInOut.jsx';
 import Landing from './components/Landing/Landing.jsx';
 // import DebugRoutes from './components/Debug/DebugRoutes.jsx';
@@ -30,6 +30,7 @@ class App extends Component {
       snackbarLogOut: false,
       snackbarVertical: 'top',
       snackbarHorizontal: 'center',
+      snackbarAuthRedirect: false,
       tabState: 0,
       open: false,
       fireRedirect: false
@@ -51,7 +52,7 @@ class App extends Component {
           { snackbarOpenSignIn: true, open: false, fireRedirect: true, isLoggedIn: true },
         );
         localStorage.setItem('token', res.data.token);
-        console.log(res.data);
+        this.props.history.push(`/${this.state.email}`)
       })
       .catch(error => {
         if(error.response.status === 423) {
@@ -92,23 +93,33 @@ class App extends Component {
       fireRedirect: !this.state.fireRedirect
     });
     localStorage.removeItem('token');
+    this.props.history.push("/")
   };
 
   handleSnackbarClose = (event, reason) => {
     if (reason === 'clickaway') {
       return;
     }
-    this.setState({ snackbarOpenSignIn: false });
-    this.setState({ snackbarPasswordMismatch: false });
-    this.setState({ snackbarOpenSignUp: false });
-    this.setState({ snackbarOpenSignUpError: false });
-    this.setState({ snackbarLogOut: false });
-    this.setState({ snackbarUserDoesNotExist: false });
+    this.setState({ 
+      snackbarOpenSignIn: false,
+      snackbarPasswordMismatch: false,
+      snackbarOpenSignUp: false,
+      snackbarOpenSignUpError: false,
+      snackbarLogOut: false,
+      snackbarUserDoesNotExist: false,
+      snackbarAuthRedirect: false
+    });
   };
   handleTabChange = (event, value) => {
     this.setState({ tabState: value });
   };
-
+  unauthorizedRedirect = () => {
+    this.setState({
+      tabState: 1,
+      open: true,
+      snackbarAuthRedirect: true
+    })
+  }
   render() {
     const { fireRedirect } = this.state;
     return (
@@ -126,6 +137,7 @@ class App extends Component {
               snackbarVertical={this.state.snackbarVertical}
               snackbarHorizontal={this.state.snackbarHorizontal}
               snackbarUserDoesNotExist={this.state.snackbarUserDoesNotExist}
+              snackbarAuthRedirect={this.state.snackbarAuthRedirect}
             />
             <CssBaseline>
               <SignInOut
@@ -146,6 +158,7 @@ class App extends Component {
                 open={this.state.open}
               />
               <React.Fragment>
+              <Route path="/" component={Landing} exact/>
                 <Route
                   path="/:user"
                   render={props => (
@@ -153,22 +166,13 @@ class App extends Component {
                       {...props}
                       isLoggedIn={this.state.isLoggedIn}
                       email={this.state.email}
+                      unauthorizedRedirect={this.unauthorizedRedirect}
                     />
                   )}
                 />
                 {/* If user logs in redirect User otherwise display landing page */}
-                <Route
-                  exact
-                  path="/"
-                  render={() =>
-                    fireRedirect ? (
-                      <Redirect to={`/${this.state.email}`} />
-                    ) : (
-                        <Landing />
-                      )
-                  }
-                />
-                <Route path="/404" component={BackWoods404} />
+                
+                {/* <Route path="/404" component={BackWoods404} /> */}
               </React.Fragment>
             </CssBaseline>
           </React.Fragment>
@@ -179,4 +183,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default withRouter(App);

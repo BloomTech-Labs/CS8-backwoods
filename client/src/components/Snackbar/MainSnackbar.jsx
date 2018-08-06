@@ -120,6 +120,21 @@ const MainSnackbar = (props) => {
             message="User already exists!"
           />
         </Snackbar>
+        <Snackbar
+          anchorOrigin={{
+            vertical: props.snackbarVertical,
+            horizontal: props.snackbarHorizontal
+          }}
+          open={props.snackbarAuthRedirect}
+          onClose={props.handleSnackbarClose}
+          autoHideDuration={2000}
+        >
+          <MySnackbarContentWrapper
+            onClose={props.handleSnackbarClose}
+            variant="error"
+            message="Please Sign In"
+          />
+        </Snackbar>
     </React.Fragment>
   )
 }

@@ -6,14 +6,33 @@ import TripCreate from '../TripCreate/TripCreate';
 import BillingForm from '../Billing/BillingForm';
 import AccountForm from '../Account/AccountForm';
 import GetArchived from '../Archived/GetArchived';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import axios from 'axios';
 import TripOpen from '../TripOpen/TripOpen';
-import { Switch } from 'react-router-dom'
 import MySnackbarContent from '../Snackbar/MySnackbarContent';
 import Snackbar from '@material-ui/core/Snackbar';
 import green from '@material-ui/core/colors/green';
 import { withStyles } from '@material-ui/core/styles';
+
+const RestrictedRoute = ({ component: Component, isLoggedIn, unauthorizedRedirect, ...rest }) => {
+  return isLoggedIn ? (
+    <div>
+      {console.log('hell')}
+      <Route {...rest} render={props => <Component {...props} />} />
+    </div>
+   
+  ) : (
+    <div>
+      {unauthorizedRedirect()}
+      <Redirect to="/" />
+    </div>
+    
+  );
+};
+
+   
+  
+
 
 const styles1 = theme => ({
   success: {
@@ -147,10 +166,10 @@ class User extends React.Component {
   render() {
     return (
       <div>
-        {
+        {/* {
           this.state.noUser ?
             <Redirect to='/404' />
-            :
+            : */}
             <div className="mainWrapper">
               <Nav
                 user={this.props.email}
@@ -171,20 +190,26 @@ class User extends React.Component {
                     isLoggedIn={this.props.isLoggedIn}
                     setSaveTripFalse={this.setSaveTripFalse}
                   />} exact />
-                <Route path="/:user/create" render={props =>
-                  (<TripCreate {...props}
-                    setSaveTripTrue={this.setSaveTripTrue}
-                    email={this.props.email}
-                    user={this.props.email}
-                    getUsersAgain={this.getUsersAgain}
-                  />)} exact />
+
+                  
+                <RestrictedRoute 
+                  path="/:user/create" 
+                  isLoggedIn={this.props.isLoggedIn} 
+                  setSaveTripTrue={this.setSaveTripTrue}
+                  email={this.props.email}
+                  user={this.props.email}
+                  getUsersAgain={this.getUsersAgain}
+                  component={TripCreate}
+                  unauthorizedRedirect={this.props.unauthorizedRedirect}
+                />
+                
                 <Route path="/:user/archived" render={props => (<GetArchived {...props} getUsersAgain={this.getUsersAgain} />)} exact />
                 <Route path="/:user/billing" component={BillingForm} exact />
                 <Route path="/:user/settings" component={AccountForm} exact />
                 <Route path="/:user/:slug" component={TripOpen} exact />
               </Switch>
             </div>
-        }
+        
         <Snackbar
           anchorOrigin={{
             vertical: this.state.snackbarVertical,
