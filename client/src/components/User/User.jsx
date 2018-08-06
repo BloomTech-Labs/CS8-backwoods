@@ -73,16 +73,15 @@ class User extends React.Component {
 
   componentWillMount() {
     axios.get(`${API_URL}/${this.props.match.params.user}`).then(res => {
-      if (!res.data) {
-        this.setState({ hasTrips: false });
-        return
-      }
       this.setState({ hasTrips: true, trips: res.data.trips })
-    }).catch(err => {
-      if (!this.props.isLoggedIn) {
+    }).catch(error => {
+      if (error.response.status === 423) {
         this.setState({ noUser: true })
+      } else if (error.response.status === 422) {
+        this.setState({ hasTrips: false })
       }
-      console.log(err);
+      
+      console.log(error);
     })
   }
 
@@ -156,6 +155,12 @@ class User extends React.Component {
   };
 
   render() {
+    if(this.state.noUser === true) {
+      return <h1>no user</h1>
+    }
+    // if(this.props.isLoggedIn === false && this.state.hasTrips === false) {
+    //   return <h1>User has no trips</h1>
+    // }
     return (
       <div>
         
