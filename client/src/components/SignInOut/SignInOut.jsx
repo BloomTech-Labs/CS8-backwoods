@@ -31,7 +31,7 @@ const SignInOut = props => {
     <div className="singInOutWrapper">
       {props.isLoggedIn ? (
         <Link to="/">
-          <Button onClick={props.handleLogInOut}>log out</Button>
+          <Button onClick={props.handleLogOut}>log out</Button>
         </Link>
       ) : (
         <Button onClick={props.handleOpen}>Sign Up / Sign In</Button>

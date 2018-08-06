@@ -11,6 +11,7 @@ const Archived = props => {
         {props.trips.map((trip, index) => {
           return (
             <SingleAchived
+              key={index}
               tripName={trip.tripName}
               startDate={trip.startDate}
               endDate={trip.endDate}
