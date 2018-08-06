@@ -166,7 +166,7 @@ class App extends Component {
                       unauthorizedRedirect={this.unauthorizedRedirect}
                     />
                   )}
-                exact/>
+                />
                 {/* If user logs in redirect User otherwise display landing page */}
                 
                 <Route path="/404" component={BackWoods404} />
