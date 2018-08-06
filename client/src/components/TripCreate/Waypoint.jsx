@@ -27,39 +27,41 @@ const Waypoint = props => {
     >
       >
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-        <Input
-          placeholder={props.wayPoint.markerName}
-          inputProps={{
-            'aria-label': 'Description'
-          }}
-          className="formSpacing"
-          onChange={props.handleChange('markerName')}
-        />
+        <MuiThemeProvider theme={theme}>
+          <Input
+            placeholder={props.wayPoint.markerName}
+            inputProps={{
+              'aria-label': 'Description'
+            }}
+            className="formSpacing"
+            onChange={props.handleChange('markerName')}
+          />
+        </MuiThemeProvider>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
-        <TextField
-          label="ETA"
-          id="date"
-          type="date"
-          defaultValue={props.eta}
-          className="spacingRight"
-          InputLabelProps={{
-            shrink: true
-          }}
-          onChange={props.handleChange('eta')}
-        />
-
-        <TextField
-          label="Time"
-          id="time"
-          type="time"
-          className="spacingRight"
-          InputLabelProps={{
-            shrink: true
-          }}
-          onChange={props.handleChange('time')}
-        />
         <MuiThemeProvider theme={theme}>
+          <TextField
+            label="ETA"
+            id="date"
+            type="date"
+            defaultValue={props.eta}
+            className="spacingRight"
+            InputLabelProps={{
+              shrink: true
+            }}
+            onChange={props.handleChange('eta')}
+          />
+
+          <TextField
+            label="Time"
+            id="time"
+            type="time"
+            className="spacingRight"
+            InputLabelProps={{
+              shrink: true
+            }}
+            onChange={props.handleChange('time')}
+          />
           <Button
             className="saveTripButton"
             variant="contained"

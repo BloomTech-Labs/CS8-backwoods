@@ -32,41 +32,42 @@ const TripCreateForm = props => {
       <form onSubmit={props.handleSubmit}>
         <div>
           <Paper className="tripCreateForm">
-            <FormControl>
-              <InputLabel htmlFor="name-simple" className="spacingLeft">
-                Name
-              </InputLabel>
-              <Input
-                id="tripName"
-                label="Trip Name"
-                className="spacingLeft"
-                value={props.tripName}
-                onChange={props.handleChange('tripName')}
-              />
-            </FormControl>
-            <TextField
-              id="startDate"
-              label="Start Date"
-              type="date"
-              className="spacingLeft spacingRight"
-              value={props.startDate}
-              InputLabelProps={{
-                shrink: true
-              }}
-              onChange={props.handleChange('startDate')}
-            />
-            <TextField
-              id="endDate"
-              label="End Date"
-              type="date"
-              className="spacingRight spacingRightBig "
-              value={props.endDate}
-              InputLabelProps={{
-                shrink: true
-              }}
-              onChange={props.handleChange('endDate')}
-            />
             <MuiThemeProvider theme={theme}>
+              <FormControl>
+                <InputLabel htmlFor="name-simple" className="spacingLeft">
+                  Name
+                </InputLabel>
+                <Input
+                  id="tripName"
+                  label="Trip Name"
+                  className="spacingLeft"
+                  value={props.tripName}
+                  onChange={props.handleChange('tripName')}
+                />
+              </FormControl>
+
+              <TextField
+                id="startDate"
+                label="Start Date"
+                type="date"
+                className="spacingLeft spacingRight"
+                value={props.startDate}
+                InputLabelProps={{
+                  shrink: true
+                }}
+                onChange={props.handleChange('startDate')}
+              />
+              <TextField
+                id="endDate"
+                label="End Date"
+                type="date"
+                className="spacingRight spacingRightBig "
+                value={props.endDate}
+                InputLabelProps={{
+                  shrink: true
+                }}
+                onChange={props.handleChange('endDate')}
+              />
               <Button
                 variant="contained"
                 type="submit"
