@@ -12,7 +12,7 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 200
+    width: 320
   },
   menu: {
     width: 200
@@ -58,6 +58,5 @@ class SignInForm extends React.Component {
     );
   }
 }
-
 
 export default withStyles(styles)(SignInForm);
