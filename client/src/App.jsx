@@ -33,7 +33,6 @@ class App extends Component {
       snackbarAuthRedirect: false,
       tabState: 0,
       open: false,
-      fireRedirect: false
     };
   }
   handleOpen = () => {
@@ -49,7 +48,7 @@ class App extends Component {
     axios.post(`${API_URL}/login`, { email, password })
       .then(res => {
         this.setState(
-          { snackbarOpenSignIn: true, open: false, fireRedirect: true, isLoggedIn: true },
+          { snackbarOpenSignIn: true, open: false, isLoggedIn: true },
         );
         localStorage.setItem('token', res.data.token);
         this.props.history.push(`/${this.state.email}`)
@@ -90,7 +89,6 @@ class App extends Component {
       isLoggedIn: false,
       tabState: 0,
       snackbarLogOut: true,
-      fireRedirect: !this.state.fireRedirect
     });
     localStorage.removeItem('token');
     this.props.history.push("/")
@@ -121,7 +119,6 @@ class App extends Component {
     })
   }
   render() {
-    // const { fireRedirect } = this.state;
     return (
       // test key need to put into config when using production key
       <StripeProvider apiKey="pk_test_UIFQFAQQTuGQzdsoR1LhXtCz">
