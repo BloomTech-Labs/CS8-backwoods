@@ -73,16 +73,14 @@ class User extends React.Component {
 
   componentWillMount() {
     axios.get(`${API_URL}/${this.props.match.params.user}`).then(res => {
-      if (!res.data) {
-        this.setState({ hasTrips: false });
-        return
-      }
       this.setState({ hasTrips: true, trips: res.data.trips })
-    }).catch(err => {
-      if (!this.props.isLoggedIn) {
+    }).catch(error => {
+      if(error.response.status === 423) {
         this.setState({ noUser: true })
+      } else if(error.response.status === 422) {
+        this.setState({ hasTrips: false });
       }
-      console.log(err);
+      console.log(error);
     })
   }
 
@@ -159,10 +157,10 @@ class User extends React.Component {
     return (
       <div>
         
-        {/* {
+        {
           this.state.noUser ?
             <Redirect to='/404' />
-            : */}
+            :
             <div className="mainWrapper">
               <Nav
                 user={this.props.email}
@@ -217,7 +215,7 @@ class User extends React.Component {
                 <Route component={BackWoods404} />
               </Switch>
             </div>
-        
+        }
         <Snackbar
           anchorOrigin={{
             vertical: this.state.snackbarVertical,
