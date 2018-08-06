@@ -6,8 +6,8 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Input from '@material-ui/core/Input';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
-import green from '@material-ui/core/colors/green';
 import Icon from '@material-ui/core/Icon';
+import green from '@material-ui/core/colors/green';
 import {
   withStyles,
   MuiThemeProvider,
