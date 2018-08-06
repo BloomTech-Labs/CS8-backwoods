@@ -6,7 +6,7 @@ import './Landing.css';
 const Landing = () => {
   return (
     <div className="landingWrapper">
-      <h1>Back Woods</h1>
+      <h1>Backwoods</h1>
       <Carousel />
       <p>
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam eget
