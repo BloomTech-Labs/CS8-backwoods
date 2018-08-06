@@ -194,17 +194,20 @@ class User extends React.Component {
                 <RestrictedRoute
                   path="/:user/archived" 
                   component={GetArchived}
+                  isLoggedIn={this.props.isLoggedIn}
                   unauthorizedRedirect={this.props.unauthorizedRedirect}
                   getUsersAgain={this.getUsersAgain}
                 />
                 <RestrictedRoute
                   path="/:user/billing"
                   component={BillingForm} 
+                  isLoggedIn={this.props.isLoggedIn}
                   unauthorizedRedirect={this.props.unauthorizedRedirect}
                 />
                 <RestrictedRoute
                   path="/:user/settings" 
                   component={AccountForm}
+                  isLoggedIn={this.props.isLoggedIn}
                   unauthorizedRedirect={this.props.unauthorizedRedirect} 
                 />
                 <Route path="/:user/:slug" component={TripOpen} exact />
