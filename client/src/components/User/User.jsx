@@ -16,7 +16,7 @@ import { withStyles } from '@material-ui/core/styles';
 
 const RestrictedRoute = ({ component: Component, isLoggedIn, unauthorizedRedirect, ...rest }) => {
   return isLoggedIn ? (
-    <Route {...rest} render={props => <Component {...props} />} />
+    <Route {...rest} render={props => <Component {...props} {...rest}/>} />
     ) : (
       <div>
         {unauthorizedRedirect()}
