@@ -48,8 +48,7 @@ class App extends Component {
     axios.post(`${API_URL}/login`, { email, password })
       .then(res => {
         this.setState(
-          { snackbarOpenSignIn: true, open: false, fireRedirect: true },
-          this.handleLogInOut()
+          { snackbarOpenSignIn: true, open: false, fireRedirect: true, isLoggedIn: true },
         );
         localStorage.setItem('token', res.data.token);
         console.log(res.data);
@@ -85,9 +84,9 @@ class App extends Component {
     });
   };
 
-  handleLogInOut = () => {
+  handleLogOut = () => {
     this.setState({
-      isLoggedIn: !this.state.isLoggedIn,
+      isLoggedIn: false,
       tabState: 0,
       snackbarLogOut: true,
       fireRedirect: !this.state.fireRedirect
@@ -131,7 +130,7 @@ class App extends Component {
             <CssBaseline>
               <SignInOut
                 handleTabChange={this.handleTabChange}
-                handleLogInOut={this.handleLogInOut}
+                handleLogOut={this.handleLogOut}
                 tabState={this.state.tabState}
                 handleChange={this.handleChange}
                 handleSignUp={this.handleSignUp}

@@ -7,14 +7,14 @@ const BackWoods404 = () => (
     <div class="hero-image-404">
       <div className="hero-text">
         <Typography 
-          variant="display3"
+          variant="display4"
           color="inherit">
-          <h1>404</h1>
+          404
         </Typography>
         <Typography 
           variant="display2"
           color="inherit">
-          <p>User not found/Has No Trips</p>
+          User not found/Has No Trips
       </Typography>
       </div>
       
