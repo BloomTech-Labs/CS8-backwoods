@@ -1,6 +1,10 @@
 import API_URL from '../../API_URL';
 import React from 'react';
-import { withStyles } from '@material-ui/core/styles';
+import {
+  withStyles,
+  MuiThemeProvider,
+  createMuiTheme
+} from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
@@ -11,12 +15,16 @@ import Snackbar from '@material-ui/core/Snackbar';
 import green from '@material-ui/core/colors/green';
 import './Account.css';
 import { Typography } from '../../../node_modules/@material-ui/core';
-
+const theme = createMuiTheme({
+  palette: {
+    primary: green
+  }
+});
 const styles = theme => ({
   button: {
     margin: 'auto',
     textAlign: 'center'
-  },
+  }
   // textField: {
   //   marginLeft: theme.spacing.unit,
   //   marginRight: theme.spacing.unit,
@@ -54,7 +62,7 @@ class AccountForm extends React.Component {
     snackbarChange: false,
     snackbarError: false,
     snackbarVertical: 'top',
-    snackbarHorizontal: 'center',
+    snackbarHorizontal: 'center'
   };
 
   handleChange = name => event => {
@@ -67,14 +75,20 @@ class AccountForm extends React.Component {
     e.preventDefault();
     const token = localStorage.getItem('token');
     const { email, password } = this.state;
-    axios.put(`${API_URL}/trips/settings`, { email, password }, { headers: { authorization: token } })
+    axios
+      .put(
+        `${API_URL}/trips/settings`,
+        { email, password },
+        { headers: { authorization: token } }
+      )
       .then(res => {
         this.setState({ snackbarChange: true });
         console.log(res.data);
-      }).catch(error => {
+      })
+      .catch(error => {
         this.setState({ snackbarError: true });
         console.log(error);
-      })
+      });
   };
 
   handleSnackbarClose = (event, reason) => {
@@ -91,56 +105,57 @@ class AccountForm extends React.Component {
     return (
       <div className="accountWrapper">
         <Paper className="formPaper">
-          <Typography
-            variant="headline"
-          >
-            Change Password
-          </Typography>
+          <Typography variant="headline">Change Password</Typography>
           <form onSubmit={this.handleSubmit} className="accountForm">
             <div className="accountTextFieldWrapper">
-            <TextField
-              required
-              id="required"
-              label="Email"
-              type="email"
-              value={this.state.email}
-              onChange={this.handleChange('email')}
-              autoComplete="email"
-              // className={classes.textField}
-              margin="normal"
-            />
-            <TextField
-              required
-              // id="password-input"
-              label="Old Password"
-              value={this.state.oldPassword}
-              onChange={this.handleChange('oldPassword')}
-              // className={classes.textField}
-              type="password"
-              autoComplete="current-password"
-              margin="normal"
-            />
-            <TextField
-              required
-              // id="password-input"
-              label="New Password"
-              value={this.state.password}
-              onChange={this.handleChange('password')}
-              // className={classes.textField}
-              type="password"
-              margin="normal"
-            />
+              <MuiThemeProvider theme={theme}>
+                <TextField
+                  required
+                  id="required"
+                  label="Email"
+                  type="email"
+                  value={this.state.email}
+                  onChange={this.handleChange('email')}
+                  autoComplete="email"
+                  // className={classes.textField}
+                  margin="normal"
+                />
+                <TextField
+                  required
+                  // id="password-input"
+                  label="Old Password"
+                  value={this.state.oldPassword}
+                  onChange={this.handleChange('oldPassword')}
+                  // className={classes.textField}
+                  type="password"
+                  autoComplete="current-password"
+                  margin="normal"
+                />
+                <TextField
+                  required
+                  // id="password-input"
+                  label="New Password"
+                  value={this.state.password}
+                  onChange={this.handleChange('password')}
+                  // className={classes.textField}
+                  type="password"
+                  margin="normal"
+                />
+              </MuiThemeProvider>
             </div>
-            
+
             <div className="accountSubmitWrapper">
-              <Button
-                variant="contained"
-                className={classes.button}
-                type="submit"
-              >
-                Submit
-                <Icon className="accountSubmitIcon">send</Icon>
-              </Button>
+              <MuiThemeProvider theme={theme}>
+                <Button
+                  variant="contained"
+                  className={classes.button}
+                  type="submit"
+                  color="primary"
+                >
+                  Submit
+                  <Icon className="accountSubmitIcon">send</Icon>
+                </Button>
+              </MuiThemeProvider>
             </div>
           </form>
         </Paper>
