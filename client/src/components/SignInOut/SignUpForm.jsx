@@ -13,7 +13,7 @@ const styles = theme => ({
   textField: {
     marginLeft: theme.spacing.unit,
     marginRight: theme.spacing.unit,
-    width: 200
+    width: 320
   },
   menu: {
     width: 200
@@ -22,19 +22,22 @@ const styles = theme => ({
 
 class SignUpForm extends React.Component {
   componentWillMount() {
-    ValidatorForm.addValidationRule('isPasswordMatch', (value) => {
+    ValidatorForm.addValidationRule('isPasswordMatch', value => {
       if (value !== this.props.password) {
-        return false
+        return false;
       }
-      return true
-    })
+      return true;
+    });
   }
 
   render() {
     const { classes } = this.props;
     // noValidate autoComplete="off"
     return (
-      <ValidatorForm className={classes.container} onSubmit={this.props.handleSignUp}>
+      <ValidatorForm
+        className={classes.container}
+        onSubmit={this.props.handleSignUp}
+      >
         <TextField
           required
           // id="firstName"
