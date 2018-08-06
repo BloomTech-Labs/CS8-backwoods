@@ -16,23 +16,14 @@ import { withStyles } from '@material-ui/core/styles';
 
 const RestrictedRoute = ({ component: Component, isLoggedIn, unauthorizedRedirect, ...rest }) => {
   return isLoggedIn ? (
-    <div>
-      {console.log('hell')}
-      <Route {...rest} render={props => <Component {...props} />} />
-    </div>
-   
-  ) : (
-    <div>
-      {unauthorizedRedirect()}
-      <Redirect to="/" />
-    </div>
-    
-  );
+    <Route {...rest} render={props => <Component {...props} />} />
+    ) : (
+      <div>
+        {unauthorizedRedirect()}
+        <Redirect to="/" />
+      </div>
+    );
 };
-
-   
-  
-
 
 const styles1 = theme => ({
   success: {
