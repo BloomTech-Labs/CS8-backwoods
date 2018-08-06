@@ -9,7 +9,7 @@ import Landing from './components/Landing/Landing.jsx';
 // import DebugRoutes from './components/Debug/DebugRoutes.jsx';
 import { StripeProvider } from 'react-stripe-elements';
 import User from './components/User/User';
-import BackWoods404 from './components/404/404';
+// import BackWoods404 from './components/404/404';
 
 // CssBaseline is the Material UI built in CSS reset
 class App extends Component {
@@ -121,7 +121,7 @@ class App extends Component {
     })
   }
   render() {
-    const { fireRedirect } = this.state;
+    // const { fireRedirect } = this.state;
     return (
       // test key need to put into config when using production key
       <StripeProvider apiKey="pk_test_UIFQFAQQTuGQzdsoR1LhXtCz">

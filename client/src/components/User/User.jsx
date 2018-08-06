@@ -190,22 +190,32 @@ class User extends React.Component {
                     isLoggedIn={this.props.isLoggedIn}
                     setSaveTripFalse={this.setSaveTripFalse}
                   />} exact />
-
-                  
                 <RestrictedRoute 
                   path="/:user/create" 
+                  component={TripCreate}
+                  unauthorizedRedirect={this.props.unauthorizedRedirect}
                   isLoggedIn={this.props.isLoggedIn} 
                   setSaveTripTrue={this.setSaveTripTrue}
                   email={this.props.email}
                   user={this.props.email}
                   getUsersAgain={this.getUsersAgain}
-                  component={TripCreate}
+                />
+                <RestrictedRoute
+                  path="/:user/archived" 
+                  component={GetArchived}
+                  unauthorizedRedirect={this.props.unauthorizedRedirect}
+                  getUsersAgain={this.getUsersAgain}
+                />
+                <RestrictedRoute
+                  path="/:user/billing"
+                  component={BillingForm} 
                   unauthorizedRedirect={this.props.unauthorizedRedirect}
                 />
-                
-                <Route path="/:user/archived" render={props => (<GetArchived {...props} getUsersAgain={this.getUsersAgain} />)} exact />
-                <Route path="/:user/billing" component={BillingForm} exact />
-                <Route path="/:user/settings" component={AccountForm} exact />
+                <RestrictedRoute
+                  path="/:user/settings" 
+                  component={AccountForm}
+                  unauthorizedRedirect={this.props.unauthorizedRedirect} 
+                />
                 <Route path="/:user/:slug" component={TripOpen} exact />
               </Switch>
             </div>
