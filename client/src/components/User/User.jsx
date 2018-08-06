@@ -164,10 +164,10 @@ class User extends React.Component {
     return (
       <div>
         
-        {/* {
+        {
           this.state.noUser ?
             <Redirect to='/404' />
-            : */}
+            :
             <div className="mainWrapper">
               <Nav
                 user={this.props.email}
@@ -222,7 +222,7 @@ class User extends React.Component {
                 <Route component={BackWoods404} />
               </Switch>
             </div>
-        
+        }
         <Snackbar
           anchorOrigin={{
             vertical: this.state.snackbarVertical,
