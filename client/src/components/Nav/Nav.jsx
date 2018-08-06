@@ -19,7 +19,7 @@ function getModalStyle() {
     left: `${left}%`,
     transform: `translate(-${top}%, -${left}%)`,
     width: '400px',
-    height: '200px',
+    height: '250px',
     padding: '1% 2% 2% 2%',
     textAlign: 'center'
   };
@@ -56,8 +56,8 @@ const Nav = props => {
             elevation={4}
           >
             <Typography variant="headline">
-              Your trip will not be saved if you leave this page. Do you want to
-              continue?
+              Your trip will not be saved if you leave this page.<br />
+              <br /> Do you want to continue?
             </Typography>
             <div className="stayOrLeaveButtons">
               <Button onClick={props.tripModalFalse}>Stay</Button>
