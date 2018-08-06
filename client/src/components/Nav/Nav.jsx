@@ -8,6 +8,7 @@ import Button from '@material-ui/core/Button';
 import { Link } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Fade from '@material-ui/core/Fade';
+import Typography from '@material-ui/core/Typography';
 
 function getModalStyle() {
   const top = 50;
@@ -16,7 +17,11 @@ function getModalStyle() {
   return {
     top: `${top}%`,
     left: `${left}%`,
-    transform: `translate(-${top}%, -${left}%)`
+    transform: `translate(-${top}%, -${left}%)`,
+    width: '400px',
+    height: '200px',
+    padding: '1% 2% 2% 2%',
+    textAlign: 'center'
   };
 }
 
@@ -50,14 +55,16 @@ const Nav = props => {
             className={classes.paper}
             elevation={4}
           >
-            <h1>
+            <Typography variant="headline">
               Your trip will not be saved if you leave this page. Do you want to
-              Continue?
-            </h1>
-            <Button onClick={props.tripModalFalse}>Stay</Button>
-            <Link className="leaveButton" to={props.navRedirect}>
-              <Button onClick={props.modalContinue}>Leave</Button>
-            </Link>
+              continue?
+            </Typography>
+            <div className="stayOrLeaveButtons">
+              <Button onClick={props.tripModalFalse}>Stay</Button>
+              <Link className="leaveButton" to={props.navRedirect}>
+                <Button onClick={props.modalContinue}>Leave</Button>
+              </Link>
+            </div>
           </Paper>
         </Fade>
       </Modal>
