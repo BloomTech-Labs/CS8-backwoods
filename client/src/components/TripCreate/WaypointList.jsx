@@ -2,9 +2,25 @@ import React from 'react';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
 import Icon from '@material-ui/core/Icon';
+import blue from '@material-ui/core/colors/blue';
+import red from '@material-ui/core/colors/red';
 import Button from '@material-ui/core/Button';
 import WayPoint from './Waypoint';
-
+import {
+  withStyles,
+  MuiThemeProvider,
+  createMuiTheme
+} from '@material-ui/core/styles';
+const addTheme = createMuiTheme({
+  palette: {
+    primary: blue
+  }
+});
+const removeTheme = createMuiTheme({
+  palette: {
+    primary: red
+  }
+});
 const WaypointList = props => {
   return (
     <Paper className="WaypointListWrapper">
@@ -26,24 +42,29 @@ const WaypointList = props => {
           />
         );
       })}
-
-      <Button
-        variant="contained"
-        onClick={() => props.addWaypoint()}
-        disabled={props.disableAddMarker}
-      >
-        <Icon>add</Icon>
-        Add
-      </Button>
-      <Button
-        variant="contained"
-        onClick={props.removeMarker}
-        disabled={props.disableRemoveMarker}
-      >
-        <Icon>delete</Icon>
-        Remove
-      </Button>
-      <Typography>End</Typography>
+      <MuiThemeProvider theme={addTheme}>
+        <Button
+          variant="contained"
+          onClick={() => props.addWaypoint()}
+          disabled={props.disableAddMarker}
+          color="primary"
+        >
+          <Icon>add</Icon>
+          Add
+        </Button>
+      </MuiThemeProvider>
+      <MuiThemeProvider theme={removeTheme}>
+        <Button
+          variant="contained"
+          onClick={props.removeMarker}
+          disabled={props.disableRemoveMarker}
+          color="primary"
+        >
+          <Icon>delete</Icon>
+          Remove
+        </Button>
+        <Typography>End</Typography>
+      </MuiThemeProvider>
     </Paper>
   );
 };

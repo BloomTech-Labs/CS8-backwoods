@@ -3,16 +3,23 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-// import ExpansionPanelForm from './ExpansionPanelForm';
 import Input from '@material-ui/core/Input';
-// import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
+import green from '@material-ui/core/colors/green';
 import Icon from '@material-ui/core/Icon';
+import {
+  withStyles,
+  MuiThemeProvider,
+  createMuiTheme
+} from '@material-ui/core/styles';
 
+const theme = createMuiTheme({
+  palette: {
+    primary: green
+  }
+});
 const Waypoint = props => {
-  
-  // console.log(date);
   return (
     <ExpansionPanel
       expanded={props.expanded === `panel${props.wayPointKey}`}
@@ -37,7 +44,7 @@ const Waypoint = props => {
           defaultValue={props.eta}
           className="spacingRight"
           InputLabelProps={{
-            shrink: true,
+            shrink: true
           }}
           onChange={props.handleChange('eta')}
         />
@@ -48,20 +55,22 @@ const Waypoint = props => {
           type="time"
           className="spacingRight"
           InputLabelProps={{
-            shrink: true,
+            shrink: true
           }}
           onChange={props.handleChange('time')}
         />
-
-        <Button
-          className="saveTripButton"
-          variant="contained"
-          onClick={props.handleNewWaypoint}
-          disabled={props.saveLocationEnabled}
-        >
-          Save Location
-          <Icon>send</Icon>
-        </Button>
+        <MuiThemeProvider theme={theme}>
+          <Button
+            className="saveTripButton"
+            variant="contained"
+            color="primary"
+            onClick={props.handleNewWaypoint}
+            disabled={props.saveLocationEnabled}
+          >
+            Save Location
+            <Icon>send</Icon>
+          </Button>
+        </MuiThemeProvider>
       </ExpansionPanelDetails>
     </ExpansionPanel>
   );

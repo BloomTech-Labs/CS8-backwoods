@@ -4,10 +4,15 @@ import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import Paper from '@material-ui/core/Paper';
 import Icon from '@material-ui/core/Icon';
+import green from '@material-ui/core/colors/green';
 import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import { Redirect } from 'react-router-dom';
-import { withStyles } from '@material-ui/core/styles';
+import {
+  withStyles,
+  MuiThemeProvider,
+  createMuiTheme
+} from '@material-ui/core/styles';
 
 const styles = theme => ({
   button: {
@@ -16,7 +21,11 @@ const styles = theme => ({
     textAlign: 'center'
   }
 });
-
+const theme = createMuiTheme({
+  palette: {
+    primary: green
+  }
+});
 const TripCreateForm = props => {
   return (
     <React.Fragment>
@@ -42,7 +51,7 @@ const TripCreateForm = props => {
               className="spacingLeft spacingRight"
               value={props.startDate}
               InputLabelProps={{
-                shrink: true,
+                shrink: true
               }}
               onChange={props.handleChange('startDate')}
             />
@@ -53,19 +62,21 @@ const TripCreateForm = props => {
               className="spacingRight spacingRightBig "
               value={props.endDate}
               InputLabelProps={{
-                shrink: true,
+                shrink: true
               }}
               onChange={props.handleChange('endDate')}
             />
-            <Button
-              variant="contained"
-              type="submit"
-              // class="saveTripButton"
-              disabled={!props.isEnabled}
-            >
-              Save Trip
-              <Icon>send</Icon>
-            </Button>
+            <MuiThemeProvider theme={theme}>
+              <Button
+                variant="contained"
+                type="submit"
+                color="primary"
+                disabled={!props.isEnabled}
+              >
+                Save Trip
+                <Icon>send</Icon>
+              </Button>
+            </MuiThemeProvider>
           </Paper>
         </div>
       </form>
