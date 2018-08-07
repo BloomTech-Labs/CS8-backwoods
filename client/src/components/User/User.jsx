@@ -156,9 +156,9 @@ class User extends React.Component {
   };
 
   render() {
-    if(this.state.hasTrips === false && this.props.isLoggedIn === false && this.state.noUser === false) {
-      return <UserHasNoTrips404/>
-    }
+    // if(this.state.hasTrips === false && this.props.isLoggedIn === false && this.state.noUser === false) {
+    //   return <UserHasNoTrips404/>
+    // }
     // if(this.state.noUser === false) {
     //   return <h1>No user</h1>
     // }
@@ -170,6 +170,9 @@ class User extends React.Component {
             <Redirect push to='/user-not-found' />
             :
             <div className="mainWrapper">
+            <div className="poop">
+
+            
               <Nav
                 user={this.props.email}
                 isLoggedIn={this.props.isLoggedIn}
@@ -222,6 +225,7 @@ class User extends React.Component {
 
                 <Route component={BadUrl404} />
               </Switch>
+            </div>
             </div>
         }
         <Snackbar
