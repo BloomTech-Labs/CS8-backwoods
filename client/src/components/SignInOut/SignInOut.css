@@ -2,6 +2,8 @@
   display: flex;
   align-content: flex-end;
   justify-content: flex-end;
+  width: 6%;
+  float: right;
   padding: 10px 10px 0px 10px;
   background-color: #fff;
 }
