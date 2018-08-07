@@ -28,7 +28,7 @@ const styles = theme => ({
 const SignInOut = props => {
   const { classes } = props;
   return (
-    <div className="singInOutWrapper">
+    <div className="signInOutWrapper">
       {props.isLoggedIn ? (
         <Link to="/">
           <Button onClick={props.handleLogOut}>log out</Button>
