@@ -13,6 +13,7 @@ import {
   MuiThemeProvider,
   createMuiTheme
 } from '@material-ui/core/styles';
+import NoMarkersModalWrapped from './TripSaveModal'
 
 const styles = theme => ({
   button: {
@@ -29,7 +30,7 @@ const theme = createMuiTheme({
 const TripCreateForm = props => {
   return (
     <React.Fragment>
-      <form onSubmit={props.handleSubmit}>
+      <form onSubmit={props.noMarkersModalOpenF}>
         <div>
           <Paper className="tripCreateForm">
             <MuiThemeProvider theme={theme}>
@@ -79,6 +80,13 @@ const TripCreateForm = props => {
               </Button>
             </MuiThemeProvider>
           </Paper>
+          <NoMarkersModalWrapped
+            noMarkersModalFalseF={props.noMarkersModalFalseF}
+            noMarkersModalOpenF={props.noMarkersModalOpenF}
+            tripSaveModal={props.tripSaveModal}
+            modalFade={props.modalFade}
+            handleSubmit={props.handleSubmit}
+            />
         </div>
       </form>
       {props.fireRedirect && <Redirect to={`/${props.email}`} />}
