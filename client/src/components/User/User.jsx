@@ -169,7 +169,7 @@ class User extends React.Component {
           this.state.noUser ?
             <Redirect push to='/user-not-found' />
             :
-            <div className="mainWrapper">
+            <div className="mainWrapper globalBackground">
             <div className="poop">
 
             
