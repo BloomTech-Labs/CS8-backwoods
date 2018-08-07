@@ -23,8 +23,9 @@ class MainTriplist extends React.Component {
             count -= 250;
           }
           return (
-            <div key={index}>
+            
               <SingleTrip
+                key={index}
                 tripName={trip.tripName}
                 animateList={this.state.animateList}
                 count={count}
@@ -39,7 +40,7 @@ class MainTriplist extends React.Component {
                 index={index}
                 isLoggedIn={this.props.isLoggedIn}
               />
-            </div>
+           
           );
         })}
         {this.props.isLoggedIn && (
