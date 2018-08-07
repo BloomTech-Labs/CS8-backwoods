@@ -3,16 +3,19 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-// import ExpansionPanelForm from './ExpansionPanelForm';
 import Input from '@material-ui/core/Input';
-// import Typography from '@material-ui/core/Typography';
 import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
+import green from '@material-ui/core/colors/green';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
+const theme = createMuiTheme({
+  palette: {
+    primary: green
+  }
+});
 const Waypoint = props => {
-  
-  // console.log(date);
   return (
     <ExpansionPanel
       expanded={props.expanded === `panel${props.wayPointKey}`}
@@ -20,48 +23,52 @@ const Waypoint = props => {
     >
       >
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-        <Input
-          placeholder={props.wayPoint.markerName}
-          inputProps={{
-            'aria-label': 'Description'
-          }}
-          className="formSpacing"
-          onChange={props.handleChange('markerName')}
-        />
+        <MuiThemeProvider theme={theme}>
+          <Input
+            placeholder={props.wayPoint.markerName}
+            inputProps={{
+              'aria-label': 'Description'
+            }}
+            className="formSpacing"
+            onChange={props.handleChange('markerName')}
+          />
+        </MuiThemeProvider>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
-        <TextField
-          label="ETA"
-          id="date"
-          type="date"
-          defaultValue={props.eta}
-          className="spacingRight"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          onChange={props.handleChange('eta')}
-        />
+        <MuiThemeProvider theme={theme}>
+          <TextField
+            label="ETA"
+            id="date"
+            type="date"
+            defaultValue={props.eta}
+            className="spacingRight"
+            InputLabelProps={{
+              shrink: true
+            }}
+            onChange={props.handleChange('eta')}
+          />
 
-        <TextField
-          label="Time"
-          id="time"
-          type="time"
-          className="spacingRight"
-          InputLabelProps={{
-            shrink: true,
-          }}
-          onChange={props.handleChange('time')}
-        />
-
-        <Button
-          className="saveTripButton"
-          variant="contained"
-          onClick={props.handleNewWaypoint}
-          disabled={props.saveLocationEnabled}
-        >
-          Save Location
-          <Icon>send</Icon>
-        </Button>
+          <TextField
+            label="Time"
+            id="time"
+            type="time"
+            className="spacingRight"
+            InputLabelProps={{
+              shrink: true
+            }}
+            onChange={props.handleChange('time')}
+          />
+          <Button
+            className="saveTripButton"
+            variant="contained"
+            color="primary"
+            onClick={props.handleNewWaypoint}
+            disabled={props.saveLocationEnabled}
+          >
+            Save Location
+            <Icon>send</Icon>
+          </Button>
+        </MuiThemeProvider>
       </ExpansionPanelDetails>
     </ExpansionPanel>
   );

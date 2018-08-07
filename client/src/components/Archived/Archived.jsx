@@ -35,7 +35,7 @@ const Archived = props => {
     return (
       <div className="mainTripList">
         <Paper className="noArchivedTripsPaper">
-          <Typography variant="headline">No archived trips yet!</Typography>
+          <Typography variant="headline">No archived trips!</Typography>
         </Paper>
       </div>
     );
