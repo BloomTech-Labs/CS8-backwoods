@@ -14,7 +14,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import green from '@material-ui/core/colors/green';
 import { withStyles } from '@material-ui/core/styles';
 import BadUrl404 from '../404/BadUrl404';
-import UserHasNoTrips404 from '../404/UserHasNoTrips404';
+// import UserHasNoTrips404 from '../404/UserHasNoTrips404';
 
 const RestrictedRoute = ({ component: Component, isLoggedIn, unauthorizedRedirect, ...rest }) => {
   return isLoggedIn ? (
@@ -156,9 +156,10 @@ class User extends React.Component {
   };
 
   render() {
-    if(this.state.hasTrips === false && this.props.isLoggedIn === false && this.state.noUser === false) {
-      return <UserHasNoTrips404/>
-    }
+    // Not working!!!!!!!!!!!!!!
+    // if(this.state.hasTrips === false && this.props.isLoggedIn === false && this.state.noUser === false) {
+    //   return <UserHasNoTrips404/>
+    // }
     // if(this.state.noUser === false) {
     //   return <h1>No user</h1>
     // }

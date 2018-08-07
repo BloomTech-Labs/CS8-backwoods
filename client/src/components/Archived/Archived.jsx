@@ -2,6 +2,7 @@ import React from 'react';
 import SingleAchived from './SingleAchived';
 import Typography from '@material-ui/core/Typography';
 import Paper from '@material-ui/core/Paper';
+import Fade from '@material-ui/core/Fade';
 import './Archived.css';
 
 const Archived = props => {
@@ -33,11 +34,14 @@ const Archived = props => {
     );
   } else {
     return (
+    <Fade in={true}>
       <div className="mainTripList">
         <Paper className="noArchivedTripsPaper">
           <Typography variant="headline">No archived trips!</Typography>
         </Paper>
       </div>
+    </Fade>
+    
     );
   }
 };

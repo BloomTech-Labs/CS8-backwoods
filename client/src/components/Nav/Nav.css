@@ -3,7 +3,7 @@
 }
 @media (min-width: 550px) {
   .navWrapper {
-    width: 250px;
+    /* width: 220px; */
   }
   /* .navBar {
     width: 250px;
@@ -11,7 +11,8 @@
 }
 .navBar {
   height: 100%;
-  width: 100%;
+  width: 180px;
+  /* max-width: 200px; */
   height: 80vh;
 }
 
@@ -23,6 +24,8 @@
   padding: 10px;
   margin-bottom: 10px;
   height: 40px;
+  max-width: 200px;
+
 }
 .material-icons {
   transform: scale(0.75);

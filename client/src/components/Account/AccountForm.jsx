@@ -5,6 +5,8 @@ import {
   MuiThemeProvider,
   createMuiTheme
 } from '@material-ui/core/styles';
+import Fade from '@material-ui/core/Fade';
+
 import TextField from '@material-ui/core/TextField';
 import Icon from '@material-ui/core/Icon';
 import Button from '@material-ui/core/Button';
@@ -103,6 +105,7 @@ class AccountForm extends React.Component {
     const { classes } = this.props;
 
     return (
+    <Fade in={true}>
       <div className="accountWrapper">
         <Paper className="formPaper">
           <Typography variant="headline">Change Password</Typography>
@@ -190,6 +193,7 @@ class AccountForm extends React.Component {
           />
         </Snackbar>
       </div>
+    </Fade>
     );
   }
 }

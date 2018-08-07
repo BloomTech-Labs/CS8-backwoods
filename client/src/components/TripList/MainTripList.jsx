@@ -6,10 +6,14 @@ import Typography from '@material-ui/core/Typography';
 import SingleTrip from './SingleTrip';
 import { Link } from 'react-router-dom';
 import './TripList.css';
+import Grow from '@material-ui/core/Grow';
+
 class MainTriplist extends React.Component {
   state = { animateList: true };
   render() {
     let count = 550;
+    let tripsLenght =  250 * this.props.trips.length;
+    let addButtonCount = count + tripsLenght;
     return (
       <div className="mainTripList">
         {this.props.trips.map((trip, index) => {
@@ -39,6 +43,11 @@ class MainTriplist extends React.Component {
           );
         })}
         {this.props.isLoggedIn && (
+          <Grow
+            in={this.state.animateList}
+            style={{ transformOrigin: '0 0 0' }}
+            {...(this.state.animateList ? { timeout: addButtonCount } : {})}
+          >
           <Paper className="trip" id="addNewTripWrapper" elevation={1}>
             <Typography variant="headline" component="h2">
               Add a trip!
@@ -54,6 +63,7 @@ class MainTriplist extends React.Component {
               </Button>
             </Link>
           </Paper>
+          </Grow>
         )}
       </div>
     );
