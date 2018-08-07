@@ -5,7 +5,7 @@
 
 // DEPLOY ROUTE
 
-// export const API_URL = 'https://ancient-inlet-94126.herokuapp.com'
+// const API_URL = 'https://ancient-inlet-94126.herokuapp.com'
 ///////////////////////////
 
 // LOCAL TESTING ROUTE
