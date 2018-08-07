@@ -6,6 +6,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Divider from '@material-ui/core/Divider';
 import { Link } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
+import Slide from '@material-ui/core/Slide';
 
 const styles = theme => ({
   root: {
@@ -15,8 +16,11 @@ const styles = theme => ({
   }
 });
 
+const fade = true;
+
 const NavBar = (props) => {
   return (
+    <Slide direction="right" in={fade} mountOnEnter unmountOnExit>
     <Paper className="navBar">
       <List component="nav">
         <Link to={`/${props.user}`}>
@@ -48,6 +52,7 @@ const NavBar = (props) => {
         }
       </List>
     </Paper>
+  </Slide>
   );
 }
 
