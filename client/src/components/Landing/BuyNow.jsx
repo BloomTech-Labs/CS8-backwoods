@@ -12,7 +12,7 @@ const theme = createMuiTheme({
 const BuyNow = () => {
   return (
     <MuiThemeProvider theme={theme}>
-      <Button variant="contained" color="primary">
+      <Button variant="contained" color="primary" className="buttonThing">
         Buy Now
       </Button>
     </MuiThemeProvider>

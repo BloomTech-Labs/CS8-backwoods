@@ -28,7 +28,7 @@ const styles = theme => ({
 const SignInOut = props => {
   const { classes } = props;
   return (
-    <div className="singInOutWrapper">
+    <div className="signInOutWrapper">
       {props.isLoggedIn ? (
         <Link to="/">
           <Button onClick={props.handleLogOut}>log out</Button>
@@ -36,7 +36,11 @@ const SignInOut = props => {
       ) : (
         <Button onClick={props.handleOpen}>Sign Up / Sign In</Button>
       )}
-      <Modal open={props.open} onClose={props.handleClose} disableAutoFocus={true}>
+      <Modal
+        open={props.open}
+        onClose={props.handleClose}
+        disableAutoFocus={true}
+      >
         <div style={getModalStyle()} className={classes.paper}>
           <Tabs
             handleTabChange={props.handleTabChange}
