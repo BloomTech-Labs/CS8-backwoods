@@ -2,6 +2,8 @@ import React from 'react';
 import Paper from '@material-ui/core/Paper';
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
+import Slide from '@material-ui/core/Slide';
+
 
 const bread = {
   display: 'flex'
@@ -25,6 +27,7 @@ class NavBreadcrumb extends React.Component {
   }
   render() {
     return (
+    <Slide direction="right" in={true} mountOnEnter unmountOnExit>
       <Paper className="navBreadcrumb">
         <div style={bread}>
           <Typography>
@@ -33,6 +36,7 @@ class NavBreadcrumb extends React.Component {
           {this.nextBreadCrumb()}
         </div>
       </Paper>
+    </Slide>
     );
   }
 }

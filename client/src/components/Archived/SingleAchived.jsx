@@ -3,7 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import MapImg from '../TripList/Google-Maps.jpg'
-
+import './Archived.css';
 
 const SingleAchived = (props) => {
   const TripOpen = {
@@ -15,7 +15,7 @@ const SingleAchived = (props) => {
   }
 
   return (
-    <Paper className="trip" elevation={1}>
+    <Paper className="trip2" elevation={1}>
       <Link to={TripOpen} style={{ textDecoration: "none" }}>
         <Typography
           variant="headline"

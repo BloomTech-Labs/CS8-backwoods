@@ -6,6 +6,8 @@ import WaypointList from './WaypointList';
 import slugify from 'slugify';
 import axios from 'axios';
 import './TripCreate.css';
+import Slide from '@material-ui/core/Slide';
+import Zoom from '@material-ui/core/Zoom';
 
 let date = new Date().toISOString().split('T')[0];
 
@@ -191,7 +193,8 @@ class TripCreate extends React.Component {
       this.state.startDate.length > 0 &&
       this.state.endDate.length > 0;
     return (
-      <div className="tripCreateWrapper">{console.log("props in tripcreate", this.props)}
+      <div className="tripCreateWrapper">
+        <Slide direction="down" in={true} mountOnEnter unmountOnExit>
         <TripCreateForm
           email={this.props.email}
           handleSubmit={this.handleSubmit}
@@ -199,7 +202,9 @@ class TripCreate extends React.Component {
           fireRedirect={this.state.fireRedirect}
           isEnabled={isEnabled}
         />
+        </Slide>
         <div className="MapWaypointWrapper">
+        <Zoom in={true}>
           <Map
             mapOpacity={this.state.mapOpacity}
             addMarker={this.addMarker}
@@ -209,7 +214,8 @@ class TripCreate extends React.Component {
             lat={this.state.lat}
             lng={this.state.lng}
           />
-
+          </Zoom>
+          <Slide direction="left" in={true} mountOnEnter unmountOnExit>
           <WaypointList
             eta={this.state.eta}
             handleChange={this.handleChange}
@@ -224,6 +230,7 @@ class TripCreate extends React.Component {
             handleWayPointExpand={this.handleWayPointExpand}
             saveLocationEnabled={this.state.saveLocationEnabled}
           />
+          </Slide>
         </div>
       </div>
     );
