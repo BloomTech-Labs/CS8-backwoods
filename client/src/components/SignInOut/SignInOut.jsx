@@ -36,7 +36,7 @@ const SignInOut = props => {
       ) : (
         <Button onClick={props.handleOpen}>Sign Up / Sign In</Button>
       )}
-      <Modal open={props.open} onClose={props.handleClose}>
+      <Modal open={props.open} onClose={props.handleClose} disableAutoFocus={true}>
         <div style={getModalStyle()} className={classes.paper}>
           <Tabs
             handleTabChange={props.handleTabChange}
