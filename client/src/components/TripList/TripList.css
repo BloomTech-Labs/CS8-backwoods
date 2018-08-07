@@ -1,7 +1,7 @@
 .trip {
-  width: 270px;
-  height: 260px;
-  padding: 10px;
+  width: 280px;
+  height: 270px;
+  /* padding: 10px; */
   margin: 15px 15px 15px 15px;
   display: flex;
   flex-direction: column;
@@ -22,10 +22,13 @@
 .mapsIcon {
   max-width: 100%;
   margin: auto;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .TripTitle {
   text-align: center;
+  padding-bottom: 5px;
 }
 
 .tripdates {
@@ -36,6 +39,9 @@
 .tripDatesWrapper {
   display: flex;
   justify-content: space-around;
+  margin-bottom: 5px;
+  margin-left: 4px;
+  margin-right: 4px;
 }
 
 #addNewTripWrapper {
@@ -44,4 +50,10 @@
   justify-content: space-around;
   align-items: center;
   
+}
+
+.SingleTripStartAndEndDate {
+  font-size: .9rem;
+  padding: 2px;
+
 }

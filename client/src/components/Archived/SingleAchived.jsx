@@ -5,6 +5,15 @@ import { Link } from 'react-router-dom';
 import MapImg from '../TripList/Google-Maps.jpg'
 import './Archived.css';
 import Grow from '@material-ui/core/Grow';
+import Button from '@material-ui/core/Button';
+import green from '@material-ui/core/colors/green';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: green
+  }
+});
 
 const SingleAchived = (props) => {
   const TripOpen = {
@@ -24,7 +33,7 @@ const SingleAchived = (props) => {
     <Paper className="trip2" elevation={1}>
       <Link to={TripOpen} style={{ textDecoration: "none" }}>
         <Typography
-          variant="headline"
+          variant="display1"
           component="h2"
           className="TripTitle"
         >
@@ -34,16 +43,24 @@ const SingleAchived = (props) => {
       </Link>
       <div className="tripDatesWrapper">
         <div className="tripdates">
-          <span>
+          <span className="SingleTripStartAndEndDate">
             Start Date: {props.startDate}
           </span>
           {" "}
-          <span>
+          <span className="SingleTripStartAndEndDate">
             End Date: {props.endDate}
           </span>
           {" "}
         </div>
-        <button onClick={() => props.UnarchiveTrip(props.id, props.index)}>Unarchive</button>
+        <MuiThemeProvider theme={theme}>
+          <Button 
+            onClick={
+              () => props.UnarchiveTrip(props.id, props.index)}
+              variant="contained" color="primary"
+            >
+            Unarchive
+          </Button>
+        </MuiThemeProvider>
       </div>
     </Paper>
   </Grow>

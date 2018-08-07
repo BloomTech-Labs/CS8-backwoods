@@ -15,9 +15,9 @@
 }
 
 .trip2 {
-  width: 270px;
-  height: 260px;
-  padding: 10px;
+  width: 280px;
+  height: 270px;
+  /* padding: 10px; */
   margin: 15px 15px 15px 15px;
   display: flex;
   flex-direction: column;
