@@ -39,6 +39,7 @@ class GetArchived extends React.Component {
       snackbarError: false,
       snackbarVertical: 'top',
       snackbarHorizontal: 'center',
+      animateList: true
     }
     this.UnarchiveTrip = this.UnarchiveTrip.bind(this);
   }
@@ -83,6 +84,7 @@ class GetArchived extends React.Component {
     return (
       <div>
         <Archived
+          animateList={this.state.animateList}
           trips={this.state.trips}
           UnarchiveTrip={this.UnarchiveTrip}
         />

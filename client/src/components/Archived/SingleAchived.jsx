@@ -4,6 +4,7 @@ import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import MapImg from '../TripList/Google-Maps.jpg'
 import './Archived.css';
+import Grow from '@material-ui/core/Grow';
 
 const SingleAchived = (props) => {
   const TripOpen = {
@@ -15,6 +16,11 @@ const SingleAchived = (props) => {
   }
 
   return (
+    <Grow
+    in={props.animateList}
+    style={{ transformOrigin: '0 0 0' }}
+    {...(props.animateList ? { timeout: props.count } : {})}
+  >
     <Paper className="trip2" elevation={1}>
       <Link to={TripOpen} style={{ textDecoration: "none" }}>
         <Typography
@@ -40,6 +46,7 @@ const SingleAchived = (props) => {
         <button onClick={() => props.UnarchiveTrip(props.id, props.index)}>Unarchive</button>
       </div>
     </Paper>
+  </Grow>
   )
 }
 

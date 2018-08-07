@@ -6,12 +6,20 @@ import Fade from '@material-ui/core/Fade';
 import './Archived.css';
 
 const Archived = props => {
+  let count = 550;
   if (props.trips.length > 0) {
     return (
       <div className="mainTripList">
         {props.trips.map((trip, index) => {
+          if (index > 0) {
+            count += 250;
+          } else if (count > 2000) {
+            count -= 250;
+          }
           return (
             <SingleAchived
+              count={count}
+              animateList={props.animateList}
               key={index}
               tripName={trip.tripName}
               startDate={trip.startDate}
