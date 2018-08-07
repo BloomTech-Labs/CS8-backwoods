@@ -1,8 +1,7 @@
 .navWrapper {
   margin-right: 20px;
-  
 }
-@media(min-width: 550px) {
+@media (min-width: 550px) {
   .navWrapper {
     width: 250px;
   }
@@ -32,7 +31,9 @@
   padding-top: 2px;
 }
 
-
+.stayOrLeaveButtons {
+  margin-top: 15%;
+}
 .leaveButton {
   text-decoration: none;
 }

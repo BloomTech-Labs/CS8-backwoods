@@ -1,8 +1,6 @@
 import React from 'react';
 import { withStyles } from '@material-ui/core/styles';
 import MobileStepper from '@material-ui/core/MobileStepper';
-import Paper from '@material-ui/core/Paper';
-import Typography from '@material-ui/core/Typography';
 import Button from '@material-ui/core/Button';
 import KeyboardArrowLeft from '@material-ui/icons/KeyboardArrowLeft';
 import KeyboardArrowRight from '@material-ui/icons/KeyboardArrowRight';
@@ -68,9 +66,6 @@ class Carousel extends React.Component {
 
     return (
       <div className={classes.root}>
-        <Paper square elevation={0} className={classes.header}>
-          <Typography>{Steps[activeStep].label}</Typography>
-        </Paper>
         <img
           className={classes.img}
           src={Steps[activeStep].imgPath}
