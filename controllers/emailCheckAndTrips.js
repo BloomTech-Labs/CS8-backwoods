@@ -9,7 +9,7 @@ const emailCheckAndTrips = (req, res, next) => {
         }
     ).then((user) => {
         if (!user) {
-            res.status(422).json({ "error": "User does not exist" })
+            res.status(423).json({ "error": "User does not exist" })
             return
         }
         // res.json({ email: user.email, firstName: user.firstName, lastName: user.lastName })

@@ -19,6 +19,8 @@ class TripOpen extends React.Component {
       .then(res => {
         console.log(res.data.marker);
         this.setState({ markers: res.data.marker });
+      }).catch(err => {
+        console.log(err);
       });
   }
 

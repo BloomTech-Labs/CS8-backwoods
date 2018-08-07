@@ -6,14 +6,26 @@ import TripCreate from '../TripCreate/TripCreate';
 import BillingForm from '../Billing/BillingForm';
 import AccountForm from '../Account/AccountForm';
 import GetArchived from '../Archived/GetArchived';
-import { Route, Redirect } from 'react-router-dom';
+import { Route, Redirect, Switch } from 'react-router-dom';
 import axios from 'axios';
 import TripOpen from '../TripOpen/TripOpen';
-import { Switch } from 'react-router-dom'
 import MySnackbarContent from '../Snackbar/MySnackbarContent';
 import Snackbar from '@material-ui/core/Snackbar';
 import green from '@material-ui/core/colors/green';
 import { withStyles } from '@material-ui/core/styles';
+import BadUrl404 from '../404/BadUrl404';
+import UserHasNoTrips404 from '../404/UserHasNoTrips404';
+
+const RestrictedRoute = ({ component: Component, isLoggedIn, unauthorizedRedirect, ...rest }) => {
+  return isLoggedIn ? (
+    <Route {...rest} render={props => <Component {...props} {...rest}/>} />
+    ) : (
+      <div>
+        {unauthorizedRedirect()}
+        <Redirect to="/" />
+      </div>
+    );
+};
 
 const styles1 = theme => ({
   success: {
@@ -62,16 +74,15 @@ class User extends React.Component {
 
   componentWillMount() {
     axios.get(`${API_URL}/${this.props.match.params.user}`).then(res => {
-      if (!res.data) {
-        this.setState({ hasTrips: false });
-        return
-      }
       this.setState({ hasTrips: true, trips: res.data.trips })
-    }).catch(err => {
-      if (!this.props.isLoggedIn) {
+    }).catch(error => {
+      if (error.response.status === 423) {
         this.setState({ noUser: true })
+      } else if (error.response.status === 422) {
+        this.setState({ hasTrips: false })
       }
-      console.log(err);
+      
+      console.log(error);
     })
   }
 
@@ -145,11 +156,18 @@ class User extends React.Component {
   };
 
   render() {
+    if(this.state.hasTrips === false && this.props.isLoggedIn === false && this.state.noUser === false) {
+      return <UserHasNoTrips404/>
+    }
+    // if(this.state.noUser === false) {
+    //   return <h1>No user</h1>
+    // }
     return (
       <div>
+        
         {
           this.state.noUser ?
-            <Redirect to='/404' />
+            <Redirect push to='/user-not-found' />
             :
             <div className="mainWrapper">
               <Nav
@@ -171,17 +189,38 @@ class User extends React.Component {
                     isLoggedIn={this.props.isLoggedIn}
                     setSaveTripFalse={this.setSaveTripFalse}
                   />} exact />
-                <Route path="/:user/create" render={props =>
-                  (<TripCreate {...props}
-                    setSaveTripTrue={this.setSaveTripTrue}
-                    email={this.props.email}
-                    user={this.props.email}
-                    getUsersAgain={this.getUsersAgain}
-                  />)} exact />
-                <Route path="/:user/archived" render={props => (<GetArchived {...props} getUsersAgain={this.getUsersAgain} />)} exact />
-                <Route path="/:user/billing" component={BillingForm} exact />
-                <Route path="/:user/settings" component={AccountForm} exact />
-                <Route path="/:user/:slug" component={TripOpen} exact />
+                <RestrictedRoute 
+                  path="/:user/create" 
+                  component={TripCreate}
+                  unauthorizedRedirect={this.props.unauthorizedRedirect}
+                  isLoggedIn={this.props.isLoggedIn} 
+                  setSaveTripTrue={this.setSaveTripTrue}
+                  email={this.props.email}
+                  user={this.props.email}
+                  getUsersAgain={this.getUsersAgain}
+                />
+                <RestrictedRoute
+                  path="/:user/archived" 
+                  component={GetArchived}
+                  isLoggedIn={this.props.isLoggedIn}
+                  unauthorizedRedirect={this.props.unauthorizedRedirect}
+                  getUsersAgain={this.getUsersAgain}
+                />
+                <RestrictedRoute
+                  path="/:user/billing"
+                  component={BillingForm} 
+                  isLoggedIn={this.props.isLoggedIn}
+                  unauthorizedRedirect={this.props.unauthorizedRedirect}
+                />
+                <RestrictedRoute
+                  path="/:user/settings" 
+                  component={AccountForm}
+                  isLoggedIn={this.props.isLoggedIn}
+                  unauthorizedRedirect={this.props.unauthorizedRedirect} 
+                />
+                <Route path="/:user/trip/:slug" component={TripOpen} exact />
+
+                <Route component={BadUrl404} />
               </Switch>
             </div>
         }

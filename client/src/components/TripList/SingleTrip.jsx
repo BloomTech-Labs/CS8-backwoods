@@ -5,10 +5,9 @@ import { Link } from 'react-router-dom';
 import MapImg from './Google-Maps.jpg'
 import Grow from '@material-ui/core/Grow';
 
-
 const SingleTrip = (props) => {
   const TripOpen = {
-    pathname: `/${props.email}/${props.slug}`,
+    pathname: `/${props.email}/trip/${props.slug}`,
     param1: props.id,
     param2: props.tripName,
     param3: props.startDate,

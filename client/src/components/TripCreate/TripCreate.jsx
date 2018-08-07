@@ -191,7 +191,7 @@ class TripCreate extends React.Component {
       this.state.startDate.length > 0 &&
       this.state.endDate.length > 0;
     return (
-      <div className="tripCreateWrapper">
+      <div className="tripCreateWrapper">{console.log("props in tripcreate", this.props)}
         <TripCreateForm
           email={this.props.email}
           handleSubmit={this.handleSubmit}
