@@ -13,7 +13,8 @@ import MySnackbarContent from '../Snackbar/MySnackbarContent';
 import Snackbar from '@material-ui/core/Snackbar';
 import green from '@material-ui/core/colors/green';
 import { withStyles } from '@material-ui/core/styles';
-import BackWoods404 from '../404/404';
+import BadUrl404 from '../404/BadUrl404';
+import UserHasNoTrips404 from '../404/UserHasNoTrips404';
 
 const RestrictedRoute = ({ component: Component, isLoggedIn, unauthorizedRedirect, ...rest }) => {
   return isLoggedIn ? (
@@ -155,18 +156,18 @@ class User extends React.Component {
   };
 
   render() {
-    if(this.state.noUser === true) {
-      return <h1>no user</h1>
+    if(this.state.hasTrips === false && this.props.isLoggedIn === false && this.state.noUser === false) {
+      return <UserHasNoTrips404/>
     }
-    // if(this.props.isLoggedIn === false && this.state.hasTrips === false) {
-    //   return <h1>User has no trips</h1>
+    // if(this.state.noUser === false) {
+    //   return <h1>No user</h1>
     // }
     return (
       <div>
         
         {
           this.state.noUser ?
-            <Redirect to='/404' />
+            <Redirect push to='/user-not-found' />
             :
             <div className="mainWrapper">
               <Nav
@@ -219,7 +220,7 @@ class User extends React.Component {
                 />
                 <Route path="/:user/trip/:slug" component={TripOpen} exact />
 
-                <Route component={BackWoods404} />
+                <Route component={BadUrl404} />
               </Switch>
             </div>
         }

@@ -12,6 +12,7 @@ class MainTriplist extends React.Component {
     let count = 550;
     return (
       <div className="mainTripList">
+      {console.log(this.props)}
         {
           this.props.trips.map((trip, index) => {
             if (index > 0) {

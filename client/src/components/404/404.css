@@ -2,6 +2,28 @@
   height: 100vh;
   width: 100vw;
 }
+.BadUrl404 {
+  position : fixed;
+  top : 0;
+  left : 0;
+  width : 100%;
+  height : 100%;
+}
+
+.hero-image-404-2 {
+  
+  background-image: url("./404-2.jpg");
+  height: 100vh;
+  width: 100vh;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* position: relative; */
+  z-index: 9999;
+  height: 100vh !important;
+  width: 100vw !important;
+}
+
 
 .hero-image-404 {
   background-image: url("./404-2.jpg");

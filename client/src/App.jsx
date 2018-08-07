@@ -9,7 +9,7 @@ import Landing from './components/Landing/Landing.jsx';
 // import DebugRoutes from './components/Debug/DebugRoutes.jsx';
 import { StripeProvider } from 'react-stripe-elements';
 import User from './components/User/User';
-import BackWoods404 from './components/404/404';
+import UserNotFound404 from './components/404/UserNotFound404';
 
 // CssBaseline is the Material UI built in CSS reset
 class App extends Component {
@@ -169,7 +169,7 @@ class App extends Component {
                 />
                 {/* If user logs in redirect User otherwise display landing page */}
                 
-                <Route path="/404" component={BackWoods404} />
+                <Route path="/user-not-found" component={UserNotFound404} />
               </React.Fragment>
             </CssBaseline>
           </React.Fragment>
