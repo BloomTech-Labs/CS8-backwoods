@@ -19,7 +19,7 @@ const theme = createMuiTheme({
 
 const SingleAchived = (props) => {
   const TripOpen = {
-    pathname: `/${props.email}/${props.slug}`,
+    pathname: `/${props.email}/trip/${props.slug}`,
     param1: props.id,
     param2: props.tripName,
     param3: props.startDate,
@@ -62,7 +62,7 @@ const SingleAchived = (props) => {
           <Button 
             onClick={
               () => props.UnarchiveTrip(props.id, props.index)}
-              variant="contained" color="primary"
+              variant="outlined" color="primary"
             >
             Unarchive
           </Button>

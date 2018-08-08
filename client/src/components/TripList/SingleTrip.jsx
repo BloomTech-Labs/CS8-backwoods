@@ -61,7 +61,7 @@ const SingleTrip = (props) => {
           <Button 
             onClick={
               () => props.archiveTrip(props.id, props.index)}
-            variant="contained" color="primary"
+            variant="outlined" color="primary"
             >
               Archive
             </Button>
