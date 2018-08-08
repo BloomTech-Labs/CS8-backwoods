@@ -12,7 +12,7 @@ const TripOpenName = (props) => {
         <Paper className="OpenTripName">
             <Typography
                 className="tripname"
-                variant="title"
+                variant="display1"
             >
 
                 {props.tripName}
