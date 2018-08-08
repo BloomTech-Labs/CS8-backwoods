@@ -35,13 +35,13 @@ const TripCreateForm = props => {
           <Paper className="tripCreateForm">
             <MuiThemeProvider theme={theme}>
               <FormControl>
-                <InputLabel htmlFor="name-simple" className="spacingLeft">
+                <InputLabel htmlFor="name-simple" className="tripCreateInputLabel">
                   Name
                 </InputLabel>
                 <Input
                   id="tripName"
                   label="Trip Name"
-                  className="spacingLeft"
+                  // className="spacingLeft"
                   value={props.tripName}
                   onChange={props.handleChange('tripName')}
                 />
@@ -51,7 +51,7 @@ const TripCreateForm = props => {
                 id="startDate"
                 label="Start Date"
                 type="date"
-                className="spacingLeft spacingRight"
+                // className="spacingLeft spacingRight"
                 value={props.startDate}
                 InputLabelProps={{
                   shrink: true
@@ -62,7 +62,7 @@ const TripCreateForm = props => {
                 id="endDate"
                 label="End Date"
                 type="date"
-                className="spacingRight spacingRightBig "
+                // className="spacingRight spacingRightBig "
                 value={props.endDate}
                 InputLabelProps={{
                   shrink: true
@@ -70,7 +70,7 @@ const TripCreateForm = props => {
                 onChange={props.handleChange('endDate')}
               />
               <Button
-                variant="contained"
+                variant="outlined"
                 type="submit"
                 color="primary"
                 disabled={!props.isEnabled}

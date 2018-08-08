@@ -19,13 +19,38 @@
 
 .tripCreateMap {
   height: 500px;
-  width: 600px;
+  width: 550px;
   margin-right: 20px;
 }
-
+@media(min-width: 1250px) {
+  .tripCreateMap {
+    width: 600px;
+  }
+}
+@media(min-width: 1300px) {
+  .tripCreateMap {
+    width: 650px;
+  }
+}
+@media(min-width: 1400px) {
+  .tripCreateMap {
+    width: 700px;
+  }
+}
+@media(min-width: 1450px) {
+  .tripCreateMap {
+    width: 750px;
+  }
+}
+@media(min-width: 1500px) {
+  .tripCreateMap {
+    width: 800px;
+  }
+}
 .tripCreateForm {
   padding: 10px;
   display: flex;
+  justify-content: space-evenly;
 }
 
 .WaypointListWrapper {
@@ -69,3 +94,6 @@
   margin-top: 20px;
 }
 
+.tripCreateInputLabel {
+  font-size: 1.3rem !important;
+}
