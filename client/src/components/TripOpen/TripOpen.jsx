@@ -5,39 +5,58 @@ import WaypointList from './TripOpenWaypointList.jsx';
 import TripOpenName from './TripOpenName';
 import axios from 'axios';
 import './tripOpenStyling.css';
+import { withRouter } from 'react-router-dom';
+
 class TripOpen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      markers: []
+      markers: [],
+      startDate: '',
+      endDate: '',
+      tripName: ''
     };
   }
 
   componentWillMount() {
+    // console.log(this.props.location.param1)
     axios
-      .get(`${API_URL}/getMarkers/${this.props.location.param1}`)
+      .get(`${API_URL}/${this.props.match.params.user}/${this.props.match.params.slug}`)
       .then(res => {
-        console.log(res.data.marker);
-        this.setState({ markers: res.data.marker });
-      }).catch(err => {
-        console.log(err);
-      });
+        this.setState({
+          startDate: res.data.trip.startDate,
+          endDate: res.data.trip.endDate,
+          tripName: res.data.trip.tripName
+        })
+      })
+      .catch(err => {
+        console.log(this.props)
+        this.props.history.push(`/${this.props.match.params.user}/trip-not-found`)
+      })
+
+      // .get(`${API_URL}/getMarkers/${this.props.location.param1}`)
+      // .then(res => {
+      //   console.log(res.data.marker);
+      //   this.setState({ markers: res.data.marker });
+      // }).catch(err => {
+      //   console.log(err);
+      // });
   }
 
   render() {
     return (
       <div className="tripOpen">
-        <TripOpenName tripName={this.props.location.param2} />
+        <TripOpenName tripName={this.state.tripName} />
         <div className="tripOpen-wrapper">
           <MapContainer
             markers={this.state.markers}
-            key={this.state.markers.markerName}
+
           />
           <WaypointList
-            key={this.state.markers.markerName}
+            // key={this.state.markers.markerName}
             markers={this.state.markers}
-            startDate={this.props.location.param3}
-            endDate={this.props.location.param4}
+            startDate={this.state.startDate}
+            endDate={this.state.endDate}
           />
         </div>
       </div>
@@ -45,4 +64,4 @@ class TripOpen extends React.Component {
   }
 }
 
-export default TripOpen;
+export default withRouter(TripOpen);

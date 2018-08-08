@@ -46,7 +46,7 @@ class Map extends React.Component {
       <div
         className="tripCreateMap"
         style={{
-          // height: '500px',
+          height: '630px',
           // width: '600px',
           opacity: this.props.mapOpacity
         }}

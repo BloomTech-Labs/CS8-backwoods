@@ -6,7 +6,7 @@ import TripCreate from '../TripCreate/TripCreate';
 import BillingForm from '../Billing/BillingForm';
 import AccountForm from '../Account/AccountForm';
 import GetArchived from '../Archived/GetArchived';
-import { Route, Redirect, Switch } from 'react-router-dom';
+import { Route, Redirect, Switch, withRouter } from 'react-router-dom';
 import axios from 'axios';
 import TripOpen from '../TripOpen/TripOpen';
 import MySnackbarContent from '../Snackbar/MySnackbarContent';
@@ -14,6 +14,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import green from '@material-ui/core/colors/green';
 import { withStyles } from '@material-ui/core/styles';
 import BadUrl404 from '../404/BadUrl404';
+
 // import UserHasNoTrips404 from '../404/UserHasNoTrips404';
 
 const RestrictedRoute = ({
@@ -23,7 +24,7 @@ const RestrictedRoute = ({
   ...rest
 }) => {
   return isLoggedIn ? (
-    <Route {...rest} render={props => <Component {...props} {...rest} />} />
+    <Route {...rest} render={props => <Component {...props} {...rest} />} exact/>
   ) : (
     <div>
       {unauthorizedRedirect()}
@@ -85,7 +86,9 @@ class User extends React.Component {
       })
       .catch(error => {
         if (error.response.status === 423) {
+
           this.setState({ noUser: true });
+          this.props.history.push(`/${this.props.match.params.user}/user-not-found`)
         } else if (error.response.status === 422) {
           this.setState({ hasTrips: false });
         }
@@ -181,9 +184,9 @@ class User extends React.Component {
     // }
     return (
       <div>
-        {this.state.noUser ? (
-          <Redirect push to="/user-not-found" />
-        ) : (
+        {/* {this.state.noUser ? (
+          <Redirect push to={`/user-not-found`} />
+        ) : ( */}
           <div className="mainWrapper globalBackground">
             <div className="poop">
               <Nav
@@ -247,7 +250,7 @@ class User extends React.Component {
               </Switch>
             </div>
           </div>
-        )}
+        {/* )} */}
         <Snackbar
           anchorOrigin={{
             vertical: this.state.snackbarVertical,
@@ -283,4 +286,4 @@ class User extends React.Component {
   }
 }
 
-export default User;
+export default withRouter(User);

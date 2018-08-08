@@ -22,7 +22,7 @@ const getMarkers = (req, res) => {
             res.json({ marker })
         })
         .catch(err => {
-            res.json({ "error": err })
+            res.status(423).json({ "error": err })
         })
 };
 
