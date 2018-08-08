@@ -20,7 +20,14 @@ const removeTheme = createMuiTheme({
 const WaypointList = props => {
   return (
     <Paper className="WaypointListWrapper">
-      <Typography>Start</Typography>
+      
+      <Typography
+        variant="display1"
+        component="h3"
+      >Start
+      </Typography>
+      
+    <div class="waypointContainer">
       {props.wayPoints.map((wayPoint, index) => {
         return (
           <WayPoint
@@ -38,29 +45,40 @@ const WaypointList = props => {
           />
         );
       })}
-      <MuiThemeProvider theme={addTheme}>
-        <Button
-          variant="contained"
-          onClick={() => props.addWaypoint()}
-          disabled={props.disableAddMarker}
-          color="primary"
-        >
-          <Icon>add</Icon>
-          Add
-        </Button>
-      </MuiThemeProvider>
-      <MuiThemeProvider theme={removeTheme}>
-        <Button
-          variant="contained"
-          onClick={props.removeMarker}
-          disabled={props.disableRemoveMarker}
-          color="primary"
-        >
+    </div>
+      <div className="waypointButtonWrapper">
+        <MuiThemeProvider theme={addTheme}>
+          <Button
+            size="large"
+            variant="outlined"
+            onClick={() => props.addWaypoint()}
+            disabled={props.disableAddMarker}
+            color="primary"
+          >
+            <Icon>add</Icon>
+            Add
+          </Button>
+        </MuiThemeProvider>
+        <MuiThemeProvider theme={removeTheme}>
+          <Button
+            size="large"
+            variant="outlined"
+            onClick={props.removeMarker}
+            disabled={props.disableRemoveMarker}
+            color="primary"
+          >
           <Icon>delete</Icon>
           Remove
         </Button>
-        <Typography>End</Typography>
-      </MuiThemeProvider>
+        
+        </MuiThemeProvider>
+      </div>
+    <Typography
+          variant="display1"
+          component="h3"
+        >
+        End
+        </Typography>
     </Paper>
   );
 };
