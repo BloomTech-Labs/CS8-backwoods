@@ -9,6 +9,8 @@ import Button from '@material-ui/core/Button';
 import green from '@material-ui/core/colors/green';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 
+
+
 const theme = createMuiTheme({
   palette: {
     primary: green
@@ -24,6 +26,10 @@ const SingleAchived = (props) => {
     param4: props.endDate
   }
 
+  const startDateFormat = new Date(props.startDate);
+  const startDate = ` ${startDateFormat.getMonth() + 1}/${startDateFormat.getDate()}/${startDateFormat.getFullYear().toString().substr(-2)}`
+  const endDateFormat = new Date(props.endDate);
+  const endDate = ` ${endDateFormat.getMonth() + 1}/${endDateFormat.getDate()}/${endDateFormat.getFullYear().toString().substr(-2)}`
   return (
     <Grow
     in={props.animateList}
@@ -44,11 +50,11 @@ const SingleAchived = (props) => {
       <div className="tripDatesWrapper">
         <div className="tripdates">
           <span className="SingleTripStartAndEndDate">
-            Start Date: {props.startDate}
+            Start Date: {startDate}
           </span>
           {" "}
           <span className="SingleTripStartAndEndDate">
-            End Date: {props.endDate}
+            End Date: {endDate}
           </span>
           {" "}
         </div>
