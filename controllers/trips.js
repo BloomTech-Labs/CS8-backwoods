@@ -31,12 +31,12 @@ const getOneTripBySlug = (req, res) => {
     })
     .then((trip) => {
         if (trip === null) {
-            res.status(422).json({"error":"trip doesn't exist"})
+            res.status(421).json({"error":"trip doesn't exist"})
         }
         res.json({ trip})
     })
     .catch(err => {
-        res.status(422).json(err)
+        res.status(420).json(err)
     })
 }
 
