@@ -1,5 +1,4 @@
 import React from 'react';
-import Carousel from './Carousel.jsx';
 import BuyNow from './BuyNow';
 import './Landing.css';
 import logo from './logo.svg';

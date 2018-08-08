@@ -6,6 +6,8 @@ import blue from '@material-ui/core/colors/blue';
 import red from '@material-ui/core/colors/red';
 import Button from '@material-ui/core/Button';
 import WayPoint from './Waypoint';
+import Divider from '@material-ui/core/Divider';
+
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 const addTheme = createMuiTheme({
   palette: {
@@ -19,8 +21,15 @@ const removeTheme = createMuiTheme({
 });
 const WaypointList = props => {
   return (
-    <Paper className="WaypointListWrapper">
-      <Typography>Start</Typography>
+    <Paper className="WaypointListWrapper" elevation={1}>
+      
+      <Typography
+        variant="display1"
+        component="h3"
+      >Start
+      </Typography>
+      <Divider />
+    <div className="waypointContainer">
       {props.wayPoints.map((wayPoint, index) => {
         return (
           <WayPoint
@@ -38,29 +47,41 @@ const WaypointList = props => {
           />
         );
       })}
-      <MuiThemeProvider theme={addTheme}>
-        <Button
-          variant="contained"
-          onClick={() => props.addWaypoint()}
-          disabled={props.disableAddMarker}
-          color="primary"
-        >
-          <Icon>add</Icon>
-          Add
-        </Button>
-      </MuiThemeProvider>
-      <MuiThemeProvider theme={removeTheme}>
-        <Button
-          variant="contained"
-          onClick={props.removeMarker}
-          disabled={props.disableRemoveMarker}
-          color="primary"
-        >
+    </div>
+      <div className="waypointButtonWrapper">
+        <MuiThemeProvider theme={addTheme}>
+          <Button
+            size="large"
+            variant="outlined"
+            onClick={() => props.addWaypoint()}
+            disabled={props.disableAddMarker}
+            color="primary"
+          >
+            <Icon>add</Icon>
+            Add
+          </Button>
+        </MuiThemeProvider>
+        <MuiThemeProvider theme={removeTheme}>
+          <Button
+            size="large"
+            variant="outlined"
+            onClick={props.removeMarker}
+            disabled={props.disableRemoveMarker}
+            color="primary"
+          >
           <Icon>delete</Icon>
           Remove
         </Button>
-        <Typography>End</Typography>
-      </MuiThemeProvider>
+        
+        </MuiThemeProvider>
+      </div>
+      <Divider />
+    <Typography
+          variant="display1"
+          component="h3"
+        >
+        End
+        </Typography>
     </Paper>
   );
 };

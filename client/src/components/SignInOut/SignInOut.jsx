@@ -1,11 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from '@material-ui/core/styles';
+import { 
+  withStyles,
+  MuiThemeProvider,
+  createMuiTheme } from '@material-ui/core/styles';
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import Tabs from './Tabs.jsx';
+import green from '@material-ui/core/colors/green';
+
 import { Link } from 'react-router-dom';
 import './SignInOut.css';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: green
+  }
+});
+
 function getModalStyle() {
   const top = 50;
   const left = 50;
@@ -31,10 +43,26 @@ const SignInOut = props => {
     <div className="signInOutWrapper">
       {props.isLoggedIn ? (
         <Link to="/">
-          <Button onClick={props.handleLogOut}>log out</Button>
+        <MuiThemeProvider theme={theme}>
+          <Button 
+          onClick={props.handleLogOut}
+          variant="contained"
+          color="primary"
+        >
+          log out
+        </Button>
+        </MuiThemeProvider>
         </Link>
       ) : (
-        <Button onClick={props.handleOpen}>Sign Up / Sign In</Button>
+        <MuiThemeProvider theme={theme}>
+        <Button 
+          variant="contained"
+          onClick={props.handleOpen}
+          color="primary"
+        >
+          Sign Up / Sign In
+        </Button>
+        </MuiThemeProvider>
       )}
       <Modal
         open={props.open}

@@ -3,29 +3,99 @@
   flex-direction: column;
   margin-top: 60px;
 }
-.spacingLeft {
-  margin-left: 15px !important;
+/* .spacingLeft {
+  margin-left: 5px !important;
 }
 .spacingRight {
-  margin-right: 15px !important;
-}
-.spacingRightBig {
+  margin-right: 5px !important;
+} */
+/* .spacingRightBig {
   margin-right: 60px !important;
-}
+} */
 .MapWaypointWrapper {
   display: flex;
   margin-top: 20px;
+  background-color: white;
 }
 
 .tripCreateMap {
-  margin-right: 20px;
+  height: 500px;
+  width: 550px;
+  /* background-color: white; */
+  /* margin-right: 20px; */
 }
-
+@media(min-width: 1250px) {
+  .tripCreateMap {
+    width: 600px;
+  }
+}
+@media(min-width: 1300px) {
+  .tripCreateMap {
+    width: 650px;
+  }
+}
+@media(min-width: 1400px) {
+  .tripCreateMap {
+    width: 700px;
+  }
+}
+@media(min-width: 1450px) {
+  .tripCreateMap {
+    width: 750px;
+  }
+}
+@media(min-width: 1500px) {
+  .tripCreateMap {
+    width: 800px;
+  }
+}
 .tripCreateForm {
   padding: 10px;
   display: flex;
+  justify-content: space-evenly;
 }
 
 .WaypointListWrapper {
   text-align: center;
+  width: 350px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+
+.waypointButtonWrapper {
+  display: flex;
+  justify-content: space-evenly;
+  justify-self: flex-start;
+  margin-bottom: 10px;
+}
+
+.waypointContainer {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 3;
+  margin-top: 10px;
+  /* justify-content: flex-end;
+  justify-items: flex-start;
+  align-content: flex-start;
+  align-items: flex-start; */
+
+}
+.waypointControlsWrapper {
+  display: flex;
+  flex-direction: column;
+  /* justify-content: space-around; */
+}
+.waypointTextField {
+  display: flex;
+  /* justify-content: space-around; */
+}
+
+.waypointButtonContainer {
+  margin-top: 20px;
+}
+
+.tripCreateInputLabel {
+  font-size: 1.3rem !important;
 }

@@ -29,38 +29,41 @@ const Waypoint = props => {
             inputProps={{
               'aria-label': 'Description'
             }}
-            className="formSpacing"
+            // className="formSpacing"
             onChange={props.handleChange('markerName')}
           />
         </MuiThemeProvider>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
         <MuiThemeProvider theme={theme}>
-          <TextField
-            label="ETA"
-            id="date"
-            type="date"
-            defaultValue={props.eta}
-            className="spacingRight"
-            InputLabelProps={{
-              shrink: true
-            }}
-            onChange={props.handleChange('eta')}
-          />
-
-          <TextField
-            label="Time"
-            id="time"
-            type="time"
-            className="spacingRight"
-            InputLabelProps={{
-              shrink: true
-            }}
-            onChange={props.handleChange('time')}
-          />
+        <div className="waypointControlsWrapper">
+          <div className="waypointTextField">
+            <TextField
+              label="ETA"
+              id="date"
+              type="date"
+              defaultValue={props.eta}
+              // className="spacingRight"
+              InputLabelProps={{
+                shrink: true
+              }}
+              onChange={props.handleChange('eta')}
+            />
+            <TextField
+              label="Time"
+              id="time"
+              type="time"
+              // className="spacingRight"
+              InputLabelProps={{
+                shrink: true
+              }}
+              onChange={props.handleChange('time')}
+            />
+          </div>
+          <div className="waypointButtonContainer">
           <Button
             className="saveTripButton"
-            variant="contained"
+            variant="outlined"
             color="primary"
             onClick={props.handleNewWaypoint}
             disabled={props.saveLocationEnabled}
@@ -68,6 +71,8 @@ const Waypoint = props => {
             Save Location
             <Icon>send</Icon>
           </Button>
+          </div>
+        </div>
         </MuiThemeProvider>
       </ExpansionPanelDetails>
     </ExpansionPanel>

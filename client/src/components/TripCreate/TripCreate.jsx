@@ -35,7 +35,9 @@ class TripCreate extends React.Component {
       disableAddMarker: false,
       saveLocationEnabled: true,
       disableRemoveMarker: true,
-      expanded: null
+      expanded: null,
+      tripSaveModal: false,
+      modalFade: false
     };
   }
 
@@ -100,7 +102,7 @@ class TripCreate extends React.Component {
   };
 
   handleSubmit = e => {
-    e.preventDefault();
+    // e.preventDefault();
     const token = localStorage.getItem('token');
     const { tripName, startDate, endDate, newMarkersArr } = this.state;
     const { email } = this.props;
@@ -185,7 +187,18 @@ class TripCreate extends React.Component {
       return this.setState({ saveLocationEnabled: false })
     }
   }
-
+  noMarkersModalOpenF = (e) => {
+    e.preventDefault()
+    if(this.state.markers.length === 0) {
+      this.setState({ tripSaveModal: true, modalFade: true})
+    } else {
+      this.handleSubmit()
+    }
+    
+  }
+  noMarkersModalFalseF =() => {
+    this.setState({ tripSaveModal: false, modalFade: false})
+  }
 
   render() {
     const isEnabled =
@@ -196,6 +209,10 @@ class TripCreate extends React.Component {
       <div className="tripCreateWrapper">
         <Slide direction="down" in={true} mountOnEnter unmountOnExit>
         <TripCreateForm
+        tripSaveModal={this.state.tripSaveModal}
+        noMarkersModalOpenF={this.noMarkersModalOpenF}
+        noMarkersModalFalseF={this.noMarkersModalFalseF}
+        modalFade={this.state.modalFade}
           email={this.props.email}
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}

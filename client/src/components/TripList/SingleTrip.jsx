@@ -4,6 +4,15 @@ import Typography from '@material-ui/core/Typography';
 import { Link } from 'react-router-dom';
 import MapImg from './Google-Maps.jpg'
 import Grow from '@material-ui/core/Grow';
+import Button from '@material-ui/core/Button';
+import green from '@material-ui/core/colors/green';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: green
+  }
+});
 
 const SingleTrip = (props) => {
   const TripOpen = {
@@ -14,6 +23,11 @@ const SingleTrip = (props) => {
     param4: props.endDate
   }
 
+  const startDateFormat = new Date(props.startDate);
+  const startDate = ` ${startDateFormat.getMonth() + 1}/${startDateFormat.getDate()}/${startDateFormat.getFullYear().toString().substr(-2)}`
+  const endDateFormat = new Date(props.endDate);
+  const endDate = ` ${endDateFormat.getMonth() + 1}/${endDateFormat.getDate()}/${endDateFormat.getFullYear().toString().substr(-2)}`
+
   return (
     <Grow
     in={props.animateList}
@@ -23,7 +37,7 @@ const SingleTrip = (props) => {
     <Paper className="trip" elevation={1}>
       <Link to={TripOpen} style={{ textDecoration: "none" }}>
         <Typography
-          variant="headline"
+          variant="display1"
           component="h2"
           className="TripTitle"
         >
@@ -33,17 +47,25 @@ const SingleTrip = (props) => {
       </Link>
       <div className="tripDatesWrapper">
         <div className="tripdates">
-          <span>
-            Start Date: {props.startDate}
+          <span className="SingleTripStartAndEndDate">
+            Start Date: {startDate}
           </span>
           {" "}
-          <span>
-            End Date: {props.endDate}
+          <span className="SingleTripStartAndEndDate">
+            End Date: {endDate}
           </span>
           {" "}
         </div>
         {props.isLoggedIn && 
-          <button onClick={() => props.archiveTrip(props.id, props.index)}>Archive</button>
+        <MuiThemeProvider theme={theme}>
+          <Button 
+            onClick={
+              () => props.archiveTrip(props.id, props.index)}
+            variant="outlined" color="primary"
+            >
+              Archive
+            </Button>
+        </MuiThemeProvider>
         }
       </div>
     </Paper>

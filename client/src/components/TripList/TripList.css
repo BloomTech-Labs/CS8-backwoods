@@ -1,7 +1,7 @@
 .trip {
-  width: 250px;
-  height: 250px;
-  padding: 10px;
+  width: 280px;
+  height: 270px;
+  /* padding: 10px; */
   margin: 15px 15px 15px 15px;
   display: flex;
   flex-direction: column;
@@ -9,19 +9,26 @@
 }
 
 .mainTripList {
-  margin-top: 47px;
+  /* margin-top: 47px; */
   display: flex;
   flex-wrap: wrap;
   width: 100%;
-  height: 100%;
+  /* justify-content: flex-start;
+  align-items: flex-start; */
+  align-content: flex-start;
+  margin: auto;
+  /* height: 100%; */
 }
 .mapsIcon {
   max-width: 100%;
   margin: auto;
+  padding-left: 10px;
+  padding-right: 10px;
 }
 
 .TripTitle {
   text-align: center;
+  padding-bottom: 5px;
 }
 
 .tripdates {
@@ -32,6 +39,9 @@
 .tripDatesWrapper {
   display: flex;
   justify-content: space-around;
+  margin-bottom: 5px;
+  margin-left: 4px;
+  margin-right: 4px;
 }
 
 #addNewTripWrapper {
@@ -40,4 +50,10 @@
   justify-content: space-around;
   align-items: center;
   
+}
+
+.SingleTripStartAndEndDate {
+  font-size: .9rem;
+  padding: 2px;
+
 }
