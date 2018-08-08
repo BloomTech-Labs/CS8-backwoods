@@ -14,6 +14,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import green from '@material-ui/core/colors/green';
 import { withStyles } from '@material-ui/core/styles';
 import BadUrl404 from '../404/BadUrl404';
+
 // import UserHasNoTrips404 from '../404/UserHasNoTrips404';
 
 const RestrictedRoute = ({
@@ -85,6 +86,7 @@ class User extends React.Component {
       })
       .catch(error => {
         if (error.response.status === 423) {
+
           this.setState({ noUser: true });
         } else if (error.response.status === 422) {
           this.setState({ hasTrips: false });
