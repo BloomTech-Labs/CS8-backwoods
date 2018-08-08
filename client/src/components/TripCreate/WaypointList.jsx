@@ -6,6 +6,8 @@ import blue from '@material-ui/core/colors/blue';
 import red from '@material-ui/core/colors/red';
 import Button from '@material-ui/core/Button';
 import WayPoint from './Waypoint';
+import Divider from '@material-ui/core/Divider';
+
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 const addTheme = createMuiTheme({
   palette: {
@@ -26,8 +28,8 @@ const WaypointList = props => {
         component="h3"
       >Start
       </Typography>
-      
-    <div class="waypointContainer">
+      <Divider />
+    <div className="waypointContainer">
       {props.wayPoints.map((wayPoint, index) => {
         return (
           <WayPoint
@@ -73,6 +75,7 @@ const WaypointList = props => {
         
         </MuiThemeProvider>
       </div>
+      <Divider />
     <Typography
           variant="display1"
           component="h3"

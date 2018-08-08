@@ -25,7 +25,20 @@ const archiveTrip = (req, res) => {
         })
 }
 
-
+const getOneTripBySlug = (req, res) => {
+    models.Trips.findOne({
+        where: {email: req.params.user, slug: req.params.slug}
+    })
+    .then((trip) => {
+        if (trip === null) {
+            res.status(422).json({"error":"trip doesn't exist"})
+        }
+        res.json({ trip})
+    })
+    .catch(err => {
+        res.status(422).json(err)
+    })
+}
 
 const getTrip = (req, res) => {
     models.Trips.findAll({
@@ -59,4 +72,4 @@ const getTripAchived = (req, res) => {
         })
 };
 
-module.exports = { createTrip, getTrip, archiveTrip, getTripAchived }
+module.exports = { createTrip, getTrip, archiveTrip, getTripAchived, getOneTripBySlug }
