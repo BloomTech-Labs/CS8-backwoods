@@ -14,16 +14,16 @@ class Map extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      lat: 37.73018235769022,
-      lng: -122.33512938022614
+      lat: 46.9282,
+      lng: 121.5045
     };
     this.addMarker = this.addMarker.bind(this);
   }
 
   static defaultProps = {
     center: {
-      lat: 37.774929,
-      lng: -122.419416
+      lat: 46.9282,
+      lng: -121.5045
     },
     zoom: 12
   };
@@ -46,7 +46,7 @@ class Map extends React.Component {
       <div
         className="tripCreateMap"
         style={{
-          height: '630px',
+          // height: '630px',
           // width: '600px',
           opacity: this.props.mapOpacity
         }}

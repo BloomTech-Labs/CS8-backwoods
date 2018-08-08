@@ -15,12 +15,14 @@
 .MapWaypointWrapper {
   display: flex;
   margin-top: 20px;
+  background-color: white;
 }
 
 .tripCreateMap {
   height: 500px;
   width: 550px;
-  margin-right: 20px;
+  /* background-color: white; */
+  /* margin-right: 20px; */
 }
 @media(min-width: 1250px) {
   .tripCreateMap {

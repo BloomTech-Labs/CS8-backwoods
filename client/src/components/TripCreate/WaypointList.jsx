@@ -21,7 +21,7 @@ const removeTheme = createMuiTheme({
 });
 const WaypointList = props => {
   return (
-    <Paper className="WaypointListWrapper">
+    <Paper className="WaypointListWrapper" elevation={1}>
       
       <Typography
         variant="display1"
