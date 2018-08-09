@@ -85,7 +85,6 @@ class TripCreate extends React.Component {
   };
 
   handleChange = name => event => {
-    // console.log(name, event.target.value)
     this.setState({ [name]: event.target.value }, this._CheckMarkers());
   };
 
@@ -124,7 +123,6 @@ class TripCreate extends React.Component {
         markersArr.forEach(item => {
           item.tripId = tripId;
         });
-        console.log(markersArr);
         return axios.post(`${API_URL}/createMarker`, { markersArr }, { headers: { authorization: token } }
         );
       })
