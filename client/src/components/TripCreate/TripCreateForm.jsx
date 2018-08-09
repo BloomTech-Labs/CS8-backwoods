@@ -32,7 +32,7 @@ class TripCreateForm extends React.Component{
         return true
       }
       for(let i = 0; i < this.props.tripsfromUserName.length; i++) {
-        if(value !== this.props.tripsfromUserName[i]) {
+        if(value.toLowerCase() !== this.props.tripsfromUserName[i].toLowerCase()) {
           return true
         }
         return false
