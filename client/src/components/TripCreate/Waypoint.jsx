@@ -9,6 +9,9 @@ import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import green from '@material-ui/core/colors/green';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { TimePicker } from 'material-ui-pickers';
+
+let time = new Date();
 
 const theme = createMuiTheme({
   palette: {
@@ -49,7 +52,7 @@ const Waypoint = props => {
               }}
               onChange={props.handleChange('eta')}
             />
-            <TextField
+            {/* <TextField
               label="Time"
               id="time"
               type="time"
@@ -58,7 +61,16 @@ const Waypoint = props => {
                 shrink: true
               }}
               onChange={props.handleChange('time')}
-            />
+            /> */}
+            <div className="picker">
+          <TimePicker
+            showTodayButton
+            todayLabel="now"
+            label="Time"
+            value={time}
+            onChange={props.handleTimeChange}
+          />
+        </div>
           </div>
           <div className="waypointButtonContainer">
           <Button

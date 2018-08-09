@@ -194,6 +194,11 @@ class TripCreate extends React.Component {
   noMarkersModalFalseF =() => {
     this.setState({ tripSaveModal: false, modalFade: false})
   }
+  handleTimeChange = (NewTime) => {
+    let time = NewTime.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour24: true })
+    console.log(time)
+    this.setState({ time: time });
+  }
 
   render() {
     const isEnabled =
@@ -243,6 +248,7 @@ class TripCreate extends React.Component {
             expanded={this.state.expanded}
             handleWayPointExpand={this.handleWayPointExpand}
             saveLocationEnabled={this.state.saveLocationEnabled}
+            handleTimeChange={this.handleTimeChange}
           />
           </Slide>
         </div>
