@@ -182,7 +182,7 @@ class User extends React.Component {
     return (
       <div>
         {this.state.noUser ? (
-          <Redirect push to="/user-not-found" />
+          <Redirect push to={`/${this.props.match.params.user}/user-not-found`} />
         ) : (
           <div className="mainWrapper globalBackground">
             <div className="poop">
@@ -221,6 +221,7 @@ class User extends React.Component {
                   email={this.props.email}
                   user={this.props.email}
                   getUsersAgain={this.getUsersAgain}
+                  tripsFromUser={this.state.trips}
                 />
                 <RestrictedRoute
                   path="/:user/archived"

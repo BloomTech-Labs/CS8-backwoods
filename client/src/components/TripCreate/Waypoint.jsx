@@ -4,11 +4,13 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Input from '@material-ui/core/Input';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import green from '@material-ui/core/colors/green';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { TimePicker } from 'material-ui-pickers';
+import { DatePicker } from 'material-ui-pickers';
+
 
 const theme = createMuiTheme({
   palette: {
@@ -38,27 +40,26 @@ const Waypoint = props => {
         <MuiThemeProvider theme={theme}>
         <div className="waypointControlsWrapper">
           <div className="waypointTextField">
-            <TextField
-              label="ETA"
-              id="date"
-              type="date"
-              defaultValue={props.eta}
-              // className="spacingRight"
-              InputLabelProps={{
-                shrink: true
-              }}
-              onChange={props.handleChange('eta')}
-            />
-            <TextField
-              label="Time"
-              id="time"
-              type="time"
-              // className="spacingRight"
-              InputLabelProps={{
-                shrink: true
-              }}
-              onChange={props.handleChange('time')}
-            />
+          <div className="picker">
+          <DatePicker
+            label="ETA"
+            showTodayButton
+            disablePast
+            maxDateMessage="Date must be greater than today"
+            value={props.eta}
+            onChange={props.handleDateChange('eta')}
+            animateYearScrolling={false}
+          />
+        </div>
+            <div className="picker">
+          <TimePicker
+            showTodayButton
+            todayLabel="now"
+            label="Time"
+            value={props.time}
+            onChange={props.handleTimeChange}
+          />
+        </div>
           </div>
           <div className="waypointButtonContainer">
           <Button

@@ -17,7 +17,6 @@ class Map extends React.Component {
       lat: 46.9282,
       lng: 121.5045
     };
-    this.addMarker = this.addMarker.bind(this);
   }
 
   static defaultProps = {
@@ -28,26 +27,11 @@ class Map extends React.Component {
     zoom: 12
   };
 
-  addMarker = event => {
-    let lat = event.lat;
-    let lng = event.lng;
-
-    const marker = {
-      lat: lat,
-      lng: lng
-    };
-
-    this.setState({ lat: lat, lng: lng });
-    this.props.newMarkersArr.push(marker);
-  };
-
   render() {
     return (
       <div
         className="tripCreateMap"
         style={{
-          // height: '630px',
-          // width: '600px',
           opacity: this.props.mapOpacity
         }}
       >

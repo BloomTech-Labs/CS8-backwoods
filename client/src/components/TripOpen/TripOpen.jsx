@@ -14,7 +14,8 @@ class TripOpen extends React.Component {
       markers: [],
       startDate: '',
       endDate: '',
-      tripName: ''
+      tripName: '',
+      noMarkers: false
     };
   }
 
@@ -28,11 +29,40 @@ class TripOpen extends React.Component {
           endDate: res.data.trip.endDate,
           tripName: res.data.trip.tripName
         })
+        const tripId = res.data.trip.id
+        return axios.get(`${API_URL}/getMarkers/${tripId}`) 
       })
-      .catch(err => {
-        console.log(err)
-        this.props.history.push(`/${this.props.match.params.user}/trip-not-found`)
-      })
+      .then(res => {
+        console.log(res)
+        //420 other getOneTripBySlug
+        //421 trip doesn't exist
+        //422 "trip has no markers"
+        //423 other getMarkers
+
+        this.setState({ markers: res.data.marker})
+        
+      }).catch(error => {
+        console.log(error);
+        switch(error.response.status) {
+          case 420:
+            console.log('420 from getOneTripBySlug', error)
+            break;
+          case 421: 
+            this.props.history.push(`/${this.props.match.params.user}/trip-not-found`);
+            break;
+          case 422:
+            this.setState({noMarkers: true})
+            break;
+          case 423:
+            console.log('423 from getMarks', error)
+            break;
+          default:
+            console.log('default');
+            break;
+        }
+      }
+
+      )
 
       // .get(`${API_URL}/getMarkers/${this.props.location.param1}`)
       // .then(res => {

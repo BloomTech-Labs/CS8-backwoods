@@ -8,8 +8,9 @@ import axios from 'axios';
 import './TripCreate.css';
 import Slide from '@material-ui/core/Slide';
 import Zoom from '@material-ui/core/Zoom';
+import { format } from 'date-fns/esm';
 
-let date = new Date().toISOString().split('T')[0];
+// let date = new Date().toISOString().split('T')[0];
 
 
 class TripCreate extends React.Component {
@@ -19,28 +20,34 @@ class TripCreate extends React.Component {
       tripName: '',
       wayPoints: [],
       newMarkersArr: [],
-      startDate: '',
-      endDate: '',
+      startDate: new Date(),
+      endDate: new Date(),
       email: '',
       fireRedirect: false,
       markerName: '',
-      eta: date,
-      time: '',
+      eta: new Date(),
+      time: new Date(),
       mapOpacity: 0.4,
       lng: null,
       lat: null,
       tripId: '',
-      markers: [],
       MarkerCreated: false,
       disableAddMarker: false,
       saveLocationEnabled: true,
       disableRemoveMarker: true,
       expanded: null,
       tripSaveModal: false,
-      modalFade: false
+      modalFade: false,
+      tripsfromUserName: []
     };
   }
-
+  componentWillMount() {
+    let tripsfromUserName = []
+    this.props.tripsFromUser.forEach(trip => {
+      tripsfromUserName.push(trip.tripName)
+    })
+    this.setState({tripsfromUserName: tripsfromUserName})
+  }
   activateMap = () => {
     this.setState({
       mapOpacity: 1,
@@ -71,7 +78,6 @@ class TripCreate extends React.Component {
     this.setState({
       mapOpacity: 0.4,
       MarkerCreated: false,
-      time: '',
       lat: null,
       lng: null
     });
@@ -82,10 +88,11 @@ class TripCreate extends React.Component {
   };
 
   handleNewWaypoint = () => {
+    let formatTime = format(new Date(this.state.time), 'HH:mm:ss')
     let newWayPoint = {
       markerName: this.state.markerName,
       eta: this.state.eta,
-      time: this.state.time,
+      time: formatTime,
       lng: this.state.lng,
       lat: this.state.lat,
       tripId: ''
@@ -116,7 +123,6 @@ class TripCreate extends React.Component {
         markersArr.forEach(item => {
           item.tripId = tripId;
         });
-        console.log(markersArr);
         return axios.post(`${API_URL}/createMarker`, { markersArr }, { headers: { authorization: token } }
         );
       })
@@ -148,22 +154,10 @@ class TripCreate extends React.Component {
   }
 
   addMarker = event => {
-    // console.log('== CLICK ==');
-    // console.log('X:', event.x);
-    // console.log('Y:', event.y);
-    // console.log('LAT:', event.lat);
-    // console.log('LNG:', event.lng);
     let lat = event.lat;
     let lng = event.lng;
 
-    const marker = {
-      lat: lat,
-      lng: lng
-    };
-
-    this.state.markers.push(marker);
     this.setState({ lat: lat, lng: lng }, this.disableSaveLocation());
-    // console.log(this.state.markers);
   };
 
   handleWayPointExpand = panel => (event, expanded) => {
@@ -189,7 +183,7 @@ class TripCreate extends React.Component {
   }
   noMarkersModalOpenF = (e) => {
     e.preventDefault()
-    if(this.state.markers.length === 0) {
+    if(this.state.newMarkersArr.length === 0) {
       this.setState({ tripSaveModal: true, modalFade: true})
     } else {
       this.handleSubmit()
@@ -198,6 +192,13 @@ class TripCreate extends React.Component {
   }
   noMarkersModalFalseF =() => {
     this.setState({ tripSaveModal: false, modalFade: false})
+  }
+  handleTimeChange = (NewTime) => {
+    this.setState({ time: NewTime });
+  }
+  handleDateChange = (name) => (date) => {
+    let formatDate = format(new Date(date), 'YYYY/MM/D');
+    this.setState({ [name]: formatDate });
   }
 
   render() {
@@ -209,15 +210,20 @@ class TripCreate extends React.Component {
       <div className="tripCreateWrapper">
         <Slide direction="down" in={true} mountOnEnter unmountOnExit>
         <TripCreateForm
-        tripSaveModal={this.state.tripSaveModal}
-        noMarkersModalOpenF={this.noMarkersModalOpenF}
-        noMarkersModalFalseF={this.noMarkersModalFalseF}
-        modalFade={this.state.modalFade}
+          tripName={this.state.tripName}
+          tripsfromUserName={this.state.tripsfromUserName}
+          tripSaveModal={this.state.tripSaveModal}
+          noMarkersModalOpenF={this.noMarkersModalOpenF}
+          noMarkersModalFalseF={this.noMarkersModalFalseF}
+          modalFade={this.state.modalFade}
           email={this.props.email}
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
           fireRedirect={this.state.fireRedirect}
           isEnabled={isEnabled}
+          handleDateChange={this.handleDateChange}
+          endDate={this.state.endDate}
+          startDate={this.state.startDate}
         />
         </Slide>
         <div className="MapWaypointWrapper">
@@ -234,6 +240,7 @@ class TripCreate extends React.Component {
           </Zoom>
           <Slide direction="left" in={true} mountOnEnter unmountOnExit>
           <WaypointList
+            time={this.state.time}
             eta={this.state.eta}
             handleChange={this.handleChange}
             addWaypoint={this.addWaypoint}
@@ -246,6 +253,8 @@ class TripCreate extends React.Component {
             expanded={this.state.expanded}
             handleWayPointExpand={this.handleWayPointExpand}
             saveLocationEnabled={this.state.saveLocationEnabled}
+            handleTimeChange={this.handleTimeChange}
+            handleDateChange={this.handleDateChange}
           />
           </Slide>
         </div>

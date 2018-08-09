@@ -33,6 +33,9 @@ const WaypointList = props => {
       {props.wayPoints.map((wayPoint, index) => {
         return (
           <WayPoint
+            time={props.time}
+            handleDateChange={props.handleDateChange}
+            handleTimeChange={props.handleTimeChange}
             eta={props.eta}
             wayPoint={wayPoint}
             wayPointKey={index}
