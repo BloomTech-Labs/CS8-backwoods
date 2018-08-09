@@ -14,8 +14,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import green from '@material-ui/core/colors/green';
 import { withStyles } from '@material-ui/core/styles';
 import BadUrl404 from '../404/BadUrl404';
-// import UserHasNoTrips404 from '../404/UserHasNoTrips404';
-
+import {testTrip} from '../TripOpen/testData'
 const RestrictedRoute = ({
   component: Component,
   isLoggedIn,
@@ -78,13 +77,17 @@ class User extends React.Component {
   }
 
   componentWillMount() {
-    // if(this.props.match.params.user === 'thegreatAdventure@backwood.app') {
-    //   console.log('Test User')
-    //   this.setState({
-    //     hasTrips: true,
-    //   })
-    // }
-    axios
+    console.log('user.jsx')
+    if(this.props.match.params.user === 'thegreatAdventure@backwood.app') {
+      console.log('Test User')
+      this.setState({
+        hasTrips: true,
+        trips: testTrip,
+        noUser: false
+      })
+      return
+    } else {
+      axios
       .get(`${API_URL}/${this.props.match.params.user}`)
       .then(res => {
         this.setState({ hasTrips: true, trips: res.data.trips });
@@ -98,6 +101,7 @@ class User extends React.Component {
 
         console.log(error);
       });
+    }
   }
 
   getUsersAgain = () => {

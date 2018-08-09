@@ -100,3 +100,5 @@ export const testTripMarkers = [
     updatedAt: "2018-08-09T21:04:06.739Z",
   }
 ]
+
+// export { testTrip, testTripMarkers }
