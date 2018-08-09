@@ -199,10 +199,9 @@ class TripCreate extends React.Component {
     let time = NewTime.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour24: true })
     this.setState({ time: time });
   }
-  handleDateChange = (date) => {
+  handleDateChange = (name) => (date) => {
     let formatDate = format(new Date(date), 'YYYY/MM/D');
-    console.log(formatDate)
-    this.setState({ eta: formatDate });
+    this.setState({ [name]: formatDate });
   }
 
   render() {
@@ -225,6 +224,7 @@ class TripCreate extends React.Component {
           handleChange={this.handleChange}
           fireRedirect={this.state.fireRedirect}
           isEnabled={isEnabled}
+          handleDateChange={this.handleDateChange}
         />
         </Slide>
         <div className="MapWaypointWrapper">

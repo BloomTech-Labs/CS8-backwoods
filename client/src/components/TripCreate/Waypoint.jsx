@@ -43,36 +43,15 @@ const Waypoint = props => {
           <div className="waypointTextField">
           <div className="picker">
           <DatePicker
-            label="With today button"
+            label="ETA"
             showTodayButton
             disablePast
-            maxDateMessage="Date must be less than today"
+            maxDateMessage="Date must be greater than today"
             value={time}
-            onChange={props.handleDateChange}
+            onChange={props.handleDateChange('eta')}
             animateYearScrolling={false}
           />
         </div>
-            {/* <TextField
-              label="ETA"
-              id="date"
-              type="date"
-              defaultValue={props.eta}
-              // className="spacingRight"
-              InputLabelProps={{
-                shrink: true
-              }}
-              onChange={props.handleChange('eta')}
-            /> */}
-            {/* <TextField
-              label="Time"
-              id="time"
-              type="time"
-              // className="spacingRight"
-              InputLabelProps={{
-                shrink: true
-              }}
-              onChange={props.handleChange('time')}
-            /> */}
             <div className="picker">
           <TimePicker
             showTodayButton

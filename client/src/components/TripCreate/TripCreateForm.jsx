@@ -3,7 +3,7 @@ import Paper from '@material-ui/core/Paper';
 import Icon from '@material-ui/core/Icon';
 import green from '@material-ui/core/colors/green';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
+// import TextField from '@material-ui/core/TextField';
 import { Redirect } from 'react-router-dom';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import {
@@ -12,6 +12,9 @@ import {
   createMuiTheme
 } from '@material-ui/core/styles';
 import NoMarkersModalWrapped from './TripSaveModal'
+import { DatePicker } from 'material-ui-pickers';
+let date = new Date();
+
 
 const styles = theme => ({
   button: {
@@ -58,28 +61,29 @@ class TripCreateForm extends React.Component{
                     value={this.props.tripName}
                     onChange={this.props.handleChange('tripName')}
                   />
-                <TextField
-                  className="textVal"
-                  id="startDate"
-                  label="Start Date"
-                  type="date"
-                  value={this.props.startDate}
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                  onChange={this.props.handleChange('startDate')}
-                />
-                <TextField
-                  className="textVal"
-                  id="endDate"
-                  label="End Date"
-                  type="date"
-                  value={this.props.endDate}
-                  InputLabelProps={{
-                    shrink: true
-                  }}
-                  onChange={this.props.handleChange('endDate')}
-                />
+                  <div className="picker">
+                    <DatePicker
+                      label="Start Date"
+                      disablePast
+                      showTodayButton
+                      maxDateMessage="Date must be geater than today"
+                      value={date}
+                      onChange={this.props.handleDateChange('startDate')}
+                      animateYearScrolling={true}
+                      />
+                    </div>
+                    <div className="picker">
+                    <DatePicker
+                      label="End Date"
+                      disablePast
+                      showTodayButton
+                      maxDateMessage="Date must be geater than today"
+                      value={date}
+                      onChange={this.props.handleDateChange('endDate')}
+                      animateYearScrolling={true}
+                      />
+                    </div>
+              
                 <Button
                   id="saveTripButton"
                   variant="outlined"
