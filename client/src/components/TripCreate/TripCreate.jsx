@@ -8,6 +8,7 @@ import axios from 'axios';
 import './TripCreate.css';
 import Slide from '@material-ui/core/Slide';
 import Zoom from '@material-ui/core/Zoom';
+import { format } from 'date-fns/esm';
 
 let date = new Date().toISOString().split('T')[0];
 
@@ -196,8 +197,12 @@ class TripCreate extends React.Component {
   }
   handleTimeChange = (NewTime) => {
     let time = NewTime.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour24: true })
-    console.log(time)
     this.setState({ time: time });
+  }
+  handleDateChange = (date) => {
+    let formatDate = format(new Date(date), 'YYYY/MM/D');
+    console.log(formatDate)
+    this.setState({ eta: formatDate });
   }
 
   render() {
@@ -209,12 +214,12 @@ class TripCreate extends React.Component {
       <div className="tripCreateWrapper">
         <Slide direction="down" in={true} mountOnEnter unmountOnExit>
         <TripCreateForm
-        tripName={this.state.tripName}
-        tripsfromUserName={this.state.tripsfromUserName}
-        tripSaveModal={this.state.tripSaveModal}
-        noMarkersModalOpenF={this.noMarkersModalOpenF}
-        noMarkersModalFalseF={this.noMarkersModalFalseF}
-        modalFade={this.state.modalFade}
+          tripName={this.state.tripName}
+          tripsfromUserName={this.state.tripsfromUserName}
+          tripSaveModal={this.state.tripSaveModal}
+          noMarkersModalOpenF={this.noMarkersModalOpenF}
+          noMarkersModalFalseF={this.noMarkersModalFalseF}
+          modalFade={this.state.modalFade}
           email={this.props.email}
           handleSubmit={this.handleSubmit}
           handleChange={this.handleChange}
@@ -249,6 +254,7 @@ class TripCreate extends React.Component {
             handleWayPointExpand={this.handleWayPointExpand}
             saveLocationEnabled={this.state.saveLocationEnabled}
             handleTimeChange={this.handleTimeChange}
+            handleDateChange={this.handleDateChange}
           />
           </Slide>
         </div>

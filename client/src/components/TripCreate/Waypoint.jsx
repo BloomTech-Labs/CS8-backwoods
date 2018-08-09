@@ -4,12 +4,12 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Input from '@material-ui/core/Input';
-import TextField from '@material-ui/core/TextField';
 import Button from '@material-ui/core/Button';
 import Icon from '@material-ui/core/Icon';
 import green from '@material-ui/core/colors/green';
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { TimePicker } from 'material-ui-pickers';
+import { DatePicker } from 'material-ui-pickers';
 
 let time = new Date();
 
@@ -41,7 +41,18 @@ const Waypoint = props => {
         <MuiThemeProvider theme={theme}>
         <div className="waypointControlsWrapper">
           <div className="waypointTextField">
-            <TextField
+          <div className="picker">
+          <DatePicker
+            label="With today button"
+            showTodayButton
+            disablePast
+            maxDateMessage="Date must be less than today"
+            value={time}
+            onChange={props.handleDateChange}
+            animateYearScrolling={false}
+          />
+        </div>
+            {/* <TextField
               label="ETA"
               id="date"
               type="date"
@@ -51,7 +62,7 @@ const Waypoint = props => {
                 shrink: true
               }}
               onChange={props.handleChange('eta')}
-            />
+            /> */}
             {/* <TextField
               label="Time"
               id="time"
