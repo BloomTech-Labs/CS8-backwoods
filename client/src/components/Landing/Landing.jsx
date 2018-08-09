@@ -4,7 +4,7 @@ import './Landing.css';
 import logo from './logo.svg';
 import bullets from './bullets.svg';
 import Paper from '@material-ui/core/Paper';
-
+import {Link} from 'react-router-dom';
 const Landing = () => {
   return (
     <div className="landingWrapper">
@@ -36,6 +36,7 @@ const Landing = () => {
         </ul>
         <h3>Subscribe for only $19.99/yr</h3>
         <BuyNow />
+        <Link to="/thegreatAdventure@backwood.app/trip/Crystal-Mountain-Loop">Test Trip </Link>
       </Paper>
     </div>
   );
