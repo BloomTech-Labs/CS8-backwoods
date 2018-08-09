@@ -221,6 +221,7 @@ class User extends React.Component {
                   email={this.props.email}
                   user={this.props.email}
                   getUsersAgain={this.getUsersAgain}
+                  tripsFromUser={this.state.trips}
                 />
                 <RestrictedRoute
                   path="/:user/archived"

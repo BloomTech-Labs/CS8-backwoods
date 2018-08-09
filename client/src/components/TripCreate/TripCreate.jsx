@@ -37,10 +37,17 @@ class TripCreate extends React.Component {
       disableRemoveMarker: true,
       expanded: null,
       tripSaveModal: false,
-      modalFade: false
+      modalFade: false,
+      tripsfromUserName: []
     };
   }
-
+  componentWillMount() {
+    let tripsfromUserName = []
+    this.props.tripsFromUser.forEach(trip => {
+      tripsfromUserName.push(trip.tripName)
+    })
+    this.setState({tripsfromUserName: tripsfromUserName})
+  }
   activateMap = () => {
     this.setState({
       mapOpacity: 1,
@@ -78,6 +85,7 @@ class TripCreate extends React.Component {
   };
 
   handleChange = name => event => {
+    // console.log(name, event.target.value)
     this.setState({ [name]: event.target.value }, this._CheckMarkers());
   };
 
@@ -209,6 +217,8 @@ class TripCreate extends React.Component {
       <div className="tripCreateWrapper">
         <Slide direction="down" in={true} mountOnEnter unmountOnExit>
         <TripCreateForm
+        tripName={this.state.tripName}
+        tripsfromUserName={this.state.tripsfromUserName}
         tripSaveModal={this.state.tripSaveModal}
         noMarkersModalOpenF={this.noMarkersModalOpenF}
         noMarkersModalFalseF={this.noMarkersModalFalseF}

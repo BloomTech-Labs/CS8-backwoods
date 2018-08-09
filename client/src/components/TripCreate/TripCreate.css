@@ -19,7 +19,7 @@
 }
 
 .tripCreateMap {
-  height: 500px;
+  height: 600px;
   width: 550px;
   /* background-color: white; */
   /* margin-right: 20px; */
@@ -50,9 +50,10 @@
   }
 }
 .tripCreateForm {
-  padding: 10px;
+  padding: 15px 0px 15px 0px;
   display: flex;
   justify-content: space-evenly;
+  /* height: 100px; */
 }
 
 .WaypointListWrapper {
@@ -98,4 +99,13 @@
 
 .tripCreateInputLabel {
   font-size: 1.3rem !important;
+}
+
+.textVal {
+  height: 70px;
+}
+
+#saveTripButton{
+  width: 150px;
+  /* margin: auto; */
 }
