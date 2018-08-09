@@ -78,6 +78,12 @@ class User extends React.Component {
   }
 
   componentWillMount() {
+    // if(this.props.match.params.user === 'thegreatAdventure@backwood.app') {
+    //   console.log('Test User')
+    //   this.setState({
+    //     hasTrips: true,
+    //   })
+    // }
     axios
       .get(`${API_URL}/${this.props.match.params.user}`)
       .then(res => {

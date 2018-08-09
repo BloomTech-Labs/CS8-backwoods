@@ -20,7 +20,12 @@ class TripOpen extends React.Component {
   }
 
   componentWillMount() {
-    // console.log(this.props.location.param1)
+    // if(this.props.match.params.user === 'thegreatAdventure@backwood.app' && this.props.match.params.slug) {
+    //   console.log('Test User')
+    //   this.setState({
+    //     hasTrips: true,
+    //   })
+    // }
     axios
       .get(`${API_URL}/${this.props.match.params.user}/${this.props.match.params.slug}`)
       .then(res => {
@@ -63,14 +68,6 @@ class TripOpen extends React.Component {
       }
 
       )
-
-      // .get(`${API_URL}/getMarkers/${this.props.location.param1}`)
-      // .then(res => {
-      //   console.log(res.data.marker);
-      //   this.setState({ markers: res.data.marker });
-      // }).catch(err => {
-      //   console.log(err);
-      // });
   }
 
   render() {

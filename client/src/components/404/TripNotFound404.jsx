@@ -10,7 +10,7 @@ const TripNotFound404 = () => {
         <Typography 
           variant="display4"
           color="inherit">
-          apologies but unfortunately,
+          Unfortunately,
         </Typography>
         <Typography 
           variant="display2"
