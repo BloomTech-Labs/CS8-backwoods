@@ -10,7 +10,7 @@ import Slide from '@material-ui/core/Slide';
 import Zoom from '@material-ui/core/Zoom';
 import { format } from 'date-fns/esm';
 
-let date = new Date().toISOString().split('T')[0];
+// let date = new Date().toISOString().split('T')[0];
 
 
 class TripCreate extends React.Component {
@@ -20,13 +20,13 @@ class TripCreate extends React.Component {
       tripName: '',
       wayPoints: [],
       newMarkersArr: [],
-      startDate: '',
-      endDate: '',
+      startDate: new Date(),
+      endDate: new Date(),
       email: '',
       fireRedirect: false,
       markerName: '',
-      eta: date,
-      time: '',
+      eta: new Date(),
+      time: new Date(),
       mapOpacity: 0.4,
       lng: null,
       lat: null,
@@ -78,7 +78,6 @@ class TripCreate extends React.Component {
     this.setState({
       mapOpacity: 0.4,
       MarkerCreated: false,
-      time: '',
       lat: null,
       lng: null
     });
@@ -89,10 +88,11 @@ class TripCreate extends React.Component {
   };
 
   handleNewWaypoint = () => {
+    let formatTime = format(new Date(this.state.time), 'HH:mm:ss')
     let newWayPoint = {
       markerName: this.state.markerName,
       eta: this.state.eta,
-      time: this.state.time,
+      time: formatTime,
       lng: this.state.lng,
       lat: this.state.lat,
       tripId: ''
@@ -194,8 +194,7 @@ class TripCreate extends React.Component {
     this.setState({ tripSaveModal: false, modalFade: false})
   }
   handleTimeChange = (NewTime) => {
-    let time = NewTime.toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour24: true })
-    this.setState({ time: time });
+    this.setState({ time: NewTime });
   }
   handleDateChange = (name) => (date) => {
     let formatDate = format(new Date(date), 'YYYY/MM/D');
@@ -223,6 +222,8 @@ class TripCreate extends React.Component {
           fireRedirect={this.state.fireRedirect}
           isEnabled={isEnabled}
           handleDateChange={this.handleDateChange}
+          endDate={this.state.endDate}
+          startDate={this.state.startDate}
         />
         </Slide>
         <div className="MapWaypointWrapper">
@@ -239,6 +240,7 @@ class TripCreate extends React.Component {
           </Zoom>
           <Slide direction="left" in={true} mountOnEnter unmountOnExit>
           <WaypointList
+            time={this.state.time}
             eta={this.state.eta}
             handleChange={this.handleChange}
             addWaypoint={this.addWaypoint}

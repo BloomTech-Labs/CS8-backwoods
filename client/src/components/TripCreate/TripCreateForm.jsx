@@ -13,7 +13,6 @@ import {
 } from '@material-ui/core/styles';
 import NoMarkersModalWrapped from './TripSaveModal'
 import { DatePicker } from 'material-ui-pickers';
-let date = new Date();
 
 
 const styles = theme => ({
@@ -67,7 +66,7 @@ class TripCreateForm extends React.Component{
                       disablePast
                       showTodayButton
                       maxDateMessage="Date must be geater than today"
-                      value={date}
+                      value={this.props.startDate}
                       onChange={this.props.handleDateChange('startDate')}
                       animateYearScrolling={true}
                       />
@@ -78,7 +77,7 @@ class TripCreateForm extends React.Component{
                       disablePast
                       showTodayButton
                       maxDateMessage="Date must be geater than today"
-                      value={date}
+                      value={this.props.endDate}
                       onChange={this.props.handleDateChange('endDate')}
                       animateYearScrolling={true}
                       />

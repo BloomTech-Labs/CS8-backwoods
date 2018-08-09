@@ -11,7 +11,6 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { TimePicker } from 'material-ui-pickers';
 import { DatePicker } from 'material-ui-pickers';
 
-let time = new Date();
 
 const theme = createMuiTheme({
   palette: {
@@ -47,7 +46,7 @@ const Waypoint = props => {
             showTodayButton
             disablePast
             maxDateMessage="Date must be greater than today"
-            value={time}
+            value={props.eta}
             onChange={props.handleDateChange('eta')}
             animateYearScrolling={false}
           />
@@ -57,7 +56,7 @@ const Waypoint = props => {
             showTodayButton
             todayLabel="now"
             label="Time"
-            value={time}
+            value={props.time}
             onChange={props.handleTimeChange}
           />
         </div>
