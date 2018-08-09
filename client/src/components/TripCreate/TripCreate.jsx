@@ -30,7 +30,6 @@ class TripCreate extends React.Component {
       lng: null,
       lat: null,
       tripId: '',
-      markers: [],
       MarkerCreated: false,
       disableAddMarker: false,
       saveLocationEnabled: true,
@@ -156,22 +155,10 @@ class TripCreate extends React.Component {
   }
 
   addMarker = event => {
-    // console.log('== CLICK ==');
-    // console.log('X:', event.x);
-    // console.log('Y:', event.y);
-    // console.log('LAT:', event.lat);
-    // console.log('LNG:', event.lng);
     let lat = event.lat;
     let lng = event.lng;
 
-    const marker = {
-      lat: lat,
-      lng: lng
-    };
-
-    this.state.markers.push(marker);
     this.setState({ lat: lat, lng: lng }, this.disableSaveLocation());
-    // console.log(this.state.markers);
   };
 
   handleWayPointExpand = panel => (event, expanded) => {
@@ -197,7 +184,7 @@ class TripCreate extends React.Component {
   }
   noMarkersModalOpenF = (e) => {
     e.preventDefault()
-    if(this.state.markers.length === 0) {
+    if(this.state.newMarkersArr.length === 0) {
       this.setState({ tripSaveModal: true, modalFade: true})
     } else {
       this.handleSubmit()
