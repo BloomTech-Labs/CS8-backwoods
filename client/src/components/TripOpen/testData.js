@@ -1,7 +1,7 @@
 export const testTrip = [{
   archived: false,
   createdAt: "2018-08-09T21:04:06.551Z",
-  email: "element1028@gmail.com",
+  email: "thegreatAdventure@backwood.app",
   endDate: "2018/09/3",
   id: "e55e656e-15fe-49ae-999e-99cb4c399edd",
   slug: "Crystal-Mountain-Loop",
