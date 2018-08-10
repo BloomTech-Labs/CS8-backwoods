@@ -5,7 +5,7 @@
   /* width: 6%;
   float: right; */
   padding: 10px 10px 0px 10px;
-  background-color: rgba(0,0,0,0.0);
+  background-color: rgba(0, 0, 0, 0);
   position: absolute;
   width: 100vw;
   height: 5vh;
@@ -16,4 +16,10 @@
 .submitButton {
   margin-left: 30%;
   margin-top: 5%;
+}
+.MuiButton-containedPrimary-19 {
+  color: white !important;
+}
+.MuiButton-containedPrimary-732 {
+  color: white !important;
 }
