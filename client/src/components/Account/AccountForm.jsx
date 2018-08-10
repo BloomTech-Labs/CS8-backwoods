@@ -20,6 +20,13 @@ import { Typography } from '../../../node_modules/@material-ui/core';
 const theme = createMuiTheme({
   palette: {
     primary: green
+  },
+  overrides: {
+    MuiButton: {
+      raisedPrimary: {
+        color: 'white'
+      }
+    }
   }
 });
 const styles = theme => ({
