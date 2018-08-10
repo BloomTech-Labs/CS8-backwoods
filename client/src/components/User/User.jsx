@@ -59,7 +59,7 @@ class User extends React.Component {
     this.state = {
       noUser: false,
       error: false,
-      email: '',
+      emailFromUser: this.props.match.params.user,
       trips: [],
       tripName: '',
       startDate: '',
@@ -197,6 +197,7 @@ class User extends React.Component {
           <div className="mainWrapper globalBackground">
             <div className="poop">
               <Nav
+                emailFromUser={this.state.emailFromUser}
                 user={this.props.email}
                 isLoggedIn={this.props.isLoggedIn}
                 savedTripCheck={this.savedTripCheck}

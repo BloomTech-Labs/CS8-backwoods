@@ -40,6 +40,7 @@ const Nav = props => {
     <div className="navWrapper">
       <NavBreadcrumb user={props.user} />
       <NavBar
+        emailFromUser={props.emailFromUser}
         user={props.user}
         isLoggedIn={props.isLoggedIn}
         checkIfTripSaved={props.checkIfTripSaved}
