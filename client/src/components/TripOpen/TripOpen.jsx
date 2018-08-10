@@ -23,7 +23,7 @@ class TripOpen extends React.Component {
   componentWillMount() {
     console.log('tripopen')
     console.log(testTrip[0])
-    if(this.props.match.params.user === 'thegreatAdventure@backwood.app' && this.props.match.params.slug === "Crystal-Mountain-Loop") {
+    if(this.props.match.params.user === 'aaron@backwood.app' && this.props.match.params.slug === "Crystal-Mountain-Loop") {
       console.log(testTrip)
       this.setState({
         startDate: testTrip[0].startDate,
