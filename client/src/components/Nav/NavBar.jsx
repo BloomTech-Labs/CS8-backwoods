@@ -19,11 +19,12 @@ const styles = theme => ({
 const fade = true;
 
 const NavBar = (props) => {
+  const isUser = props.user ? props.user : props.emailFromUser
   return (
     <Slide direction="right" in={fade} mountOnEnter unmountOnExit>
     <Paper className="navBar">
       <List component="nav">
-        <Link to={`/${props.user}`}>
+        <Link to={`/${isUser}`}>
           <ListItem button onClick={(e) => props.checkIfTripSaved(e, `/${props.user}`)}>
             <ListItemText primary="Trips" />
           </ListItem>

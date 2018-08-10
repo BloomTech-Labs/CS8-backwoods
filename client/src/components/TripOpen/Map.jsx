@@ -13,8 +13,8 @@ const Marker = ({ text }) => (
 export class MapContainer extends React.Component {
   static defaultProps = {
     center: {
-      lat: 37.774929,
-      lng: -122.419416
+      lat: 46.9282,
+      lng: -121.5045
     },
     zoom: 12
   };

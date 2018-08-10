@@ -14,8 +14,7 @@ import Snackbar from '@material-ui/core/Snackbar';
 import green from '@material-ui/core/colors/green';
 import { withStyles } from '@material-ui/core/styles';
 import BadUrl404 from '../404/BadUrl404';
-// import UserHasNoTrips404 from '../404/UserHasNoTrips404';
-
+import {testTrip} from '../TripOpen/testData'
 const RestrictedRoute = ({
   component: Component,
   isLoggedIn,
@@ -60,7 +59,7 @@ class User extends React.Component {
     this.state = {
       noUser: false,
       error: false,
-      email: '',
+      emailFromUser: this.props.match.params.user,
       trips: [],
       tripName: '',
       startDate: '',
@@ -78,7 +77,17 @@ class User extends React.Component {
   }
 
   componentWillMount() {
-    axios
+    console.log('user.jsx')
+    if(this.props.match.params.user === 'aaron@backwood.app') {
+      console.log('Test User')
+      this.setState({
+        hasTrips: true,
+        trips: testTrip,
+        noUser: false
+      })
+      return
+    } else {
+      axios
       .get(`${API_URL}/${this.props.match.params.user}`)
       .then(res => {
         this.setState({ hasTrips: true, trips: res.data.trips });
@@ -92,6 +101,7 @@ class User extends React.Component {
 
         console.log(error);
       });
+    }
   }
 
   getUsersAgain = () => {
@@ -187,6 +197,7 @@ class User extends React.Component {
           <div className="mainWrapper globalBackground">
             <div className="poop">
               <Nav
+                emailFromUser={this.state.emailFromUser}
                 user={this.props.email}
                 isLoggedIn={this.props.isLoggedIn}
                 savedTripCheck={this.savedTripCheck}

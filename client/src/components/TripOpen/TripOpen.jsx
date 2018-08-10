@@ -6,6 +6,7 @@ import TripOpenName from './TripOpenName';
 import axios from 'axios';
 import './tripOpenStyling.css';
 import { withRouter } from 'react-router-dom';
+import { testTrip, testTripMarkers } from './testData';
 
 class TripOpen extends React.Component {
   constructor(props) {
@@ -20,8 +21,18 @@ class TripOpen extends React.Component {
   }
 
   componentWillMount() {
-    // console.log(this.props.location.param1)
-    axios
+    console.log('tripopen')
+    console.log(testTrip[0])
+    if(this.props.match.params.user === 'aaron@backwood.app' && this.props.match.params.slug === "Crystal-Mountain-Loop") {
+      console.log(testTrip)
+      this.setState({
+        startDate: testTrip[0].startDate,
+        endDate: testTrip[0].endDate,
+        tripName: testTrip[0].tripName,
+        markers: testTripMarkers
+      })
+    } else {
+      axios
       .get(`${API_URL}/${this.props.match.params.user}/${this.props.match.params.slug}`)
       .then(res => {
         this.setState({
@@ -63,14 +74,8 @@ class TripOpen extends React.Component {
       }
 
       )
-
-      // .get(`${API_URL}/getMarkers/${this.props.location.param1}`)
-      // .then(res => {
-      //   console.log(res.data.marker);
-      //   this.setState({ markers: res.data.marker });
-      // }).catch(err => {
-      //   console.log(err);
-      // });
+    }
+    
   }
 
   render() {
