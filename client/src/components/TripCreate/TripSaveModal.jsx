@@ -30,34 +30,29 @@ const styles = theme => ({
   }
 });
 
-const NoMarkersModal = (props) => {
+const NoMarkersModal = props => {
   const { classes } = props;
   return (
     <Modal
-    open={props.tripSaveModal}
-    onClose={props.noMarkersModalFalseF}
-    disableAutoFocus={true}
+      open={props.tripSaveModal}
+      onClose={props.noMarkersModalFalseF}
+      disableAutoFocus={true}
     >
-    <Fade in={props.modalFade}>
-      <Paper
-        style={getModalStyle()}
-        className={classes.paper}
-        elevation={4}
-      >
-        <Typography variant="headline">
-          Your about to create a trip with no waypoints.<br />
-          <br /> Do you want to continue?
-        </Typography>
-        <div className="stayOrLeaveButtons">
-          <Button onClick={props.noMarkersModalFalseF}>Stay</Button>
-          <Button onClick={props.handleSubmit}>Save</Button>
-        </div>
-      </Paper>
-    </Fade>
-  </Modal>
-  )
-
-}
+      <Fade in={props.modalFade}>
+        <Paper style={getModalStyle()} className={classes.paper} elevation={4}>
+          <Typography variant="headline">
+            You're about to create a trip with no waypoints.<br />
+            <br /> Do you want to continue?
+          </Typography>
+          <div className="stayOrLeaveButtons">
+            <Button onClick={props.noMarkersModalFalseF}>Stay</Button>
+            <Button onClick={props.handleSubmit}>Save</Button>
+          </div>
+        </Paper>
+      </Fade>
+    </Modal>
+  );
+};
 
 const NoMarkersModalWrapped = withStyles(styles)(NoMarkersModal);
 
