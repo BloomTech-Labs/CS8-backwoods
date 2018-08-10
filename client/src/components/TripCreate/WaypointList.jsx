@@ -29,10 +29,10 @@ class WaypointList extends React.Component {
   render() {
   return (
     <Paper className="WaypointListWrapper" elevation={1}>
-      <button onClick={this.getchecked}>check</button>
       <Typography
         variant="display1"
         component="h3"
+        className="waypointStartEnd"
       >Start
       </Typography>
       <Divider />
@@ -41,7 +41,8 @@ class WaypointList extends React.Component {
           <Button
             size="large"
             variant="outlined"
-            onClick={() => this.props.addWaypoint()}
+            // onClick={() => this.props.addWaypoint()}
+            onClick={this.getchecked}
             disabled={this.props.disableAddMarker}
             color="primary"
           >
@@ -99,6 +100,7 @@ class WaypointList extends React.Component {
     <Typography
           variant="display1"
           component="h3"
+          className="waypointStartEnd"
         >
         End
         </Typography>

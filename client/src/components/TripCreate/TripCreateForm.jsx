@@ -88,6 +88,7 @@ class TripCreateForm extends React.Component{
                   variant="outlined"
                   type="submit"
                   color="primary"
+                  size="large"
                   disabled={!this.props.isEnabled}
                 >
                   Save Trip

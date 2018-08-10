@@ -21,6 +21,9 @@ const styles = {
   card: {
     minWidth: 275,
   },
+  button: {
+    margin: theme.spacing.unit,
+  },
   bullet: {
     display: 'inline-block',
     margin: '0 2px',
@@ -44,7 +47,8 @@ const WaypointCreateCard = (props) => {
           <CardContent>
           <MuiThemeProvider theme={theme}>
           <Input
-            placeholder='New Marker'
+            placeholder='Marker Name here'
+            className="markerName"
             inputProps={{
               'aria-label': 'Description'
             }}
@@ -52,7 +56,7 @@ const WaypointCreateCard = (props) => {
           />
         <div className="waypointControlsWrapper">
           <div className="waypointTextField">
-          <div className="picker">
+          <div className="datePicker">
           <DatePicker
             label="ETA"
             showTodayButton
@@ -61,25 +65,28 @@ const WaypointCreateCard = (props) => {
             value={props.eta}
             onChange={props.handleDateChange('eta')}
             animateYearScrolling={false}
+            className="pickerCard"
           />
         </div>
-            <div className="picker">
+            <div className="timePicker">
           <TimePicker
             showTodayButton
             todayLabel="now"
             label="Time"
             value={props.time}
             onChange={props.handleTimeChange}
+            className="pickerCard"
           />
         </div>
           </div>
           <div className="waypointButtonContainer">
           <Button
-            className="saveTripButton"
+            className={classes.button}
             variant="outlined"
             color="primary"
             onClick={props.handleNewWaypoint}
             disabled={props.saveLocationEnabled}
+            size="large"
           >
             Save Location
             <Icon>send</Icon>
