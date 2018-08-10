@@ -42,7 +42,7 @@ class WaypointList extends React.Component {
             size="large"
             variant="outlined"
             // onClick={() => this.props.addWaypoint()}
-            onClick={this.getchecked}
+            onClick={this.props.markerAddCard}
             disabled={this.props.disableAddMarker}
             color="primary"
           >
@@ -66,7 +66,13 @@ class WaypointList extends React.Component {
       </div>
       <div className="waypointContainer">
       <WaypointCreateCard 
-        checked={this.state.checked}
+        displayMarkerCard={this.props.displayMarkerCard}
+        activateMap={this.props.activateMap}
+        lat={this.props.lat}
+        startDate={this.props.startDate}
+        endDate={this.props.endDate}
+
+
         handleChange={this.props.handleChange}
         handleDateChange={this.props.handleDateChange}
         handleTimeChange={this.props.handleTimeChange}
@@ -75,18 +81,17 @@ class WaypointList extends React.Component {
         handleNewWaypoint={this.props.handleNewWaypoint}
         saveLocationEnabled={this.props.saveLocationEnabled}
         />
-      {this.props.wayPoints.map((wayPoint, index) => {
+      {this.props.newMarkersArr.map((wayPoint, index) => {
         return (
           <WayPoint
             time={this.props.time}
-            handleDateChange={this.props.handleDateChange}
-            handleTimeChange={this.props.handleTimeChange}
+            
             eta={this.props.eta}
             wayPoint={wayPoint}
             wayPointKey={index}
             key={index}
+            
             handleChange={this.props.handleChange}
-            activateMap={this.props.activateMap}
             handleNewWaypoint={this.props.handleNewWaypoint}
             disableAddMarker={this.props.disableAddMarker}
             handleWayPointExpand={this.props.handleWayPointExpand}

@@ -65,7 +65,8 @@ class TripCreateForm extends React.Component{
                       label="Start Date"
                       disablePast
                       showTodayButton
-                      maxDateMessage="Date must be geater than today"
+                      // maxDate={this.props.endDate}
+                      // maxDateMessage="Date must be less that trip end date"
                       value={this.props.startDate}
                       onChange={this.props.handleDateChange('startDate')}
                       animateYearScrolling={true}
@@ -76,7 +77,8 @@ class TripCreateForm extends React.Component{
                       label="End Date"
                       disablePast
                       showTodayButton
-                      maxDateMessage="Date must be geater than today"
+                      minDate={this.props.startDate}
+                      minDateMessage="Date must be geater than trip start date"
                       value={this.props.endDate}
                       onChange={this.props.handleDateChange('endDate')}
                       animateYearScrolling={true}

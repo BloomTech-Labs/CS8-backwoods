@@ -25,20 +25,23 @@ class TripCreate extends React.Component {
       email: '',
       fireRedirect: false,
       markerName: '',
-      eta: new Date(),
-      time: new Date(),
       mapOpacity: 0.4,
       lng: null,
       lat: null,
       tripId: '',
       MarkerCreated: false,
-      disableAddMarker: false,
       saveLocationEnabled: true,
       disableRemoveMarker: true,
       expanded: null,
       tripSaveModal: false,
       modalFade: false,
-      tripsfromUserName: []
+      tripsfromUserName: [],
+
+      
+      eta: new Date(),
+      time: new Date(),
+      disableAddMarker: false,
+      displayMarkerCard: false
     };
   }
   componentWillMount() {
@@ -50,10 +53,28 @@ class TripCreate extends React.Component {
   }
   activateMap = () => {
     this.setState({
+      lng: 0,
+      lat: 0,
       mapOpacity: 1,
       MarkerCreated: true
     });
   };
+
+
+////// NEW FUNCTIONS
+
+  markerAddCard = () => {
+    this.setState({
+      disableAddMarker: true,
+      displayMarkerCard: true
+    })
+  }
+
+//////////////////////////////
+
+
+
+
 
   addWaypoint = () => {
     let newWayPoint = {
@@ -103,6 +124,7 @@ class TripCreate extends React.Component {
         disableAddMarker: false,
         disableRemoveMarker: false,
         saveLocationEnabled: true,
+        displayMarkerCard: false
       },
       this.deactivateMap
     );
@@ -240,6 +262,14 @@ class TripCreate extends React.Component {
           </Zoom>
           <Slide direction="left" in={true} mountOnEnter unmountOnExit>
           <WaypointList
+            disableAddMarker={this.state.disableAddMarker}
+            displayMarkerCard={this.state.displayMarkerCard}
+            markerAddCard={this.markerAddCard}
+            lat={this.state.lat}
+            startDate={this.state.startDate}
+            endDate={this.state.endDate}
+            newMarkersArr={this.state.newMarkersArr}
+
             time={this.state.time}
             eta={this.state.eta}
             handleChange={this.handleChange}
@@ -248,7 +278,7 @@ class TripCreate extends React.Component {
             activateMap={this.activateMap}
             handleNewWaypoint={this.handleNewWaypoint}
             removeMarker={this.removeMarker}
-            disableAddMarker={this.state.disableAddMarker}
+            // disableAddMarker={this.state.disableAddMarker}
             disableRemoveMarker={this.state.disableRemoveMarker}
             expanded={this.state.expanded}
             handleWayPointExpand={this.handleWayPointExpand}

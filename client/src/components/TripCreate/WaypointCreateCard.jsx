@@ -1,6 +1,6 @@
 import React from 'react';
 import Card from '@material-ui/core/Card';
-import CardActions from '@material-ui/core/CardActions';
+// import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import { withStyles } from '@material-ui/core/styles';
 import Collapse from '@material-ui/core/Collapse';
@@ -42,7 +42,7 @@ const WaypointCreateCard = (props) => {
   const { classes } = props;
   return (
     <React.Fragment>
-      <Collapse in={props.checked}>
+      <Collapse in={props.displayMarkerCard}>
         <Card className={classes.card}>
           <CardContent>
           <MuiThemeProvider theme={theme}>
@@ -61,7 +61,10 @@ const WaypointCreateCard = (props) => {
             label="ETA"
             showTodayButton
             disablePast
-            maxDateMessage="Date must be greater than today"
+            minDate={props.startDate}
+            maxDate={props.endDate}
+            minDateMessage="ETA must be greater then trip start date"
+            maxDateMessage="ETA must be less than trip end date"
             value={props.eta}
             onChange={props.handleDateChange('eta')}
             animateYearScrolling={false}
@@ -80,17 +83,34 @@ const WaypointCreateCard = (props) => {
         </div>
           </div>
           <div className="waypointButtonContainer">
+          {
+          props.lat === null ?
+          <Button
+            className={classes.button}
+            variant="outlined"
+            color="primary"
+            onClick={props.activateMap}
+            // disabled={props.saveLocationEnabled}
+            size="large"
+          >
+            Place Marker
+            <Icon>send</Icon>
+          </Button>
+          :
+
           <Button
             className={classes.button}
             variant="outlined"
             color="primary"
             onClick={props.handleNewWaypoint}
-            disabled={props.saveLocationEnabled}
+            // disabled={props.saveLocationEnabled}
             size="large"
           >
+          
             Save Location
             <Icon>send</Icon>
           </Button>
+          }
           </div>
         </div>
         </MuiThemeProvider>
