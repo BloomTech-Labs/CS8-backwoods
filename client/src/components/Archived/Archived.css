@@ -1,6 +1,6 @@
 .noArchivedTripsPaper {
-  height: 250px;
-  width: 250px;
+  height: 270px;
+  width: 280px;
   padding: 5%;
   align-content: center;
   text-align: center;
@@ -17,7 +17,7 @@
 .trip2 {
   width: 280px;
   height: 270px;
-  /* padding: 10px; */
+  padding: 5%;
   margin: 15px 15px 15px 15px;
   display: flex;
   flex-direction: column;
