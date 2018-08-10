@@ -7,8 +7,10 @@ import red from '@material-ui/core/colors/red';
 import Button from '@material-ui/core/Button';
 import WayPoint from './Waypoint';
 import Divider from '@material-ui/core/Divider';
-
+import WaypointCreateCard from './WaypointCreateCard'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+
+
 const addTheme = createMuiTheme({
   palette: {
     primary: blue
@@ -19,45 +21,28 @@ const removeTheme = createMuiTheme({
     primary: red
   }
 });
-const WaypointList = props => {
+class WaypointList extends React.Component {
+  state = { ckecked: false }
+    getchecked = () => {
+      this.setState({ checked: !this.state.checked });
+    }
+  render() {
   return (
     <Paper className="WaypointListWrapper" elevation={1}>
-      
+      <button onClick={this.getchecked}>check</button>
       <Typography
         variant="display1"
         component="h3"
       >Start
       </Typography>
       <Divider />
-    <div className="waypointContainer">
-      {props.wayPoints.map((wayPoint, index) => {
-        return (
-          <WayPoint
-            time={props.time}
-            handleDateChange={props.handleDateChange}
-            handleTimeChange={props.handleTimeChange}
-            eta={props.eta}
-            wayPoint={wayPoint}
-            wayPointKey={index}
-            key={index}
-            handleChange={props.handleChange}
-            activateMap={props.activateMap}
-            handleNewWaypoint={props.handleNewWaypoint}
-            disableAddMarker={props.disableAddMarker}
-            handleWayPointExpand={props.handleWayPointExpand}
-            expanded={props.expanded}
-            saveLocationEnabled={props.saveLocationEnabled}
-          />
-        );
-      })}
-    </div>
       <div className="waypointButtonWrapper">
         <MuiThemeProvider theme={addTheme}>
           <Button
             size="large"
             variant="outlined"
-            onClick={() => props.addWaypoint()}
-            disabled={props.disableAddMarker}
+            onClick={() => this.props.addWaypoint()}
+            disabled={this.props.disableAddMarker}
             color="primary"
           >
             <Icon>add</Icon>
@@ -68,8 +53,8 @@ const WaypointList = props => {
           <Button
             size="large"
             variant="outlined"
-            onClick={props.removeMarker}
-            disabled={props.disableRemoveMarker}
+            onClick={this.props.removeMarker}
+            disabled={this.props.disableRemoveMarker}
             color="primary"
           >
           <Icon>delete</Icon>
@@ -78,6 +63,38 @@ const WaypointList = props => {
         
         </MuiThemeProvider>
       </div>
+      <div className="waypointContainer">
+      <WaypointCreateCard 
+        checked={this.state.checked}
+        handleChange={this.props.handleChange}
+        handleDateChange={this.props.handleDateChange}
+        handleTimeChange={this.props.handleTimeChange}
+        eta={this.props.eta}
+        time={this.props.time}
+        handleNewWaypoint={this.props.handleNewWaypoint}
+        saveLocationEnabled={this.props.saveLocationEnabled}
+        />
+      {this.props.wayPoints.map((wayPoint, index) => {
+        return (
+          <WayPoint
+            time={this.props.time}
+            handleDateChange={this.props.handleDateChange}
+            handleTimeChange={this.props.handleTimeChange}
+            eta={this.props.eta}
+            wayPoint={wayPoint}
+            wayPointKey={index}
+            key={index}
+            handleChange={this.props.handleChange}
+            activateMap={this.props.activateMap}
+            handleNewWaypoint={this.props.handleNewWaypoint}
+            disableAddMarker={this.props.disableAddMarker}
+            handleWayPointExpand={this.props.handleWayPointExpand}
+            expanded={this.props.expanded}
+            saveLocationEnabled={this.props.saveLocationEnabled}
+          />
+        );
+      })}
+    </div>
       <Divider />
     <Typography
           variant="display1"
@@ -87,6 +104,6 @@ const WaypointList = props => {
         </Typography>
     </Paper>
   );
-};
+};}
 
 export default WaypointList;

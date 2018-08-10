@@ -1,0 +1,97 @@
+import React from 'react';
+import Card from '@material-ui/core/Card';
+import CardActions from '@material-ui/core/CardActions';
+import CardContent from '@material-ui/core/CardContent';
+import { withStyles } from '@material-ui/core/styles';
+import Collapse from '@material-ui/core/Collapse';
+import Button from '@material-ui/core/Button';
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import { TimePicker } from 'material-ui-pickers';
+import { DatePicker } from 'material-ui-pickers';
+import Icon from '@material-ui/core/Icon';
+import Input from '@material-ui/core/Input';
+import green from '@material-ui/core/colors/green';
+
+const theme = createMuiTheme({
+  palette: {
+    primary: green
+  }
+});
+const styles = {
+  card: {
+    minWidth: 275,
+  },
+  bullet: {
+    display: 'inline-block',
+    margin: '0 2px',
+    transform: 'scale(0.8)',
+  },
+  title: {
+    marginBottom: 16,
+    fontSize: 14,
+  },
+  pos: {
+    marginBottom: 12,
+  },
+};
+
+const WaypointCreateCard = (props) => {
+  const { classes } = props;
+  return (
+    <React.Fragment>
+      <Collapse in={props.checked}>
+        <Card className={classes.card}>
+          <CardContent>
+          <MuiThemeProvider theme={theme}>
+          <Input
+            placeholder='New Marker'
+            inputProps={{
+              'aria-label': 'Description'
+            }}
+            onChange={props.handleChange('markerName')}
+          />
+        <div className="waypointControlsWrapper">
+          <div className="waypointTextField">
+          <div className="picker">
+          <DatePicker
+            label="ETA"
+            showTodayButton
+            disablePast
+            maxDateMessage="Date must be greater than today"
+            value={props.eta}
+            onChange={props.handleDateChange('eta')}
+            animateYearScrolling={false}
+          />
+        </div>
+            <div className="picker">
+          <TimePicker
+            showTodayButton
+            todayLabel="now"
+            label="Time"
+            value={props.time}
+            onChange={props.handleTimeChange}
+          />
+        </div>
+          </div>
+          <div className="waypointButtonContainer">
+          <Button
+            className="saveTripButton"
+            variant="outlined"
+            color="primary"
+            onClick={props.handleNewWaypoint}
+            disabled={props.saveLocationEnabled}
+          >
+            Save Location
+            <Icon>send</Icon>
+          </Button>
+          </div>
+        </div>
+        </MuiThemeProvider>
+        </CardContent>
+      </Card>
+      </Collapse>
+    </React.Fragment>
+  )
+}
+
+export default withStyles(styles)(WaypointCreateCard)
