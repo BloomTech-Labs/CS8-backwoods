@@ -12,6 +12,13 @@ import {
 const theme = createMuiTheme({
   palette: {
     primary: green
+  },
+  overrides: {
+    MuiButton: {
+      raisedPrimary: {
+        color: 'white'
+      }
+    }
   }
 });
 const styles = theme => ({
