@@ -61,6 +61,7 @@ const WaypointCreateCard = (props) => {
             label="ETA"
             showTodayButton
             disablePast
+            initialFocusedDate={props.startDate}
             minDate={props.startDate}
             maxDate={props.endDate}
             minDateMessage="ETA must be greater then trip start date"

@@ -33,12 +33,13 @@ class TripCreateForm extends React.Component{
       if (this.props.tripsfromUserName.length === 0){
         return true
       }
-      for(let i = 0; i < this.props.tripsfromUserName.length; i++) {
-        if(value.toLowerCase() !== this.props.tripsfromUserName[i].toLowerCase()) {
-          return true
-        }
-        return false
+      function doesAnyMatch(currentValue) {
+        return value.toLowerCase() !== currentValue
       }
+      if(this.props.tripsfromUserName.every(doesAnyMatch)) {
+        return true
+      }
+      return false
     });
   }
   render() {
@@ -74,6 +75,7 @@ class TripCreateForm extends React.Component{
                     </div>
                     <div className="picker">
                     <DatePicker
+                      initialFocusedDate={this.props.startDate}
                       label="End Date"
                       disablePast
                       showTodayButton
