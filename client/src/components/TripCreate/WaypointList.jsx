@@ -65,22 +65,26 @@ class WaypointList extends React.Component {
         </MuiThemeProvider>
       </div>
       <div className="waypointContainer">
-      <WaypointCreateCard 
-        displayMarkerCard={this.props.displayMarkerCard}
-        activateMap={this.props.activateMap}
-        lat={this.props.lat}
-        startDate={this.props.startDate}
-        endDate={this.props.endDate}
-
-
-        handleChange={this.props.handleChange}
-        handleDateChange={this.props.handleDateChange}
-        handleTimeChange={this.props.handleTimeChange}
-        eta={this.props.eta}
-        time={this.props.time}
-        handleNewWaypoint={this.props.handleNewWaypoint}
-        saveLocationEnabled={this.props.saveLocationEnabled}
-        />
+      {
+        this.props.displayMarkerCard ?
+        <WaypointCreateCard 
+          displayMarkerCard={this.props.displayMarkerCard}
+          activateMap={this.props.activateMap}
+          lat={this.props.lat}
+          startDate={this.props.startDate}
+          endDate={this.props.endDate}
+  
+  
+          handleChange={this.props.handleChange}
+          handleDateChange={this.props.handleDateChange}
+          handleTimeChange={this.props.handleTimeChange}
+          eta={this.props.eta}
+          time={this.props.time}
+          handleNewWaypoint={this.props.handleNewWaypoint}
+          saveLocationEnabled={this.props.saveLocationEnabled}
+          />
+        : null
+      }
       {this.props.newMarkersArr.map((wayPoint, index) => {
         return (
           <WayPoint
@@ -90,7 +94,8 @@ class WaypointList extends React.Component {
             wayPoint={wayPoint}
             wayPointKey={index}
             key={index}
-            
+
+
             handleChange={this.props.handleChange}
             handleNewWaypoint={this.props.handleNewWaypoint}
             disableAddMarker={this.props.disableAddMarker}

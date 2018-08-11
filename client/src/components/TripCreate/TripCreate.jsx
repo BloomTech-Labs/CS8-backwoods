@@ -124,7 +124,10 @@ class TripCreate extends React.Component {
         disableAddMarker: false,
         disableRemoveMarker: false,
         saveLocationEnabled: true,
-        displayMarkerCard: false
+        displayMarkerCard: false,
+        markerName: '',
+        eta: this.state.startDate
+
       },
       this.deactivateMap
     );
@@ -159,13 +162,14 @@ class TripCreate extends React.Component {
   // removes marker after hitting save location
   removeMarker = () => {
     this.state.newMarkersArr.pop();
-    this.state.wayPoints.pop();
-    this.state.markers.pop();
+    // this.state.wayPoints.pop();
+    // this.state.markers.pop();
     this.setState({
       disableAddMarker: false,
-      eta: '',
-      time: '',
+      eta: this.state.startDate,
+      time: new Date(),
       markerName: '',
+      displayMarkerCard: true
     }, this.markerCheck);
   };
 

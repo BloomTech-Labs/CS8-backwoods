@@ -3,6 +3,8 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import Typography from '@material-ui/core/Typography';
+
 // import Input from '@material-ui/core/Input';
 // import Button from '@material-ui/core/Button';
 // import Icon from '@material-ui/core/Icon';
@@ -19,7 +21,19 @@ import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 // });
 const Waypoint = props => {
   return (
-   <div><h1>POOOOOOPPPPPP</h1></div>
+    <ExpansionPanel
+      expanded={props.expanded === `panel${props.wayPointKey}`}
+      onChange={props.handleWayPointExpand(`panel${props.wayPointKey}`)}
+    >
+      
+      <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
+      <Typography>Checkpoint Name: {console.log(props)}</Typography>
+        hello
+      </ExpansionPanelSummary>
+      <ExpansionPanelDetails>
+       blblblblblblb
+      </ExpansionPanelDetails>
+    </ExpansionPanel>
   );
 };
 
