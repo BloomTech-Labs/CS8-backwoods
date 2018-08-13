@@ -34,7 +34,7 @@ class TripCreate extends React.Component {
       disableRemoveMarker: true,
       expanded: null,
       tripSaveModal: false,
-      
+
       modalFade: false,
       tripsfromUserName: [],
 
@@ -52,7 +52,7 @@ class TripCreate extends React.Component {
     this.props.tripsFromUser.forEach(trip => {
       tripsfromUserName.push(trip.tripName)
     })
-    this.setState({tripsfromUserName: tripsfromUserName})
+    this.setState({ tripsfromUserName: tripsfromUserName })
   }
   activateMap = () => {
     this.setState({
@@ -64,7 +64,7 @@ class TripCreate extends React.Component {
   };
 
 
-////// NEW FUNCTIONS
+  ////// NEW FUNCTIONS
 
   markerAddCard = () => {
     this.setState({
@@ -73,7 +73,7 @@ class TripCreate extends React.Component {
     })
   }
 
-//////////////////////////////
+  //////////////////////////////
 
   deactivateMap = () => {
     this.setState({
@@ -90,14 +90,14 @@ class TripCreate extends React.Component {
 
   handleNewWaypoint = (e) => {
     e.preventDefault()
-    if(this.state.markerName === '' || this.state.lat === 0) {
+    if (this.state.markerName === '' || this.state.lat === 0) {
       this.setState({
         markSaveModal: true, markSaveFade: true
       })
     } else {
-      let formatTime = format(new Date(this.state.time), 'h:m A')
+      let formatTime = format(new Date(this.state.time), 'hh:mm A')
       let formatDate = format(new Date(this.state.eta), 'MM/DD/YYYY');
-      
+
       let newWayPoint = {
         markerName: this.state.markerName,
         eta: formatDate,
@@ -116,7 +116,7 @@ class TripCreate extends React.Component {
           markerName: '',
           eta: this.state.startDate,
           time: new Date()
-  
+
         },
         this.deactivateMap
       );
@@ -196,22 +196,21 @@ class TripCreate extends React.Component {
   }
   noMarkersModalOpenF = (e) => {
     e.preventDefault()
-    if(this.state.newMarkersArr.length === 0) {
-      this.setState({ tripSaveModal: true, modalFade: true})
+    if (this.state.newMarkersArr.length === 0) {
+      this.setState({ tripSaveModal: true, modalFade: true })
     } else {
       this.handleSubmit()
     }
-    
+
   }
   noMarkerNameFalseF = () => {
-    this.setState({ markSaveModal: !this.state.markSaveModal, markSaveFade: !this.state.markSaveFade})
+    this.setState({ markSaveModal: !this.state.markSaveModal, markSaveFade: !this.state.markSaveFade })
   }
   noMarkersModalFalseF = () => {
-    this.setState({ tripSaveModal: false, modalFade: false})
+    this.setState({ tripSaveModal: false, modalFade: false })
   }
   handleTimeChange = (NewTime) => {
-    let formatTime = format(new Date(NewTime), 'h:m A')
-    this.setState({ time: formatTime });
+    this.setState({ time: NewTime });
   }
   handleDateChange = (name) => (date) => {
     let formatDate = format(new Date(date), 'MM/DD/YYYY');
@@ -225,72 +224,72 @@ class TripCreate extends React.Component {
       this.state.endDate.length > 0;
     return (
       <div className="tripCreateWrapper">
-      {console.log(isEnabled)}
+        {console.log(isEnabled)}
         <Slide direction="down" in={true} mountOnEnter unmountOnExit>
-        <TripCreateForm
-          tripName={this.state.tripName}
-          tripsfromUserName={this.state.tripsfromUserName}
-          tripSaveModal={this.state.tripSaveModal}
-          noMarkersModalOpenF={this.noMarkersModalOpenF}
-          noMarkersModalFalseF={this.noMarkersModalFalseF}
-          modalFade={this.state.modalFade}
-          email={this.props.email}
-          handleSubmit={this.handleSubmit}
-          handleChange={this.handleChange}
-          fireRedirect={this.state.fireRedirect}
-          isEnabled={isEnabled}
-          handleDateChange={this.handleDateChange}
-          endDate={this.state.endDate}
-          startDate={this.state.startDate}
-        />
+          <TripCreateForm
+            tripName={this.state.tripName}
+            tripsfromUserName={this.state.tripsfromUserName}
+            tripSaveModal={this.state.tripSaveModal}
+            noMarkersModalOpenF={this.noMarkersModalOpenF}
+            noMarkersModalFalseF={this.noMarkersModalFalseF}
+            modalFade={this.state.modalFade}
+            email={this.props.email}
+            handleSubmit={this.handleSubmit}
+            handleChange={this.handleChange}
+            fireRedirect={this.state.fireRedirect}
+            isEnabled={isEnabled}
+            handleDateChange={this.handleDateChange}
+            endDate={this.state.endDate}
+            startDate={this.state.startDate}
+          />
         </Slide>
         <div className="MapWaypointWrapper">
-        <Zoom in={true}>
-          <Map
-            mapOpacity={this.state.mapOpacity}
-            addMarker={this.addMarker}
-            markers={this.state.markers}
-            MarkerCreated={this.state.MarkerCreated}
-            newMarkersArr={this.state.newMarkersArr}
-            lat={this.state.lat}
-            lng={this.state.lng}
-          />
+          <Zoom in={true}>
+            <Map
+              mapOpacity={this.state.mapOpacity}
+              addMarker={this.addMarker}
+              markers={this.state.markers}
+              MarkerCreated={this.state.MarkerCreated}
+              newMarkersArr={this.state.newMarkersArr}
+              lat={this.state.lat}
+              lng={this.state.lng}
+            />
           </Zoom>
           <Slide direction="left" in={true} mountOnEnter unmountOnExit>
-          <WaypointList
+            <WaypointList
 
-            noMarkerNameFalseF={this.noMarkerNameFalseF}
-            markSaveModal={this.state.markSaveModal}
-            markSaveFade={this.state.markSaveFade}
+              noMarkerNameFalseF={this.noMarkerNameFalseF}
+              markSaveModal={this.state.markSaveModal}
+              markSaveFade={this.state.markSaveFade}
 
-            noMarkersModalFalseF={this.noMarkersModalFalseF}
-            noMarkersModalOpenF={this.noMarkersModalOpenF}
-            tripSaveModal={this.state.tripSaveModal}
-            modalFade={this.state.modalFade}
-            handleNewWaypoint={this.handleNewWaypoint}
+              noMarkersModalFalseF={this.noMarkersModalFalseF}
+              noMarkersModalOpenF={this.noMarkersModalOpenF}
+              tripSaveModal={this.state.tripSaveModal}
+              modalFade={this.state.modalFade}
+              handleNewWaypoint={this.handleNewWaypoint}
 
 
-            disableAddMarker={this.state.disableAddMarker}
-            displayMarkerCard={this.state.displayMarkerCard}
-            markerAddCard={this.markerAddCard}
-            lat={this.state.lat}
-            startDate={this.state.startDate}
-            endDate={this.state.endDate}
-            newMarkersArr={this.state.newMarkersArr}
+              disableAddMarker={this.state.disableAddMarker}
+              displayMarkerCard={this.state.displayMarkerCard}
+              markerAddCard={this.markerAddCard}
+              lat={this.state.lat}
+              startDate={this.state.startDate}
+              endDate={this.state.endDate}
+              newMarkersArr={this.state.newMarkersArr}
 
-            time={this.state.time}
-            eta={this.state.eta}
-            handleChange={this.handleChange}
-            wayPoints={this.state.wayPoints}
-            activateMap={this.activateMap}
-            removeMarker={this.removeMarker}
-            disableRemoveMarker={this.state.disableRemoveMarker}
-            expanded={this.state.expanded}
-            handleWayPointExpand={this.handleWayPointExpand}
-            saveLocationEnabled={this.state.saveLocationEnabled}
-            handleTimeChange={this.handleTimeChange}
-            handleDateChange={this.handleDateChange}
-          />
+              time={this.state.time}
+              eta={this.state.eta}
+              handleChange={this.handleChange}
+              wayPoints={this.state.wayPoints}
+              activateMap={this.activateMap}
+              removeMarker={this.removeMarker}
+              disableRemoveMarker={this.state.disableRemoveMarker}
+              expanded={this.state.expanded}
+              handleWayPointExpand={this.handleWayPointExpand}
+              saveLocationEnabled={this.state.saveLocationEnabled}
+              handleTimeChange={this.handleTimeChange}
+              handleDateChange={this.handleDateChange}
+            />
           </Slide>
         </div>
       </div>
