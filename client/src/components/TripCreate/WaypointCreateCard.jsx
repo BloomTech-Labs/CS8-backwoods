@@ -116,8 +116,9 @@ class WaypointCreateCard extends React.Component {
       <MakerSaveModalWrapped
               noMarkersModalFalseF={this.props.noMarkersModalFalseF}
               noMarkersModalOpenF={this.props.noMarkersModalOpenF}
-              tripSaveModal={this.props.tripSaveModal}
-              modalFade={this.props.modalFade}
+              noMarkerNameFalseF={this.props.noMarkerNameFalseF}
+              markSaveModal={this.props.markSaveModal}
+              markSaveFade={this.props.markSaveFade}
               handleNewWaypoint={this.props.handleNewWaypoint}
               />
     </React.Fragment>

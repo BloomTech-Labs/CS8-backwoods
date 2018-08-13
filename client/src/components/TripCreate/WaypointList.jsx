@@ -67,10 +67,14 @@ class WaypointList extends React.Component {
       <div className="waypointContainer">
 
         <WaypointCreateCard 
+          markSaveModal={this.props.markSaveModal}
+          markSaveFade={this.props.markSaveFade}
+          noMarkerNameFalseF={this.props.noMarkerNameFalseF}
+
           noMarkersModalFalseF={this.props.noMarkersModalFalseF}
           noMarkersModalOpenF={this.props.noMarkersModalOpenF}
-          tripSaveModal={this.props.tripSaveModal}
-          modalFade={this.props.modalFade}
+          // tripSaveModal={this.props.tripSaveModal}
+          // modalFade={this.props.modalFade}
           handleNewWaypoint={this.props.handleNewWaypoint}
 
 

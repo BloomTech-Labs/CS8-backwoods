@@ -34,8 +34,12 @@ class TripCreate extends React.Component {
       disableRemoveMarker: true,
       expanded: null,
       tripSaveModal: false,
+      
       modalFade: false,
       tripsfromUserName: [],
+
+      markSaveModal: false,
+      markSaveFade: false,
 
       eta: new Date(),
       time: new Date(),
@@ -88,16 +92,16 @@ class TripCreate extends React.Component {
     e.preventDefault()
     if(this.state.markerName === '' || this.state.lat === 0) {
       this.setState({
-        tripSaveModal: true, modalFade: true
+        markSaveModal: true, markSaveFade: true
       })
     } else {
+      let formatTime = format(new Date(this.state.time), 'h:m A')
+      let formatDate = format(new Date(this.state.eta), 'MM/DD/YYYY');
       
-      // let formatTime = format(new Date(this.state.time), 'HH:mm:ss')
-      // console.log('formatTime', formatTime)
       let newWayPoint = {
         markerName: this.state.markerName,
-        eta: this.state.eta,
-        time: this.state.time,
+        eta: formatDate,
+        time: formatTime,
         lng: this.state.lng,
         lat: this.state.lat,
         tripId: ''
@@ -199,15 +203,18 @@ class TripCreate extends React.Component {
     }
     
   }
+  noMarkerNameFalseF = () => {
+    this.setState({ markSaveModal: !this.state.markSaveModal, markSaveFade: !this.state.markSaveFade})
+  }
   noMarkersModalFalseF = () => {
     this.setState({ tripSaveModal: false, modalFade: false})
   }
   handleTimeChange = (NewTime) => {
-    let formatTime = format(new Date(NewTime), 'hh:mm:ss')
+    let formatTime = format(new Date(NewTime), 'h:m A')
     this.setState({ time: formatTime });
   }
   handleDateChange = (name) => (date) => {
-    let formatDate = format(new Date(date), 'YYYY/MM/D');
+    let formatDate = format(new Date(date), 'MM/DD/YYYY');
     this.setState({ [name]: formatDate });
   }
 
@@ -218,6 +225,7 @@ class TripCreate extends React.Component {
       this.state.endDate.length > 0;
     return (
       <div className="tripCreateWrapper">
+      {console.log(isEnabled)}
         <Slide direction="down" in={true} mountOnEnter unmountOnExit>
         <TripCreateForm
           tripName={this.state.tripName}
@@ -250,6 +258,11 @@ class TripCreate extends React.Component {
           </Zoom>
           <Slide direction="left" in={true} mountOnEnter unmountOnExit>
           <WaypointList
+
+            noMarkerNameFalseF={this.noMarkerNameFalseF}
+            markSaveModal={this.state.markSaveModal}
+            markSaveFade={this.state.markSaveFade}
+
             noMarkersModalFalseF={this.noMarkersModalFalseF}
             noMarkersModalOpenF={this.noMarkersModalOpenF}
             tripSaveModal={this.state.tripSaveModal}
