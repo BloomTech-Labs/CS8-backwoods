@@ -9,6 +9,7 @@ import WayPoint from './Waypoint';
 import Divider from '@material-ui/core/Divider';
 import WaypointCreateCard from './WaypointCreateCard'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+import Input from '@material-ui/core/Input';
 
 
 const addTheme = createMuiTheme({
@@ -65,8 +66,7 @@ class WaypointList extends React.Component {
         </MuiThemeProvider>
       </div>
       <div className="waypointContainer">
-      {
-        this.props.displayMarkerCard ?
+
         <WaypointCreateCard 
           displayMarkerCard={this.props.displayMarkerCard}
           activateMap={this.props.activateMap}
@@ -82,9 +82,20 @@ class WaypointList extends React.Component {
           time={this.props.time}
           handleNewWaypoint={this.props.handleNewWaypoint}
           saveLocationEnabled={this.props.saveLocationEnabled}
-          />
-        : null
-      }
+          >
+          {
+            this.props.displayMarkerCard ?
+            <Input
+              placeholder='Marker Name here'
+              className="markerName"
+              inputProps={{
+                'aria-label': 'Description'
+              }}
+              onChange={this.props.handleChange('markerName')}
+            />
+              : null
+          }
+      </WaypointCreateCard>
       {this.props.newMarkersArr.map((wayPoint, index) => {
         return (
           <WayPoint

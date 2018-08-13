@@ -38,22 +38,18 @@ const styles = {
   },
 };
 
-const WaypointCreateCard = (props) => {
-  const { classes } = props;
+class WaypointCreateCard extends React.Component {
+  render() {
+
+  
+  const { classes } = this.props;
   return (
     <React.Fragment>
-      <Collapse in={props.displayMarkerCard}>
+      <Collapse in={this.props.displayMarkerCard}>
         <Card className={classes.card}>
           <CardContent>
           <MuiThemeProvider theme={theme}>
-          <Input
-            placeholder='Marker Name here'
-            className="markerName"
-            inputProps={{
-              'aria-label': 'Description'
-            }}
-            onChange={props.handleChange('markerName')}
-          />
+          {this.props.children}
         <div className="waypointControlsWrapper">
           <div className="waypointTextField">
           <div className="datePicker">
@@ -61,13 +57,13 @@ const WaypointCreateCard = (props) => {
             label="ETA"
             showTodayButton
             disablePast
-            initialFocusedDate={props.startDate}
-            minDate={props.startDate}
-            maxDate={props.endDate}
+            initialFocusedDate={this.props.startDate}
+            minDate={this.props.startDate}
+            maxDate={this.props.endDate}
             minDateMessage="ETA must be greater then trip start date"
             maxDateMessage="ETA must be less than trip end date"
-            value={props.eta}
-            onChange={props.handleDateChange('eta')}
+            value={this.props.eta}
+            onChange={this.props.handleDateChange('eta')}
             animateYearScrolling={false}
             className="pickerCard"
           />
@@ -77,20 +73,20 @@ const WaypointCreateCard = (props) => {
             showTodayButton
             todayLabel="now"
             label="Time"
-            value={props.time}
-            onChange={props.handleTimeChange}
+            value={this.props.time}
+            onChange={this.props.handleTimeChange}
             className="pickerCard"
           />
         </div>
           </div>
           <div className="waypointButtonContainer">
           {
-          props.lat === null ?
+          this.props.lat === null ?
           <Button
             className={classes.button}
             variant="outlined"
             color="primary"
-            onClick={props.activateMap}
+            onClick={this.props.activateMap}
             // disabled={props.saveLocationEnabled}
             size="large"
           >
@@ -103,7 +99,7 @@ const WaypointCreateCard = (props) => {
             className={classes.button}
             variant="outlined"
             color="primary"
-            onClick={props.handleNewWaypoint}
+            onClick={this.props.handleNewWaypoint}
             // disabled={props.saveLocationEnabled}
             size="large"
           >
@@ -119,7 +115,7 @@ const WaypointCreateCard = (props) => {
       </Card>
       </Collapse>
     </React.Fragment>
-  )
+  )}
 }
 
 export default withStyles(styles)(WaypointCreateCard)

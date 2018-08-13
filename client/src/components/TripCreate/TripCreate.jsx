@@ -165,11 +165,12 @@ class TripCreate extends React.Component {
     // this.state.wayPoints.pop();
     // this.state.markers.pop();
     this.setState({
+
       disableAddMarker: false,
       eta: this.state.startDate,
       time: new Date(),
       markerName: '',
-      displayMarkerCard: true
+      // displayMarkerCard: true,
     }, this.markerCheck);
   };
 

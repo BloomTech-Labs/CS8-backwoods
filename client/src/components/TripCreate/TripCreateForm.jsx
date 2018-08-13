@@ -34,7 +34,7 @@ class TripCreateForm extends React.Component{
         return true
       }
       function doesAnyMatch(currentValue) {
-        return value.toLowerCase() !== currentValue
+        return value.toLowerCase() !== currentValue.toLowerCase()
       }
       if(this.props.tripsfromUserName.every(doesAnyMatch)) {
         return true
