@@ -37,7 +37,6 @@ class TripCreate extends React.Component {
       modalFade: false,
       tripsfromUserName: [],
 
-      
       eta: new Date(),
       time: new Date(),
       disableAddMarker: false,
@@ -108,29 +107,38 @@ class TripCreate extends React.Component {
     this.setState({ [name]: event.target.value }, this._CheckMarkers());
   };
 
-  handleNewWaypoint = () => {
-    let formatTime = format(new Date(this.state.time), 'HH:mm:ss')
-    let newWayPoint = {
-      markerName: this.state.markerName,
-      eta: this.state.eta,
-      time: formatTime,
-      lng: this.state.lng,
-      lat: this.state.lat,
-      tripId: ''
-    };
-    this.setState(
-      {
-        newMarkersArr: [...this.state.newMarkersArr, newWayPoint],
-        disableAddMarker: false,
-        disableRemoveMarker: false,
-        saveLocationEnabled: true,
-        displayMarkerCard: false,
-        markerName: '',
-        eta: this.state.startDate
+  handleNewWaypoint = (e) => {
+    e.preventDefault()
+    if(this.state.markerName === '' || this.state.lat === 0) {
+      this.setState({
+        tripSaveModal: true, modalFade: true
+       
+      })
+    } else {
 
-      },
-      this.deactivateMap
-    );
+      let formatTime = format(new Date(this.state.time), 'HH:mm:ss')
+      let newWayPoint = {
+        markerName: this.state.markerName,
+        eta: this.state.eta,
+        time: formatTime,
+        lng: this.state.lng,
+        lat: this.state.lat,
+        tripId: ''
+      };
+      this.setState(
+        {
+          newMarkersArr: [...this.state.newMarkersArr, newWayPoint],
+          disableAddMarker: false,
+          disableRemoveMarker: false,
+          saveLocationEnabled: true,
+          displayMarkerCard: false,
+          markerName: '',
+          eta: this.state.startDate
+  
+        },
+        this.deactivateMap
+      );
+    }
   };
 
   handleSubmit = e => {
@@ -267,6 +275,13 @@ class TripCreate extends React.Component {
           </Zoom>
           <Slide direction="left" in={true} mountOnEnter unmountOnExit>
           <WaypointList
+            noMarkersModalFalseF={this.noMarkersModalFalseF}
+            noMarkersModalOpenF={this.noMarkersModalOpenF}
+            tripSaveModal={this.state.tripSaveModal}
+            modalFade={this.state.modalFade}
+            handleNewWaypoint={this.handleNewWaypoint}
+
+
             disableAddMarker={this.state.disableAddMarker}
             displayMarkerCard={this.state.displayMarkerCard}
             markerAddCard={this.markerAddCard}
@@ -281,7 +296,6 @@ class TripCreate extends React.Component {
             addWaypoint={this.addWaypoint}
             wayPoints={this.state.wayPoints}
             activateMap={this.activateMap}
-            handleNewWaypoint={this.handleNewWaypoint}
             removeMarker={this.removeMarker}
             // disableAddMarker={this.state.disableAddMarker}
             disableRemoveMarker={this.state.disableRemoveMarker}

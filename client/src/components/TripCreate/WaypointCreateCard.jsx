@@ -9,9 +9,8 @@ import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
 import { TimePicker } from 'material-ui-pickers';
 import { DatePicker } from 'material-ui-pickers';
 import Icon from '@material-ui/core/Icon';
-import Input from '@material-ui/core/Input';
 import green from '@material-ui/core/colors/green';
-
+import MakerSaveModalWrapped from './MakerSaveModal'
 const theme = createMuiTheme({
   palette: {
     primary: green
@@ -114,6 +113,13 @@ class WaypointCreateCard extends React.Component {
         </CardContent>
       </Card>
       </Collapse>
+      <MakerSaveModalWrapped
+              noMarkersModalFalseF={this.props.noMarkersModalFalseF}
+              noMarkersModalOpenF={this.props.noMarkersModalOpenF}
+              tripSaveModal={this.props.tripSaveModal}
+              modalFade={this.props.modalFade}
+              handleNewWaypoint={this.props.handleNewWaypoint}
+              />
     </React.Fragment>
   )}
 }

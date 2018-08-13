@@ -68,6 +68,13 @@ class WaypointList extends React.Component {
       <div className="waypointContainer">
 
         <WaypointCreateCard 
+          noMarkersModalFalseF={this.props.noMarkersModalFalseF}
+          noMarkersModalOpenF={this.props.noMarkersModalOpenF}
+          tripSaveModal={this.props.tripSaveModal}
+          modalFade={this.props.modalFade}
+          handleNewWaypoint={this.props.handleNewWaypoint}
+
+
           displayMarkerCard={this.props.displayMarkerCard}
           activateMap={this.props.activateMap}
           lat={this.props.lat}
@@ -80,7 +87,6 @@ class WaypointList extends React.Component {
           handleTimeChange={this.props.handleTimeChange}
           eta={this.props.eta}
           time={this.props.time}
-          handleNewWaypoint={this.props.handleNewWaypoint}
           saveLocationEnabled={this.props.saveLocationEnabled}
           >
           {
