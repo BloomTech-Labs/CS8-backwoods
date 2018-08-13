@@ -4,7 +4,7 @@ import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 import Typography from '@material-ui/core/Typography';
-import { format } from 'date-fns/esm';
+// import { format } from 'date-fns/esm';
 
 // import Input from '@material-ui/core/Input';
 // import Button from '@material-ui/core/Button';
@@ -21,8 +21,8 @@ import { format } from 'date-fns/esm';
 //   }
 // });
 const Waypoint = props => {
-  let formatTime = format(new Date(props.wayPoint.time), 'HH:mm:ss')
-  let formatDate = format(new Date(props.wayPoint.eta), 'MM/DD/YYYY');
+  // let formatTime = format(new Date(props.wayPoint.time), 'HH:mm:ss')
+  // let formatDate = format(new Date(props.wayPoint.eta), 'MM/DD/YYYY');
   return (
     <ExpansionPanel
       expanded={props.expanded === `panel${props.wayPointKey}`}
@@ -39,8 +39,8 @@ const Waypoint = props => {
       > */}
       <div>
         {console.log(props.wayPoint)}
-      ETA: {formatDate}<br/>
-        Time: {formatTime}
+      ETA: {props.wayPoint.eta}<br/>
+        Time: {props.wayPoint.time}
       </div>
        
         {/* </Typography> */}

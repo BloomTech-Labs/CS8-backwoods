@@ -15,7 +15,7 @@ function getModalStyle() {
     left: `${left}%`,
     transform: `translate(-${top}%, -${left}%)`,
     width: '400px',
-    height: '250px',
+    height: '300px',
     padding: '1% 2% 2% 2%',
     textAlign: 'center'
   };
@@ -34,18 +34,18 @@ const MakerSaveModal = props => {
   const { classes } = props;
   return (
     <Modal
-      open={props.tripSaveModal}
-      onClose={props.noMarkersModalFalseF}
+      open={props.markSaveModal}
+      onClose={props.noMarkerNameFalseF}
       disableAutoFocus={true}
     >
-      <Fade in={props.modalFade}>
+      <Fade in={props.markSaveFade}>
         <Paper style={getModalStyle()} className={classes.paper} elevation={4}>
           <Typography variant="headline">
             Please make sure you have a name for your maker and that you've placed a marker on the map.<br />
             <br /> Do you want to continue?
           </Typography>
           <div className="stayOrLeaveButtons">
-            <Button onClick={props.noMarkersModalFalseF}>Stay</Button>
+            <Button onClick={props.noMarkerNameFalseF}>Stay</Button>
             {/* <Button onClick={props.handleNewWaypoint}>Save</Button> */}
           </div>
         </Paper>
