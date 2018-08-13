@@ -71,29 +71,6 @@ class TripCreate extends React.Component {
 
 //////////////////////////////
 
-
-
-
-
-  addWaypoint = () => {
-    let newWayPoint = {
-      markerName: 'Marker Name Here',
-      eta: '',
-      time: '',
-      lng: '',
-      lat: '',
-      tripId: ''
-    };
-    this.setState(
-      {
-        wayPoints: [...this.state.wayPoints, newWayPoint],
-        disableAddMarker: true,
-        saveLocationEnabled: true,
-      },
-      this.activateMap
-    );
-  };
-
   deactivateMap = () => {
     this.setState({
       mapOpacity: 0.4,
@@ -112,15 +89,15 @@ class TripCreate extends React.Component {
     if(this.state.markerName === '' || this.state.lat === 0) {
       this.setState({
         tripSaveModal: true, modalFade: true
-       
       })
     } else {
-
-      let formatTime = format(new Date(this.state.time), 'HH:mm:ss')
+      
+      // let formatTime = format(new Date(this.state.time), 'HH:mm:ss')
+      // console.log('formatTime', formatTime)
       let newWayPoint = {
         markerName: this.state.markerName,
         eta: this.state.eta,
-        time: formatTime,
+        time: this.state.time,
         lng: this.state.lng,
         lat: this.state.lat,
         tripId: ''
@@ -133,7 +110,8 @@ class TripCreate extends React.Component {
           saveLocationEnabled: true,
           displayMarkerCard: false,
           markerName: '',
-          eta: this.state.startDate
+          eta: this.state.startDate,
+          time: new Date()
   
         },
         this.deactivateMap
@@ -170,15 +148,11 @@ class TripCreate extends React.Component {
   // removes marker after hitting save location
   removeMarker = () => {
     this.state.newMarkersArr.pop();
-    // this.state.wayPoints.pop();
-    // this.state.markers.pop();
     this.setState({
-
       disableAddMarker: false,
       eta: this.state.startDate,
       time: new Date(),
       markerName: '',
-      // displayMarkerCard: true,
     }, this.markerCheck);
   };
 
@@ -225,11 +199,12 @@ class TripCreate extends React.Component {
     }
     
   }
-  noMarkersModalFalseF =() => {
+  noMarkersModalFalseF = () => {
     this.setState({ tripSaveModal: false, modalFade: false})
   }
   handleTimeChange = (NewTime) => {
-    this.setState({ time: NewTime });
+    let formatTime = format(new Date(NewTime), 'hh:mm:ss')
+    this.setState({ time: formatTime });
   }
   handleDateChange = (name) => (date) => {
     let formatDate = format(new Date(date), 'YYYY/MM/D');
@@ -293,11 +268,9 @@ class TripCreate extends React.Component {
             time={this.state.time}
             eta={this.state.eta}
             handleChange={this.handleChange}
-            addWaypoint={this.addWaypoint}
             wayPoints={this.state.wayPoints}
             activateMap={this.activateMap}
             removeMarker={this.removeMarker}
-            // disableAddMarker={this.state.disableAddMarker}
             disableRemoveMarker={this.state.disableRemoveMarker}
             expanded={this.state.expanded}
             handleWayPointExpand={this.handleWayPointExpand}

@@ -42,7 +42,6 @@ class WaypointList extends React.Component {
           <Button
             size="large"
             variant="outlined"
-            // onClick={() => this.props.addWaypoint()}
             onClick={this.props.markerAddCard}
             disabled={this.props.disableAddMarker}
             color="primary"
@@ -105,20 +104,18 @@ class WaypointList extends React.Component {
       {this.props.newMarkersArr.map((wayPoint, index) => {
         return (
           <WayPoint
-            time={this.props.time}
-            
-            eta={this.props.eta}
             wayPoint={wayPoint}
+            // wayPoint={wayPoint}
             wayPointKey={index}
             key={index}
 
 
-            handleChange={this.props.handleChange}
-            handleNewWaypoint={this.props.handleNewWaypoint}
-            disableAddMarker={this.props.disableAddMarker}
+            // handleChange={this.props.handleChange}
+            // handleNewWaypoint={this.props.handleNewWaypoint}
+            // disableAddMarker={this.props.disableAddMarker}
             handleWayPointExpand={this.props.handleWayPointExpand}
             expanded={this.props.expanded}
-            saveLocationEnabled={this.props.saveLocationEnabled}
+            // saveLocationEnabled={this.props.saveLocationEnabled}
           />
         );
       })}
