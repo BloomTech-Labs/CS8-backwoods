@@ -77,7 +77,6 @@ class User extends React.Component {
   }
 
   componentWillMount() {
-    console.log('user.jsx')
     if(this.props.match.params.user === 'aaron@backwood.app') {
       console.log('Test User')
       this.setState({

@@ -50,7 +50,7 @@ const SignInOut = props => {
   return (
     <div className="signInOutWrapper">
       {props.isLoggedIn ? (
-        <Link to="/">
+        <Link to="/" className="LandingHomeLink">
           <MuiThemeProvider theme={theme}>
             <Button
               onClick={props.handleLogOut}

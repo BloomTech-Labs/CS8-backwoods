@@ -35,7 +35,7 @@ const Landing = () => {
           </li>
           <li className="listItem">
             <img src={bullets} className="bullets" alt="bullet" /> 
-            Check out our up coming hike on the <Link to="/thegreatAdventure@backwood.app/trip/Crystal-Mountain-Loop">
+            Check out our up coming hike on the <Link to="/aaron@backwood.app/trip/Crystal-Mountain-Loop">
             Crystal Mountain Loop</Link> in Washington State.
           </li>
         </ul>

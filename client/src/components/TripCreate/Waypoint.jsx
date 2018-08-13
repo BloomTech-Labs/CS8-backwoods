@@ -3,78 +3,47 @@ import ExpansionPanel from '@material-ui/core/ExpansionPanel';
 import ExpansionPanelSummary from '@material-ui/core/ExpansionPanelSummary';
 import ExpansionPanelDetails from '@material-ui/core/ExpansionPanelDetails';
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
-import Input from '@material-ui/core/Input';
-import Button from '@material-ui/core/Button';
-import Icon from '@material-ui/core/Icon';
-import green from '@material-ui/core/colors/green';
-import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
-import { TimePicker } from 'material-ui-pickers';
-import { DatePicker } from 'material-ui-pickers';
+import Typography from '@material-ui/core/Typography';
+import { format } from 'date-fns/esm';
+
+// import Input from '@material-ui/core/Input';
+// import Button from '@material-ui/core/Button';
+// import Icon from '@material-ui/core/Icon';
+// import green from '@material-ui/core/colors/green';
+// import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles';
+// import { TimePicker } from 'material-ui-pickers';
+// import { DatePicker } from 'material-ui-pickers';
 
 
-const theme = createMuiTheme({
-  palette: {
-    primary: green
-  }
-});
+// const theme = createMuiTheme({
+//   palette: {
+//     primary: green
+//   }
+// });
 const Waypoint = props => {
+  let formatTime = format(new Date(props.wayPoint.time), 'HH:mm:ss')
+  let formatDate = format(new Date(props.wayPoint.eta), 'MM/DD/YYYY');
   return (
     <ExpansionPanel
       expanded={props.expanded === `panel${props.wayPointKey}`}
       onChange={props.handleWayPointExpand(`panel${props.wayPointKey}`)}
     >
-      >
+   
+      
       <ExpansionPanelSummary expandIcon={<ExpandMoreIcon />}>
-        <MuiThemeProvider theme={theme}>
-          <Input
-            placeholder={props.wayPoint.markerName}
-            inputProps={{
-              'aria-label': 'Description'
-            }}
-            // className="formSpacing"
-            onChange={props.handleChange('markerName')}
-          />
-        </MuiThemeProvider>
+      <Typography variant="headline">Checkpoint Name: {props.wayPoint.markerName}</Typography>
       </ExpansionPanelSummary>
       <ExpansionPanelDetails>
-        <MuiThemeProvider theme={theme}>
-        <div className="waypointControlsWrapper">
-          <div className="waypointTextField">
-          <div className="picker">
-          <DatePicker
-            label="ETA"
-            showTodayButton
-            disablePast
-            maxDateMessage="Date must be greater than today"
-            value={props.eta}
-            onChange={props.handleDateChange('eta')}
-            animateYearScrolling={false}
-          />
-        </div>
-            <div className="picker">
-          <TimePicker
-            showTodayButton
-            todayLabel="now"
-            label="Time"
-            value={props.time}
-            onChange={props.handleTimeChange}
-          />
-        </div>
-          </div>
-          <div className="waypointButtonContainer">
-          <Button
-            className="saveTripButton"
-            variant="outlined"
-            color="primary"
-            onClick={props.handleNewWaypoint}
-            disabled={props.saveLocationEnabled}
-          >
-            Save Location
-            <Icon>send</Icon>
-          </Button>
-          </div>
-        </div>
-        </MuiThemeProvider>
+      {/* <Typography
+        variant="headline"
+      > */}
+      <div>
+        {console.log(props.wayPoint)}
+      ETA: {formatDate}<br/>
+        Time: {formatTime}
+      </div>
+       
+        {/* </Typography> */}
       </ExpansionPanelDetails>
     </ExpansionPanel>
   );
