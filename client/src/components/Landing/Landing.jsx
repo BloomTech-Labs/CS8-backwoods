@@ -4,9 +4,30 @@ import './Landing.css';
 import logo from './logo.svg';
 import bullets from './bullets.svg';
 import Paper from '@material-ui/core/Paper';
-import {Link} from 'react-router-dom';
-const Landing = () => {
+import { Link } from 'react-router-dom';
+import SignInOut from '../SignInOut/SignInOut';
+
+const Landing = (props) => {
   return (
+    <React.Fragment>
+      <SignInOut
+        handleTabChange={props.handleTabChange}
+        handleLogOut={props.handleLogOut}
+        tabState={props.tabState}
+        handleChange={props.handleChange}
+        handleSignUp={props.handleSignUp}
+        handleSignIn={props.handleSignIn}
+        firstName={props.firstName}
+        lastName={props.lastName}
+        email={props.email}
+        password={props.password}
+        validatePassword={props.validatePassword}
+        isLoggedIn={props.isLoggedIn}
+        handleClose={props.handleClose}
+        handleOpen={props.handleOpen}
+        open={props.open}
+      />
+
     <div className="landingWrapper">
       <div className="header">
         <h1 className="backwoodsHeader">
@@ -43,6 +64,8 @@ const Landing = () => {
         <BuyNow />
       </Paper>
     </div>
+    </React.Fragment>
+    
   );
 };
 

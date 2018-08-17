@@ -1,60 +1,133 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
 import List from '@material-ui/core/List';
-import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
+import Typography from '@material-ui/core/Typography';
+import IconButton from '@material-ui/core/IconButton';
+import Hidden from '@material-ui/core/Hidden';
 import Divider from '@material-ui/core/Divider';
-import { Link } from 'react-router-dom';
-import Paper from '@material-ui/core/Paper';
-import Slide from '@material-ui/core/Slide';
+import MenuIcon from '@material-ui/icons/Menu';
+// import { mailFolderListItems, otherMailFolderListItems } from './tileData';
+
+const drawerWidth = 240;
 
 const styles = theme => ({
   root: {
+    flexGrow: 1,
+    height: 430,
+    zIndex: 1,
+    overflow: 'hidden',
+    position: 'relative',
+    display: 'flex',
     width: '100%',
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper
-  }
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    // marginLeft: drawerWidth,
+    // [theme.breakpoints.up('md')]: {
+    //   width: `calc(100% - ${drawerWidth}px)`,
+    // },
+  },
+  navIconHide: {
+    [theme.breakpoints.up('md')]: {
+      display: 'none',
+    },
+  },
+  toolbar: theme.mixins.toolbar,
+  drawerPaper: {
+    width: drawerWidth,
+    [theme.breakpoints.up('md')]: {
+      position: 'relative',
+    },
+  },
+  content: {
+    flexGrow: 1,
+    backgroundColor: theme.palette.background.default,
+    padding: theme.spacing.unit * 3,
+  },
 });
 
-const fade = true;
+class ResponsiveDrawer extends React.Component {
+  state = {
+    mobileOpen: false,
+  };
 
-const NavBar = (props) => {
-  const isUser = props.user ? props.user : props.emailFromUser
-  return (
-    <Slide direction="right" in={fade} mountOnEnter unmountOnExit>
-    <Paper className="navBar">
-      <List component="nav">
-        <Link to={`/${isUser}`}>
-          <ListItem button onClick={(e) => props.checkIfTripSaved(e, `/${props.user}`)}>
-            <ListItemText primary="Trips" />
-          </ListItem>
-        </Link>
+  handleDrawerToggle = () => {
+    this.setState(state => ({ mobileOpen: !state.mobileOpen }));
+  };
+
+  render() {
+    const { classes, theme } = this.props;
+
+    const drawer = (
+      <div>
+        <div className={classes.toolbar} />
         <Divider />
-        {props.isLoggedIn &&
-          <div>
-            <Link to={`/${props.user}/archived`}>
-              <ListItem button onClick={(e) => props.checkIfTripSaved(e, `/${props.user}/archived`)}>
-                <ListItemText primary="Archived" />
-              </ListItem>
-            </Link>
-            <Divider />
-            <Link to={`/${props.user}/billing`}>
-              <ListItem button onClick={(e) => props.checkIfTripSaved(e, `/${props.user}/billing`)}>
-                <ListItemText primary="Billing" />
-              </ListItem>
-            </Link>
-            <Divider />
-            <Link to={`/${props.user}/settings`}>
-              <ListItem button onClick={(e) => props.checkIfTripSaved(e, `/${props.user}/settings`)}>
-                <ListItemText primary="Account" />
-              </ListItem>
-            </Link>
-          </div>
-        }
-      </List>
-    </Paper>
-  </Slide>
-  );
+        <List>poop</List>
+        <Divider />
+        <List>poops</List>
+      </div>
+    );
+
+    return (
+      <div className={classes.root}>
+        <AppBar className={classes.appBar} position="absolute">
+          <Toolbar>
+            <IconButton
+              color="inherit"
+              aria-label="Open drawer"
+              onClick={this.handleDrawerToggle}
+              className={classes.navIconHide}
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="title" color="inherit" noWrap>
+              Responsive drawer
+            </Typography>
+          </Toolbar>
+        </AppBar>
+        <Hidden mdUp>
+          <Drawer
+            variant="temporary"
+            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+            open={this.state.mobileOpen}
+            onClose={this.handleDrawerToggle}
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+            ModalProps={{
+              keepMounted: true, // Better open performance on mobile.
+            }}
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+        <Hidden smDown implementation="css">
+          <Drawer
+            variant="permanent"
+            open
+            classes={{
+              paper: classes.drawerPaper,
+            }}
+          >
+            {drawer}
+          </Drawer>
+        </Hidden>
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
+          <Typography noWrap>{'You think water moves fast? You should see ice.'}</Typography>
+        </main>
+      </div>
+    );
+  }
 }
 
-export default withStyles(styles)(NavBar);
+ResponsiveDrawer.propTypes = {
+  classes: PropTypes.object.isRequired,
+  theme: PropTypes.object.isRequired,
+};
+
+export default withStyles(styles, { withTheme: true })(ResponsiveDrawer);

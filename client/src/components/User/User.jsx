@@ -14,7 +14,8 @@ import Snackbar from '@material-ui/core/Snackbar';
 import green from '@material-ui/core/colors/green';
 import { withStyles } from '@material-ui/core/styles';
 import BadUrl404 from '../404/BadUrl404';
-import {testTrip} from '../TripOpen/testData'
+import {testTrip} from '../TripOpen/testData';
+
 const RestrictedRoute = ({
   component: Component,
   isLoggedIn,
@@ -194,7 +195,7 @@ class User extends React.Component {
           <Redirect push to={`/${this.props.match.params.user}/user-not-found`} />
         ) : (
           <div className="mainWrapper globalBackground">
-            <div className="poop">
+           
               <Nav
                 emailFromUser={this.state.emailFromUser}
                 user={this.props.email}
@@ -256,7 +257,7 @@ class User extends React.Component {
 
                 <Route component={BadUrl404} />
               </Switch>
-            </div>
+          
           </div>
         )}
         <Snackbar

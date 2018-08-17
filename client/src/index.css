@@ -10,12 +10,6 @@ body {
 .mainWrapper {
   display: flex;
   width: 100vw;
-  padding: 20px;
+  /* padding: 20px; */
 }
 
-.poop {
-  display: flex;
-  width: 100vw;
-  padding: 20px;
-  margin-top: 40px;
-}

@@ -4,7 +4,6 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import axios from 'axios';
 import MainSnackbar from './components/Snackbar/MainSnackbar';
 import { Route, withRouter } from 'react-router-dom';
-import SignInOut from './components/SignInOut/SignInOut.jsx';
 import Landing from './components/Landing/Landing.jsx';
 // import DebugRoutes from './components/Debug/DebugRoutes.jsx';
 import { StripeProvider } from 'react-stripe-elements';
@@ -138,25 +137,28 @@ class App extends Component {
               snackbarAuthRedirect={this.state.snackbarAuthRedirect}
             />
             <CssBaseline>
-              <SignInOut
-                handleTabChange={this.handleTabChange}
-                handleLogOut={this.handleLogOut}
-                tabState={this.state.tabState}
-                handleChange={this.handleChange}
-                handleSignUp={this.handleSignUp}
-                handleSignIn={this.handleSignIn}
-                firstName={this.state.firstName}
-                lastName={this.state.lastName}
-                email={this.state.email}
-                password={this.state.password}
-                validatePassword={this.state.validatePassword}
-                isLoggedIn={this.state.isLoggedIn}
-                handleClose={this.handleClose}
-                handleOpen={this.handleOpen}
-                open={this.state.open}
-              />
               <React.Fragment>
-              <Route path="/" component={Landing} exact/>
+              <Route 
+                path="/" 
+                render={props => (
+                  <Landing
+                    {...props}
+                    handleTabChange={this.handleTabChange}
+                    handleLogOut={this.handleLogOut}
+                    tabState={this.state.tabState}
+                    handleChange={this.handleChange}
+                    handleSignUp={this.handleSignUp}
+                    handleSignIn={this.handleSignIn}
+                    firstName={this.state.firstName}
+                    lastName={this.state.lastName}
+                    email={this.state.email}
+                    password={this.state.password}
+                    validatePassword={this.state.validatePassword}
+                    isLoggedIn={this.state.isLoggedIn}
+                    handleClose={this.handleClose}
+                    handleOpen={this.handleOpen}
+                    open={this.state.open}
+                    />)} exact/>
                 <Route
                   path="/:user"
                   render={props => (
