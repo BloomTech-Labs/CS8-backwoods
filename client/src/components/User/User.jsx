@@ -207,7 +207,7 @@ class User extends React.Component {
                 navRedirect={this.state.navRedirect}
                 setSaveTripTrue={this.state.setSaveTripTrue}
                 modalContinue={this.modalContinue}
-              />
+              >
               <Switch>
                 <Route
                   path="/:user"
@@ -257,7 +257,7 @@ class User extends React.Component {
 
                 <Route component={BadUrl404} />
               </Switch>
-          
+          </Nav>
           </div>
         )}
         <Snackbar
