@@ -13,10 +13,11 @@ import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItemText from '@material-ui/core/ListItemText';
-// import Paper from '@material-ui/core/Paper';
+import Slide from '@material-ui/core/Slide';
 import { Link } from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
 import './Nav.css';
+const fade = true;
 
 // import { mailFolderListItems, otherMailFolderListItems } from './tileData';
 
@@ -114,7 +115,7 @@ class ResponsiveDrawer extends React.Component {
         </div>
       
     );
-
+    
     return (
       <div className={classes.root}>
         <AppBar className={classes.appBar} position="absolute">
@@ -124,7 +125,7 @@ class ResponsiveDrawer extends React.Component {
               aria-label="Open drawer"
               onClick={this.handleDrawerToggle}
               className={classes.navIconHide}
-            >
+              >
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit" noWrap>
@@ -144,25 +145,31 @@ class ResponsiveDrawer extends React.Component {
             ModalProps={{
               keepMounted: true, // Better open performance on mobile.
             }}
-          >
+            >
             {drawer}
           </Drawer>
         </Hidden>
         <Hidden smDown implementation="css">
+            <Slide direction="right" in={fade} mountOnEnter unmountOnExit>
           <Drawer
             variant="permanent"
             open
             classes={{
               paper: classes.drawerPaper,
             }}
-          >
+            >
             {drawer}
           </Drawer>
+            </Slide>
         </Hidden>
-        <main className="MainContentWrapper">
-    
+        <main className={classes.content}>
+          <div className={classes.toolbar} />
           {this.props.children}
         </main>
+        {/* <main className="MainContentWrapper">
+    
+          {this.props.children}
+        </main> */}
       </div>
     );
   }
