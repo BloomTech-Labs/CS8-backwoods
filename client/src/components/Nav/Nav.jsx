@@ -74,6 +74,14 @@ const styles = theme => ({
       position: 'relative',
     },
   },
+  drawerHeader: {
+    display: 'flex',
+    alignItems: 'center',
+    marginTop: "-54px",
+    justifyContent: 'center',
+    padding: '0 8px',
+    ...theme.mixins.toolbar,
+  },
   content: {
     flexGrow: 1,
     backgroundColor: theme.palette.background.default,
@@ -84,6 +92,17 @@ const styles = theme => ({
     width: theme.spacing.unit * 50,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5]
+  },
+  ListItemText: {
+    textAlign: 'center'
+  },
+  ChevronIcon: {
+    height: '4rem',
+    width: '4rem'
+  },
+  IconButton: {
+    height: '80px',
+    width: '80px'
   }
 });
 
@@ -104,42 +123,59 @@ class ResponsiveDrawer extends React.Component {
       <div>
         <div className={classes.toolbar} />
         {this.state.mobileOpen &&
-          <IconButton onClick={this.handleDrawerToggle}>
-          {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+        <div className={classes.drawerHeader}>
+          <IconButton onClick={this.handleDrawerToggle} className={classes.IconButton}>
+          {theme.direction === 'rtl' ? <ChevronRightIcon className={classes.ChevronIcon}/> : <ChevronLeftIcon className={classes.ChevronIcon}/>}
         </IconButton>
+        </div>
         }
           
           {/* <Paper className="navBar"> */}
       <List component="nav">
-        <Link to={`/${isUser}`}>
+        <Link to={`/${isUser}`} className="navBarLinks">
           <ListItem button onClick={(e) => this.props.checkIfTripSaved(e, `/${this.props.user}`)}>
-            <ListItemText primary="Trips" />
+            <ListItemText
+              disableTypography 
+              className={classes.ListItemText}
+              primary={<Typography variant="title">Trips</Typography>}
+            />
           </ListItem>
         </Link>
         <Divider />
         {this.props.isLoggedIn &&
           <div>
-            <Link to={`/${this.props.user}/archived`}>
+            <Link to={`/${this.props.user}/archived`} className="navBarLinks">
               <ListItem button onClick={(e) => this.props.checkIfTripSaved(e, `/${this.props.user}/archived`)}>
-                <ListItemText primary="Archived" />
+                <ListItemText 
+                  disableTypography 
+                  className={classes.ListItemText}
+                  primary={<Typography variant="title">Archived</Typography>}
+                />
               </ListItem>
             </Link>
             <Divider />
-            <Link to={`/${this.props.user}/billing`}>
+            <Link to={`/${this.props.user}/billing`} className="navBarLinks">
               <ListItem button onClick={(e) => this.props.checkIfTripSaved(e, `/${this.props.user}/billing`)}>
-                <ListItemText primary="Billing" />
+                <ListItemText
+                  disableTypography 
+                  className={classes.ListItemText}
+                  primary={<Typography variant="title">Billing</Typography>}
+                />
               </ListItem>
             </Link>
             <Divider />
-            <Link to={`/${this.props.user}/settings`}>
+            <Link to={`/${this.props.user}/settings`} className="navBarLinks">
               <ListItem button onClick={(e) => this.props.checkIfTripSaved(e, `/${this.props.user}/settings`)}>
-                <ListItemText primary="Account" />
+                <ListItemText
+                  disableTypography
+                  className={classes.ListItemText}
+                  primary={<Typography variant="title">Account</Typography>}
+                />
               </ListItem>
             </Link>
           </div>
         }
       </List>
-    {/* </Paper> */}
         </div>
       
     );
@@ -157,7 +193,7 @@ class ResponsiveDrawer extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit" noWrap>
-             <NavBreadcrumb user={this.props.user}/>
+              <NavBreadcrumb user={this.props.user}/>
             </Typography>
           </Toolbar>
         </AppBar>
@@ -190,7 +226,7 @@ class ResponsiveDrawer extends React.Component {
           </Drawer>
             </Slide>
         </Hidden>
-        <main className={classes.content}>
+        <main className={classes.content} id="globalBackground">
           <div className={classes.toolbar} />
           {this.props.children}
         </main>

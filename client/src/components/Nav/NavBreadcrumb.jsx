@@ -33,7 +33,7 @@ class NavBreadcrumb extends React.Component {
       {/* <Paper className="navBreadcrumb"> */}
         {/* <div style={bread}> */}
           <Typography variant="title" color="inherit" noWrap>
-            <Link to={`/${this.props.user}`}>Home</Link>
+            <Link to={`/${this.props.user}`} className="navBarLinks" >Home</Link>
           {this.nextBreadCrumb()}
           </Typography>
         {/* </div>

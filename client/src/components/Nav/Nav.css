@@ -1,14 +1,7 @@
 .navWrapper {
   margin-right: 20px;
 }
-@media (min-width: 550px) {
-  .navWrapper {
-    /* width: 220px; */
-  }
-  /* .navBar {
-    width: 250px;
-  } */
-}
+
 .navBar {
   height: 100%;
   width: 180px;
@@ -16,10 +9,25 @@
   height: 80vh;
 }
 
-.navBar a {
-  text-decoration: none;
+/*NEW CSS RULES */
+.NavList {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+  align-items: center;
+  width: 100%; */
 }
 
+.navBarLinks {
+  /* width: 100%; */
+  text-decoration: none;
+  color: white;
+  margin: auto;
+}
+/*----------------*/
 .navBreadcrumb {
   padding: 10px;
   margin-bottom: 10px;
