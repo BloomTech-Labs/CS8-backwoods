@@ -17,8 +17,29 @@ import Slide from '@material-ui/core/Slide';
 import { Link } from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
 import './Nav.css';
+import Modal from '@material-ui/core/Modal';
+
+import Paper from '@material-ui/core/Paper';
+import Button from '@material-ui/core/Button';
+import Fade from '@material-ui/core/Fade';
 import NavBreadcrumb from './NavBreadcrumb'
 const fade = true;
+
+
+function getModalStyle() {
+  const top = 50;
+  const left = 50;
+
+  return {
+    top: `${top}%`,
+    left: `${left}%`,
+    transform: `translate(-${top}%, -${left}%)`,
+    width: '400px',
+    height: '250px',
+    padding: '1% 2% 2% 2%',
+    textAlign: 'center'
+  };
+}
 
 // import { mailFolderListItems, otherMailFolderListItems } from './tileData';
 
@@ -58,6 +79,12 @@ const styles = theme => ({
     backgroundColor: theme.palette.background.default,
     padding: theme.spacing.unit * 3,
   },
+  paper: {
+    position: 'absolute',
+    width: theme.spacing.unit * 50,
+    backgroundColor: theme.palette.background.paper,
+    boxShadow: theme.shadows[5]
+  }
 });
 
 class ResponsiveDrawer extends React.Component {
@@ -167,6 +194,30 @@ class ResponsiveDrawer extends React.Component {
           <div className={classes.toolbar} />
           {this.props.children}
         </main>
+        <Modal
+        open={this.props.tripSavedModal}
+        onClose={this.props.tripModalFalse}
+        disableAutoFocus={true}
+      >
+        <Fade in={this.props.tripSavedModal}>
+          <Paper
+            style={getModalStyle()}
+            className={classes.paper}
+            elevation={4}
+          >
+            <Typography variant="headline">
+              Your trip will not be saved if you leave this page.<br />
+              <br /> Do you want to continue?
+            </Typography>
+            <div className="stayOrLeaveButtons">
+              <Button onClick={this.props.tripModalFalse}>Stay</Button>
+              <Link className="leaveButton" to={this.props.navRedirect}>
+                <Button onClick={this.props.modalContinue}>Leave</Button>
+              </Link>
+            </div>
+          </Paper>
+        </Fade>
+      </Modal>
       </div>
     );
   }
