@@ -17,6 +17,7 @@ import Slide from '@material-ui/core/Slide';
 import { Link } from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
 import './Nav.css';
+import NavBreadcrumb from './NavBreadcrumb'
 const fade = true;
 
 // import { mailFolderListItems, otherMailFolderListItems } from './tileData';
@@ -129,7 +130,7 @@ class ResponsiveDrawer extends React.Component {
               <MenuIcon />
             </IconButton>
             <Typography variant="title" color="inherit" noWrap>
-              Backwoods
+             <NavBreadcrumb user={this.props.user}/>
             </Typography>
           </Toolbar>
         </AppBar>
@@ -166,10 +167,6 @@ class ResponsiveDrawer extends React.Component {
           <div className={classes.toolbar} />
           {this.props.children}
         </main>
-        {/* <main className="MainContentWrapper">
-    
-          {this.props.children}
-        </main> */}
       </div>
     );
   }
