@@ -15,7 +15,7 @@ class MainTriplist extends React.Component {
     let tripsLenght =  250 * this.props.trips.length;
     let addButtonCount = count + tripsLenght;
     return (
-      <div className="mainTripList">
+      <div>
         {this.props.trips.map((trip, index) => {
           if (index > 0) {
             count += 250;

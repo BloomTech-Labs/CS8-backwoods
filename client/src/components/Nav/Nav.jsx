@@ -159,8 +159,8 @@ class ResponsiveDrawer extends React.Component {
             {drawer}
           </Drawer>
         </Hidden>
-        <main className={classes.content}>
-          <div className={classes.toolbar} />
+        <main className="MainContentWrapper">
+    
           {this.props.children}
         </main>
       </div>

@@ -1,7 +1,7 @@
 .tripCreateWrapper {
   display: flex;
   flex-direction: column;
-  margin-top: 60px;
+  /* margin-top: 60px; */
 }
 /* .spacingLeft {
   margin-left: 5px !important;

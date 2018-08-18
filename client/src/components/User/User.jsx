@@ -190,12 +190,10 @@ class User extends React.Component {
     //   return <h1>No user</h1>
     // }
     return (
-      <div>
+      <React.Fragment>
         {this.state.noUser ? (
           <Redirect push to={`/${this.props.match.params.user}/user-not-found`} />
         ) : (
-          <div className="mainWrapper globalBackground">
-           
               <Nav
                 emailFromUser={this.state.emailFromUser}
                 user={this.props.email}
@@ -258,7 +256,7 @@ class User extends React.Component {
                 <Route component={BadUrl404} />
               </Switch>
           </Nav>
-          </div>
+       
         )}
         <Snackbar
           anchorOrigin={{
@@ -290,7 +288,7 @@ class User extends React.Component {
             message="Server Cannot Archive Trip!"
           />
         </Snackbar>
-      </div>
+      </React.Fragment>
     );
   }
 }
