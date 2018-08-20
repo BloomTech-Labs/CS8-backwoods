@@ -57,7 +57,7 @@ const styles = theme => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    backgroundColor: '#8d8741'
+    // backgroundColor: '#8d8741'
     // marginLeft: drawerWidth,
     // [theme.breakpoints.up('md')]: {
     //   width: `calc(100% - ${drawerWidth}px)`,
@@ -74,7 +74,7 @@ const styles = theme => ({
     [theme.breakpoints.up('md')]: {
       position: 'relative',
     },
-    backgroundColor: '#659dbd'
+    // backgroundColor: '#659dbd'
   },
   drawerHeader: {
     display: 'flex',
@@ -96,7 +96,7 @@ const styles = theme => ({
     boxShadow: theme.shadows[5]
   },
   ListItemText: {
-    textAlign: 'center'
+    // textAlign: 'center'
   },
   ChevronIcon: {
     height: '4rem',

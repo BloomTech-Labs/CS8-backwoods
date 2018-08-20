@@ -3,6 +3,11 @@
   flex-direction: column;
   /* margin-top: 60px; */
 }
+.thisISSPARTA{
+  background-color: white;
+  width: 71%;
+  height: 600px;
+}
 /* .spacingLeft {
   margin-left: 5px !important;
 }
@@ -15,16 +20,16 @@
 .MapWaypointWrapper {
   display: flex;
   margin-top: 20px;
-  background-color: white;
+  /* background-color: white; */
 }
 
 .tripCreateMap {
-  height: 600px;
-  width: 550px;
+  height: 100%;
+  width: 100%;
   /* background-color: white; */
   /* margin-right: 20px; */
 }
-@media(min-width: 1250px) {
+/* @media(min-width: 1250px) {
   .tripCreateMap {
     width: 600px;
   }
@@ -48,7 +53,7 @@
   .tripCreateMap {
     width: 800px;
   }
-}
+} */
 .tripCreateForm {
   padding: 15px 0px 15px 0px;
   display: flex;
@@ -62,6 +67,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  margin-left: 2%;
 }
 
 

@@ -244,6 +244,8 @@ class TripCreate extends React.Component {
           />
         </Slide>
         <div className="MapWaypointWrapper">
+        <div className="thisISSPARTA">
+
           <Zoom in={true}>
             <Map
               mapOpacity={this.state.mapOpacity}
@@ -253,8 +255,9 @@ class TripCreate extends React.Component {
               newMarkersArr={this.state.newMarkersArr}
               lat={this.state.lat}
               lng={this.state.lng}
-            />
+              />
           </Zoom>
+              </div>
           <Slide direction="left" in={true} mountOnEnter unmountOnExit>
             <WaypointList
 
