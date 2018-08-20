@@ -167,6 +167,21 @@ class App extends Component {
                       isLoggedIn={this.state.isLoggedIn}
                       email={this.state.email}
                       unauthorizedRedirect={this.unauthorizedRedirect}
+                      handleTabChange={this.handleTabChange}
+                      handleLogOut={this.handleLogOut}
+                      tabState={this.state.tabState}
+                      handleChange={this.handleChange}
+                      handleSignUp={this.handleSignUp}
+                      handleSignIn={this.handleSignIn}
+                      firstName={this.state.firstName}
+                      lastName={this.state.lastName}
+                      email={this.state.email}
+                      password={this.state.password}
+                      validatePassword={this.state.validatePassword}
+                      isLoggedIn={this.state.isLoggedIn}
+                      handleClose={this.handleClose}
+                      handleOpen={this.handleOpen}
+                      open={this.state.open}
                     />
                   )}
                 />

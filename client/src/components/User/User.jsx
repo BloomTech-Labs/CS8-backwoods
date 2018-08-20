@@ -195,6 +195,7 @@ class User extends React.Component {
           <Redirect push to={`/${this.props.match.params.user}/user-not-found`} />
         ) : (
               <Nav
+                styleName='signInOutMain'
                 emailFromUser={this.state.emailFromUser}
                 user={this.props.email}
                 isLoggedIn={this.props.isLoggedIn}
@@ -205,6 +206,21 @@ class User extends React.Component {
                 navRedirect={this.state.navRedirect}
                 setSaveTripTrue={this.state.setSaveTripTrue}
                 modalContinue={this.modalContinue}
+                handleTabChange={this.props.handleTabChange}
+                handleLogOut={this.props.handleLogOut}
+                tabState={this.props.tabState}
+                handleChange={this.props.handleChange}
+                handleSignUp={this.props.handleSignUp}
+                handleSignIn={this.props.handleSignIn}
+                firstName={this.props.firstName}
+                lastName={this.props.lastName}
+                email={this.props.email}
+                password={this.props.password}
+                validatePassword={this.props.validatePassword}
+                isLoggedIn={this.props.isLoggedIn}
+                handleClose={this.props.handleClose}
+                handleOpen={this.props.handleOpen}
+                open={this.props.open}
               >
               <Switch>
                 <Route

@@ -18,7 +18,7 @@ import { Link } from 'react-router-dom';
 import ListItem from '@material-ui/core/ListItem';
 import './Nav.css';
 import Modal from '@material-ui/core/Modal';
-
+import SignInOut from '../SignInOut/SignInOut'
 import Paper from '@material-ui/core/Paper';
 import Button from '@material-ui/core/Button';
 import Fade from '@material-ui/core/Fade';
@@ -57,6 +57,7 @@ const styles = theme => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
+    // flexGrow: 2,
     // backgroundColor: '#8d8741'
     // marginLeft: drawerWidth,
     // [theme.breakpoints.up('md')]: {
@@ -105,6 +106,10 @@ const styles = theme => ({
   IconButton: {
     height: '80px',
     width: '80px'
+  },
+  CoolStuff: {
+    display: 'flex',
+    justifyContent: 'space-between'
   }
 });
 
@@ -185,7 +190,7 @@ class ResponsiveDrawer extends React.Component {
     return (
       <div className={classes.root}>
         <AppBar className={classes.appBar} position="absolute">
-          <Toolbar>
+          <Toolbar className={classes.CoolStuff}>
             <IconButton
               color="inherit"
               aria-label="Open drawer"
@@ -197,6 +202,25 @@ class ResponsiveDrawer extends React.Component {
             <Typography variant="title" color="inherit" noWrap>
               <NavBreadcrumb user={this.props.user}/>
             </Typography>
+            <SignInOut
+              buttonVariant="flat"
+              styleName='signInOutMain'
+              handleTabChange={this.props.handleTabChange}
+              handleLogOut={this.props.handleLogOut}
+              tabState={this.props.tabState}
+              handleChange={this.props.handleChange}
+              handleSignUp={this.props.handleSignUp}
+              handleSignIn={this.props.handleSignIn}
+              firstName={this.props.firstName}
+              lastName={this.props.lastName}
+              email={this.props.email}
+              password={this.props.password}
+              validatePassword={this.props.validatePassword}
+              isLoggedIn={this.props.isLoggedIn}
+              handleClose={this.props.handleClose}
+              handleOpen={this.props.handleOpen}
+              open={this.props.open}
+            />
           </Toolbar>
         </AppBar>
         <Hidden mdUp>

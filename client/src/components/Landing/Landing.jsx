@@ -11,6 +11,9 @@ const Landing = (props) => {
   return (
     <React.Fragment>
       <SignInOut
+        buttonColor={true}
+        styleName='signInOutlanding'
+        buttonVariant="contained"
         handleTabChange={props.handleTabChange}
         handleLogOut={props.handleLogOut}
         tabState={props.tabState}
