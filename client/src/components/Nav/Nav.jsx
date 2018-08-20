@@ -191,6 +191,8 @@ class ResponsiveDrawer extends React.Component {
       <div className={classes.root}>
         <AppBar className={classes.appBar} position="absolute">
           <Toolbar className={classes.CoolStuff}>
+          <div className="breadAndHanburger">
+
             <IconButton
               color="inherit"
               aria-label="Open drawer"
@@ -202,6 +204,7 @@ class ResponsiveDrawer extends React.Component {
             <Typography variant="title" color="inherit" noWrap>
               <NavBreadcrumb user={this.props.user}/>
             </Typography>
+              </div>
             <SignInOut
               buttonVariant="flat"
               styleName='signInOutMain'

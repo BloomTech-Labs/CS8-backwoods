@@ -10,15 +10,9 @@
 }
 
 /*NEW CSS RULES */
-.NavList {
-  /* display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-content: center;
-  justify-items: center;
-  text-align: center;
+.breadAndHanburger {
+  display: flex;
   align-items: center;
-  width: 100%; */
 }
 
 .navBarLinks {
