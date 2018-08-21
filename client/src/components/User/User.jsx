@@ -72,7 +72,8 @@ class User extends React.Component {
       snackbarHorizontal: 'center',
       tripSavedModal: false,
       isTripSaved: true,
-      navRedirect: ''
+      navRedirect: '',
+      mobileOpen: false,
     };
     this.archiveTrip = this.archiveTrip.bind(this);
   }
@@ -131,7 +132,7 @@ class User extends React.Component {
   };
 
   modalContinue = () => {
-    this.setState({ tripSavedModal: false, isTripSaved: true });
+    this.setState({ tripSavedModal: false, isTripSaved: true, mobileOpen: false });
   };
 
   checkIfTripSaved = (e, navLink) => {
@@ -140,8 +141,12 @@ class User extends React.Component {
       e.preventDefault();
       this.tripModalTrue();
     } else {
+      this.handleDrawerToggle()
       return;
     }
+  };
+  handleDrawerToggle = () => {
+    this.setState(state => ({ mobileOpen: !state.mobileOpen }));
   };
 
   tripModalTrue = () => {
@@ -149,7 +154,7 @@ class User extends React.Component {
   };
 
   tripModalFalse = () => {
-    this.setState({ tripSavedModal: false });
+    this.setState({ tripSavedModal: false, mobileOpen: false });
   };
 
   archiveTrip(TripId, index) {
@@ -195,17 +200,14 @@ class User extends React.Component {
           <Redirect push to={`/${this.props.match.params.user}/user-not-found`} />
         ) : (
               <Nav
-                styleName='signInOutMain'
+                ////////////NAV////////////
                 emailFromUser={this.state.emailFromUser}
                 user={this.props.email}
+                mobileOpen={this.state.mobileOpen}
+                handleDrawerToggle={this.handleDrawerToggle}
                 isLoggedIn={this.props.isLoggedIn}
-                savedTripCheck={this.savedTripCheck}
-                tripModalFalse={this.tripModalFalse}
                 checkIfTripSaved={this.checkIfTripSaved}
-                tripSavedModal={this.state.tripSavedModal}
-                navRedirect={this.state.navRedirect}
-                setSaveTripTrue={this.state.setSaveTripTrue}
-                modalContinue={this.modalContinue}
+                ////////////SIGN IN/OUT///////////
                 handleTabChange={this.props.handleTabChange}
                 handleLogOut={this.props.handleLogOut}
                 tabState={this.props.tabState}
@@ -220,6 +222,11 @@ class User extends React.Component {
                 handleClose={this.props.handleClose}
                 handleOpen={this.props.handleOpen}
                 open={this.props.open}
+                ///////////////MODAL//////////////
+                tripModalFalse={this.tripModalFalse}
+                tripSavedModal={this.state.tripSavedModal}
+                navRedirect={this.state.navRedirect}
+                modalContinue={this.modalContinue}
               >
               <Switch>
                 <Route

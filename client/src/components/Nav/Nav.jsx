@@ -41,8 +41,6 @@ function getModalStyle() {
   };
 }
 
-// import { mailFolderListItems, otherMailFolderListItems } from './tileData';
-
 const drawerWidth = 240;
 
 const styles = theme => ({
@@ -57,12 +55,6 @@ const styles = theme => ({
   },
   appBar: {
     zIndex: theme.zIndex.drawer + 1,
-    // flexGrow: 2,
-    // backgroundColor: '#8d8741'
-    // marginLeft: drawerWidth,
-    // [theme.breakpoints.up('md')]: {
-    //   width: `calc(100% - ${drawerWidth}px)`,
-    // },
   },
   navIconHide: {
     [theme.breakpoints.up('md')]: {
@@ -113,184 +105,182 @@ const styles = theme => ({
   }
 });
 
-class ResponsiveDrawer extends React.Component {
-  state = {
-    mobileOpen: false,
-  };
-
-  handleDrawerToggle = () => {
-    this.setState(state => ({ mobileOpen: !state.mobileOpen }));
-  };
-
-  render() {
-    const { classes, theme } = this.props;
-    const isUser = this.props.user ? this.props.user : this.props.emailFromUser
-
-    const drawer = (
-      <div>
-        <div className={classes.toolbar} />
-        {this.state.mobileOpen &&
-        <div className={classes.drawerHeader}>
-          <IconButton onClick={this.handleDrawerToggle} className={classes.IconButton}>
-          {theme.direction === 'rtl' ? <ChevronRightIcon className={classes.ChevronIcon}/> : <ChevronLeftIcon className={classes.ChevronIcon}/>}
-        </IconButton>
+const Nav = (props) => {
+  const { classes, theme } = props; // Materail-UI 
+  const { user, emailFromUser, mobileOpen, handleDrawerToggle,
+          checkIfTripSaved, isLoggedIn } = props; //NAV
+  const { handleTabChange, handleLogOut, tabState, handleChange,
+          handleSignUp, handleSignIn, firstName, lastName, email,
+          password, validatePassword, handleClose, handleOpen, open} = props //sign IN/out
+  const isUser = user ? user : emailFromUser
+  const drawer = (
+    <div>
+      <div className={classes.toolbar} />
+      {mobileOpen &&
+      <div className={classes.drawerHeader}>
+        <IconButton onClick={handleDrawerToggle} className={classes.IconButton}>
+        {theme.direction === 'rtl' ? <ChevronRightIcon className={classes.ChevronIcon}/> : <ChevronLeftIcon className={classes.ChevronIcon}/>}
+      </IconButton>
+      </div>
+      }
+    <List component="nav">
+      <Link to={`/${isUser}`} className="navBarLinks">
+        <ListItem button onClick={(e) => checkIfTripSaved(e, `/${user}`)}>
+          <ListItemText
+            disableTypography 
+            className={classes.ListItemText}
+            primary={<Typography variant="title">Trips</Typography>}
+          />
+        </ListItem>
+      </Link>
+      <Divider />
+      {isLoggedIn &&
+        <div>
+          <Link to={`/${user}/archived`} className="navBarLinks">
+            <ListItem button onClick={(e) => checkIfTripSaved(e, `/${user}/archived`)}>
+              <ListItemText 
+                disableTypography 
+                className={classes.ListItemText}
+                primary={<Typography variant="title">Archived</Typography>}
+              />
+            </ListItem>
+          </Link>
+          <Divider />
+          <Link to={`/${user}/billing`} className="navBarLinks">
+            <ListItem button onClick={(e) => checkIfTripSaved(e, `/${user}/billing`)}>
+              <ListItemText
+                disableTypography 
+                className={classes.ListItemText}
+                primary={<Typography variant="title">Billing</Typography>}
+              />
+            </ListItem>
+          </Link>
+          <Divider />
+          <Link to={`/${user}/settings`} className="navBarLinks">
+            <ListItem button onClick={(e) => checkIfTripSaved(e, `/${user}/settings`)}>
+              <ListItemText
+                disableTypography
+                className={classes.ListItemText}
+                primary={<Typography variant="title">Account</Typography>}
+              />
+            </ListItem>
+          </Link>
         </div>
-        }
-          
-          {/* <Paper className="navBar"> */}
-      <List component="nav">
-        <Link to={`/${isUser}`} className="navBarLinks">
-          <ListItem button onClick={(e) => this.props.checkIfTripSaved(e, `/${this.props.user}`)}>
-            <ListItemText
-              disableTypography 
-              className={classes.ListItemText}
-              primary={<Typography variant="title">Trips</Typography>}
-            />
-          </ListItem>
-        </Link>
-        <Divider />
-        {this.props.isLoggedIn &&
-          <div>
-            <Link to={`/${this.props.user}/archived`} className="navBarLinks">
-              <ListItem button onClick={(e) => this.props.checkIfTripSaved(e, `/${this.props.user}/archived`)}>
-                <ListItemText 
-                  disableTypography 
-                  className={classes.ListItemText}
-                  primary={<Typography variant="title">Archived</Typography>}
-                />
-              </ListItem>
-            </Link>
-            <Divider />
-            <Link to={`/${this.props.user}/billing`} className="navBarLinks">
-              <ListItem button onClick={(e) => this.props.checkIfTripSaved(e, `/${this.props.user}/billing`)}>
-                <ListItemText
-                  disableTypography 
-                  className={classes.ListItemText}
-                  primary={<Typography variant="title">Billing</Typography>}
-                />
-              </ListItem>
-            </Link>
-            <Divider />
-            <Link to={`/${this.props.user}/settings`} className="navBarLinks">
-              <ListItem button onClick={(e) => this.props.checkIfTripSaved(e, `/${this.props.user}/settings`)}>
-                <ListItemText
-                  disableTypography
-                  className={classes.ListItemText}
-                  primary={<Typography variant="title">Account</Typography>}
-                />
-              </ListItem>
+      }
+    </List>
+      </div>
+    
+  );
+  return (
+    <div className={classes.root}>
+      <AppBar className={classes.appBar} position="absolute">
+        <Toolbar className={classes.CoolStuff}>
+        <div className="breadAndHanburger">
+
+          <IconButton
+            color="inherit"
+            aria-label="Open drawer"
+            onClick={handleDrawerToggle}
+            className={classes.navIconHide}
+            >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="title" color="inherit" noWrap>
+            <NavBreadcrumb user={user}/>
+          </Typography>
+            </div>
+          <SignInOut
+            buttonVariant="flat"
+            styleName='signInOutMain'
+            handleTabChange={handleTabChange}
+            handleLogOut={handleLogOut}
+            tabState={tabState}
+            handleChange={handleChange}
+            handleSignUp={handleSignUp}
+            handleSignIn={handleSignIn}
+            firstName={firstName}
+            lastName={lastName}
+            email={email}
+            password={password}
+            validatePassword={validatePassword}
+            isLoggedIn={isLoggedIn}
+            handleClose={handleClose}
+            handleOpen={handleOpen}
+            open={open}
+          />
+        </Toolbar>
+      </AppBar>
+      <Hidden mdUp>
+        <Drawer
+          variant="temporary"
+          anchor={theme.direction === 'rtl' ? 'right' : 'left'}
+          open={mobileOpen}
+          onClose={handleDrawerToggle}
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+          ModalProps={{
+            keepMounted: true,
+          }}
+          >
+          {drawer}
+        </Drawer>
+      </Hidden>
+      <Hidden smDown implementation="css">
+          <Slide direction="right" in={fade} mountOnEnter unmountOnExit>
+        <Drawer
+          variant="permanent"
+          open
+          classes={{
+            paper: classes.drawerPaper,
+          }}
+          >
+          {drawer}
+        </Drawer>
+          </Slide>
+      </Hidden>
+      <main className={classes.content} id="globalBackground">
+        <div className={classes.toolbar} />
+        {props.children}
+      </main>
+      <Modal
+      open={props.tripSavedModal}
+      onClose={props.tripModalFalse}
+      disableAutoFocus={true}
+    >
+      <Fade in={props.tripSavedModal}>
+        <Paper
+          style={getModalStyle()}
+          className={classes.paper}
+          elevation={4}
+        >
+          <Typography variant="headline">
+            Your trip will not be saved if you leave this page.<br />
+            <br /> Do you want to continue?
+          </Typography>
+          <div className="stayOrLeaveButtons">
+            <Button onClick={props.tripModalFalse}>Stay</Button>
+            <Link className="leaveButton" to={props.navRedirect}>
+              <Button onClick={props.modalContinue}>Leave</Button>
             </Link>
           </div>
-        }
-      </List>
-        </div>
-      
-    );
-    
-    return (
-      <div className={classes.root}>
-        <AppBar className={classes.appBar} position="absolute">
-          <Toolbar className={classes.CoolStuff}>
-          <div className="breadAndHanburger">
-
-            <IconButton
-              color="inherit"
-              aria-label="Open drawer"
-              onClick={this.handleDrawerToggle}
-              className={classes.navIconHide}
-              >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="title" color="inherit" noWrap>
-              <NavBreadcrumb user={this.props.user}/>
-            </Typography>
-              </div>
-            <SignInOut
-              buttonVariant="flat"
-              styleName='signInOutMain'
-              handleTabChange={this.props.handleTabChange}
-              handleLogOut={this.props.handleLogOut}
-              tabState={this.props.tabState}
-              handleChange={this.props.handleChange}
-              handleSignUp={this.props.handleSignUp}
-              handleSignIn={this.props.handleSignIn}
-              firstName={this.props.firstName}
-              lastName={this.props.lastName}
-              email={this.props.email}
-              password={this.props.password}
-              validatePassword={this.props.validatePassword}
-              isLoggedIn={this.props.isLoggedIn}
-              handleClose={this.props.handleClose}
-              handleOpen={this.props.handleOpen}
-              open={this.props.open}
-            />
-          </Toolbar>
-        </AppBar>
-        <Hidden mdUp>
-          <Drawer
-            variant="temporary"
-            anchor={theme.direction === 'rtl' ? 'right' : 'left'}
-            open={this.state.mobileOpen}
-            onClose={this.handleDrawerToggle}
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            ModalProps={{
-              keepMounted: true, // Better open performance on mobile.
-            }}
-            >
-            {drawer}
-          </Drawer>
-        </Hidden>
-        <Hidden smDown implementation="css">
-            <Slide direction="right" in={fade} mountOnEnter unmountOnExit>
-          <Drawer
-            variant="permanent"
-            open
-            classes={{
-              paper: classes.drawerPaper,
-            }}
-            >
-            {drawer}
-          </Drawer>
-            </Slide>
-        </Hidden>
-        <main className={classes.content} id="globalBackground">
-          <div className={classes.toolbar} />
-          {this.props.children}
-        </main>
-        <Modal
-        open={this.props.tripSavedModal}
-        onClose={this.props.tripModalFalse}
-        disableAutoFocus={true}
-      >
-        <Fade in={this.props.tripSavedModal}>
-          <Paper
-            style={getModalStyle()}
-            className={classes.paper}
-            elevation={4}
-          >
-            <Typography variant="headline">
-              Your trip will not be saved if you leave this page.<br />
-              <br /> Do you want to continue?
-            </Typography>
-            <div className="stayOrLeaveButtons">
-              <Button onClick={this.props.tripModalFalse}>Stay</Button>
-              <Link className="leaveButton" to={this.props.navRedirect}>
-                <Button onClick={this.props.modalContinue}>Leave</Button>
-              </Link>
-            </div>
-          </Paper>
-        </Fade>
-      </Modal>
-      </div>
-    );
-  }
+        </Paper>
+      </Fade>
+    </Modal>
+    </div>
+  );
 }
 
-ResponsiveDrawer.propTypes = {
+Nav.propTypes = {
   classes: PropTypes.object.isRequired,
   theme: PropTypes.object.isRequired,
+
+  user: PropTypes.string.isRequired,
+  emailFromUser: PropTypes.string.isRequired,
+  mobileOpen: PropTypes.bool.isRequired,
+  handleDrawerToggle: PropTypes.func.isRequired,
+  checkIfTripSaved: PropTypes.func.isRequired,
+  isLoggedIn: PropTypes.bool.isRequired,
 };
 
-export default withStyles(styles, { withTheme: true })(ResponsiveDrawer);
+export default withStyles(styles, { withTheme: true })(Nav);
