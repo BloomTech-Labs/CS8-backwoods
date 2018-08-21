@@ -1,13 +1,8 @@
 import React from 'react';
-import Paper from '@material-ui/core/Paper';
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
 
-
-const bread = {
-  display: 'flex'
-};
 class NavBreadcrumb extends React.Component {
   nextBreadCrumb() {
     let currentLocation = window.location.pathname;

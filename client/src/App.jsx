@@ -5,7 +5,6 @@ import axios from 'axios';
 import MainSnackbar from './components/Snackbar/MainSnackbar';
 import { Route, withRouter } from 'react-router-dom';
 import Landing from './components/Landing/Landing.jsx';
-// import DebugRoutes from './components/Debug/DebugRoutes.jsx';
 import { StripeProvider } from 'react-stripe-elements';
 import User from './components/User/User';
 import UserNotFound404 from './components/404/UserNotFound404';
@@ -165,7 +164,6 @@ class App extends Component {
                     <User
                       {...props}
                       isLoggedIn={this.state.isLoggedIn}
-                      email={this.state.email}
                       unauthorizedRedirect={this.unauthorizedRedirect}
                       handleTabChange={this.handleTabChange}
                       handleLogOut={this.handleLogOut}
@@ -178,7 +176,6 @@ class App extends Component {
                       email={this.state.email}
                       password={this.state.password}
                       validatePassword={this.state.validatePassword}
-                      isLoggedIn={this.state.isLoggedIn}
                       handleClose={this.handleClose}
                       handleOpen={this.handleOpen}
                       open={this.state.open}
@@ -191,7 +188,6 @@ class App extends Component {
               </React.Fragment>
             </CssBaseline>
           </React.Fragment>
-          {/* <DebugRoutes /> */}
         </div>
       </StripeProvider>
     );

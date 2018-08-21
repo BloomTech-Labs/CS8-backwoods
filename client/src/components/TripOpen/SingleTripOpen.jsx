@@ -9,8 +9,6 @@ import { format } from 'date-fns/esm';
 
 
 const SingleTripOpen = props => {
-  // Not working
-  // let formatTime = format(new Date(props.marker.time), 'h:m:s')
   let formatDate = format(new Date(props.marker.eta), 'MM/DD/YYYY');
   return (
     <Paper>

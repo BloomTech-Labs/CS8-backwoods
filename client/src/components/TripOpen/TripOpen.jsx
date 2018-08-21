@@ -88,7 +88,6 @@ class TripOpen extends React.Component {
 
           />
           <WaypointList
-            // key={this.state.markers.markerName}
             markers={this.state.markers}
             startDate={this.state.startDate}
             endDate={this.state.endDate}

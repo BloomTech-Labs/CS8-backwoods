@@ -50,7 +50,6 @@ class SignUpForm extends React.Component {
 
   render() {
     const { classes } = this.props;
-    // noValidate autoComplete="off"
     return (
       <ValidatorForm
         className={classes.container}
@@ -59,7 +58,6 @@ class SignUpForm extends React.Component {
         <MuiThemeProvider theme={theme}>
           <TextField
             required
-            // id="firstName"
             label="First Name"
             className={classes.textField}
             type="text"
@@ -70,7 +68,6 @@ class SignUpForm extends React.Component {
           />
           <TextField
             required
-            // id="lastName"
             label="Last Name"
             className={classes.textField}
             type="text"
@@ -81,7 +78,6 @@ class SignUpForm extends React.Component {
           />
           <TextField
             required
-            // id="required"
             label="Email"
             className={classes.textField}
             type="email"
@@ -96,7 +92,6 @@ class SignUpForm extends React.Component {
             validators={['required']}
             name="password"
             required
-            // id="password-input"
             label="Password"
             className={classes.textField}
             type="password"
@@ -110,7 +105,6 @@ class SignUpForm extends React.Component {
             validators={['isPasswordMatch', 'required']}
             name="repeatPassword"
             required
-            // id="password-input"
             label="Confirm Password"
             className={classes.textField}
             type="password"

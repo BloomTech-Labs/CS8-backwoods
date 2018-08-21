@@ -3,7 +3,6 @@ import Paper from '@material-ui/core/Paper';
 import Icon from '@material-ui/core/Icon';
 import green from '@material-ui/core/colors/green';
 import Button from '@material-ui/core/Button';
-// import TextField from '@material-ui/core/TextField';
 import { Redirect } from 'react-router-dom';
 import { ValidatorForm, TextValidator } from 'react-material-ui-form-validator';
 import {
@@ -66,8 +65,6 @@ class TripCreateForm extends React.Component{
                       label="Start Date"
                       disablePast
                       showTodayButton
-                      // maxDate={this.props.endDate}
-                      // maxDateMessage="Date must be less that trip end date"
                       value={this.props.startDate}
                       onChange={this.props.handleDateChange('startDate')}
                       animateYearScrolling={true}

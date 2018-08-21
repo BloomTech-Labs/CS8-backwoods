@@ -217,7 +217,6 @@ class User extends React.Component {
                 email={this.props.email}
                 password={this.props.password}
                 validatePassword={this.props.validatePassword}
-                isLoggedIn={this.props.isLoggedIn}
                 handleClose={this.props.handleClose}
                 handleOpen={this.props.handleOpen}
                 open={this.props.open}

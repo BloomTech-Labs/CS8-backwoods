@@ -40,7 +40,6 @@ class MainTriplist extends React.Component {
                 index={index}
                 isLoggedIn={this.props.isLoggedIn}
               />
-           
           );
         })}
         {this.props.isLoggedIn && (

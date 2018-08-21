@@ -10,9 +10,6 @@ import Slide from '@material-ui/core/Slide';
 import Zoom from '@material-ui/core/Zoom';
 import { format } from 'date-fns/esm';
 
-// let date = new Date().toISOString().split('T')[0];
-
-
 class TripCreate extends React.Component {
   constructor(props) {
     super(props);
@@ -124,7 +121,6 @@ class TripCreate extends React.Component {
   };
 
   handleSubmit = e => {
-    // e.preventDefault();
     const token = localStorage.getItem('token');
     const { tripName, startDate, endDate, newMarkersArr } = this.state;
     const { email } = this.props;
@@ -270,8 +266,6 @@ class TripCreate extends React.Component {
               tripSaveModal={this.state.tripSaveModal}
               modalFade={this.state.modalFade}
               handleNewWaypoint={this.handleNewWaypoint}
-
-
               disableAddMarker={this.state.disableAddMarker}
               displayMarkerCard={this.state.displayMarkerCard}
               markerAddCard={this.markerAddCard}
@@ -279,7 +273,6 @@ class TripCreate extends React.Component {
               startDate={this.state.startDate}
               endDate={this.state.endDate}
               newMarkersArr={this.state.newMarkersArr}
-
               time={this.state.time}
               eta={this.state.eta}
               handleChange={this.handleChange}

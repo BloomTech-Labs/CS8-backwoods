@@ -5,22 +5,14 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  /* padding: 1%; */
 }
 .mainTripList {
-  /* margin-top: 47px; */
   display: flex;
   flex-wrap: wrap;
   width: 100%;
   height: 100%;
 }
-/* .mainTripList {
-  display: flex;
-  flex-wrap: wrap;
-  width: 100%;
-  align-content: flex-start;
-  margin: auto;
-} */
+
 .mapsIcon {
   max-width: 100%;
   margin: auto;
