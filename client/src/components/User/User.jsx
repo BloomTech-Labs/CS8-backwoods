@@ -136,18 +136,25 @@ class User extends React.Component {
   };
 
   checkIfTripSaved = (e, navLink) => {
+    console.log('poop')
     this.setState({ navRedirect: navLink });
     if (!this.state.isTripSaved) {
       e.preventDefault();
       this.tripModalTrue();
     } else {
-      this.handleDrawerToggle()
+      this._checkIfMobileOpen()
       return;
     }
   };
   handleDrawerToggle = () => {
     this.setState(state => ({ mobileOpen: !state.mobileOpen }));
   };
+  _checkIfMobileOpen = () => {
+    if(!this.state.mobileOpen) {
+      return
+    }
+    this.setState({ mobileOpen: false})
+  }
 
   tripModalTrue = () => {
     this.setState({ tripSavedModal: true });
