@@ -136,7 +136,6 @@ class User extends React.Component {
   };
 
   checkIfTripSaved = (e, navLink) => {
-    console.log('poop')
     this.setState({ navRedirect: navLink });
     if (!this.state.isTripSaved) {
       e.preventDefault();
