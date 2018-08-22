@@ -14,25 +14,22 @@ class NavBreadcrumb extends React.Component {
         <i key={1} className="material-icons">
           keyboard_arrow_right
         </i>,
-       <React.Fragment>
-        {/* // <Typography key={2} className="breadCrumb"> */}
+        <div key={2}>
           {t[t.length - 1]}
-          </React.Fragment>
+        </div>
       ];
     }
   }
   render() {
     return (
     <Slide direction="right" in={true} mountOnEnter unmountOnExit>
-    <React.Fragment>
-      {/* <Paper className="navBreadcrumb"> */}
-        {/* <div style={bread}> */}
+      <React.Fragment>
+        <div style={{display: 'flex'}}>
           <Typography variant="title" color="inherit" noWrap>
             <Link to={`/${this.props.user}`} className="navBarLinks" >Home</Link>
-          {this.nextBreadCrumb()}
           </Typography>
-        {/* </div>
-      </Paper> */}
+          {this.nextBreadCrumb()}
+        </div>
       </React.Fragment>
     </Slide>
     );

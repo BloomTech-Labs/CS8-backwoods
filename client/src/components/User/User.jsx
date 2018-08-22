@@ -78,7 +78,7 @@ class User extends React.Component {
     this.archiveTrip = this.archiveTrip.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if(this.props.match.params.user === 'aaron@backwood.app') {
       console.log('Test User')
       this.setState({
