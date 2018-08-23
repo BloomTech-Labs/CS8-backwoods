@@ -6,7 +6,7 @@ import { Redirect } from 'react-router-dom';
 
 const UserNotFound404 = (props) => {
   if (props.isLoggedIn) {
-    <Redirect push to={`/${props.match.params.user}/`} />
+    return <Redirect push to={`/${props.match.params.user}/`} />
   }
   return (
 

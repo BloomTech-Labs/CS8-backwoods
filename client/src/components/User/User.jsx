@@ -15,7 +15,7 @@ import green from '@material-ui/core/colors/green';
 import { withStyles } from '@material-ui/core/styles';
 import BadUrl404 from '../404/BadUrl404';
 import {testTrip} from '../TripOpen/testData';
-
+import TripNotFound404 from '../404/TripNotFound404';
 const RestrictedRoute = ({
   component: Component,
   isLoggedIn,
@@ -240,6 +240,7 @@ class User extends React.Component {
                   render={props => (
                     <MainTriplist
                       {...props}
+                      hasTrips={this.state.hasTrips}
                       trips={this.state.trips}
                       user={this.props.email}
                       archiveTrip={this.archiveTrip}
@@ -279,8 +280,8 @@ class User extends React.Component {
                   isLoggedIn={this.props.isLoggedIn}
                   unauthorizedRedirect={this.props.unauthorizedRedirect}
                 />
-                <Route path="/:user/trip/:slug" component={TripOpen} exact />
-
+                <Route path="/:user/trip/:slug" component={TripOpen} />
+                <Route path="/:user/trip-not-found" component={TripNotFound404} exact/>
                 <Route component={BadUrl404} />
               </Switch>
           </Nav>

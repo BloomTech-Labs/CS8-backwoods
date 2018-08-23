@@ -8,7 +8,6 @@ import Landing from './components/Landing/Landing.jsx';
 import { StripeProvider } from 'react-stripe-elements';
 import User from './components/User/User';
 import UserNotFound404 from './components/404/UserNotFound404';
-import TripNotFound404 from './components/404/TripNotFound404';
 
 // CssBaseline is the Material UI built in CSS reset
 class App extends Component {
@@ -183,7 +182,7 @@ class App extends Component {
                   )}
                 />
                 {/* If user logs in redirect User otherwise display landing page */}
-                <Route path="/:user/trip-not-found" component={TripNotFound404} />
+                
                 <Route 
                 path="/:user/user-not-found" 
                 render={props => (
@@ -201,7 +200,6 @@ class App extends Component {
                     email={this.state.email}
                     password={this.state.password}
                     validatePassword={this.state.validatePassword}
-                    isLoggedIn={this.state.isLoggedIn}
                     handleClose={this.handleClose}
                     handleOpen={this.handleOpen}
                     open={this.state.open}/>
