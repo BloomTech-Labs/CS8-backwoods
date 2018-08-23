@@ -5,7 +5,7 @@ import Typography from '@material-ui/core/Typography';
 const BadUrl404 = () => {
   return  ( 
     <div className="BadUrl404">
-    <div class="hero-image-404-2">
+    <div className="hero-image-404-2">
       <div className="hero-text">
         <Typography 
           variant="display4"

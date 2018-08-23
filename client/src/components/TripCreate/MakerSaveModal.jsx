@@ -46,7 +46,6 @@ const MakerSaveModal = props => {
           </Typography>
           <div className="stayOrLeaveButtons">
             <Button onClick={props.noMarkerNameFalseF}>Stay</Button>
-            {/* <Button onClick={props.handleNewWaypoint}>Save</Button> */}
           </div>
         </Paper>
       </Fade>

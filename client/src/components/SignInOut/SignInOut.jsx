@@ -8,24 +8,40 @@ import {
 import Modal from '@material-ui/core/Modal';
 import Button from '@material-ui/core/Button';
 import Tabs from './Tabs.jsx';
-import green from '@material-ui/core/colors/green';
-
+// import green from '@material-ui/core/colors/green';
 import { Link } from 'react-router-dom';
 import './SignInOut.css';
 
 const theme = createMuiTheme({
   palette: {
-    primary: green
+    primary: {
+      main: '#48a259'
+    }
   },
   overrides: {
     MuiButton: {
       raisedPrimary: {
         color: 'white'
       }
+      
     }
   }
 });
-
+const theme2 = createMuiTheme({
+  palette: {
+    primary: {
+      main: '#ffffff'
+    }
+  },
+  overrides: {
+    MuiButton: {
+      raisedPrimary: {
+        color: 'white'
+      }
+      
+    }
+  }
+});
 function getModalStyle() {
   const top = 50;
   const left = 50;
@@ -48,29 +64,54 @@ const styles = theme => ({
 const SignInOut = props => {
   const { classes } = props;
   return (
-    <div className="signInOutWrapper">
+    <div className={props.styleName}>
       {props.isLoggedIn ? (
         <Link to="/" className="LandingHomeLink">
+        {props.buttonColor ?
           <MuiThemeProvider theme={theme}>
-            <Button
-              onClick={props.handleLogOut}
-              variant="contained"
-              color="primary"
-            >
-              log out
-            </Button>
-          </MuiThemeProvider>
+          <Button
+            onClick={props.handleLogOut}
+            variant={props.buttonVariant}
+            color="primary"
+          >
+            log out
+          </Button>
+        </MuiThemeProvider> :
+          <MuiThemeProvider theme={theme2}>
+          <Button
+            onClick={props.handleLogOut}
+            variant={props.buttonVariant}
+            color="primary"
+          >
+            log out
+          </Button>
+        </MuiThemeProvider>
+      }
         </Link>
       ) : (
-        <MuiThemeProvider theme={theme}>
+       <div>
+        {props.buttonColor ?
+           <MuiThemeProvider theme={theme}>
+           <Button
+             variant={props.buttonVariant}
+             onClick={props.handleOpen}
+             color="primary"
+           >
+             Sign Up / Sign In
+           </Button>
+         </MuiThemeProvider> :
+          <MuiThemeProvider theme={theme2}>
           <Button
-            variant="contained"
+            variant={props.buttonVariant}
             onClick={props.handleOpen}
             color="primary"
           >
             Sign Up / Sign In
           </Button>
         </MuiThemeProvider>
+      }
+
+       </div>
       )}
       <Modal
         open={props.open}

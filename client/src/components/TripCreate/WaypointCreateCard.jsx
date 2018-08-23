@@ -86,7 +86,6 @@ class WaypointCreateCard extends React.Component {
             variant="outlined"
             color="primary"
             onClick={this.props.activateMap}
-            // disabled={props.saveLocationEnabled}
             size="large"
           >
             Place Marker
@@ -99,7 +98,6 @@ class WaypointCreateCard extends React.Component {
             variant="outlined"
             color="primary"
             onClick={this.props.handleNewWaypoint}
-            // disabled={props.saveLocationEnabled}
             size="large"
           >
           

@@ -4,13 +4,10 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import axios from 'axios';
 import MainSnackbar from './components/Snackbar/MainSnackbar';
 import { Route, withRouter } from 'react-router-dom';
-import SignInOut from './components/SignInOut/SignInOut.jsx';
 import Landing from './components/Landing/Landing.jsx';
-// import DebugRoutes from './components/Debug/DebugRoutes.jsx';
 import { StripeProvider } from 'react-stripe-elements';
 import User from './components/User/User';
 import UserNotFound404 from './components/404/UserNotFound404';
-import TripNotFound404 from './components/404/TripNotFound404';
 
 // CssBaseline is the Material UI built in CSS reset
 class App extends Component {
@@ -138,43 +135,79 @@ class App extends Component {
               snackbarAuthRedirect={this.state.snackbarAuthRedirect}
             />
             <CssBaseline>
-              <SignInOut
-                handleTabChange={this.handleTabChange}
-                handleLogOut={this.handleLogOut}
-                tabState={this.state.tabState}
-                handleChange={this.handleChange}
-                handleSignUp={this.handleSignUp}
-                handleSignIn={this.handleSignIn}
-                firstName={this.state.firstName}
-                lastName={this.state.lastName}
-                email={this.state.email}
-                password={this.state.password}
-                validatePassword={this.state.validatePassword}
-                isLoggedIn={this.state.isLoggedIn}
-                handleClose={this.handleClose}
-                handleOpen={this.handleOpen}
-                open={this.state.open}
-              />
               <React.Fragment>
-              <Route path="/" component={Landing} exact/>
+              <Route 
+                path="/" 
+                render={props => (
+                  <Landing
+                    {...props}
+                    handleTabChange={this.handleTabChange}
+                    handleLogOut={this.handleLogOut}
+                    tabState={this.state.tabState}
+                    handleChange={this.handleChange}
+                    handleSignUp={this.handleSignUp}
+                    handleSignIn={this.handleSignIn}
+                    firstName={this.state.firstName}
+                    lastName={this.state.lastName}
+                    email={this.state.email}
+                    password={this.state.password}
+                    validatePassword={this.state.validatePassword}
+                    isLoggedIn={this.state.isLoggedIn}
+                    handleClose={this.handleClose}
+                    handleOpen={this.handleOpen}
+                    open={this.state.open}
+                    />)} exact/>
                 <Route
                   path="/:user"
                   render={props => (
                     <User
                       {...props}
                       isLoggedIn={this.state.isLoggedIn}
-                      email={this.state.email}
                       unauthorizedRedirect={this.unauthorizedRedirect}
+                      handleTabChange={this.handleTabChange}
+                      handleLogOut={this.handleLogOut}
+                      tabState={this.state.tabState}
+                      handleChange={this.handleChange}
+                      handleSignUp={this.handleSignUp}
+                      handleSignIn={this.handleSignIn}
+                      firstName={this.state.firstName}
+                      lastName={this.state.lastName}
+                      email={this.state.email}
+                      password={this.state.password}
+                      validatePassword={this.state.validatePassword}
+                      handleClose={this.handleClose}
+                      handleOpen={this.handleOpen}
+                      open={this.state.open}
                     />
                   )}
                 />
                 {/* If user logs in redirect User otherwise display landing page */}
-                <Route path="/:user/trip-not-found" component={TripNotFound404} />
-                <Route path="/:user/user-not-found" component={UserNotFound404} />
+                
+                <Route 
+                path="/:user/user-not-found" 
+                render={props => (
+                  <UserNotFound404
+                    {...props}
+                    isLoggedIn={this.state.isLoggedIn}
+                    handleTabChange={this.handleTabChange}
+                    handleLogOut={this.handleLogOut}
+                    tabState={this.state.tabState}
+                    handleChange={this.handleChange}
+                    handleSignUp={this.handleSignUp}
+                    handleSignIn={this.handleSignIn}
+                    firstName={this.state.firstName}
+                    lastName={this.state.lastName}
+                    email={this.state.email}
+                    password={this.state.password}
+                    validatePassword={this.state.validatePassword}
+                    handleClose={this.handleClose}
+                    handleOpen={this.handleOpen}
+                    open={this.state.open}/>
+                )}
+                />
               </React.Fragment>
             </CssBaseline>
           </React.Fragment>
-          {/* <DebugRoutes /> */}
         </div>
       </StripeProvider>
     );

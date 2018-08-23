@@ -10,9 +10,6 @@ import Slide from '@material-ui/core/Slide';
 import Zoom from '@material-ui/core/Zoom';
 import { format } from 'date-fns/esm';
 
-// let date = new Date().toISOString().split('T')[0];
-
-
 class TripCreate extends React.Component {
   constructor(props) {
     super(props);
@@ -124,7 +121,6 @@ class TripCreate extends React.Component {
   };
 
   handleSubmit = e => {
-    // e.preventDefault();
     const token = localStorage.getItem('token');
     const { tripName, startDate, endDate, newMarkersArr } = this.state;
     const { email } = this.props;
@@ -224,7 +220,6 @@ class TripCreate extends React.Component {
       this.state.endDate.length > 0;
     return (
       <div className="tripCreateWrapper">
-        {console.log(isEnabled)}
         <Slide direction="down" in={true} mountOnEnter unmountOnExit>
           <TripCreateForm
             tripName={this.state.tripName}
@@ -244,6 +239,8 @@ class TripCreate extends React.Component {
           />
         </Slide>
         <div className="MapWaypointWrapper">
+        <div className="thisISSPARTA">
+
           <Zoom in={true}>
             <Map
               mapOpacity={this.state.mapOpacity}
@@ -253,8 +250,9 @@ class TripCreate extends React.Component {
               newMarkersArr={this.state.newMarkersArr}
               lat={this.state.lat}
               lng={this.state.lng}
-            />
+              />
           </Zoom>
+              </div>
           <Slide direction="left" in={true} mountOnEnter unmountOnExit>
             <WaypointList
 
@@ -267,8 +265,6 @@ class TripCreate extends React.Component {
               tripSaveModal={this.state.tripSaveModal}
               modalFade={this.state.modalFade}
               handleNewWaypoint={this.handleNewWaypoint}
-
-
               disableAddMarker={this.state.disableAddMarker}
               displayMarkerCard={this.state.displayMarkerCard}
               markerAddCard={this.markerAddCard}
@@ -276,7 +272,6 @@ class TripCreate extends React.Component {
               startDate={this.state.startDate}
               endDate={this.state.endDate}
               newMarkersArr={this.state.newMarkersArr}
-
               time={this.state.time}
               eta={this.state.eta}
               handleChange={this.handleChange}

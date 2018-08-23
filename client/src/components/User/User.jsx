@@ -14,7 +14,8 @@ import Snackbar from '@material-ui/core/Snackbar';
 import green from '@material-ui/core/colors/green';
 import { withStyles } from '@material-ui/core/styles';
 import BadUrl404 from '../404/BadUrl404';
-import {testTrip} from '../TripOpen/testData'
+import {testTrip} from '../TripOpen/testData';
+import TripNotFound404 from '../404/TripNotFound404';
 const RestrictedRoute = ({
   component: Component,
   isLoggedIn,
@@ -71,12 +72,13 @@ class User extends React.Component {
       snackbarHorizontal: 'center',
       tripSavedModal: false,
       isTripSaved: true,
-      navRedirect: ''
+      navRedirect: '',
+      mobileOpen: false,
     };
     this.archiveTrip = this.archiveTrip.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     if(this.props.match.params.user === 'aaron@backwood.app') {
       console.log('Test User')
       this.setState({
@@ -130,7 +132,7 @@ class User extends React.Component {
   };
 
   modalContinue = () => {
-    this.setState({ tripSavedModal: false, isTripSaved: true });
+    this.setState({ tripSavedModal: false, isTripSaved: true, mobileOpen: false });
   };
 
   checkIfTripSaved = (e, navLink) => {
@@ -139,16 +141,26 @@ class User extends React.Component {
       e.preventDefault();
       this.tripModalTrue();
     } else {
+      this._checkIfMobileOpen()
       return;
     }
   };
+  handleDrawerToggle = () => {
+    this.setState(state => ({ mobileOpen: !state.mobileOpen }));
+  };
+  _checkIfMobileOpen = () => {
+    if(!this.state.mobileOpen) {
+      return
+    }
+    this.setState({ mobileOpen: false})
+  }
 
   tripModalTrue = () => {
     this.setState({ tripSavedModal: true });
   };
 
   tripModalFalse = () => {
-    this.setState({ tripSavedModal: false });
+    this.setState({ tripSavedModal: false, mobileOpen: false });
   };
 
   archiveTrip(TripId, index) {
@@ -189,30 +201,46 @@ class User extends React.Component {
     //   return <h1>No user</h1>
     // }
     return (
-      <div>
+      <React.Fragment>
         {this.state.noUser ? (
           <Redirect push to={`/${this.props.match.params.user}/user-not-found`} />
         ) : (
-          <div className="mainWrapper globalBackground">
-            <div className="poop">
               <Nav
+                ////////////NAV////////////
                 emailFromUser={this.state.emailFromUser}
                 user={this.props.email}
+                mobileOpen={this.state.mobileOpen}
+                handleDrawerToggle={this.handleDrawerToggle}
                 isLoggedIn={this.props.isLoggedIn}
-                savedTripCheck={this.savedTripCheck}
-                tripModalFalse={this.tripModalFalse}
                 checkIfTripSaved={this.checkIfTripSaved}
+                ////////////SIGN IN/OUT///////////
+                handleTabChange={this.props.handleTabChange}
+                handleLogOut={this.props.handleLogOut}
+                tabState={this.props.tabState}
+                handleChange={this.props.handleChange}
+                handleSignUp={this.props.handleSignUp}
+                handleSignIn={this.props.handleSignIn}
+                firstName={this.props.firstName}
+                lastName={this.props.lastName}
+                email={this.props.email}
+                password={this.props.password}
+                validatePassword={this.props.validatePassword}
+                handleClose={this.props.handleClose}
+                handleOpen={this.props.handleOpen}
+                open={this.props.open}
+                ///////////////MODAL//////////////
+                tripModalFalse={this.tripModalFalse}
                 tripSavedModal={this.state.tripSavedModal}
                 navRedirect={this.state.navRedirect}
-                setSaveTripTrue={this.state.setSaveTripTrue}
                 modalContinue={this.modalContinue}
-              />
+              >
               <Switch>
                 <Route
                   path="/:user"
                   render={props => (
                     <MainTriplist
                       {...props}
+                      hasTrips={this.state.hasTrips}
                       trips={this.state.trips}
                       user={this.props.email}
                       archiveTrip={this.archiveTrip}
@@ -252,12 +280,12 @@ class User extends React.Component {
                   isLoggedIn={this.props.isLoggedIn}
                   unauthorizedRedirect={this.props.unauthorizedRedirect}
                 />
-                <Route path="/:user/trip/:slug" component={TripOpen} exact />
-
+                <Route path="/:user/trip/:slug" component={TripOpen} />
+                <Route path="/:user/trip-not-found" component={TripNotFound404} exact/>
                 <Route component={BadUrl404} />
               </Switch>
-            </div>
-          </div>
+          </Nav>
+       
         )}
         <Snackbar
           anchorOrigin={{
@@ -289,7 +317,7 @@ class User extends React.Component {
             message="Server Cannot Archive Trip!"
           />
         </Snackbar>
-      </div>
+      </React.Fragment>
     );
   }
 }

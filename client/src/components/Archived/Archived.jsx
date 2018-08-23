@@ -45,7 +45,7 @@ const Archived = props => {
     <Fade in={true}>
       <div className="mainTripList">
         <Paper className="noArchivedTripsPaper">
-          <Typography variant="headline">No archived trips!</Typography>
+          <Typography variant="display1">No archived trips!</Typography>
         </Paper>
       </div>
     </Fade>

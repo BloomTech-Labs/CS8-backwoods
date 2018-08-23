@@ -1,13 +1,8 @@
 import React from 'react';
-import Paper from '@material-ui/core/Paper';
 import { Link } from 'react-router-dom';
 import Typography from '@material-ui/core/Typography';
 import Slide from '@material-ui/core/Slide';
 
-
-const bread = {
-  display: 'flex'
-};
 class NavBreadcrumb extends React.Component {
   nextBreadCrumb() {
     let currentLocation = window.location.pathname;
@@ -19,23 +14,23 @@ class NavBreadcrumb extends React.Component {
         <i key={1} className="material-icons">
           keyboard_arrow_right
         </i>,
-        <Typography key={2} className="breadCrumb">
+        <div key={2}>
           {t[t.length - 1]}
-        </Typography>
+        </div>
       ];
     }
   }
   render() {
     return (
     <Slide direction="right" in={true} mountOnEnter unmountOnExit>
-      <Paper className="navBreadcrumb">
-        <div style={bread}>
-          <Typography>
-            <Link to={`/${this.props.user}`}>Home</Link>
+      <React.Fragment>
+        <div style={{display: 'flex'}}>
+          <Typography variant="title" color="inherit" noWrap>
+            <Link to={`/${this.props.user}`} className="navBarLinks" >Home</Link>
           </Typography>
           {this.nextBreadCrumb()}
         </div>
-      </Paper>
+      </React.Fragment>
     </Slide>
     );
   }

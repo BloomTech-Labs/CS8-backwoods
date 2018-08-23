@@ -70,21 +70,14 @@ class WaypointList extends React.Component {
           markSaveModal={this.props.markSaveModal}
           markSaveFade={this.props.markSaveFade}
           noMarkerNameFalseF={this.props.noMarkerNameFalseF}
-
           noMarkersModalFalseF={this.props.noMarkersModalFalseF}
           noMarkersModalOpenF={this.props.noMarkersModalOpenF}
-          // tripSaveModal={this.props.tripSaveModal}
-          // modalFade={this.props.modalFade}
           handleNewWaypoint={this.props.handleNewWaypoint}
-
-
           displayMarkerCard={this.props.displayMarkerCard}
           activateMap={this.props.activateMap}
           lat={this.props.lat}
           startDate={this.props.startDate}
-          endDate={this.props.endDate}
-  
-  
+          endDate={this.props.endDate}  
           handleChange={this.props.handleChange}
           handleDateChange={this.props.handleDateChange}
           handleTimeChange={this.props.handleTimeChange}
@@ -109,17 +102,10 @@ class WaypointList extends React.Component {
         return (
           <WayPoint
             wayPoint={wayPoint}
-            // wayPoint={wayPoint}
             wayPointKey={index}
             key={index}
-
-
-            // handleChange={this.props.handleChange}
-            // handleNewWaypoint={this.props.handleNewWaypoint}
-            // disableAddMarker={this.props.disableAddMarker}
             handleWayPointExpand={this.props.handleWayPointExpand}
             expanded={this.props.expanded}
-            // saveLocationEnabled={this.props.saveLocationEnabled}
           />
         );
       })}
