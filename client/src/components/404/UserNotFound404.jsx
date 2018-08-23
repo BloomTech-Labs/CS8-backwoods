@@ -33,7 +33,7 @@ const UserNotFound404 = (props) => {
         handleOpen={props.handleOpen}
         open={props.open}
       />
-    <div className="hero-image-404">
+    <div className="hero-image-404-5">
       <div className="hero-text">
         <Typography 
           variant="display4"
