@@ -1,9 +1,10 @@
 .noArchivedTripsPaper {
-  height: 270px;
-  width: 280px;
-  padding: 5%;
+  height: 400px;
+  width: 400px;
+  display: flex;
+  justify-content: center;
   align-content: center;
-  text-align: center;
+  align-items: center;
 }
 
 .trip2 {
