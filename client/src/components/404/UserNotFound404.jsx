@@ -2,8 +2,16 @@ import React from 'react';
 import './404.css';
 import Typography from '@material-ui/core/Typography';
 import SignInOut from '../SignInOut/SignInOut';
+import { Redirect } from 'react-router-dom';
 
-const UserNotFound404 = (props) => (
+const UserNotFound404 = (props) => {
+  if (props.isLoggedIn) {
+    <Redirect push to={`/${props.match.params.user}/`} />
+  }
+  return (
+
+  
+
   <div className="Wrapper404">
   <SignInOut
         buttonColor={true}
@@ -25,7 +33,7 @@ const UserNotFound404 = (props) => (
         handleOpen={props.handleOpen}
         open={props.open}
       />
-    <div class="hero-image-404">
+    <div className="hero-image-404">
       <div className="hero-text">
         <Typography 
           variant="display4"
@@ -40,6 +48,7 @@ const UserNotFound404 = (props) => (
       </div>
     </div>
   </div>
-)
+  )
+}
 
 export default UserNotFound404;

@@ -189,6 +189,7 @@ class App extends Component {
                 render={props => (
                   <UserNotFound404
                     {...props}
+                    isLoggedIn={this.state.isLoggedIn}
                     handleTabChange={this.handleTabChange}
                     handleLogOut={this.handleLogOut}
                     tabState={this.state.tabState}
