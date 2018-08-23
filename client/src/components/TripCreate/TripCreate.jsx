@@ -220,7 +220,6 @@ class TripCreate extends React.Component {
       this.state.endDate.length > 0;
     return (
       <div className="tripCreateWrapper">
-        {console.log(isEnabled)}
         <Slide direction="down" in={true} mountOnEnter unmountOnExit>
           <TripCreateForm
             tripName={this.state.tripName}

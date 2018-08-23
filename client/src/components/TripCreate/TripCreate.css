@@ -23,6 +23,7 @@
   padding: 15px 0px 15px 0px;
   display: flex;
   justify-content: space-evenly;
+  max-width: 1540px;
 }
 
 .WaypointListWrapper {
