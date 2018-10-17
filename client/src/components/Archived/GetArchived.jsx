@@ -1,33 +1,8 @@
 import React from "react";
 import axios from "axios";
-import Snackbar from "@material-ui/core/Snackbar";
-import green from "@material-ui/core/colors/green";
-import { withStyles } from "@material-ui/core/styles";
-import MySnackbarContent from "../Snackbar/MySnackbarContent";
 import Archived from "./Archived";
 import API_URL from "../../API_URL";
-
-const styles1 = theme => ({
-  success: {
-    backgroundColor: green[600]
-  },
-  error: {
-    backgroundColor: theme.palette.error.dark
-  },
-  icon: {
-    fontSize: 20
-  },
-  iconVariant: {
-    opacity: 0.9,
-    marginRight: theme.spacing.unit
-  },
-  message: {
-    display: "flex",
-    alignItems: "center"
-  }
-});
-
-const MySnackbarContentWrapper = withStyles(styles1)(MySnackbarContent);
+import ArchivedSnackBar from "../Snackbar/ArchivedSnackBar";
 
 class GetArchived extends React.Component {
   constructor() {
@@ -35,7 +10,6 @@ class GetArchived extends React.Component {
     this.state = {
       trips: [],
       snackbarUnArchive: false,
-      snackbarArchive: false,
       snackbarError: false,
       snackbarVertical: "top",
       snackbarHorizontal: "center",
@@ -62,21 +36,31 @@ class GetArchived extends React.Component {
       });
   }
 
+  handleSnackbarClose = (event, reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    this.setState({ snackbarUnArchive: false });
+    this.setState({ snackbarError: false });
+  };
+
   UnarchiveTrip(TripId, index) {
-    const trips = [...this.state.trips];
+    const { match, getUsersAgain } = this.props;
+    const { trips } = this.state;
+    const tripsCopy = [...trips];
     const token = localStorage.getItem("token");
     const id = TripId;
     axios
       .put(
-        `${API_URL}/${this.props.match.params.user}/archiveTrip`,
-        { id: id, archived: false },
+        `${API_URL}/${match.params.user}/archiveTrip`,
+        { id, archived: false },
         { headers: { authorization: token } }
       )
       .then(res => {
-        trips.splice(index, 1);
-        this.setState({ trips: trips });
+        tripsCopy.splice(index, 1);
+        this.setState({ trips: tripsCopy });
         console.log(res);
-        this.props.getUsersAgain();
+        getUsersAgain();
         this.setState({ snackbarUnArchive: true });
       })
       .catch(err => {
@@ -85,51 +69,19 @@ class GetArchived extends React.Component {
       });
   }
 
-  handleSnackbarClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    this.setState({ snackbarUnArchive: false });
-    this.setState({ snackbarError: false });
-  };
   render() {
+    const { animateList, trips, ...snackbarState } = this.state;
     return (
       <div>
+        <ArchivedSnackBar
+          handleSnackbarClose={this.handleSnackbarClose}
+          {...snackbarState}
+        />
         <Archived
-          animateList={this.state.animateList}
-          trips={this.state.trips}
+          animateList={animateList}
+          trips={trips}
           UnarchiveTrip={this.UnarchiveTrip}
         />
-        <Snackbar
-          anchorOrigin={{
-            vertical: this.state.snackbarVertical,
-            horizontal: this.state.snackbarHorizontal
-          }}
-          open={this.state.snackbarUnArchive}
-          onClose={this.handleSnackbarClose}
-          autoHideDuration={2000}
-        >
-          <MySnackbarContentWrapper
-            onClose={this.handleSnackbarClose}
-            variant="success"
-            message="Trip Unarchived Successfully!"
-          />
-        </Snackbar>
-        <Snackbar
-          anchorOrigin={{
-            vertical: this.state.snackbarVertical,
-            horizontal: this.state.snackbarHorizontal
-          }}
-          open={this.state.snackbarError}
-          onClose={this.handleSnackbarClose}
-          autoHideDuration={2000}
-        >
-          <MySnackbarContentWrapper
-            onClose={this.handleSnackbarClose}
-            variant="error"
-            message="Server Cannot Unarchive Trip!"
-          />
-        </Snackbar>
       </div>
     );
   }
