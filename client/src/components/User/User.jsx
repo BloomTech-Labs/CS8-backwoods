@@ -1,21 +1,22 @@
-import API_URL from "../../API_URL";
 import React from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
+import axios from "axios";
+import Snackbar from "@material-ui/core/Snackbar";
+import green from "@material-ui/core/colors/green";
+import { withStyles } from "@material-ui/core/styles";
 import Nav from "../Nav/Nav";
 import MainTriplist from "../TripList/MainTripList";
 import TripCreate from "../TripCreate/TripCreate";
 import BillingForm from "../Billing/BillingForm";
 import AccountForm from "../Account/AccountForm";
 import GetArchived from "../Archived/GetArchived";
-import axios from "axios";
 import TripOpen from "../TripOpen/TripOpen";
 import MySnackbarContent from "../Snackbar/MySnackbarContent";
-import Snackbar from "@material-ui/core/Snackbar";
-import green from "@material-ui/core/colors/green";
-import { withStyles } from "@material-ui/core/styles";
 import BadUrl404 from "../404/BadUrl404";
 import { testTrip } from "../TripOpen/testData";
 import TripNotFound404 from "../404/TripNotFound404";
+import API_URL from "../../API_URL";
+
 const RestrictedRoute = ({
   component: Component,
   isLoggedIn,
@@ -197,13 +198,6 @@ class User extends React.Component {
   };
 
   render() {
-    // Not working!!!!!!!!!!!!!!
-    // if(this.state.hasTrips === false && this.props.isLoggedIn === false && this.state.noUser === false) {
-    //   return <UserHasNoTrips404/>
-    // }
-    // if(this.state.noUser === false) {
-    //   return <h1>No user</h1>
-    // }
     return (
       <React.Fragment>
         {this.state.noUser ? (

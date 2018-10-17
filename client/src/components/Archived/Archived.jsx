@@ -7,10 +7,11 @@ import "./Archived.css";
 
 const Archived = props => {
   let count = 550;
+  const { trips } = props;
   if (props.trips.length > 0) {
     return (
       <div className="mainTripList">
-        {props.trips.map((trip, index) => {
+        {trips.map((trip, index) => {
           if (index > 0) {
             count += 250;
           } else if (count > 2000) {
