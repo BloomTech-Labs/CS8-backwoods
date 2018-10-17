@@ -1,24 +1,24 @@
-import API_URL from './API_URL';
-import React, { Component } from 'react';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import axios from 'axios';
-import MainSnackbar from './components/Snackbar/MainSnackbar';
-import { Route, withRouter } from 'react-router-dom';
-import Landing from './components/Landing/Landing.jsx';
-import { StripeProvider } from 'react-stripe-elements';
-import User from './components/User/User';
-import UserNotFound404 from './components/404/UserNotFound404';
+import API_URL from "./API_URL";
+import React, { Component } from "react";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import axios from "axios";
+import MainSnackbar from "./components/Snackbar/MainSnackbar";
+import { Route, withRouter } from "react-router-dom";
+import Landing from "./components/Landing/Landing.jsx";
+import { StripeProvider } from "react-stripe-elements";
+import User from "./components/User/User";
+import UserNotFound404 from "./components/404/UserNotFound404";
 
 // CssBaseline is the Material UI built in CSS reset
 class App extends Component {
   constructor() {
     super();
     this.state = {
-      firstName: '',
-      lastName: '',
-      email: '',
-      password: '',
-      validatePassword: '',
+      firstName: "",
+      lastName: "",
+      email: "",
+      password: "",
+      validatePassword: "",
       isLoggedIn: false,
       snackbarOpenSignIn: false,
       snackbarPasswordMismatch: false,
@@ -26,11 +26,11 @@ class App extends Component {
       snackbarOpenSignUpError: false,
       snackbarUserDoesNotExist: false,
       snackbarLogOut: false,
-      snackbarVertical: 'top',
-      snackbarHorizontal: 'center',
+      snackbarVertical: "top",
+      snackbarHorizontal: "center",
       snackbarAuthRedirect: false,
       tabState: 0,
-      open: false,
+      open: false
     };
   }
   handleOpen = () => {
@@ -43,20 +43,23 @@ class App extends Component {
   handleSignIn = e => {
     e.preventDefault();
     const { email, password } = this.state;
-    axios.post(`${API_URL}/login`, { email, password })
+    axios
+      .post(`${API_URL}/login`, { email, password })
       .then(res => {
-        this.setState(
-          { snackbarOpenSignIn: true, open: false, isLoggedIn: true },
-        );
-        localStorage.setItem('token', res.data.token);
-        this.props.history.push(`/${this.state.email}`)
+        this.setState({
+          snackbarOpenSignIn: true,
+          open: false,
+          isLoggedIn: true
+        });
+        localStorage.setItem("token", res.data.token);
+        this.props.history.push(`/${this.state.email}`);
       })
       .catch(error => {
-        if(error.response.status === 423) {
-          console.log('User does not exist')
-          this.setState({ snackbarUserDoesNotExist: true})
+        if (error.response.status === 423) {
+          console.log("User does not exist");
+          this.setState({ snackbarUserDoesNotExist: true });
         } else if (error.response.status === 422) {
-          console.log('Password does not match')
+          console.log("Password does not match");
           this.setState({ snackbarPasswordMismatch: true });
         }
       });
@@ -65,14 +68,15 @@ class App extends Component {
   handleSignUp = e => {
     e.preventDefault();
     const { firstName, lastName, email, password } = this.state;
-    axios.post(`${API_URL}/signup`, { firstName, lastName, email, password })
+    axios
+      .post(`${API_URL}/signup`, { firstName, lastName, email, password })
       .then(res => {
         this.setState({ snackbarOpenSignUp: true, tabState: 1 });
         console.log(res.data);
       })
       .catch(error => {
         this.setState({ snackbarOpenSignUpError: true });
-        console.log('User Already Exists');
+        console.log("User Already Exists");
       });
   };
 
@@ -86,17 +90,17 @@ class App extends Component {
     this.setState({
       isLoggedIn: false,
       tabState: 0,
-      snackbarLogOut: true,
+      snackbarLogOut: true
     });
-    localStorage.removeItem('token');
-    this.props.history.push("/")
+    localStorage.removeItem("token");
+    this.props.history.push("/");
   };
 
   handleSnackbarClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
-    this.setState({ 
+    this.setState({
       snackbarOpenSignIn: false,
       snackbarPasswordMismatch: false,
       snackbarOpenSignUp: false,
@@ -114,8 +118,8 @@ class App extends Component {
       tabState: 1,
       open: true,
       snackbarAuthRedirect: true
-    })
-  }
+    });
+  };
   render() {
     return (
       // test key need to put into config when using production key
@@ -136,27 +140,30 @@ class App extends Component {
             />
             <CssBaseline>
               <React.Fragment>
-              <Route 
-                path="/" 
-                render={props => (
-                  <Landing
-                    {...props}
-                    handleTabChange={this.handleTabChange}
-                    handleLogOut={this.handleLogOut}
-                    tabState={this.state.tabState}
-                    handleChange={this.handleChange}
-                    handleSignUp={this.handleSignUp}
-                    handleSignIn={this.handleSignIn}
-                    firstName={this.state.firstName}
-                    lastName={this.state.lastName}
-                    email={this.state.email}
-                    password={this.state.password}
-                    validatePassword={this.state.validatePassword}
-                    isLoggedIn={this.state.isLoggedIn}
-                    handleClose={this.handleClose}
-                    handleOpen={this.handleOpen}
-                    open={this.state.open}
-                    />)} exact/>
+                <Route
+                  path="/"
+                  render={props => (
+                    <Landing
+                      {...props}
+                      handleTabChange={this.handleTabChange}
+                      handleLogOut={this.handleLogOut}
+                      tabState={this.state.tabState}
+                      handleChange={this.handleChange}
+                      handleSignUp={this.handleSignUp}
+                      handleSignIn={this.handleSignIn}
+                      firstName={this.state.firstName}
+                      lastName={this.state.lastName}
+                      email={this.state.email}
+                      password={this.state.password}
+                      validatePassword={this.state.validatePassword}
+                      isLoggedIn={this.state.isLoggedIn}
+                      handleClose={this.handleClose}
+                      handleOpen={this.handleOpen}
+                      open={this.state.open}
+                    />
+                  )}
+                  exact
+                />
                 <Route
                   path="/:user"
                   render={props => (
@@ -182,28 +189,29 @@ class App extends Component {
                   )}
                 />
                 {/* If user logs in redirect User otherwise display landing page */}
-                
-                <Route 
-                path="/:user/user-not-found" 
-                render={props => (
-                  <UserNotFound404
-                    {...props}
-                    isLoggedIn={this.state.isLoggedIn}
-                    handleTabChange={this.handleTabChange}
-                    handleLogOut={this.handleLogOut}
-                    tabState={this.state.tabState}
-                    handleChange={this.handleChange}
-                    handleSignUp={this.handleSignUp}
-                    handleSignIn={this.handleSignIn}
-                    firstName={this.state.firstName}
-                    lastName={this.state.lastName}
-                    email={this.state.email}
-                    password={this.state.password}
-                    validatePassword={this.state.validatePassword}
-                    handleClose={this.handleClose}
-                    handleOpen={this.handleOpen}
-                    open={this.state.open}/>
-                )}
+
+                <Route
+                  path="/:user/user-not-found"
+                  render={props => (
+                    <UserNotFound404
+                      {...props}
+                      isLoggedIn={this.state.isLoggedIn}
+                      handleTabChange={this.handleTabChange}
+                      handleLogOut={this.handleLogOut}
+                      tabState={this.state.tabState}
+                      handleChange={this.handleChange}
+                      handleSignUp={this.handleSignUp}
+                      handleSignIn={this.handleSignIn}
+                      firstName={this.state.firstName}
+                      lastName={this.state.lastName}
+                      email={this.state.email}
+                      password={this.state.password}
+                      validatePassword={this.state.validatePassword}
+                      handleClose={this.handleClose}
+                      handleOpen={this.handleOpen}
+                      open={this.state.open}
+                    />
+                  )}
                 />
               </React.Fragment>
             </CssBaseline>
