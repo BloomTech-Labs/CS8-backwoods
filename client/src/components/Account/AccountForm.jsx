@@ -1,5 +1,6 @@
-import API_URL from "../../API_URL";
 import React from "react";
+import axios from "axios";
+
 import {
   withStyles,
   MuiThemeProvider,
@@ -11,12 +12,13 @@ import TextField from "@material-ui/core/TextField";
 import Icon from "@material-ui/core/Icon";
 import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
-import axios from "axios";
-import MySnackbarContent from "../Snackbar/MySnackbarContent";
 import Snackbar from "@material-ui/core/Snackbar";
 import green from "@material-ui/core/colors/green";
 import "./Account.css";
-import { Typography } from "../../../node_modules/@material-ui/core";
+import Typography from "@material-ui/core/Typography";
+import API_URL from "../../API_URL";
+import MySnackbarContent from "../Snackbar/MySnackbarContent";
+
 const theme = createMuiTheme({
   palette: {
     primary: green
