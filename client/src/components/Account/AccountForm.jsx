@@ -1,22 +1,22 @@
-import API_URL from '../../API_URL';
-import React from 'react';
+import API_URL from "../../API_URL";
+import React from "react";
 import {
   withStyles,
   MuiThemeProvider,
   createMuiTheme
-} from '@material-ui/core/styles';
-import Fade from '@material-ui/core/Fade';
+} from "@material-ui/core/styles";
+import Fade from "@material-ui/core/Fade";
 
-import TextField from '@material-ui/core/TextField';
-import Icon from '@material-ui/core/Icon';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-import axios from 'axios';
-import MySnackbarContent from '../Snackbar/MySnackbarContent';
-import Snackbar from '@material-ui/core/Snackbar';
-import green from '@material-ui/core/colors/green';
-import './Account.css';
-import { Typography } from '../../../node_modules/@material-ui/core';
+import TextField from "@material-ui/core/TextField";
+import Icon from "@material-ui/core/Icon";
+import Button from "@material-ui/core/Button";
+import Paper from "@material-ui/core/Paper";
+import axios from "axios";
+import MySnackbarContent from "../Snackbar/MySnackbarContent";
+import Snackbar from "@material-ui/core/Snackbar";
+import green from "@material-ui/core/colors/green";
+import "./Account.css";
+import { Typography } from "../../../node_modules/@material-ui/core";
 const theme = createMuiTheme({
   palette: {
     primary: green
@@ -24,15 +24,15 @@ const theme = createMuiTheme({
   overrides: {
     MuiButton: {
       raisedPrimary: {
-        color: 'white'
+        color: "white"
       }
     }
   }
 });
 const styles = theme => ({
   button: {
-    margin: 'auto',
-    textAlign: 'center'
+    margin: "auto",
+    textAlign: "center"
   }
   // textField: {
   //   marginLeft: theme.spacing.unit,
@@ -56,8 +56,8 @@ const styles1 = theme => ({
     marginRight: theme.spacing.unit
   },
   message: {
-    display: 'flex',
-    alignItems: 'center'
+    display: "flex",
+    alignItems: "center"
   }
 });
 
@@ -65,13 +65,13 @@ const MySnackbarContentWrapper = withStyles(styles1)(MySnackbarContent);
 
 class AccountForm extends React.Component {
   state = {
-    email: '',
-    password: '',
-    oldPassword: '',
+    email: "",
+    password: "",
+    oldPassword: "",
     snackbarChange: false,
     snackbarError: false,
-    snackbarVertical: 'top',
-    snackbarHorizontal: 'center'
+    snackbarVertical: "top",
+    snackbarHorizontal: "center"
   };
 
   handleChange = name => event => {
@@ -81,8 +81,9 @@ class AccountForm extends React.Component {
   };
 
   handleSubmit = e => {
+    console.log("in submit");
     e.preventDefault();
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     const { email, password } = this.state;
     axios
       .put(
@@ -92,16 +93,16 @@ class AccountForm extends React.Component {
       )
       .then(res => {
         this.setState({ snackbarChange: true });
-        console.log(res.data);
+        console.log("password changed", res.data);
       })
       .catch(error => {
         this.setState({ snackbarError: true });
-        console.log(error);
+        console.log("error", error);
       });
   };
 
   handleSnackbarClose = (event, reason) => {
-    if (reason === 'clickaway') {
+    if (reason === "clickaway") {
       return;
     }
     this.setState({ snackbarChange: false });
@@ -114,6 +115,7 @@ class AccountForm extends React.Component {
     return (
       <Fade in={true}>
         <div className="accountWrapper">
+          {console.log(this.state)}
           <Paper className="formPaper">
             <Typography variant="headline">Change Password</Typography>
             <form onSubmit={this.handleSubmit} className="accountForm">
@@ -125,7 +127,7 @@ class AccountForm extends React.Component {
                     label="Email"
                     type="email"
                     value={this.state.email}
-                    onChange={this.handleChange('email')}
+                    onChange={this.handleChange("email")}
                     autoComplete="email"
                     // className={classes.textField}
                     margin="normal"
@@ -135,7 +137,7 @@ class AccountForm extends React.Component {
                     // id="password-input"
                     label="Old Password"
                     value={this.state.oldPassword}
-                    onChange={this.handleChange('oldPassword')}
+                    onChange={this.handleChange("oldPassword")}
                     // className={classes.textField}
                     type="password"
                     autoComplete="current-password"
@@ -146,7 +148,7 @@ class AccountForm extends React.Component {
                     // id="password-input"
                     label="New Password"
                     value={this.state.password}
-                    onChange={this.handleChange('password')}
+                    onChange={this.handleChange("password")}
                     // className={classes.textField}
                     type="password"
                     margin="normal"
