@@ -1,10 +1,10 @@
 import React from "react";
 import axios from "axios";
-import Archived from "./Archived";
-import MySnackbarContent from "../Snackbar/MySnackbarContent";
 import Snackbar from "@material-ui/core/Snackbar";
 import green from "@material-ui/core/colors/green";
 import { withStyles } from "@material-ui/core/styles";
+import MySnackbarContent from "../Snackbar/MySnackbarContent";
+import Archived from "./Archived";
 import API_URL from "../../API_URL";
 
 const styles1 = theme => ({
@@ -45,11 +45,12 @@ class GetArchived extends React.Component {
   }
 
   componentWillMount() {
+    const { match } = this.props;
     const token = localStorage.getItem("token");
     axios
       .get(
-        `${API_URL}/${this.props.match.params.user}/getArchivedTrips`,
-        { email: this.props.match.params.user },
+        `${API_URL}/${match.params.user}/getArchivedTrips`,
+        { email: match.params.user },
         { headers: { authorization: token } }
       )
       .then(res => {
