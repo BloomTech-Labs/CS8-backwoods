@@ -1,13 +1,14 @@
-import API_URL from "./API_URL";
 import React, { Component } from "react";
+import { Route, withRouter } from "react-router-dom";
+import { StripeProvider } from "react-stripe-elements";
+
 import CssBaseline from "@material-ui/core/CssBaseline";
 import axios from "axios";
 import MainSnackbar from "./components/Snackbar/MainSnackbar";
-import { Route, withRouter } from "react-router-dom";
-import Landing from "./components/Landing/Landing.jsx";
-import { StripeProvider } from "react-stripe-elements";
+import Landing from "./components/Landing/Landing";
 import User from "./components/User/User";
 import UserNotFound404 from "./components/404/UserNotFound404";
+import API_URL from "./API_URL";
 
 // CssBaseline is the Material UI built in CSS reset
 class App extends Component {
@@ -33,6 +34,7 @@ class App extends Component {
       open: false
     };
   }
+
   handleOpen = () => {
     this.setState({ open: true });
   };
@@ -40,7 +42,9 @@ class App extends Component {
   handleClose = () => {
     this.setState({ open: false });
   };
+
   handleSignIn = e => {
+    const { history } = this.props;
     e.preventDefault();
     const { email, password } = this.state;
     axios
@@ -52,7 +56,7 @@ class App extends Component {
           isLoggedIn: true
         });
         localStorage.setItem("token", res.data.token);
-        this.props.history.push(`/${this.state.email}`);
+        history.push(`/${email}`);
       })
       .catch(error => {
         if (error.response.status === 423) {
@@ -76,7 +80,7 @@ class App extends Component {
       })
       .catch(error => {
         this.setState({ snackbarOpenSignUpError: true });
-        console.log("User Already Exists");
+        console.log(error, "User Already Exists");
       });
   };
 
@@ -87,13 +91,14 @@ class App extends Component {
   };
 
   handleLogOut = () => {
+    const { history } = this.props;
     this.setState({
       isLoggedIn: false,
       tabState: 0,
       snackbarLogOut: true
     });
     localStorage.removeItem("token");
-    this.props.history.push("/");
+    history.push("/");
   };
 
   handleSnackbarClose = (event, reason) => {
@@ -110,9 +115,11 @@ class App extends Component {
       snackbarAuthRedirect: false
     });
   };
+
   handleTabChange = (event, value) => {
     this.setState({ tabState: value });
   };
+
   unauthorizedRedirect = () => {
     this.setState({
       tabState: 1,
@@ -120,23 +127,27 @@ class App extends Component {
       snackbarAuthRedirect: true
     });
   };
+
   render() {
+    const {
+      tabState,
+      firstName,
+      lastName,
+      email,
+      password,
+      validatePassword,
+      isLoggedIn,
+      open,
+      ...snackbarState
+    } = this.state;
     return (
       // test key need to put into config when using production key
       <StripeProvider apiKey="pk_test_UIFQFAQQTuGQzdsoR1LhXtCz">
         <div>
           <React.Fragment>
             <MainSnackbar
-              snackbarOpenSignIn={this.state.snackbarOpenSignIn}
-              snackbarPasswordMismatch={this.state.snackbarPasswordMismatch}
-              snackbarOpenSignUp={this.state.snackbarOpenSignUp}
-              snackbarOpenSignUpError={this.state.snackbarOpenSignUpError}
-              snackbarLogOut={this.state.snackbarLogOut}
+              {...snackbarState}
               handleSnackbarClose={this.handleSnackbarClose}
-              snackbarVertical={this.state.snackbarVertical}
-              snackbarHorizontal={this.state.snackbarHorizontal}
-              snackbarUserDoesNotExist={this.state.snackbarUserDoesNotExist}
-              snackbarAuthRedirect={this.state.snackbarAuthRedirect}
             />
             <CssBaseline>
               <React.Fragment>
@@ -147,19 +158,19 @@ class App extends Component {
                       {...props}
                       handleTabChange={this.handleTabChange}
                       handleLogOut={this.handleLogOut}
-                      tabState={this.state.tabState}
+                      tabState={tabState}
                       handleChange={this.handleChange}
                       handleSignUp={this.handleSignUp}
                       handleSignIn={this.handleSignIn}
-                      firstName={this.state.firstName}
-                      lastName={this.state.lastName}
-                      email={this.state.email}
-                      password={this.state.password}
-                      validatePassword={this.state.validatePassword}
-                      isLoggedIn={this.state.isLoggedIn}
+                      firstName={firstName}
+                      lastName={lastName}
+                      email={email}
+                      password={password}
+                      validatePassword={validatePassword}
+                      isLoggedIn={isLoggedIn}
                       handleClose={this.handleClose}
                       handleOpen={this.handleOpen}
-                      open={this.state.open}
+                      open={open}
                     />
                   )}
                   exact
@@ -169,22 +180,22 @@ class App extends Component {
                   render={props => (
                     <User
                       {...props}
-                      isLoggedIn={this.state.isLoggedIn}
+                      isLoggedIn={isLoggedIn}
                       unauthorizedRedirect={this.unauthorizedRedirect}
                       handleTabChange={this.handleTabChange}
                       handleLogOut={this.handleLogOut}
-                      tabState={this.state.tabState}
+                      tabState={tabState}
                       handleChange={this.handleChange}
                       handleSignUp={this.handleSignUp}
                       handleSignIn={this.handleSignIn}
-                      firstName={this.state.firstName}
-                      lastName={this.state.lastName}
-                      email={this.state.email}
-                      password={this.state.password}
-                      validatePassword={this.state.validatePassword}
+                      firstName={firstName}
+                      lastName={lastName}
+                      email={email}
+                      password={password}
+                      validatePassword={validatePassword}
                       handleClose={this.handleClose}
                       handleOpen={this.handleOpen}
-                      open={this.state.open}
+                      open={open}
                     />
                   )}
                 />
@@ -195,21 +206,21 @@ class App extends Component {
                   render={props => (
                     <UserNotFound404
                       {...props}
-                      isLoggedIn={this.state.isLoggedIn}
+                      isLoggedIn={isLoggedIn}
                       handleTabChange={this.handleTabChange}
                       handleLogOut={this.handleLogOut}
-                      tabState={this.state.tabState}
+                      tabState={tabState}
                       handleChange={this.handleChange}
                       handleSignUp={this.handleSignUp}
                       handleSignIn={this.handleSignIn}
-                      firstName={this.state.firstName}
-                      lastName={this.state.lastName}
-                      email={this.state.email}
-                      password={this.state.password}
-                      validatePassword={this.state.validatePassword}
+                      firstName={firstName}
+                      lastName={lastName}
+                      email={email}
+                      password={password}
+                      validatePassword={validatePassword}
                       handleClose={this.handleClose}
                       handleOpen={this.handleOpen}
-                      open={this.state.open}
+                      open={open}
                     />
                   )}
                 />
