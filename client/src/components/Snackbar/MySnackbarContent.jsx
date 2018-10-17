@@ -43,8 +43,8 @@ const MySnackbarContent = props => {
 };
 
 MySnackbarContent.propTypes = {
-  classes: PropTypes.object.isRequired,
-  className: PropTypes.string,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  // className: PropTypes.string,
   message: PropTypes.node.isRequired,
   onClose: PropTypes.func.isRequired,
   variant: PropTypes.oneOf(["success", "error"]).isRequired
