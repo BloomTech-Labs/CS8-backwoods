@@ -1,9 +1,9 @@
-import React from 'react';
-import SingleAchived from './SingleAchived';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import Fade from '@material-ui/core/Fade';
-import './Archived.css';
+import React from "react";
+import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
+import Fade from "@material-ui/core/Fade";
+import SingleAchived from "./SingleAchived";
+import "./Archived.css";
 
 const Archived = props => {
   let count = 550;
@@ -42,14 +42,13 @@ const Archived = props => {
     );
   } else {
     return (
-    <Fade in={true}>
-      <div className="mainTripList">
-        <Paper className="noArchivedTripsPaper">
-          <Typography variant="display1">No archived trips!</Typography>
-        </Paper>
-      </div>
-    </Fade>
-    
+      <Fade in={true}>
+        <div className="mainTripList">
+          <Paper className="noArchivedTripsPaper">
+            <Typography variant="display1">No archived trips!</Typography>
+          </Paper>
+        </div>
+      </Fade>
     );
   }
 };
