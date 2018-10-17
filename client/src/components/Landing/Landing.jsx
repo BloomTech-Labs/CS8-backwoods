@@ -33,7 +33,7 @@ const Landing = props => (
           <li className="listItem">
             <img src={bullets} className="bullets" alt="bullet" /> Save your
             trips and share them with friends and family with your own personal
-            URL so they know you're safe.
+            URL so they know you&apos;re safe.
           </li>
           <li className="listItem">
             <img src={bullets} className="bullets" alt="bullet" /> Customize
@@ -41,7 +41,8 @@ const Landing = props => (
           </li>
           <li className="listItem">
             <img src={bullets} className="bullets" alt="bullet" /> Add trips to
-            the archive when you're done and build up a log of all your travels
+            the archive when you&apos;re done and build up a log of all your
+            travels
           </li>
           <li className="listItem">
             <img src={bullets} className="bullets" alt="bullet" />
