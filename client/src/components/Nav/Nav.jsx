@@ -25,31 +25,23 @@ import styles from "./Nav-M-UI-Styles";
 const fade = true;
 
 const Nav = props => {
-  const { classes, theme } = props; // Materail-UI
   const {
+    classes,
+    theme,
     user,
     emailFromUser,
     mobileOpen,
     handleDrawerToggle,
     checkIfTripSaved,
-    isLoggedIn
-  } = props; // NAV
-  const {
-    handleTabChange,
-    handleLogOut,
-    tabState,
-    handleChange,
-    handleSignUp,
-    handleSignIn,
-    firstName,
-    lastName,
-    email,
-    password,
-    validatePassword,
-    handleClose,
-    handleOpen,
-    open
-  } = props; //sign IN/out
+    isLoggedIn,
+    tripSavedModal,
+    tripModalFalse,
+    navRedirect,
+    modalContinue,
+    children,
+    ...rest
+  } = props;
+
   const isUser = user ? user : emailFromUser;
   const drawer = (
     <div>
@@ -144,21 +136,8 @@ const Nav = props => {
           <SignInOut
             buttonVariant="flat"
             styleName="signInOutMain"
-            handleTabChange={handleTabChange}
-            handleLogOut={handleLogOut}
-            tabState={tabState}
-            handleChange={handleChange}
-            handleSignUp={handleSignUp}
-            handleSignIn={handleSignIn}
-            firstName={firstName}
-            lastName={lastName}
-            email={email}
-            password={password}
-            validatePassword={validatePassword}
             isLoggedIn={isLoggedIn}
-            handleClose={handleClose}
-            handleOpen={handleOpen}
-            open={open}
+            {...rest}
           />
         </Toolbar>
       </AppBar>
@@ -193,22 +172,21 @@ const Nav = props => {
       </Hidden>
       <main className={classes.content} id="globalBackground">
         <div className={classes.toolbar} />
-        {props.children}
+        {children}
       </main>
       <ModalTripSave
-        tripSavedModal={props.tripSavedModal}
-        tripModalFalse={props.tripModalFalse}
-        navRedirect={props.navRedirect}
-        modalContinue={props.modalContinue}
+        tripSavedModal={tripSavedModal}
+        tripModalFalse={tripModalFalse}
+        navRedirect={navRedirect}
+        modalContinue={modalContinue}
       />
     </div>
   );
 };
 
 Nav.propTypes = {
-  classes: PropTypes.object.isRequired,
-  theme: PropTypes.object.isRequired,
-
+  classes: PropTypes.instanceOf(Object).isRequired,
+  theme: PropTypes.instanceOf(Object).isRequired,
   user: PropTypes.string.isRequired,
   emailFromUser: PropTypes.string.isRequired,
   mobileOpen: PropTypes.bool.isRequired,
