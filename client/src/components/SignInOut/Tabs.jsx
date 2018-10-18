@@ -1,18 +1,17 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import Paper from '@material-ui/core/Paper';
-import Tabs from '@material-ui/core/Tabs';
-import Tab from '@material-ui/core/Tab';
-import Typography from '@material-ui/core/Typography';
-import SignInForm from './SignInForm.jsx';
-import SignUpForm from './SignUpForm.jsx';
-import green from '@material-ui/core/colors/green';
-
+import React from "react";
+import PropTypes from "prop-types";
+import Paper from "@material-ui/core/Paper";
+import Tabs from "@material-ui/core/Tabs";
+import Tab from "@material-ui/core/Tab";
+import green from "@material-ui/core/colors/green";
+import Typography from "@material-ui/core/Typography";
 import {
   withStyles,
   MuiThemeProvider,
   createMuiTheme
-} from '@material-ui/core/styles';
+} from "@material-ui/core/styles";
+import SignInForm from "./SignInForm";
+import SignUpForm from "./SignUpForm";
 
 const theme = createMuiTheme({
   palette: {
@@ -21,7 +20,7 @@ const theme = createMuiTheme({
   overrides: {
     MuiButton: {
       raisedPrimary: {
-        color: 'white'
+        color: "white"
       }
     }
   }
@@ -33,21 +32,34 @@ const styles = {
 };
 
 const TabContainer = props => {
+  const { children } = props;
   return (
     <Typography component="div" style={{ padding: 8 * 3 }}>
-      {props.children}
+      {children}
     </Typography>
   );
 };
 const CenteredTabs = props => {
-  const { classes } = props;
+  const {
+    classes,
+    tabState,
+    handleChange,
+    handleTabChange,
+    handleSignUp,
+    handleSignIn,
+    firstName,
+    lastName,
+    email,
+    password,
+    validatePassword
+  } = props;
 
   return (
     <MuiThemeProvider theme={theme}>
       <Paper className={classes.root}>
         <Tabs
-          value={props.tabState}
-          onChange={props.handleTabChange}
+          value={tabState}
+          onChange={handleTabChange}
           indicatorColor="primary"
           textColor="primary"
           centered
@@ -56,23 +68,23 @@ const CenteredTabs = props => {
           <Tab label="Sign In" />
         </Tabs>
         <TabContainer>
-          {props.tabState === 0 && (
+          {tabState === 0 && (
             <SignUpForm
-              handleChange={props.handleChange}
-              handleSignUp={props.handleSignUp}
-              firstName={props.firstName}
-              lastName={props.lastName}
-              email={props.email}
-              password={props.password}
-              validatePassword={props.validatePassword}
+              handleChange={handleChange}
+              handleSignUp={handleSignUp}
+              firstName={firstName}
+              lastName={lastName}
+              email={email}
+              password={password}
+              validatePassword={validatePassword}
             />
           )}
-          {props.tabState === 1 && (
+          {tabState === 1 && (
             <SignInForm
-              handleChange={props.handleChange}
-              handleSignIn={props.handleSignIn}
-              email={props.email}
-              password={props.password}
+              handleChange={handleChange}
+              handleSignIn={handleSignIn}
+              email={email}
+              password={password}
             />
           )}
         </TabContainer>
@@ -82,7 +94,21 @@ const CenteredTabs = props => {
 };
 
 CenteredTabs.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.instanceOf(Object).isRequired,
+  tabState: PropTypes.number.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleSignIn: PropTypes.func.isRequired,
+  handleSignUp: PropTypes.func.isRequired,
+  handleTabChange: PropTypes.func.isRequired,
+  firstName: PropTypes.string.isRequired,
+  lastName: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  validatePassword: PropTypes.string.isRequired,
+  email: PropTypes.string.isRequired
+};
+
+TabContainer.propTypes = {
+  children: PropTypes.node.isRequired
 };
 
 export default withStyles(styles)(CenteredTabs);
