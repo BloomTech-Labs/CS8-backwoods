@@ -45,7 +45,10 @@ class CheckoutForm extends Component {
     const { ...snackbarState } = this.state;
     return (
       <Paper className="checkoutForm">
-        <BillingSnackbar {...snackbarState} />
+        <BillingSnackbar
+          {...snackbarState}
+          handleSnackbarClose={this.handleSnackbarClose}
+        />
         <div className="checkoutName">
           <Typography className="paymentInfo" variant="headline">
             Payment Information

@@ -80,7 +80,8 @@ class User extends React.Component {
   }
 
   componentDidMount() {
-    if (this.props.match.params.user === "aaron@backwood.app") {
+    const { match } = this.props;
+    if (match.params.user === "aaron@backwood.app") {
       console.log("Test User");
       this.setState({
         hasTrips: true,
@@ -90,7 +91,7 @@ class User extends React.Component {
       return;
     } else {
       axios
-        .get(`${API_URL}/${this.props.match.params.user}`)
+        .get(`${API_URL}/${match.params.user}`)
         .then(res => {
           this.setState({ hasTrips: true, trips: res.data.trips });
         })
@@ -107,8 +108,9 @@ class User extends React.Component {
   }
 
   getUsersAgain = () => {
+    const { match, isLoggedIn } = this.props;
     axios
-      .get(`${API_URL}/${this.props.match.params.user}`)
+      .get(`${API_URL}/${match.params.user}`)
       .then(res => {
         if (!res.data) {
           this.setState({ hasTrips: false });
@@ -117,7 +119,7 @@ class User extends React.Component {
         this.setState({ hasTrips: true, trips: res.data.trips });
       })
       .catch(err => {
-        if (!this.props.isLoggedIn) {
+        if (!isLoggedIn) {
           this.setState({ noUser: true });
         }
         console.log(err);
@@ -141,8 +143,9 @@ class User extends React.Component {
   };
 
   checkIfTripSaved = (e, navLink) => {
+    const { isTripSaved } = this.state;
     this.setState({ navRedirect: navLink });
-    if (!this.state.isTripSaved) {
+    if (!isTripSaved) {
       e.preventDefault();
       this.tripModalTrue();
     } else {
@@ -150,9 +153,11 @@ class User extends React.Component {
       return;
     }
   };
+
   handleDrawerToggle = () => {
     this.setState(state => ({ mobileOpen: !state.mobileOpen }));
   };
+
   _checkIfMobileOpen = () => {
     if (!this.state.mobileOpen) {
       return;
@@ -198,23 +203,24 @@ class User extends React.Component {
   };
 
   render() {
+    const { noUser } = this.state;
     return (
       <React.Fragment>
-        {this.state.noUser ? (
+        {noUser ? (
           <Redirect
             push
             to={`/${this.props.match.params.user}/user-not-found`}
           />
         ) : (
           <Nav
-            ////////////NAV////////////
+            // //////////NAV////////// //
             emailFromUser={this.state.emailFromUser}
             user={this.props.email}
             mobileOpen={this.state.mobileOpen}
             handleDrawerToggle={this.handleDrawerToggle}
             isLoggedIn={this.props.isLoggedIn}
             checkIfTripSaved={this.checkIfTripSaved}
-            ////////////SIGN IN/OUT///////////
+            // //////////SIGN IN/OUT///////// //
             handleTabChange={this.props.handleTabChange}
             handleLogOut={this.props.handleLogOut}
             tabState={this.props.tabState}
@@ -229,7 +235,7 @@ class User extends React.Component {
             handleClose={this.props.handleClose}
             handleOpen={this.props.handleOpen}
             open={this.props.open}
-            ///////////////MODAL//////////////
+            // /////////////MODAL//////////// //
             tripModalFalse={this.tripModalFalse}
             tripSavedModal={this.state.tripSavedModal}
             navRedirect={this.state.navRedirect}
