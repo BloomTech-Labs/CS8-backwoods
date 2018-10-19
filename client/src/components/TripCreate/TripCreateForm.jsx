@@ -98,7 +98,6 @@ class TripCreateForm extends React.Component {
                     onChange={handleDateChange("endDate")}
                     animateYearScrolling
                   />
-                  {console.log(this.props)}
                 </div>
                 <Button
                   id="saveTripButton"
