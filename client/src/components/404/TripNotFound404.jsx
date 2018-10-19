@@ -1,6 +1,6 @@
 import React from "react";
-import "./404.css";
 import Typography from "@material-ui/core/Typography";
+import "./404.css";
 
 const TripNotFound404 = () => (
   <div className="BadUrl404">

@@ -1,8 +1,8 @@
 import React from "react";
 import { Redirect } from "react-router-dom";
-import "./404.css";
 import Typography from "@material-ui/core/Typography";
 import SignInOut from "../SignInOut/SignInOut";
+import "./404.css";
 
 const UserNotFound404 = props => {
   const { isLoggedIn, match, ...rest } = props;

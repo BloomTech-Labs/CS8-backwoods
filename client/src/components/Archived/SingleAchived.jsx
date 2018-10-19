@@ -2,12 +2,12 @@ import React from "react";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
-import "./Archived.css";
 import Grow from "@material-ui/core/Grow";
 import Button from "@material-ui/core/Button";
 import green from "@material-ui/core/colors/green";
 import { MuiThemeProvider, createMuiTheme } from "@material-ui/core/styles";
 import MapImg from "../TripList/Google-Maps.jpg";
+import "./Archived.css";
 
 const theme = createMuiTheme({
   palette: {

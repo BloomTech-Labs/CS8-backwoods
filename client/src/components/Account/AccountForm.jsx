@@ -49,7 +49,9 @@ class AccountForm extends React.Component {
     snackbarChange: false,
     snackbarError: false,
     snackbarVertical: "top",
-    snackbarHorizontal: "center"
+    snackbarHorizontal: "center",
+    res: null,
+    error: null
   };
 
   handleChange = name => event => {
@@ -59,7 +61,6 @@ class AccountForm extends React.Component {
   };
 
   handleSubmit = e => {
-    // console.log("in submit");
     e.preventDefault();
     const token = localStorage.getItem("token");
     const { email, password } = this.state;
@@ -70,12 +71,10 @@ class AccountForm extends React.Component {
         { headers: { authorization: token } }
       )
       .then(res => {
-        this.setState({ snackbarChange: true });
-        console.log("password changed", res.data);
+        this.setState({ snackbarChange: true, res });
       })
       .catch(error => {
-        this.setState({ snackbarError: true });
-        console.log("error", error);
+        this.setState({ snackbarError: true, error });
       });
   };
 

@@ -5,8 +5,8 @@ import AddIcon from "@material-ui/icons/Add";
 import Paper from "@material-ui/core/Paper";
 import Typography from "@material-ui/core/Typography";
 import { Link } from "react-router-dom";
-import "./TripList.css";
 import Grow from "@material-ui/core/Grow";
+import "./TripList.css";
 import UserHasNoTrips404 from "../404/UserHasNoTrips404";
 import SingleTrip from "./SingleTrip";
 

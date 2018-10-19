@@ -9,7 +9,6 @@ import {
 import Modal from "@material-ui/core/Modal";
 import Button from "@material-ui/core/Button";
 import Tabs from "./Tabs";
-// import green from '@material-ui/core/colors/green';
 import "./SignInOut.css";
 
 const theme1 = createMuiTheme({

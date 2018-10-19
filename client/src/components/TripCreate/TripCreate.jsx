@@ -2,7 +2,6 @@ import React from "react";
 import PropTypes from "prop-types";
 import slugify from "slugify";
 import axios from "axios";
-import "./TripCreate.css";
 import Slide from "@material-ui/core/Slide";
 import Zoom from "@material-ui/core/Zoom";
 import { format } from "date-fns/esm";
@@ -10,6 +9,7 @@ import TripCreateForm from "./TripCreateForm";
 import Map from "./Map";
 import API_URL from "../../API_URL";
 import WaypointList from "./WaypointList";
+import "./TripCreate.css";
 
 class TripCreate extends React.Component {
   constructor(props) {

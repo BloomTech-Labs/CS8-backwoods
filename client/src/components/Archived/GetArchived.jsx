@@ -13,7 +13,11 @@ class GetArchived extends React.Component {
       snackbarError: false,
       snackbarVertical: "top",
       snackbarHorizontal: "center",
-      animateList: true
+      animateList: true,
+      resGet: null,
+      errorGet: null,
+      resArchive: null,
+      errorArchive: null
     };
     this.UnarchiveTrip = this.UnarchiveTrip.bind(this);
   }
@@ -28,11 +32,10 @@ class GetArchived extends React.Component {
         { headers: { authorization: token } }
       )
       .then(res => {
-        this.setState({ trips: res.data.trips });
-        console.log(res);
+        this.setState({ trips: res.data.trips, resGet: res });
       })
       .catch(error => {
-        console.log(error);
+        this.setState({ errorGet: error });
       });
   }
 
@@ -59,13 +62,11 @@ class GetArchived extends React.Component {
       .then(res => {
         tripsCopy.splice(index, 1);
         this.setState({ trips: tripsCopy });
-        console.log(res);
         getUsersAgain();
-        this.setState({ snackbarUnArchive: true });
+        this.setState({ snackbarUnArchive: true, resArchive: res });
       })
       .catch(err => {
-        console.log(err);
-        this.setState({ snackbarError: true });
+        this.setState({ snackbarError: true, errorArchive: err });
       });
   }
 
