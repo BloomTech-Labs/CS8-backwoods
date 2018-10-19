@@ -28,14 +28,15 @@ const theme = createMuiTheme({
 });
 class TripCreateForm extends React.Component {
   componentDidMount() {
+    const { tripsfromUserName } = this.props;
     ValidatorForm.addValidationRule("tripExists", value => {
-      if (this.props.tripsfromUserName.length === 0) {
+      if (tripsfromUserName.length === 0) {
         return true;
       }
       function doesAnyMatch(currentValue) {
         return value.toLowerCase() !== currentValue.toLowerCase();
       }
-      if (this.props.tripsfromUserName.every(doesAnyMatch)) {
+      if (tripsfromUserName.every(doesAnyMatch)) {
         return true;
       }
       return false;
@@ -138,10 +139,14 @@ TripCreateForm.propTypes = {
   isEnabled: PropTypes.bool.isRequired,
   fireRedirect: PropTypes.bool.isRequired,
   tripName: PropTypes.string.isRequired,
-  email: PropTypes.string.isRequired
-  // Sometimes these props are strings and sometimes they are Dates ?!?
-  // startDate: PropTypes.instanceOf(Date).isRequired,
-  // endDate: PropTypes.instanceOf(Date).isRequired
+  email: PropTypes.string.isRequired,
+  tripsfromUserName: PropTypes.instanceOf(Array).isRequired,
+  startDate: PropTypes.oneOfType([
+    PropTypes.string,
+    PropTypes.instanceOf(Object)
+  ]).isRequired,
+  endDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Object)])
+    .isRequired
 };
 
 export default withStyles(styles)(TripCreateForm);

@@ -146,7 +146,8 @@ class TripCreate extends React.Component {
         const tripId = res.data.id;
         const markersArr = [...newMarkersArr];
         markersArr.forEach(item => {
-          item.tripId = tripId;
+          const newItem = item;
+          newItem.tripId = tripId;
         });
         return axios.post(
           `${API_URL}/createMarker`,
