@@ -60,10 +60,10 @@ class App extends Component {
       })
       .catch(error => {
         if (error.response.status === 423) {
-          console.log("User does not exist");
+          // User does not exist
           this.setState({ snackbarUserDoesNotExist: true });
         } else if (error.response.status === 422) {
-          console.log("Password does not match");
+          // Password does not match
           this.setState({ snackbarPasswordMismatch: true });
         }
       });
@@ -75,12 +75,11 @@ class App extends Component {
     axios
       .post(`${API_URL}/signup`, { firstName, lastName, email, password })
       .then(res => {
-        this.setState({ snackbarOpenSignUp: true, tabState: 1 });
-        console.log(res.data);
+        this.setState({ snackbarOpenSignUp: true, tabState: 1, res });
       })
       .catch(error => {
-        this.setState({ snackbarOpenSignUpError: true });
-        console.log(error, "User Already Exists");
+        this.setState({ snackbarOpenSignUpError: true, error });
+        // "User Already Exists
       });
   };
 

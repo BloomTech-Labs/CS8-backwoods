@@ -42,7 +42,7 @@ const Nav = props => {
     ...rest
   } = props;
 
-  const isUser = user ? user : emailFromUser;
+  const isUser = user || emailFromUser;
   const drawer = (
     <div>
       <div className={classes.toolbar} />

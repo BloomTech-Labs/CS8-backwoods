@@ -32,13 +32,10 @@ class TripCreate extends React.Component {
       disableRemoveMarker: true,
       expanded: null,
       tripSaveModal: false,
-
       modalFade: false,
       tripsfromUserName: [],
-
       markSaveModal: false,
       markSaveFade: false,
-
       eta: new Date(),
       time: new Date(),
       disableAddMarker: false,

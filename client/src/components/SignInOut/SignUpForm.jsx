@@ -40,10 +40,10 @@ const styles = theme => ({
 });
 
 class SignUpForm extends React.Component {
-  // can't destructor password from props in componentWillMount
-  componentWillMount() {
+  componentWillReceiveProps() {
+    const { password } = this.props;
     ValidatorForm.addValidationRule("isPasswordMatch", value => {
-      if (value !== this.props.password) {
+      if (value !== password) {
         return false;
       }
       return true;
