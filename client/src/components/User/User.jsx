@@ -19,8 +19,8 @@ const RestrictedRoute = ({
   isLoggedIn,
   unauthorizedRedirect,
   ...rest
-}) => {
-  return isLoggedIn ? (
+}) =>
+  isLoggedIn ? (
     <Route {...rest} render={props => <Component {...props} {...rest} />} />
   ) : (
     <div>
@@ -28,27 +28,22 @@ const RestrictedRoute = ({
       <Redirect to="/" />
     </div>
   );
-};
 
 class User extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      noUser: false,
-      emailFromUser: "",
-      trips: [],
-      hasTrips: false,
-      snackbarArchive: false,
-      snackbarError: false,
-      snackbarVertical: "top",
-      snackbarHorizontal: "center",
-      tripSavedModal: false,
-      isTripSaved: true,
-      navRedirect: "",
-      mobileOpen: false
-    };
-    this.archiveTrip = this.archiveTrip.bind(this);
-  }
+  state = {
+    noUser: false,
+    emailFromUser: "",
+    trips: [],
+    hasTrips: false,
+    snackbarArchive: false,
+    snackbarError: false,
+    snackbarVertical: "top",
+    snackbarHorizontal: "center",
+    tripSavedModal: false,
+    isTripSaved: true,
+    navRedirect: "",
+    mobileOpen: false
+  };
 
   componentDidMount() {
     const { match } = this.props;
@@ -60,7 +55,6 @@ class User extends React.Component {
         trips: testTrip,
         noUser: false
       });
-      return;
     } else {
       axios
         .get(`${API_URL}/${match.params.user}`)
@@ -122,7 +116,6 @@ class User extends React.Component {
       this.tripModalTrue();
     } else {
       this._checkIfMobileOpen();
-      return;
     }
   };
 
@@ -154,7 +147,7 @@ class User extends React.Component {
     this.setState({ snackbarError: false });
   };
 
-  archiveTrip(TripId, index) {
+  archiveTrip = (TripId, index) => {
     const { trips } = this.state;
     const { match } = this.props;
     const token = localStorage.getItem("token");
@@ -174,7 +167,7 @@ class User extends React.Component {
         console.log(err);
         this.setState({ snackbarError: true });
       });
-  }
+  };
 
   render() {
     const {
