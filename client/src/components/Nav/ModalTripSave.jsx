@@ -63,9 +63,12 @@ const ModalTripSave = props => {
 ModalTripSave.propTypes = {
   modalContinue: PropTypes.func.isRequired,
   tripModalFalse: PropTypes.func.isRequired,
-  tripSavedModal: PropTypes.bool.isRequired,
-  navRedirect: PropTypes.string.isRequired,
+  tripSavedModal: PropTypes.bool,
+  navRedirect: PropTypes.string,
   classes: PropTypes.instanceOf(Object).isRequired
 };
-
+ModalTripSave.defaultProps = {
+  tripSavedModal: false,
+  navRedirect: false
+};
 export default withStyles(styles)(ModalTripSave);

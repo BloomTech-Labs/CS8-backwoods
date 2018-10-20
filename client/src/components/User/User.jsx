@@ -1,9 +1,6 @@
 import React from "react";
 import { Route, Redirect, Switch } from "react-router-dom";
 import axios from "axios";
-import Snackbar from "@material-ui/core/Snackbar";
-import green from "@material-ui/core/colors/green";
-import { withStyles } from "@material-ui/core/styles";
 import Nav from "../Nav/Nav";
 import MainTriplist from "../TripList/MainTripList";
 import TripCreate from "../TripCreate/TripCreate";
@@ -11,11 +8,11 @@ import BillingForm from "../Billing/BillingForm";
 import AccountForm from "../Account/AccountForm";
 import GetArchived from "../Archived/GetArchived";
 import TripOpen from "../TripOpen/TripOpen";
-import MySnackbarContent from "../Snackbar/MySnackbarContent";
 import BadUrl404 from "../404/BadUrl404";
 import { testTrip } from "../TripOpen/testData";
 import TripNotFound404 from "../404/TripNotFound404";
 import API_URL from "../../API_URL";
+import UserSnackbar from "../Snackbar/UserSnackbar";
 
 const RestrictedRoute = ({
   component: Component,
@@ -33,39 +30,13 @@ const RestrictedRoute = ({
   );
 };
 
-const styles1 = theme => ({
-  success: {
-    backgroundColor: green[600]
-  },
-  error: {
-    backgroundColor: theme.palette.error.dark
-  },
-  icon: {
-    fontSize: 20
-  },
-  iconVariant: {
-    opacity: 0.9,
-    marginRight: theme.spacing.unit
-  },
-  message: {
-    display: "flex",
-    alignItems: "center"
-  }
-});
-
-const MySnackbarContentWrapper = withStyles(styles1)(MySnackbarContent);
-
 class User extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       noUser: false,
-      error: false,
       emailFromUser: this.props.match.params.user,
       trips: [],
-      tripName: "",
-      startDate: "",
-      endDate: "",
       hasTrips: false,
       snackbarArchive: false,
       snackbarError: false,
@@ -203,42 +174,70 @@ class User extends React.Component {
   };
 
   render() {
-    const { noUser } = this.state;
+    const {
+      noUser,
+      emailFromUser,
+      mobileOpen,
+      tripSavedModal,
+      navRedirect,
+      hasTrips,
+      trips,
+      snackbarHorizontal,
+      snackbarVertical,
+      snackbarArchive,
+      snackbarError
+    } = this.state;
+    const {
+      match,
+      email,
+      isLoggedIn,
+      firstName,
+      lastName,
+      handleTabChange,
+      handleLogOut,
+      tabState,
+      handleChange,
+      handleSignUp,
+      handleSignIn,
+      password,
+      validatePassword,
+      handleClose,
+      handleOpen,
+      open,
+      unauthorizedRedirect
+    } = this.props;
     return (
       <React.Fragment>
         {noUser ? (
-          <Redirect
-            push
-            to={`/${this.props.match.params.user}/user-not-found`}
-          />
+          <Redirect push to={`/${match.params.user}/user-not-found`} />
         ) : (
           <Nav
             // //////////NAV////////// //
-            emailFromUser={this.state.emailFromUser}
-            user={this.props.email}
-            mobileOpen={this.state.mobileOpen}
+            emailFromUser={emailFromUser}
+            user={email}
+            mobileOpen={mobileOpen}
             handleDrawerToggle={this.handleDrawerToggle}
-            isLoggedIn={this.props.isLoggedIn}
+            isLoggedIn={isLoggedIn}
             checkIfTripSaved={this.checkIfTripSaved}
             // //////////SIGN IN/OUT///////// //
-            handleTabChange={this.props.handleTabChange}
-            handleLogOut={this.props.handleLogOut}
-            tabState={this.props.tabState}
-            handleChange={this.props.handleChange}
-            handleSignUp={this.props.handleSignUp}
-            handleSignIn={this.props.handleSignIn}
-            firstName={this.props.firstName}
-            lastName={this.props.lastName}
-            email={this.props.email}
-            password={this.props.password}
-            validatePassword={this.props.validatePassword}
-            handleClose={this.props.handleClose}
-            handleOpen={this.props.handleOpen}
-            open={this.props.open}
+            handleTabChange={handleTabChange}
+            handleLogOut={handleLogOut}
+            tabState={tabState}
+            handleChange={handleChange}
+            handleSignUp={handleSignUp}
+            handleSignIn={handleSignIn}
+            firstName={firstName}
+            lastName={lastName}
+            email={email}
+            password={password}
+            validatePassword={validatePassword}
+            handleClose={handleClose}
+            handleOpen={handleOpen}
+            open={open}
             // /////////////MODAL//////////// //
             tripModalFalse={this.tripModalFalse}
-            tripSavedModal={this.state.tripSavedModal}
-            navRedirect={this.state.navRedirect}
+            tripSavedModal={tripSavedModal}
+            navRedirect={navRedirect}
             modalContinue={this.modalContinue}
           >
             <Switch>
@@ -247,11 +246,11 @@ class User extends React.Component {
                 render={props => (
                   <MainTriplist
                     {...props}
-                    hasTrips={this.state.hasTrips}
-                    trips={this.state.trips}
-                    user={this.props.email}
+                    hasTrips={hasTrips}
+                    trips={trips}
+                    user={email}
                     archiveTrip={this.archiveTrip}
-                    isLoggedIn={this.props.isLoggedIn}
+                    isLoggedIn={isLoggedIn}
                     setSaveTripFalse={this.setSaveTripFalse}
                   />
                 )}
@@ -260,32 +259,32 @@ class User extends React.Component {
               <RestrictedRoute
                 path="/:user/create"
                 component={TripCreate}
-                unauthorizedRedirect={this.props.unauthorizedRedirect}
-                isLoggedIn={this.props.isLoggedIn}
+                unauthorizedRedirect={unauthorizedRedirect}
+                isLoggedIn={isLoggedIn}
                 setSaveTripTrue={this.setSaveTripTrue}
-                email={this.props.email}
-                user={this.props.email}
+                email={email}
+                user={email}
                 getUsersAgain={this.getUsersAgain}
-                tripsFromUser={this.state.trips}
+                tripsFromUser={trips}
               />
               <RestrictedRoute
                 path="/:user/archived"
                 component={GetArchived}
-                isLoggedIn={this.props.isLoggedIn}
-                unauthorizedRedirect={this.props.unauthorizedRedirect}
+                isLoggedIn={isLoggedIn}
+                unauthorizedRedirect={unauthorizedRedirect}
                 getUsersAgain={this.getUsersAgain}
               />
               <RestrictedRoute
                 path="/:user/billing"
                 component={BillingForm}
-                isLoggedIn={this.props.isLoggedIn}
-                unauthorizedRedirect={this.props.unauthorizedRedirect}
+                isLoggedIn={isLoggedIn}
+                unauthorizedRedirect={unauthorizedRedirect}
               />
               <RestrictedRoute
                 path="/:user/settings"
                 component={AccountForm}
-                isLoggedIn={this.props.isLoggedIn}
-                unauthorizedRedirect={this.props.unauthorizedRedirect}
+                isLoggedIn={isLoggedIn}
+                unauthorizedRedirect={unauthorizedRedirect}
               />
               <Route path="/:user/trip/:slug" component={TripOpen} />
               <Route
@@ -297,36 +296,13 @@ class User extends React.Component {
             </Switch>
           </Nav>
         )}
-        <Snackbar
-          anchorOrigin={{
-            vertical: this.state.snackbarVertical,
-            horizontal: this.state.snackbarHorizontal
-          }}
-          open={this.state.snackbarArchive}
-          onClose={this.handleSnackbarClose}
-          autoHideDuration={2000}
-        >
-          <MySnackbarContentWrapper
-            onClose={this.handleSnackbarClose}
-            variant="success"
-            message="Trip Archived Successfully!"
-          />
-        </Snackbar>
-        <Snackbar
-          anchorOrigin={{
-            vertical: this.state.snackbarVertical,
-            horizontal: this.state.snackbarHorizontal
-          }}
-          open={this.state.snackbarError}
-          onClose={this.handleSnackbarClose}
-          autoHideDuration={2000}
-        >
-          <MySnackbarContentWrapper
-            onClose={this.handleSnackbarClose}
-            variant="error"
-            message="Server Cannot Archive Trip!"
-          />
-        </Snackbar>
+        <UserSnackbar
+          snackbarHorizontal={snackbarHorizontal}
+          snackbarVertical={snackbarVertical}
+          handleSnackbarClose={this.handleSnackbarClose}
+          snackbarArchive={snackbarArchive}
+          snackbarError={snackbarError}
+        />
       </React.Fragment>
     );
   }
