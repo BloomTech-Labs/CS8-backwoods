@@ -35,7 +35,7 @@ class User extends React.Component {
     super(props);
     this.state = {
       noUser: false,
-      emailFromUser: this.props.match.params.user,
+      emailFromUser: "",
       trips: [],
       hasTrips: false,
       snackbarArchive: false,
@@ -52,6 +52,7 @@ class User extends React.Component {
 
   componentDidMount() {
     const { match } = this.props;
+    this.setState({ emailFromUser: match.params.user });
     if (match.params.user === "aaron@backwood.app") {
       console.log("Test User");
       this.setState({
@@ -130,7 +131,8 @@ class User extends React.Component {
   };
 
   _checkIfMobileOpen = () => {
-    if (!this.state.mobileOpen) {
+    const { mobileOpen } = this.state;
+    if (!mobileOpen) {
       return;
     }
     this.setState({ mobileOpen: false });
@@ -144,27 +146,6 @@ class User extends React.Component {
     this.setState({ tripSavedModal: false, mobileOpen: false });
   };
 
-  archiveTrip(TripId, index) {
-    const trips = [...this.state.trips];
-    const token = localStorage.getItem("token");
-    const id = TripId;
-    axios
-      .put(
-        `${API_URL}/${this.props.match.params.user}/archiveTrip`,
-        { id: id, archived: true },
-        { headers: { authorization: token } }
-      )
-      .then(res => {
-        trips.splice(index, 1);
-        this.setState({ trips: trips, snackbarArchive: true });
-        console.log(res);
-      })
-      .catch(err => {
-        console.log(err);
-        this.setState({ snackbarError: true });
-      });
-  }
-
   handleSnackbarClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
@@ -172,6 +153,28 @@ class User extends React.Component {
     this.setState({ snackbarArchive: false });
     this.setState({ snackbarError: false });
   };
+
+  archiveTrip(TripId, index) {
+    const { trips } = this.state;
+    const { match } = this.props;
+    const token = localStorage.getItem("token");
+    const id = TripId;
+    axios
+      .put(
+        `${API_URL}/${match.params.user}/archiveTrip`,
+        { id, archived: true },
+        { headers: { authorization: token } }
+      )
+      .then(res => {
+        trips.splice(index, 1);
+        this.setState({ trips, snackbarArchive: true });
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+        this.setState({ snackbarError: true });
+      });
+  }
 
   render() {
     const {
