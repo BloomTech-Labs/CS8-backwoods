@@ -2,25 +2,20 @@ import React from "react";
 import axios from "axios";
 import Archived from "./Archived";
 import API_URL from "../../API_URL";
-import ArchivedSnackBar from "../Snackbar/ArchivedSnackBar";
+import Snackbar from "../Snackbar/Snackbar";
 
 class GetArchived extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      trips: [],
-      snackbarUnArchive: false,
-      snackbarError: false,
-      snackbarVertical: "top",
-      snackbarHorizontal: "center",
-      animateList: true,
-      resGet: null,
-      errorGet: null,
-      resArchive: null,
-      errorArchive: null
-    };
-    this.UnarchiveTrip = this.UnarchiveTrip.bind(this);
-  }
+  state = {
+    trips: [],
+    animateList: true,
+    resGet: null,
+    errorGet: null,
+    resArchive: null,
+    errorArchive: null,
+    snackbarVariant: "",
+    snackbarMessage: "",
+    snackbarOpen: false
+  };
 
   componentWillMount() {
     const { match } = this.props;
@@ -43,11 +38,18 @@ class GetArchived extends React.Component {
     if (reason === "clickaway") {
       return;
     }
-    this.setState({ snackbarUnArchive: false });
-    this.setState({ snackbarError: false });
+    this.setState({ snackbarOpen: false });
   };
 
-  UnarchiveTrip(TripId, index) {
+  handleSnackbarOpen = (variant, message) => {
+    this.setState({
+      snackbarVariant: variant,
+      snackbarMessage: message,
+      snackbarOpen: true
+    });
+  };
+
+  UnarchiveTrip = (TripId, index) => {
     const { match, getUsersAgain } = this.props;
     const { trips } = this.state;
     const tripsCopy = [...trips];
@@ -63,18 +65,24 @@ class GetArchived extends React.Component {
         tripsCopy.splice(index, 1);
         this.setState({ trips: tripsCopy });
         getUsersAgain();
-        this.setState({ snackbarUnArchive: true, resArchive: res });
+        this.setState(
+          { resArchive: res },
+          this.handleSnackbarOpen("success", "Trip Uncarchived Successfully!")
+        );
       })
       .catch(err => {
-        this.setState({ snackbarError: true, errorArchive: err });
+        this.setState(
+          { errorArchive: err },
+          this.handleSnackbarOpen("error", "Server cannot unarchive trip!")
+        );
       });
-  }
+  };
 
   render() {
     const { animateList, trips, ...snackbarState } = this.state;
     return (
       <div>
-        <ArchivedSnackBar
+        <Snackbar
           handleSnackbarClose={this.handleSnackbarClose}
           {...snackbarState}
         />

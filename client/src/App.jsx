@@ -4,7 +4,7 @@ import { StripeProvider } from "react-stripe-elements";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 import axios from "axios";
-import MainSnackbar from "./components/Snackbar/MainSnackbar";
+import Snackbar from "./components/Snackbar/Snackbar";
 import Landing from "./components/Landing/Landing";
 import User from "./components/User/User";
 import UserNotFound404 from "./components/404/UserNotFound404";
@@ -21,17 +21,11 @@ class App extends Component {
       password: "",
       validatePassword: "",
       isLoggedIn: false,
-      snackbarOpenSignIn: false,
-      snackbarPasswordMismatch: false,
-      snackbarOpenSignUp: false,
-      snackbarOpenSignUpError: false,
-      snackbarUserDoesNotExist: false,
-      snackbarLogOut: false,
-      snackbarVertical: "top",
-      snackbarHorizontal: "center",
-      snackbarAuthRedirect: false,
       tabState: 0,
-      open: false
+      open: false,
+      snackbarOpen: false,
+      snackbarMessage: "",
+      snackbarVariant: ""
     };
   }
 
@@ -50,21 +44,21 @@ class App extends Component {
     axios
       .post(`${API_URL}/login`, { email, password })
       .then(res => {
-        this.setState({
-          snackbarOpenSignIn: true,
-          open: false,
-          isLoggedIn: true
-        });
+        this.setState(
+          {
+            open: false,
+            isLoggedIn: true
+          },
+          this.handleSnackbarOpen("success", "Logged in successful!")
+        );
         localStorage.setItem("token", res.data.token);
         history.push(`/${email}`);
       })
       .catch(error => {
         if (error.response.status === 423) {
-          // User does not exist
-          this.setState({ snackbarUserDoesNotExist: true });
+          this.handleSnackbarOpen("error", "User does not exist");
         } else if (error.response.status === 422) {
-          // Password does not match
-          this.setState({ snackbarPasswordMismatch: true });
+          this.handleSnackbarOpen("error", "Password does not match");
         }
       });
   };
@@ -75,11 +69,16 @@ class App extends Component {
     axios
       .post(`${API_URL}/signup`, { firstName, lastName, email, password })
       .then(res => {
-        this.setState({ snackbarOpenSignUp: true, tabState: 1, res });
+        this.setState(
+          { tabState: 1, res },
+          this.handleSnackbarOpen("success", "User successfully created!")
+        );
       })
       .catch(error => {
-        this.setState({ snackbarOpenSignUpError: true, error });
-        // "User Already Exists
+        this.setState(
+          { error },
+          this.handleSnackbarOpen("error", "User already exists!")
+        );
       });
   };
 
@@ -91,11 +90,13 @@ class App extends Component {
 
   handleLogOut = () => {
     const { history } = this.props;
-    this.setState({
-      isLoggedIn: false,
-      tabState: 0,
-      snackbarLogOut: true
-    });
+    this.setState(
+      {
+        isLoggedIn: false,
+        tabState: 0
+      },
+      this.handleSnackbarOpen("success", "Logged out successfully!")
+    );
     localStorage.removeItem("token");
     history.push("/");
   };
@@ -105,13 +106,15 @@ class App extends Component {
       return;
     }
     this.setState({
-      snackbarOpenSignIn: false,
-      snackbarPasswordMismatch: false,
-      snackbarOpenSignUp: false,
-      snackbarOpenSignUpError: false,
-      snackbarLogOut: false,
-      snackbarUserDoesNotExist: false,
-      snackbarAuthRedirect: false
+      snackbarOpen: false
+    });
+  };
+
+  handleSnackbarOpen = (variant, message) => {
+    this.setState({
+      snackbarVariant: variant,
+      snackbarMessage: message,
+      snackbarOpen: true
     });
   };
 
@@ -120,11 +123,13 @@ class App extends Component {
   };
 
   unauthorizedRedirect = () => {
-    this.setState({
-      tabState: 1,
-      open: true,
-      snackbarAuthRedirect: true
-    });
+    this.setState(
+      {
+        tabState: 1,
+        open: true
+      },
+      this.handleSnackbarOpen("error", "Please Sign In")
+    );
   };
 
   render() {
@@ -144,7 +149,7 @@ class App extends Component {
       <StripeProvider apiKey="pk_test_UIFQFAQQTuGQzdsoR1LhXtCz">
         <div>
           <React.Fragment>
-            <MainSnackbar
+            <Snackbar
               {...snackbarState}
               handleSnackbarClose={this.handleSnackbarClose}
             />

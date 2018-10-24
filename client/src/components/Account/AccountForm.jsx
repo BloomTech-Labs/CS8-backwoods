@@ -13,7 +13,7 @@ import Button from "@material-ui/core/Button";
 import Paper from "@material-ui/core/Paper";
 import green from "@material-ui/core/colors/green";
 import Typography from "@material-ui/core/Typography";
-import AccountSnackBar from "../Snackbar/AccountSnackBar";
+import Snackbar from "../Snackbar/Snackbar";
 import "./Account.css";
 import API_URL from "../../API_URL";
 
@@ -46,12 +46,11 @@ class AccountForm extends React.Component {
     email: "",
     password: "",
     oldPassword: "",
-    snackbarChange: false,
-    snackbarError: false,
-    snackbarVertical: "top",
-    snackbarHorizontal: "center",
     res: null,
-    error: null
+    error: null,
+    snackbarVariant: "",
+    snackbarMessage: "",
+    snackbarOpen: false
   };
 
   handleChange = name => event => {
@@ -71,19 +70,35 @@ class AccountForm extends React.Component {
         { headers: { authorization: token } }
       )
       .then(res => {
-        this.setState({ snackbarChange: true, res });
+        this.setState(
+          { res },
+          this.handleSnackbarOpen("success", "Changed Password Successfully!")
+        );
       })
       .catch(error => {
-        this.setState({ snackbarError: true, error });
+        this.setState(
+          { error },
+          this.handleSnackbarOpen(
+            "error",
+            "Must Be Logged In To Change Password!"
+          )
+        );
       });
+  };
+
+  handleSnackbarOpen = (variant, message) => {
+    this.setState({
+      snackbarVariant: variant,
+      snackbarMessage: message,
+      snackbarOpen: true
+    });
   };
 
   handleSnackbarClose = (event, reason) => {
     if (reason === "clickaway") {
       return;
     }
-    this.setState({ snackbarChange: false });
-    this.setState({ snackbarError: false });
+    this.setState({ snackbarOpen: false });
   };
 
   render() {
@@ -91,7 +106,7 @@ class AccountForm extends React.Component {
     const { password, oldPassword, email, ...snackbarState } = this.state;
     return (
       <React.Fragment>
-        <AccountSnackBar
+        <Snackbar
           handleSnackbarClose={this.handleSnackbarClose}
           {...snackbarState}
         />

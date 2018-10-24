@@ -12,7 +12,7 @@ import BadUrl404 from "../404/BadUrl404";
 import { testTrip } from "../TripOpen/testData";
 import TripNotFound404 from "../404/TripNotFound404";
 import API_URL from "../../API_URL";
-import UserSnackbar from "../Snackbar/UserSnackbar";
+import Snackbar from "../Snackbar/Snackbar";
 
 const RestrictedRoute = ({
   component: Component,
@@ -35,14 +35,13 @@ class User extends React.Component {
     emailFromUser: "",
     trips: [],
     hasTrips: false,
-    snackbarArchive: false,
-    snackbarError: false,
-    snackbarVertical: "top",
-    snackbarHorizontal: "center",
     tripSavedModal: false,
     isTripSaved: true,
     navRedirect: "",
-    mobileOpen: false
+    mobileOpen: false,
+    snackbarVariant: "",
+    snackbarMessage: "",
+    snackbarOpen: false
   };
 
   componentDidMount() {
@@ -143,8 +142,15 @@ class User extends React.Component {
     if (reason === "clickaway") {
       return;
     }
-    this.setState({ snackbarArchive: false });
-    this.setState({ snackbarError: false });
+    this.setState({ snackbarOpen: false });
+  };
+
+  handleSnackbarOpen = (variant, message) => {
+    this.setState({
+      snackbarVariant: variant,
+      snackbarMessage: message,
+      snackbarOpen: true
+    });
   };
 
   archiveTrip = (TripId, index) => {
@@ -160,12 +166,15 @@ class User extends React.Component {
       )
       .then(res => {
         trips.splice(index, 1);
-        this.setState({ trips, snackbarArchive: true });
+        this.setState(
+          { trips },
+          this.handleSnackbarOpen("success", "Trip Archived Successfully!")
+        );
         console.log(res);
       })
       .catch(err => {
         console.log(err);
-        this.setState({ snackbarError: true });
+        this.handleSnackbarOpen("error", "Server Cannot Archive Trip!");
       });
   };
 
@@ -178,10 +187,9 @@ class User extends React.Component {
       navRedirect,
       hasTrips,
       trips,
-      snackbarHorizontal,
-      snackbarVertical,
-      snackbarArchive,
-      snackbarError
+      snackbarOpen,
+      snackbarMessage,
+      snackbarVariant
     } = this.state;
     const {
       match,
@@ -292,12 +300,11 @@ class User extends React.Component {
             </Switch>
           </Nav>
         )}
-        <UserSnackbar
-          snackbarHorizontal={snackbarHorizontal}
-          snackbarVertical={snackbarVertical}
+        <Snackbar
+          snackbarVariant={snackbarVariant}
+          snackbarMessage={snackbarMessage}
           handleSnackbarClose={this.handleSnackbarClose}
-          snackbarArchive={snackbarArchive}
-          snackbarError={snackbarError}
+          snackbarOpen={snackbarOpen}
         />
       </React.Fragment>
     );

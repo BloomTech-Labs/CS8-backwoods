@@ -3,16 +3,15 @@ import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import { CardElement, injectStripe } from "react-stripe-elements";
 import Typography from "@material-ui/core/Typography";
-import BillingSnackbar from "../Snackbar/BillingSnackbar";
+import Snackbar from "../Snackbar/Snackbar";
 
 class CheckoutForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      snackbarPurchase: false,
-      snackbarError: false,
-      snackbarVertical: "top",
-      snackbarHorizontal: "center"
+      snackbarVariant: "success",
+      snackbarMessage: "",
+      snackbarOpen: true
     };
     this.submit = this.submit.bind(this);
   }
@@ -21,8 +20,15 @@ class CheckoutForm extends Component {
     if (reason === "clickaway") {
       return;
     }
-    this.setState({ snackbarUnArchive: false });
-    this.setState({ snackbarError: false });
+    this.setState({ snackbarOpen: false });
+  };
+
+  handleSnackbarOpen = (variant, message) => {
+    this.setState({
+      snackbarVariant: variant,
+      snackbarMessage: message,
+      snackbarOpen: true
+    });
   };
 
   async submit() {
@@ -35,9 +41,9 @@ class CheckoutForm extends Component {
       body: token.id
     });
     if (response.ok) {
-      this.setState({ snackbarPurchase: true });
+      this.handleSnackbarOpen("success", "Purchase Completed Successfully!");
     } else {
-      this.setState({ snackbarError: true });
+      this.handleSnackbarOpen("error", "Cannot Complete Purchase!");
     }
   }
 
@@ -45,7 +51,7 @@ class CheckoutForm extends Component {
     const { ...snackbarState } = this.state;
     return (
       <Paper className="checkoutForm">
-        <BillingSnackbar
+        <Snackbar
           {...snackbarState}
           handleSnackbarClose={this.handleSnackbarClose}
         />
