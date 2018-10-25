@@ -1,39 +1,21 @@
 import React, { Component } from "react";
+import PropTypes from "prop-types";
 import Paper from "@material-ui/core/Paper";
 import Button from "@material-ui/core/Button";
 import { CardElement, injectStripe } from "react-stripe-elements";
 import Typography from "@material-ui/core/Typography";
 import Snackbar from "../Snackbar/Snackbar";
+import WithSnackbar from "../Snackbar/SnackbarHOC";
 
 class CheckoutForm extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      snackbarVariant: "success",
-      snackbarMessage: "",
-      snackbarOpen: true
-    };
     this.submit = this.submit.bind(this);
   }
 
-  handleSnackbarClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    this.setState({ snackbarOpen: false });
-  };
-
-  handleSnackbarOpen = (variant, message) => {
-    this.setState({
-      snackbarVariant: variant,
-      snackbarMessage: message,
-      snackbarOpen: true
-    });
-  };
-
   async submit() {
     // User clicked submit
-    const { stripe } = this.props;
+    const { stripe, handleSnackbarOpen } = this.props;
     const { token } = await stripe.createToken({ name: "Name" });
     const response = await fetch("/charge", {
       method: "POST",
@@ -41,19 +23,26 @@ class CheckoutForm extends Component {
       body: token.id
     });
     if (response.ok) {
-      this.handleSnackbarOpen("success", "Purchase Completed Successfully!");
+      handleSnackbarOpen("success", "Purchase Completed Successfully!");
     } else {
-      this.handleSnackbarOpen("error", "Cannot Complete Purchase!");
+      handleSnackbarOpen("error", "Cannot Complete Purchase!");
     }
   }
 
   render() {
-    const { ...snackbarState } = this.state;
+    const {
+      snackbarVariant,
+      snackbarMessage,
+      snackbarOpen,
+      handleSnackbarClose
+    } = this.props;
     return (
       <Paper className="checkoutForm">
         <Snackbar
-          {...snackbarState}
-          handleSnackbarClose={this.handleSnackbarClose}
+          snackbarVariant={snackbarVariant}
+          snackbarMessage={snackbarMessage}
+          snackbarOpen={snackbarOpen}
+          handleSnackbarClose={handleSnackbarClose}
         />
         <div className="checkoutName">
           <Typography className="paymentInfo" variant="headline">
@@ -78,4 +67,12 @@ class CheckoutForm extends Component {
   }
 }
 
-export default injectStripe(CheckoutForm);
+CheckoutForm.propTypes = {
+  handleSnackbarOpen: PropTypes.func.isRequired,
+  handleSnackbarClose: PropTypes.func.isRequired,
+  snackbarVariant: PropTypes.string.isRequired,
+  snackbarMessage: PropTypes.string.isRequired,
+  snackbarOpen: PropTypes.bool.isRequired
+};
+
+export default injectStripe(WithSnackbar(CheckoutForm));

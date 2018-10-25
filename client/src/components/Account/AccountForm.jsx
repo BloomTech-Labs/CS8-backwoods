@@ -1,6 +1,6 @@
 import React from "react";
 import axios from "axios";
-
+import PropTypes from "prop-types";
 import {
   withStyles,
   MuiThemeProvider,
@@ -16,6 +16,7 @@ import Typography from "@material-ui/core/Typography";
 import Snackbar from "../Snackbar/Snackbar";
 import "./Account.css";
 import API_URL from "../../API_URL";
+import WithSnackbar from "../Snackbar/SnackbarHOC";
 
 const theme = createMuiTheme({
   palette: {
@@ -45,12 +46,7 @@ class AccountForm extends React.Component {
   state = {
     email: "",
     password: "",
-    oldPassword: "",
-    res: null,
-    error: null,
-    snackbarVariant: "",
-    snackbarMessage: "",
-    snackbarOpen: false
+    oldPassword: ""
   };
 
   handleChange = name => event => {
@@ -63,6 +59,7 @@ class AccountForm extends React.Component {
     e.preventDefault();
     const token = localStorage.getItem("token");
     const { email, password } = this.state;
+    const { handleSnackbarOpen } = this.props;
     axios
       .put(
         `${API_URL}/trips/settings`,
@@ -70,45 +67,31 @@ class AccountForm extends React.Component {
         { headers: { authorization: token } }
       )
       .then(res => {
-        this.setState(
-          { res },
-          this.handleSnackbarOpen("success", "Changed Password Successfully!")
-        );
+        handleSnackbarOpen("success", "Changed Password Successfully!");
+        console.log(res);
       })
       .catch(error => {
-        this.setState(
-          { error },
-          this.handleSnackbarOpen(
-            "error",
-            "Must Be Logged In To Change Password!"
-          )
-        );
+        handleSnackbarOpen("error", "Must Be Logged In To Change Password!");
+        console.log(error);
       });
   };
 
-  handleSnackbarOpen = (variant, message) => {
-    this.setState({
-      snackbarVariant: variant,
-      snackbarMessage: message,
-      snackbarOpen: true
-    });
-  };
-
-  handleSnackbarClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    this.setState({ snackbarOpen: false });
-  };
-
   render() {
-    const { classes } = this.props;
-    const { password, oldPassword, email, ...snackbarState } = this.state;
+    const {
+      classes,
+      handleSnackbarClose,
+      snackbarVariant,
+      snackbarMessage,
+      snackbarOpen
+    } = this.props;
+    const { password, oldPassword, email } = this.state;
     return (
       <React.Fragment>
         <Snackbar
-          handleSnackbarClose={this.handleSnackbarClose}
-          {...snackbarState}
+          handleSnackbarClose={handleSnackbarClose}
+          snackbarVariant={snackbarVariant}
+          snackbarMessage={snackbarMessage}
+          snackbarOpen={snackbarOpen}
         />
         <Fade in>
           <div className="accountWrapper">
@@ -169,4 +152,13 @@ class AccountForm extends React.Component {
   }
 }
 
-export default withStyles(styles)(AccountForm);
+AccountForm.propTypes = {
+  classes: PropTypes.instanceOf(Object).isRequired,
+  handleSnackbarOpen: PropTypes.func.isRequired,
+  handleSnackbarClose: PropTypes.func.isRequired,
+  snackbarVariant: PropTypes.string.isRequired,
+  snackbarMessage: PropTypes.string.isRequired,
+  snackbarOpen: PropTypes.bool.isRequired
+};
+
+export default withStyles(styles)(WithSnackbar(AccountForm));

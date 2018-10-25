@@ -13,6 +13,7 @@ import { testTrip } from "../TripOpen/testData";
 import TripNotFound404 from "../404/TripNotFound404";
 import API_URL from "../../API_URL";
 import Snackbar from "../Snackbar/Snackbar";
+import WithSnackbar from "../Snackbar/SnackbarHOC";
 
 const RestrictedRoute = ({
   component: Component,
@@ -38,10 +39,7 @@ class User extends React.Component {
     tripSavedModal: false,
     isTripSaved: true,
     navRedirect: "",
-    mobileOpen: false,
-    snackbarVariant: "",
-    snackbarMessage: "",
-    snackbarOpen: false
+    mobileOpen: false
   };
 
   componentDidMount() {
@@ -138,24 +136,9 @@ class User extends React.Component {
     this.setState({ tripSavedModal: false, mobileOpen: false });
   };
 
-  handleSnackbarClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    this.setState({ snackbarOpen: false });
-  };
-
-  handleSnackbarOpen = (variant, message) => {
-    this.setState({
-      snackbarVariant: variant,
-      snackbarMessage: message,
-      snackbarOpen: true
-    });
-  };
-
   archiveTrip = (TripId, index) => {
     const { trips } = this.state;
-    const { match } = this.props;
+    const { match, handleSnackbarOpen } = this.props;
     const token = localStorage.getItem("token");
     const id = TripId;
     axios
@@ -168,13 +151,13 @@ class User extends React.Component {
         trips.splice(index, 1);
         this.setState(
           { trips },
-          this.handleSnackbarOpen("success", "Trip Archived Successfully!")
+          handleSnackbarOpen("success", "Trip Archived Successfully!")
         );
         console.log(res);
       })
       .catch(err => {
         console.log(err);
-        this.handleSnackbarOpen("error", "Server Cannot Archive Trip!");
+        handleSnackbarOpen("error", "Server Cannot Archive Trip!");
       });
   };
 
@@ -186,12 +169,13 @@ class User extends React.Component {
       tripSavedModal,
       navRedirect,
       hasTrips,
-      trips,
-      snackbarOpen,
-      snackbarMessage,
-      snackbarVariant
+      trips
     } = this.state;
     const {
+      snackbarOpen,
+      snackbarMessage,
+      snackbarVariant,
+      handleSnackbarClose,
       match,
       email,
       isLoggedIn,
@@ -303,7 +287,7 @@ class User extends React.Component {
         <Snackbar
           snackbarVariant={snackbarVariant}
           snackbarMessage={snackbarMessage}
-          handleSnackbarClose={this.handleSnackbarClose}
+          handleSnackbarClose={handleSnackbarClose}
           snackbarOpen={snackbarOpen}
         />
       </React.Fragment>
@@ -311,4 +295,4 @@ class User extends React.Component {
   }
 }
 
-export default User;
+export default WithSnackbar(User);

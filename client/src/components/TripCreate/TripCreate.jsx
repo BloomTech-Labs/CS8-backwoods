@@ -12,36 +12,33 @@ import WaypointList from "./WaypointList";
 import "./TripCreate.css";
 
 class TripCreate extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      tripName: "",
-      wayPoints: [],
-      newMarkersArr: [],
-      startDate: new Date(),
-      endDate: new Date(),
-      // email: "",
-      fireRedirect: false,
-      markerName: "",
-      mapOpacity: 0.4,
-      lng: null,
-      lat: null,
-      // tripId: "",
-      MarkerCreated: false,
-      saveLocationEnabled: true,
-      disableRemoveMarker: true,
-      expanded: null,
-      tripSaveModal: false,
-      modalFade: false,
-      tripsfromUserName: [],
-      markSaveModal: false,
-      markSaveFade: false,
-      eta: new Date(),
-      time: new Date(),
-      disableAddMarker: false,
-      displayMarkerCard: false
-    };
-  }
+  state = {
+    tripName: "",
+    wayPoints: [],
+    newMarkersArr: [],
+    startDate: new Date(),
+    endDate: new Date(),
+    // email: "",
+    fireRedirect: false,
+    markerName: "",
+    mapOpacity: 0.4,
+    lng: null,
+    lat: null,
+    // tripId: "",
+    MarkerCreated: false,
+    saveLocationEnabled: true,
+    disableRemoveMarker: true,
+    expanded: null,
+    tripSaveModal: false,
+    modalFade: false,
+    tripsfromUserName: [],
+    markSaveModal: false,
+    markSaveFade: false,
+    eta: new Date(),
+    time: new Date(),
+    disableAddMarker: false,
+    displayMarkerCard: false
+  };
 
   componentWillMount() {
     const { tripsFromUser } = this.props;

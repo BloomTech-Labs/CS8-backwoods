@@ -9,6 +9,7 @@ import Landing from "./components/Landing/Landing";
 import User from "./components/User/User";
 import UserNotFound404 from "./components/404/UserNotFound404";
 import API_URL from "./API_URL";
+import WithSnackbar from "./components/Snackbar/SnackbarHOC";
 
 // CssBaseline is the Material UI built in CSS reset
 class App extends Component {
@@ -22,10 +23,7 @@ class App extends Component {
       validatePassword: "",
       isLoggedIn: false,
       tabState: 0,
-      open: false,
-      snackbarOpen: false,
-      snackbarMessage: "",
-      snackbarVariant: ""
+      open: false
     };
   }
 
@@ -38,7 +36,7 @@ class App extends Component {
   };
 
   handleSignIn = e => {
-    const { history } = this.props;
+    const { history, handleSnackbarOpen } = this.props;
     e.preventDefault();
     const { email, password } = this.state;
     axios
@@ -49,36 +47,36 @@ class App extends Component {
             open: false,
             isLoggedIn: true
           },
-          this.handleSnackbarOpen("success", "Logged in successful!")
+          handleSnackbarOpen("success", "Logged in successful!")
         );
         localStorage.setItem("token", res.data.token);
         history.push(`/${email}`);
       })
       .catch(error => {
         if (error.response.status === 423) {
-          this.handleSnackbarOpen("error", "User does not exist");
+          handleSnackbarOpen("error", "User does not exist");
         } else if (error.response.status === 422) {
-          this.handleSnackbarOpen("error", "Password does not match");
+          handleSnackbarOpen("error", "Password does not match");
         }
       });
   };
 
   handleSignUp = e => {
     e.preventDefault();
+    const { handleSnackbarOpen } = this.props;
     const { firstName, lastName, email, password } = this.state;
     axios
       .post(`${API_URL}/signup`, { firstName, lastName, email, password })
       .then(res => {
         this.setState(
-          { tabState: 1, res },
-          this.handleSnackbarOpen("success", "User successfully created!")
+          { tabState: 1 },
+          handleSnackbarOpen("success", "User successfully created!")
         );
+        console.log(res);
       })
       .catch(error => {
-        this.setState(
-          { error },
-          this.handleSnackbarOpen("error", "User already exists!")
-        );
+        handleSnackbarOpen("error", "User already exists!");
+        console.log(error);
       });
   };
 
@@ -89,33 +87,16 @@ class App extends Component {
   };
 
   handleLogOut = () => {
-    const { history } = this.props;
+    const { history, handleSnackbarOpen } = this.props;
     this.setState(
       {
         isLoggedIn: false,
         tabState: 0
       },
-      this.handleSnackbarOpen("success", "Logged out successfully!")
+      handleSnackbarOpen("success", "Logged out successfully!")
     );
     localStorage.removeItem("token");
     history.push("/");
-  };
-
-  handleSnackbarClose = (event, reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    this.setState({
-      snackbarOpen: false
-    });
-  };
-
-  handleSnackbarOpen = (variant, message) => {
-    this.setState({
-      snackbarVariant: variant,
-      snackbarMessage: message,
-      snackbarOpen: true
-    });
   };
 
   handleTabChange = (event, value) => {
@@ -123,12 +104,13 @@ class App extends Component {
   };
 
   unauthorizedRedirect = () => {
+    const { handleSnackbarOpen } = this.props;
     this.setState(
       {
         tabState: 1,
         open: true
       },
-      this.handleSnackbarOpen("error", "Please Sign In")
+      handleSnackbarOpen("error", "Please Sign In")
     );
   };
 
@@ -141,18 +123,15 @@ class App extends Component {
       password,
       validatePassword,
       isLoggedIn,
-      open,
-      ...snackbarState
+      open
     } = this.state;
+    const { ...snackbarState } = this.props;
     return (
       // test key need to put into config when using production key
       <StripeProvider apiKey="pk_test_UIFQFAQQTuGQzdsoR1LhXtCz">
         <div>
           <React.Fragment>
-            <Snackbar
-              {...snackbarState}
-              handleSnackbarClose={this.handleSnackbarClose}
-            />
+            <Snackbar {...snackbarState} />
             <CssBaseline>
               <React.Fragment>
                 <Route
@@ -237,4 +216,4 @@ class App extends Component {
   }
 }
 
-export default withRouter(App);
+export default WithSnackbar(withRouter(App));
