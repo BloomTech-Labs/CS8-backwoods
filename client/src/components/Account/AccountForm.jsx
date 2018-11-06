@@ -1,22 +1,23 @@
-import API_URL from '../../API_URL';
-import React from 'react';
+import React from "react";
+import axios from "axios";
+import PropTypes from "prop-types";
 import {
   withStyles,
   MuiThemeProvider,
   createMuiTheme
-} from '@material-ui/core/styles';
-import Fade from '@material-ui/core/Fade';
+} from "@material-ui/core/styles";
+import Fade from "@material-ui/core/Fade";
+import TextField from "@material-ui/core/TextField";
+import Icon from "@material-ui/core/Icon";
+import Button from "@material-ui/core/Button";
+import Paper from "@material-ui/core/Paper";
+import green from "@material-ui/core/colors/green";
+import Typography from "@material-ui/core/Typography";
+import Snackbar from "../Snackbar/Snackbar";
+import "./Account.css";
+import API_URL from "../../API_URL";
+import WithSnackbar from "../Snackbar/SnackbarHOC";
 
-import TextField from '@material-ui/core/TextField';
-import Icon from '@material-ui/core/Icon';
-import Button from '@material-ui/core/Button';
-import Paper from '@material-ui/core/Paper';
-import axios from 'axios';
-import MySnackbarContent from '../Snackbar/MySnackbarContent';
-import Snackbar from '@material-ui/core/Snackbar';
-import green from '@material-ui/core/colors/green';
-import './Account.css';
-import { Typography } from '../../../node_modules/@material-ui/core';
 const theme = createMuiTheme({
   palette: {
     primary: green
@@ -24,15 +25,15 @@ const theme = createMuiTheme({
   overrides: {
     MuiButton: {
       raisedPrimary: {
-        color: 'white'
+        color: "white"
       }
     }
   }
 });
-const styles = theme => ({
+const styles = () => ({
   button: {
-    margin: 'auto',
-    textAlign: 'center'
+    margin: "auto",
+    textAlign: "center"
   }
   // textField: {
   //   marginLeft: theme.spacing.unit,
@@ -41,37 +42,11 @@ const styles = theme => ({
   // }
 });
 
-const styles1 = theme => ({
-  success: {
-    backgroundColor: green[600]
-  },
-  error: {
-    backgroundColor: theme.palette.error.dark
-  },
-  icon: {
-    fontSize: 20
-  },
-  iconVariant: {
-    opacity: 0.9,
-    marginRight: theme.spacing.unit
-  },
-  message: {
-    display: 'flex',
-    alignItems: 'center'
-  }
-});
-
-const MySnackbarContentWrapper = withStyles(styles1)(MySnackbarContent);
-
 class AccountForm extends React.Component {
   state = {
-    email: '',
-    password: '',
-    oldPassword: '',
-    snackbarChange: false,
-    snackbarError: false,
-    snackbarVertical: 'top',
-    snackbarHorizontal: 'center'
+    email: "",
+    password: "",
+    oldPassword: ""
   };
 
   handleChange = name => event => {
@@ -82,8 +57,9 @@ class AccountForm extends React.Component {
 
   handleSubmit = e => {
     e.preventDefault();
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     const { email, password } = this.state;
+    const { handleSnackbarOpen } = this.props;
     axios
       .put(
         `${API_URL}/trips/settings`,
@@ -91,118 +67,98 @@ class AccountForm extends React.Component {
         { headers: { authorization: token } }
       )
       .then(res => {
-        this.setState({ snackbarChange: true });
-        console.log(res.data);
+        handleSnackbarOpen("success", "Changed Password Successfully!");
+        console.log(res);
       })
       .catch(error => {
-        this.setState({ snackbarError: true });
+        handleSnackbarOpen("error", "Must Be Logged In To Change Password!");
         console.log(error);
       });
   };
 
-  handleSnackbarClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    this.setState({ snackbarChange: false });
-    this.setState({ snackbarError: false });
-  };
-
   render() {
-    const { classes } = this.props;
-
+    const {
+      classes,
+      handleSnackbarClose,
+      snackbarVariant,
+      snackbarMessage,
+      snackbarOpen
+    } = this.props;
+    const { password, oldPassword, email } = this.state;
     return (
-      <Fade in={true}>
-        <div className="accountWrapper">
-          <Paper className="formPaper">
-            <Typography variant="headline">Change Password</Typography>
-            <form onSubmit={this.handleSubmit} className="accountForm">
-              <div className="accountTextFieldWrapper">
-                <MuiThemeProvider theme={theme}>
-                  <TextField
-                    required
-                    id="required"
-                    label="Email"
-                    type="email"
-                    value={this.state.email}
-                    onChange={this.handleChange('email')}
-                    autoComplete="email"
-                    // className={classes.textField}
-                    margin="normal"
-                  />
-                  <TextField
-                    required
-                    // id="password-input"
-                    label="Old Password"
-                    value={this.state.oldPassword}
-                    onChange={this.handleChange('oldPassword')}
-                    // className={classes.textField}
-                    type="password"
-                    autoComplete="current-password"
-                    margin="normal"
-                  />
-                  <TextField
-                    required
-                    // id="password-input"
-                    label="New Password"
-                    value={this.state.password}
-                    onChange={this.handleChange('password')}
-                    // className={classes.textField}
-                    type="password"
-                    margin="normal"
-                  />
-                </MuiThemeProvider>
-              </div>
+      <React.Fragment>
+        <Snackbar
+          handleSnackbarClose={handleSnackbarClose}
+          snackbarVariant={snackbarVariant}
+          snackbarMessage={snackbarMessage}
+          snackbarOpen={snackbarOpen}
+        />
+        <Fade in>
+          <div className="accountWrapper">
+            <Paper className="formPaper">
+              <Typography variant="headline">Change Password</Typography>
+              <form onSubmit={this.handleSubmit} className="accountForm">
+                <div className="accountTextFieldWrapper">
+                  <MuiThemeProvider theme={theme}>
+                    <TextField
+                      required
+                      id="required"
+                      label="Email"
+                      type="email"
+                      value={email}
+                      onChange={this.handleChange("email")}
+                      autoComplete="email"
+                      margin="normal"
+                    />
+                    <TextField
+                      required
+                      label="Old Password"
+                      value={oldPassword}
+                      onChange={this.handleChange("oldPassword")}
+                      type="password"
+                      autoComplete="current-password"
+                      margin="normal"
+                    />
+                    <TextField
+                      required
+                      label="New Password"
+                      value={password}
+                      onChange={this.handleChange("password")}
+                      type="password"
+                      margin="normal"
+                    />
+                  </MuiThemeProvider>
+                </div>
 
-              <div className="accountSubmitWrapper">
-                <MuiThemeProvider theme={theme}>
-                  <Button
-                    variant="contained"
-                    className={classes.button}
-                    type="submit"
-                    color="primary"
-                  >
-                    Submit
-                    <Icon className="accountSubmitIcon">send</Icon>
-                  </Button>
-                </MuiThemeProvider>
-              </div>
-            </form>
-          </Paper>
-          <Snackbar
-            anchorOrigin={{
-              vertical: this.state.snackbarVertical,
-              horizontal: this.state.snackbarHorizontal
-            }}
-            open={this.state.snackbarChange}
-            onClose={this.handleSnackbarClose}
-            autoHideDuration={2000}
-          >
-            <MySnackbarContentWrapper
-              onClose={this.handleSnackbarClose}
-              variant="success"
-              message="Changed Password Successfully!"
-            />
-          </Snackbar>
-          <Snackbar
-            anchorOrigin={{
-              vertical: this.state.snackbarVertical,
-              horizontal: this.state.snackbarHorizontal
-            }}
-            open={this.state.snackbarError}
-            onClose={this.handleSnackbarClose}
-            autoHideDuration={2000}
-          >
-            <MySnackbarContentWrapper
-              onClose={this.handleSnackbarClose}
-              variant="error"
-              message="Must Be Logged In To Change Password!"
-            />
-          </Snackbar>
-        </div>
-      </Fade>
+                <div className="accountSubmitWrapper">
+                  <MuiThemeProvider theme={theme}>
+                    <Button
+                      variant="contained"
+                      className={classes.button}
+                      type="submit"
+                      color="primary"
+                    >
+                      Submit
+                      <Icon className="accountSubmitIcon">send</Icon>
+                    </Button>
+                  </MuiThemeProvider>
+                </div>
+              </form>
+            </Paper>
+          </div>
+        </Fade>
+      </React.Fragment>
     );
   }
 }
 
-export default withStyles(styles)(AccountForm);
+AccountForm.propTypes = {
+  classes: PropTypes.instanceOf(Object).isRequired,
+  handleSnackbarOpen: PropTypes.func.isRequired,
+  handleSnackbarClose: PropTypes.func.isRequired,
+  snackbarVariant: PropTypes.string.isRequired,
+  snackbarMessage: PropTypes.string.isRequired,
+  snackbarOpen: PropTypes.bool.isRequired
+};
+
+export default withStyles(styles)(WithSnackbar(AccountForm));

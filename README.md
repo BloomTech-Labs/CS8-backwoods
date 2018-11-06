@@ -2,16 +2,20 @@
 This Lambda Labs Project is a location based trip planner to keep your family and friends informed of your adventures.
 ## Tech Stack
 React, Express, Node, Postgres
-## Deploy URL [Backwoods](https://backwoods.netlify.com/)
+## Deploy URL [Backwoods](https://www.backwoods.app/)
 ## To run project locally 
 _______________________________
+
+## Known issue
+You must use NPM to install packages for this project. Our Heroku deploy fails if `yarn.lock` files are present in the build. With no lock file a package manager will install the newest dependencies which can cause incompatibility issues. Notably the date picker and maps packages that we are using.
+
 1. Clone repo.
-2. In `/CS8-Backwoods` type `yarn` or `npm i` to install back-end dependencies.
+2. In `/CS8-Backwoods` type `npm i` to install back-end dependencies.
 3. Make sure you have a Postgres DB running on your local machine. [Instructions here](https://devcenter.heroku.com/articles/heroku-postgresql#local-setup)
-4. The `yarn start` or `npm start` command will start back-end server [listening on port 8000](http://localhost:8000/).
+4. The `npm start` command will start back-end server [listening on port 8000](http://localhost:8000/).
 5. Open a new terminal window.
-6. `cd client` type `yarn` or `npm i` to install front-end dependencies.
-7. The `yarn start` or `npm start` command visit site at [localhost:3000](http://localhost:3000/)
+6. `cd client` type `npm i` to install front-end dependencies.
+7. The or `npm start` command visit site at [localhost:3000](http://localhost:3000/)
 
 
 ## Testing Instructions

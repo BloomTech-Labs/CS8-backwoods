@@ -1,16 +1,18 @@
-import React from 'react';
-import SingleAchived from './SingleAchived';
-import Typography from '@material-ui/core/Typography';
-import Paper from '@material-ui/core/Paper';
-import Fade from '@material-ui/core/Fade';
-import './Archived.css';
+import React from "react";
+import PropTypes from "prop-types";
+import Typography from "@material-ui/core/Typography";
+import Paper from "@material-ui/core/Paper";
+import Fade from "@material-ui/core/Fade";
+import SingleAchived from "./SingleAchived";
+import "./Archived.css";
 
 const Archived = props => {
   let count = 550;
-  if (props.trips.length > 0) {
+  const { trips, ...rest } = props;
+  if (trips.length > 0) {
     return (
       <div className="mainTripList">
-        {props.trips.map((trip, index) => {
+        {trips.map((trip, index) => {
           if (index > 0) {
             count += 250;
           } else if (count > 2000) {
@@ -18,40 +20,35 @@ const Archived = props => {
           }
           return (
             <SingleAchived
+              index={index}
               count={count}
-              animateList={props.animateList}
-              key={index}
+              key={trip.id}
               tripName={trip.tripName}
               startDate={trip.startDate}
               endDate={trip.endDate}
               slug={trip.slug}
               email={trip.email}
               id={trip.id}
-              UnarchiveTrip={props.UnarchiveTrip}
-              index={index}
-              // isLoggedIn={this.props.isLoggedIn}
-              snackbarArchive={props.snackbarArchive}
-              snackbarError={props.snackbarError}
-              snackbarVertical={props.snackbarVertical}
-              snackbarHorizontal={props.snackbarHorizontal}
-              handleSnackbarClose={props.handleSnackbarClose}
+              {...rest}
             />
           );
         })}
       </div>
     );
-  } else {
-    return (
-    <Fade in={true}>
+  }
+  return (
+    <Fade in>
       <div className="mainTripList">
         <Paper className="noArchivedTripsPaper">
           <Typography variant="display1">No archived trips!</Typography>
         </Paper>
       </div>
     </Fade>
-    
-    );
-  }
+  );
+};
+
+Archived.propTypes = {
+  trips: PropTypes.instanceOf(Object).isRequired
 };
 
 export default Archived;

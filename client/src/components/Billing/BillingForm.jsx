@@ -1,20 +1,17 @@
-import React from 'react';
-import CheckoutForm from './CheckoutForm.jsx';
-import { Elements } from 'react-stripe-elements';
-import './Billing.css';
-import Fade from '@material-ui/core/Fade';
+import React from "react";
+import { Elements } from "react-stripe-elements";
+import Fade from "@material-ui/core/Fade";
+import CheckoutForm from "./CheckoutForm";
+import "./Billing.css";
 
-
-const BillingForm = () => {
-  return (
-  <Fade in={true}>
+const BillingForm = () => (
+  <Fade in>
     <div className="billing">
       <Elements>
         <CheckoutForm />
       </Elements>
     </div>
   </Fade>
-  );
-};
+);
 
 export default BillingForm;

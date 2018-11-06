@@ -1,18 +1,18 @@
-import React from 'react';
-import PropTypes from 'prop-types';
-import classNames from 'classnames';
-import IconButton from '@material-ui/core/IconButton';
-import SnackbarContent from '@material-ui/core/SnackbarContent';
-import CloseIcon from '@material-ui/icons/Close';
-import ErrorIcon from '@material-ui/icons/Error';
-import CheckCircleIcon from '@material-ui/icons/CheckCircle';
+import React from "react";
+import PropTypes from "prop-types";
+import classNames from "classnames";
+import IconButton from "@material-ui/core/IconButton";
+import SnackbarContent from "@material-ui/core/SnackbarContent";
+import CloseIcon from "@material-ui/icons/Close";
+import ErrorIcon from "@material-ui/icons/Error";
+import CheckCircleIcon from "@material-ui/icons/CheckCircle";
 
 const variantIcon = {
   success: CheckCircleIcon,
-  error: ErrorIcon,
+  error: ErrorIcon
 };
 
-const MySnackbarContent = (props) => {
+const MySnackbarContent = props => {
   const { classes, className, message, onClose, variant, ...other } = props;
   const Icon = variantIcon[variant];
 
@@ -35,19 +35,19 @@ const MySnackbarContent = (props) => {
           onClick={onClose}
         >
           <CloseIcon className={classes.icon} />
-        </IconButton>,
+        </IconButton>
       ]}
       {...other}
     />
   );
-}
+};
 
 MySnackbarContent.propTypes = {
-  classes: PropTypes.object.isRequired,
-  className: PropTypes.string,
-  message: PropTypes.node,
-  onClose: PropTypes.func,
-  variant: PropTypes.oneOf(['success', 'error']).isRequired,
+  classes: PropTypes.instanceOf(Object).isRequired,
+  // className: PropTypes.string,
+  message: PropTypes.node.isRequired,
+  onClose: PropTypes.func.isRequired,
+  variant: PropTypes.oneOf(["success", "error"]).isRequired
 };
 
 export default MySnackbarContent;

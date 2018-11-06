@@ -1,44 +1,41 @@
-import React from 'react';
-import PropTypes from 'prop-types';
+import React from "react";
+import { Link } from "react-router-dom";
+import PropTypes from "prop-types";
 import {
   withStyles,
   MuiThemeProvider,
   createMuiTheme
-} from '@material-ui/core/styles';
-import Modal from '@material-ui/core/Modal';
-import Button from '@material-ui/core/Button';
-import Tabs from './Tabs.jsx';
-// import green from '@material-ui/core/colors/green';
-import { Link } from 'react-router-dom';
-import './SignInOut.css';
+} from "@material-ui/core/styles";
+import Modal from "@material-ui/core/Modal";
+import Button from "@material-ui/core/Button";
+import Tabs from "./Tabs";
+import "./SignInOut.css";
 
-const theme = createMuiTheme({
+const theme1 = createMuiTheme({
   palette: {
     primary: {
-      main: '#48a259'
+      main: "#48a259"
     }
   },
   overrides: {
     MuiButton: {
       raisedPrimary: {
-        color: 'white'
+        color: "white"
       }
-      
     }
   }
 });
 const theme2 = createMuiTheme({
   palette: {
     primary: {
-      main: '#ffffff'
+      main: "#ffffff"
     }
   },
   overrides: {
     MuiButton: {
       raisedPrimary: {
-        color: 'white'
+        color: "white"
       }
-      
     }
   }
 });
@@ -55,82 +52,79 @@ function getModalStyle() {
 
 const styles = theme => ({
   paper: {
-    position: 'absolute',
+    position: "absolute",
     width: theme.spacing.unit * 50,
     backgroundColor: theme.palette.background.paper,
     boxShadow: theme.shadows[5]
   }
 });
 const SignInOut = props => {
-  const { classes } = props;
+  const {
+    classes,
+    styleName,
+    isLoggedIn,
+    buttonColor,
+    handleLogOut,
+    buttonVariant,
+    handleOpen,
+    open,
+    handleClose,
+    ...rest
+  } = props;
   return (
-    <div className={props.styleName}>
-      {props.isLoggedIn ? (
+    <div className={styleName}>
+      {isLoggedIn ? (
         <Link to="/" className="LandingHomeLink">
-        {props.buttonColor ?
-          <MuiThemeProvider theme={theme}>
-          <Button
-            onClick={props.handleLogOut}
-            variant={props.buttonVariant}
-            color="primary"
-          >
-            log out
-          </Button>
-        </MuiThemeProvider> :
-          <MuiThemeProvider theme={theme2}>
-          <Button
-            onClick={props.handleLogOut}
-            variant={props.buttonVariant}
-            color="primary"
-          >
-            log out
-          </Button>
-        </MuiThemeProvider>
-      }
+          {buttonColor ? (
+            <MuiThemeProvider theme={theme1}>
+              <Button
+                onClick={handleLogOut}
+                variant={buttonVariant}
+                color="primary"
+              >
+                log out
+              </Button>
+            </MuiThemeProvider>
+          ) : (
+            <MuiThemeProvider theme={theme2}>
+              <Button
+                onClick={handleLogOut}
+                variant={buttonVariant}
+                color="primary"
+              >
+                log out
+              </Button>
+            </MuiThemeProvider>
+          )}
         </Link>
       ) : (
-       <div>
-        {props.buttonColor ?
-           <MuiThemeProvider theme={theme}>
-           <Button
-             variant={props.buttonVariant}
-             onClick={props.handleOpen}
-             color="primary"
-           >
-             Sign Up / Sign In
-           </Button>
-         </MuiThemeProvider> :
-          <MuiThemeProvider theme={theme2}>
-          <Button
-            variant={props.buttonVariant}
-            onClick={props.handleOpen}
-            color="primary"
-          >
-            Sign Up / Sign In
-          </Button>
-        </MuiThemeProvider>
-      }
-
-       </div>
+        <div>
+          {buttonColor ? (
+            <MuiThemeProvider theme={theme1}>
+              <Button
+                variant={buttonVariant}
+                onClick={handleOpen}
+                color="primary"
+              >
+                Sign Up / Sign In
+              </Button>
+            </MuiThemeProvider>
+          ) : (
+            <MuiThemeProvider theme={theme2}>
+              <Button
+                variant={buttonVariant}
+                onClick={handleOpen}
+                color="primary"
+              >
+                Sign Up / Sign In
+              </Button>
+            </MuiThemeProvider>
+          )}
+        </div>
       )}
-      <Modal
-        open={props.open}
-        onClose={props.handleClose}
-        disableAutoFocus={true}
-      >
+      <Modal open={open} onClose={handleClose} disableAutoFocus>
         <div style={getModalStyle()} className={classes.paper}>
-          <Tabs
-            handleTabChange={props.handleTabChange}
-            tabState={props.tabState}
-            handleChange={props.handleChange}
-            handleSignUp={props.handleSignUp}
-            handleSignIn={props.handleSignIn}
-            firstName={props.firstName}
-            lastName={props.lastName}
-            email={props.email}
-            password={props.password}
-            validatePassword={props.validatePassword}
-          />
+          <Tabs {...rest} />
         </div>
       </Modal>
     </div>
@@ -138,7 +132,7 @@ const SignInOut = props => {
 };
 
 SignInOut.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.instanceOf(Object).isRequired
 };
 
 // We need an intermediary variable for handling the recursive nesting.

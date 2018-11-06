@@ -1,28 +1,27 @@
-import API_URL from '../../API_URL';
-import React from 'react';
-import Nav from '../Nav/Nav';
-import MainTriplist from '../TripList/MainTripList';
-import TripCreate from '../TripCreate/TripCreate';
-import BillingForm from '../Billing/BillingForm';
-import AccountForm from '../Account/AccountForm';
-import GetArchived from '../Archived/GetArchived';
-import { Route, Redirect, Switch } from 'react-router-dom';
-import axios from 'axios';
-import TripOpen from '../TripOpen/TripOpen';
-import MySnackbarContent from '../Snackbar/MySnackbarContent';
-import Snackbar from '@material-ui/core/Snackbar';
-import green from '@material-ui/core/colors/green';
-import { withStyles } from '@material-ui/core/styles';
-import BadUrl404 from '../404/BadUrl404';
-import {testTrip} from '../TripOpen/testData';
-import TripNotFound404 from '../404/TripNotFound404';
+import React from "react";
+import { Route, Redirect, Switch } from "react-router-dom";
+import axios from "axios";
+import Nav from "../Nav/Nav";
+import MainTriplist from "../TripList/MainTripList";
+import TripCreate from "../TripCreate/TripCreate";
+import BillingForm from "../Billing/BillingForm";
+import AccountForm from "../Account/AccountForm";
+import GetArchived from "../Archived/GetArchived";
+import TripOpen from "../TripOpen/TripOpen";
+import BadUrl404 from "../404/BadUrl404";
+import { testTrip } from "../TripOpen/testData";
+import TripNotFound404 from "../404/TripNotFound404";
+import API_URL from "../../API_URL";
+import Snackbar from "../Snackbar/Snackbar";
+import WithSnackbar from "../Snackbar/SnackbarHOC";
+
 const RestrictedRoute = ({
   component: Component,
   isLoggedIn,
   unauthorizedRedirect,
   ...rest
-}) => {
-  return isLoggedIn ? (
+}) =>
+  isLoggedIn ? (
     <Route {...rest} render={props => <Component {...props} {...rest} />} />
   ) : (
     <div>
@@ -30,84 +29,51 @@ const RestrictedRoute = ({
       <Redirect to="/" />
     </div>
   );
-};
-
-const styles1 = theme => ({
-  success: {
-    backgroundColor: green[600]
-  },
-  error: {
-    backgroundColor: theme.palette.error.dark
-  },
-  icon: {
-    fontSize: 20
-  },
-  iconVariant: {
-    opacity: 0.9,
-    marginRight: theme.spacing.unit
-  },
-  message: {
-    display: 'flex',
-    alignItems: 'center'
-  }
-});
-
-const MySnackbarContentWrapper = withStyles(styles1)(MySnackbarContent);
 
 class User extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      noUser: false,
-      error: false,
-      emailFromUser: this.props.match.params.user,
-      trips: [],
-      tripName: '',
-      startDate: '',
-      endDate: '',
-      hasTrips: false,
-      snackbarArchive: false,
-      snackbarError: false,
-      snackbarVertical: 'top',
-      snackbarHorizontal: 'center',
-      tripSavedModal: false,
-      isTripSaved: true,
-      navRedirect: '',
-      mobileOpen: false,
-    };
-    this.archiveTrip = this.archiveTrip.bind(this);
-  }
+  state = {
+    noUser: false,
+    emailFromUser: "",
+    trips: [],
+    hasTrips: false,
+    tripSavedModal: false,
+    isTripSaved: true,
+    navRedirect: "",
+    mobileOpen: false
+  };
 
   componentDidMount() {
-    if(this.props.match.params.user === 'aaron@backwood.app') {
-      console.log('Test User')
+    const { match } = this.props;
+    this.setState({ emailFromUser: match.params.user });
+    if (match.params.user === "aaron@backwood.app") {
+      console.log("Test User");
       this.setState({
         hasTrips: true,
         trips: testTrip,
         noUser: false
-      })
-      return
+      });
     } else {
       axios
-      .get(`${API_URL}/${this.props.match.params.user}`)
-      .then(res => {
-        this.setState({ hasTrips: true, trips: res.data.trips });
-      })
-      .catch(error => {
-        if (error.response.status === 423) {
-          this.setState({ noUser: true });
-        } else if (error.response.status === 422) {
-          this.setState({ hasTrips: false });
-        }
+        .get(`${API_URL}/${match.params.user}`)
+        .then(res => {
+          this.setState({ hasTrips: true, trips: res.data.trips });
+        })
+        .catch(error => {
+          if (error.response.status === 423) {
+            this.setState({ noUser: true });
+          } else if (error.response.status === 422) {
+            this.setState({ hasTrips: false });
+          }
 
-        console.log(error);
-      });
+          console.log(error);
+        });
     }
   }
 
   getUsersAgain = () => {
+    const { match, isLoggedIn } = this.props;
     axios
-      .get(`${API_URL}/${this.props.match.params.user}`)
+      .get(`${API_URL}/${match.params.user}`)
       .then(res => {
         if (!res.data) {
           this.setState({ hasTrips: false });
@@ -116,7 +82,7 @@ class User extends React.Component {
         this.setState({ hasTrips: true, trips: res.data.trips });
       })
       .catch(err => {
-        if (!this.props.isLoggedIn) {
+        if (!isLoggedIn) {
           this.setState({ noUser: true });
         }
         console.log(err);
@@ -132,28 +98,35 @@ class User extends React.Component {
   };
 
   modalContinue = () => {
-    this.setState({ tripSavedModal: false, isTripSaved: true, mobileOpen: false });
+    this.setState({
+      tripSavedModal: false,
+      isTripSaved: true,
+      mobileOpen: false
+    });
   };
 
   checkIfTripSaved = (e, navLink) => {
+    const { isTripSaved } = this.state;
     this.setState({ navRedirect: navLink });
-    if (!this.state.isTripSaved) {
+    if (!isTripSaved) {
       e.preventDefault();
       this.tripModalTrue();
     } else {
-      this._checkIfMobileOpen()
-      return;
+      this._checkIfMobileOpen();
     }
   };
+
   handleDrawerToggle = () => {
     this.setState(state => ({ mobileOpen: !state.mobileOpen }));
   };
+
   _checkIfMobileOpen = () => {
-    if(!this.state.mobileOpen) {
-      return
+    const { mobileOpen } = this.state;
+    if (!mobileOpen) {
+      return;
     }
-    this.setState({ mobileOpen: false})
-  }
+    this.setState({ mobileOpen: false });
+  };
 
   tripModalTrue = () => {
     this.setState({ tripSavedModal: true });
@@ -163,163 +136,163 @@ class User extends React.Component {
     this.setState({ tripSavedModal: false, mobileOpen: false });
   };
 
-  archiveTrip(TripId, index) {
-    const trips = [...this.state.trips];
-    const token = localStorage.getItem('token');
+  archiveTrip = (TripId, index) => {
+    const { trips } = this.state;
+    const { match, handleSnackbarOpen } = this.props;
+    const token = localStorage.getItem("token");
     const id = TripId;
     axios
       .put(
-        `${API_URL}/${this.props.match.params.user}/archiveTrip`,
-        { id: id, archived: true },
+        `${API_URL}/${match.params.user}/archiveTrip`,
+        { id, archived: true },
         { headers: { authorization: token } }
       )
       .then(res => {
         trips.splice(index, 1);
-        this.setState({ trips: trips, snackbarArchive: true });
+        this.setState(
+          { trips },
+          handleSnackbarOpen("success", "Trip Archived Successfully!")
+        );
         console.log(res);
       })
       .catch(err => {
         console.log(err);
-        this.setState({ snackbarError: true });
+        handleSnackbarOpen("error", "Server Cannot Archive Trip!");
       });
-  }
-
-  handleSnackbarClose = (event, reason) => {
-    if (reason === 'clickaway') {
-      return;
-    }
-    this.setState({ snackbarArchive: false });
-    this.setState({ snackbarError: false });
   };
 
   render() {
-    // Not working!!!!!!!!!!!!!!
-    // if(this.state.hasTrips === false && this.props.isLoggedIn === false && this.state.noUser === false) {
-    //   return <UserHasNoTrips404/>
-    // }
-    // if(this.state.noUser === false) {
-    //   return <h1>No user</h1>
-    // }
+    const {
+      noUser,
+      emailFromUser,
+      mobileOpen,
+      tripSavedModal,
+      navRedirect,
+      hasTrips,
+      trips
+    } = this.state;
+    const {
+      snackbarOpen,
+      snackbarMessage,
+      snackbarVariant,
+      handleSnackbarClose,
+      match,
+      email,
+      isLoggedIn,
+      firstName,
+      lastName,
+      handleTabChange,
+      handleLogOut,
+      tabState,
+      handleChange,
+      handleSignUp,
+      handleSignIn,
+      password,
+      validatePassword,
+      handleClose,
+      handleOpen,
+      open,
+      unauthorizedRedirect
+    } = this.props;
     return (
       <React.Fragment>
-        {this.state.noUser ? (
-          <Redirect push to={`/${this.props.match.params.user}/user-not-found`} />
+        {noUser ? (
+          <Redirect push to={`/${match.params.user}/user-not-found`} />
         ) : (
-              <Nav
-                ////////////NAV////////////
-                emailFromUser={this.state.emailFromUser}
-                user={this.props.email}
-                mobileOpen={this.state.mobileOpen}
-                handleDrawerToggle={this.handleDrawerToggle}
-                isLoggedIn={this.props.isLoggedIn}
-                checkIfTripSaved={this.checkIfTripSaved}
-                ////////////SIGN IN/OUT///////////
-                handleTabChange={this.props.handleTabChange}
-                handleLogOut={this.props.handleLogOut}
-                tabState={this.props.tabState}
-                handleChange={this.props.handleChange}
-                handleSignUp={this.props.handleSignUp}
-                handleSignIn={this.props.handleSignIn}
-                firstName={this.props.firstName}
-                lastName={this.props.lastName}
-                email={this.props.email}
-                password={this.props.password}
-                validatePassword={this.props.validatePassword}
-                handleClose={this.props.handleClose}
-                handleOpen={this.props.handleOpen}
-                open={this.props.open}
-                ///////////////MODAL//////////////
-                tripModalFalse={this.tripModalFalse}
-                tripSavedModal={this.state.tripSavedModal}
-                navRedirect={this.state.navRedirect}
-                modalContinue={this.modalContinue}
-              >
-              <Switch>
-                <Route
-                  path="/:user"
-                  render={props => (
-                    <MainTriplist
-                      {...props}
-                      hasTrips={this.state.hasTrips}
-                      trips={this.state.trips}
-                      user={this.props.email}
-                      archiveTrip={this.archiveTrip}
-                      isLoggedIn={this.props.isLoggedIn}
-                      setSaveTripFalse={this.setSaveTripFalse}
-                    />
-                  )}
-                  exact
-                />
-                <RestrictedRoute
-                  path="/:user/create"
-                  component={TripCreate}
-                  unauthorizedRedirect={this.props.unauthorizedRedirect}
-                  isLoggedIn={this.props.isLoggedIn}
-                  setSaveTripTrue={this.setSaveTripTrue}
-                  email={this.props.email}
-                  user={this.props.email}
-                  getUsersAgain={this.getUsersAgain}
-                  tripsFromUser={this.state.trips}
-                />
-                <RestrictedRoute
-                  path="/:user/archived"
-                  component={GetArchived}
-                  isLoggedIn={this.props.isLoggedIn}
-                  unauthorizedRedirect={this.props.unauthorizedRedirect}
-                  getUsersAgain={this.getUsersAgain}
-                />
-                <RestrictedRoute
-                  path="/:user/billing"
-                  component={BillingForm}
-                  isLoggedIn={this.props.isLoggedIn}
-                  unauthorizedRedirect={this.props.unauthorizedRedirect}
-                />
-                <RestrictedRoute
-                  path="/:user/settings"
-                  component={AccountForm}
-                  isLoggedIn={this.props.isLoggedIn}
-                  unauthorizedRedirect={this.props.unauthorizedRedirect}
-                />
-                <Route path="/:user/trip/:slug" component={TripOpen} />
-                <Route path="/:user/trip-not-found" component={TripNotFound404} exact/>
-                <Route component={BadUrl404} />
-              </Switch>
+          <Nav
+            // //////////NAV////////// //
+            emailFromUser={emailFromUser}
+            user={email}
+            mobileOpen={mobileOpen}
+            handleDrawerToggle={this.handleDrawerToggle}
+            isLoggedIn={isLoggedIn}
+            checkIfTripSaved={this.checkIfTripSaved}
+            // //////////SIGN IN/OUT///////// //
+            handleTabChange={handleTabChange}
+            handleLogOut={handleLogOut}
+            tabState={tabState}
+            handleChange={handleChange}
+            handleSignUp={handleSignUp}
+            handleSignIn={handleSignIn}
+            firstName={firstName}
+            lastName={lastName}
+            email={email}
+            password={password}
+            validatePassword={validatePassword}
+            handleClose={handleClose}
+            handleOpen={handleOpen}
+            open={open}
+            // /////////////MODAL//////////// //
+            tripModalFalse={this.tripModalFalse}
+            tripSavedModal={tripSavedModal}
+            navRedirect={navRedirect}
+            modalContinue={this.modalContinue}
+          >
+            <Switch>
+              <Route
+                path="/:user"
+                render={props => (
+                  <MainTriplist
+                    {...props}
+                    hasTrips={hasTrips}
+                    trips={trips}
+                    user={email}
+                    archiveTrip={this.archiveTrip}
+                    isLoggedIn={isLoggedIn}
+                    setSaveTripFalse={this.setSaveTripFalse}
+                  />
+                )}
+                exact
+              />
+              <RestrictedRoute
+                path="/:user/create"
+                component={TripCreate}
+                unauthorizedRedirect={unauthorizedRedirect}
+                isLoggedIn={isLoggedIn}
+                setSaveTripTrue={this.setSaveTripTrue}
+                email={email}
+                user={email}
+                getUsersAgain={this.getUsersAgain}
+                tripsFromUser={trips}
+              />
+              <RestrictedRoute
+                path="/:user/archived"
+                component={GetArchived}
+                isLoggedIn={isLoggedIn}
+                unauthorizedRedirect={unauthorizedRedirect}
+                getUsersAgain={this.getUsersAgain}
+              />
+              <RestrictedRoute
+                path="/:user/billing"
+                component={BillingForm}
+                isLoggedIn={isLoggedIn}
+                unauthorizedRedirect={unauthorizedRedirect}
+              />
+              <RestrictedRoute
+                path="/:user/settings"
+                component={AccountForm}
+                isLoggedIn={isLoggedIn}
+                unauthorizedRedirect={unauthorizedRedirect}
+              />
+              <Route path="/:user/trip/:slug" component={TripOpen} />
+              <Route
+                path="/:user/trip-not-found"
+                component={TripNotFound404}
+                exact
+              />
+              <Route component={BadUrl404} />
+            </Switch>
           </Nav>
-       
         )}
         <Snackbar
-          anchorOrigin={{
-            vertical: this.state.snackbarVertical,
-            horizontal: this.state.snackbarHorizontal
-          }}
-          open={this.state.snackbarArchive}
-          onClose={this.handleSnackbarClose}
-          autoHideDuration={2000}
-        >
-          <MySnackbarContentWrapper
-            onClose={this.handleSnackbarClose}
-            variant="success"
-            message="Trip Archived Successfully!"
-          />
-        </Snackbar>
-        <Snackbar
-          anchorOrigin={{
-            vertical: this.state.snackbarVertical,
-            horizontal: this.state.snackbarHorizontal
-          }}
-          open={this.state.snackbarError}
-          onClose={this.handleSnackbarClose}
-          autoHideDuration={2000}
-        >
-          <MySnackbarContentWrapper
-            onClose={this.handleSnackbarClose}
-            variant="error"
-            message="Server Cannot Archive Trip!"
-          />
-        </Snackbar>
+          snackbarVariant={snackbarVariant}
+          snackbarMessage={snackbarMessage}
+          handleSnackbarClose={handleSnackbarClose}
+          snackbarOpen={snackbarOpen}
+        />
       </React.Fragment>
     );
   }
 }
 
-export default User;
+export default WithSnackbar(User);
